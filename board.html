@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="board.css">
+    <title>Board</title>
 </head>
+
 <body onload=initBoard()>
-    <div class="headline"><h1><b>Board</b></h1><div class="searchbar"><input type="text" onkeydown="findTask()" placeholder="Find Task"><button onclick="findTask()">S</button></div><div class="addtask"><button onclick="taskPopup()">Add task +</button></div></div>
+    <div class="headline">
+        <h1><b>Board</b></h1>
+        <div class="headaction">
+            <div class="searchbar">
+                <div class="searchinfield">
+                    <input type="text" onkeydown="findTask()" placeholder="Find Task">
+                    <img src="assets/img/Search1.png">
+                </div>
+            </div>
+            <button onclick="taskPopup()" class="addtask">Add task +</button>
+        </div>
+    </div>
+    <div class="taskbar">
+        <div>
+            <div class="taskHeader">
+                <div>
+                    <p>To do</p>
+                </div>
+                <div class="plusbutton">+</div>
+            </div>
+            <div class="taskbox" id="toDo"></div>
+        </div>
+        <div>
+            <div class="taskHeader">
+                <div>
+                    <p>In progress</p>
+                </div>
+                <div class="plusbutton">+</div>
+            </div>
+            <div class="taskbox" id="inProgress"></div>
+        </div>
+        <div>
+            <div class="taskHeader">
+                <div>
+                    <p>Awaiting Feedback</p>
+                </div>
+                <div class="plusbutton">+</div>
+            </div>
+            <div class="taskbox" id="awaitingFeedback"></div>
+        </div>
+        <div>
+            <div class="taskHeader">
+                <div>
+                    <p>Done</p>
+                </div>
+                <div class="plusbutton">+</div>
+            </div>
+            <div class="taskbox" id="doneTasks"></div>
+        </div>
+    </div>
 </body>
+
 </html>
