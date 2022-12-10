@@ -1,0 +1,156 @@
+.Kanban_headline {
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 25px;
+}
+
+.wrapper {
+  position: relative;
+  width: 100vw;
+  height: fit-content;
+  background: #f6f7f8;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 36px 20px 348px;
+  gap: 34px;
+  position: fixed;
+  width: 100%;
+  height: 89px;
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.header_left_side {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 26px;
+  width: 106px;
+  height: 49px;
+}
+
+.help-icon {
+  width: 31px;
+  height: 31px;
+}
+
+.profile-img {
+  width: 49px;
+  height: 49px;
+  left: 0px;
+  top: 0px;
+  border: 3px solid #2a3647;
+  border-radius: 180px;
+}
+
+.wrapper_sidebar {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 66px 20px;
+  gap: 103px;
+  position: fixed;
+  width: 232px;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background: #2a3647;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0px;
+  box-sizing: content-box;
+}
+
+.logo {
+  width: 100.03px;
+  height: 121.97px;
+}
+
+.sidebar_menu_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+
+  width: 232px;
+  height: 229px;
+}
+
+.sidebar_menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 53px;
+  gap: 20px;
+  width: 232px;
+  height: 46px;
+}
+
+.sidebar_menu p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #CDCDCD;
+  width: 72px;
+  height: 19px;
+  cursor: pointer;
+}
+
+.sidebar_menu img {
+  width: 22px;
+  height: 22px;
+}
+
+.sidebar_part3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0px 0px 0px;
+  gap: 15px;
+  width: 232px;
+  height: 190px;
+}
+
+.legalnotice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 20px;
+  width: 232px;
+  height: 46px;
+  box-sizing: border-box;
+}
+
+.legalnotice img {
+  width: 18px;
+  height: 18px;
+}
+
+.legalnotice p{
+    width: 94px;
+    height: 17px; 
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;  
+    color: #CDCDCD;
+    cursor: pointer;
+}
