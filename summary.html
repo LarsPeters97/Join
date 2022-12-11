@@ -15,7 +15,7 @@
     
 </head>
 
-<body onload="includeHTML()">
+<body onload="summaryInit()">
 
     <div w3-include-html="/assets/templates/desktop_template.html"></div>
 
@@ -26,8 +26,12 @@
     </div>
 
     <div class="summary-greet-container">
-        <div class="summary-greet-top">Good morning,</div>
-        <div class="summary-greet-bottom">Guest</div>
+        <div class="summary-greet-top">
+            <span class="summary-greet-top" id="greeting-slogan">Good morning,
+            </span> 
+        </div>
+        <div class="summary-greet-bottom">
+            <span class="summary-greet-bottom" id="greeting-name">Guest</span> </div>
     </div>
 
     <div class="summary-details-container">

@@ -1,16 +1,42 @@
 /**
- * Change greeting at summary depending on the time of day
+ * init function when body is loading
  */
-function getDateAndTime() {
-    let currentDate = new Date();
-    let welcome = document.getElementById('welcome');
-    welcome.innerHTML = ``;
-    let hour = currentDate.getHours();
-    if (hour < 12) {
-        welcome.innerHTML = "Good morning";
-    } else if (hour > 12 && hour < 17) {
-        welcome.innerHTML = "Good afternoon";
-    } else {
-        welcome.innerHTML = "Good evening";
+async function summaryInit() {
+    await includeHTML();
+    showGreeting();
+}
+
+/**
+ * showing greeting slogan and username
+ */
+function showGreeting() {
+    let dateNow = new Date();
+    let hours = dateNow.getHours();
+    let greetingSlogan = returnGreetingSlogan(hours);
+    document.getElementById('greeting-slogan').innerHTML = greetingSlogan;
+    document.getElementById('greeting-name').innerHTML = userAccounts[activeUser].userName;
+    document.getElementById('greeting-slogan-mobile').innerHTML = greetingSlogan;
+    document.getElementById('greeting-name-mobile').innerHTML = userAccounts[activeUser].userName;
+}
+
+/**
+ * returning the daytime greeting slogan
+ * @param {number} hours - the hours of time now
+ * @returns - greeting slogan
+ */
+function returnGreetingSlogan(hours) {
+    let greetingSlogan;
+    if (hours < 6 || hours > 22) {
+        greetingSlogan = 'Good night, ';
     }
+    if (hours >= 6 && hours < 10) {
+        greetingSlogan = 'Good morning, ';
+    }
+    if (hours >= 10 && hours < 17) {
+        greetingSlogan = 'Have a nice day, ';
+    }
+    if (hours >= 17 && hours <= 22) {
+        greetingSlogan = 'Good evening, ';
+    }
+    return greetingSlogan;
 }
