@@ -4,9 +4,10 @@ body {
 }
 
 .content {
-    margin-top: 140px;
-    margin-left: 300px;
-    margin-right: 60px;
+    position: fixed;
+    left: 232px;
+    top: 89px;
+    margin-left: 16px;
 }
 
 .headline {

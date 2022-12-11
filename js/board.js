@@ -1,30 +1,96 @@
-let tasklist = [{
-    'progress': 'todo',
-    'id': 0,
-    'color': 'orange',
-    'category': 'Design',
-    'title': 'Website redesign',
-    'description': 'lorem ipsum',
-    'subtasks': ['lorem ipsum', 'lorem ipsum duo'],
-    'completedtasks': ['lorem ipsum'],
-    'assignedToIco': ['ME', 'MK', 'YU', 'SE'],
-    'assignedToIcoColor': ['#0190E0', '#02CF2F', '#FF5C00', '#9327FF'],
-    'assignetTo': ['me', 'Marcel Küpper', 'You', 'Someone Else'],
-    'priority': 'high.png',
+let tasklist =
+    [
+        {
+            'progress': 'todo',
+            'id': 0,
+            'category': {
+                'color': 'orange',
+                'categoryName': 'Design',
+            },
+            'duedate': "23.12.2022",
+            'title': 'Website redesign',
+            'description': 'lorem ipsum',
+            'subtasks': {
+                'tasks': [
+                    {
+                        'task': 'lorem ipsum',
+                        'completed': true,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                ],
+            },
+            'assignedTo': {
+                'user': [
+                    {
+                        'name': 'me',
+                        'icon': 'ME',
+                        'iconcolor': '#0190E0',
+                    },
+                    {
+                        'name': 'Marcel Küpper',
+                        'icon': 'MK',
+                        'iconcolor': '#02CF2F',
+                    },
+                    {
+                        'name': 'You',
+                        'icon': 'Yo',
+                        'iconcolor': '#FF5C00',
+                    },
+                    {
+                        'name': 'Someone Else',
+                        'icon': 'SE',
+                        'iconcolor': '#9327FF',
+                    },
+                ]},
+                'priority': 'high',
 },
 {
-    'progress': 'inprogresss',
-    'id': 1,
-    'color': 'green',
-    'category': 'Sales',
-    'title': 'Website redesign',
-    'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero recusandae earum iure ut impedit voluptas aliquid reprehenderit sapiente iste sint, officia cumque ex, quibusdam atque natus veritatis veniam repellendus modi.',
-    'subtasks': ['lorem ipsum', 'lorem ipsum duo', 'lorem ipsum tria'],
-    'completedtasks': ['lorem ipsum', 'lorem ipsum duo'],
-    'assignedToIco': ['ME', 'MK', 'YU'],
-    'assignedToIcoColor': ['#0190E0', '#02CF2F', '#FF5C00',],
-    'assignetTo': ['me', 'Marcel Küpper', 'You',],
-    'priority': 'low.png',
+            'progress': 'todo',
+            'id': 1,
+            'category': {
+                'color': 'orange',
+                'categoryName': 'Design',
+            },
+            'duedate': "23.12.2022",
+            'title': 'Website redesign',
+            'description': 'lorem ipsum',
+            'subtasks': {
+                'tasks': [
+                    {
+                        'task': 'lorem ipsum',
+                        'completed': true,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                ],
+            },
+            'assignedTo': {
+                'user': [
+                    {
+                        'name': 'me',
+                        'icon': 'ME',
+                        'iconcolor': '#0190E0',
+                    },
+                    {
+                        'name': 'Marcel Küpper',
+                        'icon': 'MK',
+                        'iconcolor': '#02CF2F',
+                    },
+                ]},
+                'priority': 'high',
 }];
 let todos = [];
 let inProgress = [];
@@ -81,13 +147,19 @@ function renderTodos() {
     for (let i = 0; i < todos.length; i++) {
         let toDo = todos[i];
         let id = toDo['id'];
-        let color = toDo['color'];
-        let category = toDo['category'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
         let title = toDo['title'];
         let description = toDo['description'];
-        let subtasks = toDo['subtasks'].length;
-        let completedtasks = toDo['completedtasks'].length;
-        let assignedIconToThree = assignedTo(toDo['assignedToIco'], toDo['assignedToIcoColor']);
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']){
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
         document.getElementById('toDos').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
     }
@@ -99,13 +171,19 @@ function renderInProgress() {
     for (let i = 0; i < inProgress.length; i++) {
         let toDo = inProgress[i];
         let id = toDo['id'];
-        let color = toDo['color'];
-        let category = toDo['category'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
         let title = toDo['title'];
         let description = toDo['description'];
-        let subtasks = toDo['subtasks'].length;
-        let completedtasks = toDo['completedtasks'].length;
-        let assignedIconToThree = assignedTo(toDo['assignedToIco'], toDo['assignedToIcoColor']);
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']){
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
         document.getElementById('inProgress').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
     }
@@ -117,13 +195,19 @@ function renderAwaitFeedback() {
     for (let i = 0; i < awaitFeedback.length; i++) {
         let toDo = awaitFeedback[i];
         let id = toDo['id'];
-        let color = toDo['color'];
-        let category = toDo['category'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
         let title = toDo['title'];
         let description = toDo['description'];
-        let subtasks = toDo['subtasks'].length;
-        let completedtasks = toDo['completedtasks'].length;
-        let assignedIconToThree = assignedTo(toDo['assignedToIco'], toDo['assignedToIcoColor']);
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']){
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
         document.getElementById('awaitingFeedback').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
     }
@@ -135,31 +219,37 @@ function renderDoneTasks() {
     for (let i = 0; i < doneTasks.length; i++) {
         let toDo = doneTasks[i];
         let id = toDo['id'];
-        let color = toDo['color'];
-        let category = toDo['category'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
         let title = toDo['title'];
         let description = toDo['description'];
-        let subtasks = toDo['subtasks'].length;
-        let completedtasks = toDo['completedtasks'].length;
-        let assignedIconToThree = assignedTo(toDo['assignedToIco'], toDo['assignedToIcoColor']);
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']){
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
         document.getElementById('doneTasks').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
     }
     document.getElementById('doneTasks').innerHTML += addDragarea('donetask');
 }
 
-function assignedTo(assignedToIco, assignedToIcoColor) {
-    if (assignedToIco.length == 1){
-        return `<div class="name" style="background-color: ${assignedToIcoColor[0]}">${assignedToIco[0]}</div>`
+function assignedTo(assignedTo) {
+    if (assignedTo.length == 1) {
+        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div>`
     }
-    if (assignedToIco.length == 2){
-        return `<div class="name" style="background-color: ${assignedToIcoColor[0]}">${assignedToIco[0]}</div><div class="name" style="background-color: ${assignedToIcoColor[1]}">${assignedToIco[1]}</div>`
+    if (assignedTo.length == 2) {
+        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div>`
     }
-    if (assignedToIco.length == 3) {
-        return `<div class="name" style="background-color: ${assignedToIcoColor[0]}">${assignedToIco[0]}</div><div class="name" style="background-color: ${assignedToIcoColor[1]}">${assignedToIco[1]}</div><div class="name" style="background-color: ${assignedToIcoColor[2]}">${assignedToIco[2]}</div>`
+    if (assignedTo.length == 3) {
+        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="name" style="background-color: ${assignedTo[2]['iconcolor']}">${assignedTo[2]['icon']}</div>`
     } else {
-        let number = assignedToIco.length - 2
-        return `<div class="name" style="background-color: ${assignedToIcoColor[0]}">${assignedToIco[0]}</div><div class="name" style="background-color: ${assignedToIcoColor[1]}">${assignedToIco[1]}</div><div class="number">+${number}</div>`
+        let number = assignedTo.length - 2
+        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="number">+${number}</div>`
     }
 }
 
@@ -179,7 +269,7 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
         <div class="todofooter">
             <div class="assigned">${assignedIconToThree}
             </div>
-            <img src="assets/img/${priority}" alt="${priority}">
+            <img src="assets/img/${priority}.png" alt="${priority}">
         </div>
     </div>`
 }
