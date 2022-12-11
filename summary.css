@@ -37,8 +37,9 @@ body {
 .summary-headline-right {
     width: 304px;
     height: 32px;
-    font-size: 25px;
+    font-size: 27px;
     color: #2A3647;
+    font-weight:   400;
 }
 
 .summary-greet-container {
@@ -55,19 +56,20 @@ body {
 }
 
 .summary-greet-top {
-    width: 338px;
-    height: 56px;
-    font-weight: 500;
-    font-size: 40px;
     color: #2A3647;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 47px;
 }
 
 .summary-greet-bottom {
-    width: 375px;
-    height: 77px;
-    font-weight: 700;
-    font-size: 45px;
     color: #29ABE2;
+    width: 385px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
 }
 
 .summary-details-container {
@@ -135,17 +137,24 @@ body {
 
 .summary-tasks-amount {
     width: 41px;
+    height: 77px;
+    font-family: 'Inter';
+    font-style: normal;
     font-weight: 600;
-    font-size: 50px;
+    font-size: 64px;
+    line-height: 120%;
     text-align: center;
 }
 
 .summary-tasks-text {
     width: 87px;
     height: 50px;
-    font-size: 20px;
     text-align: center;
     color: #2A3647;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
 }
 
 .summary-urgency-container {
@@ -251,13 +260,16 @@ body {
 
 .summary-deadline-top {
     font-weight: 700;
-    font-size: 20px;
+    font-style: normal;
+    font-size: 21px;
     color: #2A3647;
 }
 
 .summary-deadline-bottom {
     font-weight: 400;
     font-size: 16px;
+    font-family: 'Inter';
+    font-style: normal;
     color: #2A3647;
 }
 
