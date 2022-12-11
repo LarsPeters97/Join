@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,49 +8,88 @@
     <link rel="stylesheet" href="./assets/templates/desktop_template.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="add_task.css">
     <title>Add Task</title>
-    
+
 </head>
+
 <body>
-    <div class="wrapper" id="wrapper">
+    <!-- <div class="wrapper" id="wrapper">
         <div class="header">
-          <p class="Kanban_headline">Kanban Project Management Tool</p>
-          <div class="header_left_side">
-            <img class="help-icon" src="../img/help-icon.png" alt="" />
-            <img class="profile-img" src="../img/profile-img.png" />
-          </div>
+            <p class="Kanban_headline">Kanban Project Management Tool</p>
+            <div class="header_left_side">
+                <img class="help-icon" src="../img/help-icon.png" alt="" />
+                <img class="profile-img" src="../img/profile-img.png" />
+            </div>
         </div>
         <div class="wrapper_sidebar">
-          <div class="sidebar">
-            <img class="logo" src="../img/Logo.png" alt="" />
-            <div>
-              <div class="sidebar_menu_container">
-                <div class="sidebar_menu">
-                  <img src="../img/summary-icon.png" alt="" />
-                  <p>Summary</p>
+            <div class="sidebar">
+                <img class="logo" src="../img/Logo.png" alt="" />
+                <div>
+                    <div class="sidebar_menu_container">
+                        <div class="sidebar_menu">
+                            <img src="../img/summary-icon.png" alt="" />
+                            <p>Summary</p>
+                        </div>
+                        <div class="sidebar_menu">
+                            <img src="../img/board-icon.png" alt="" />
+                            <p>Board</p>
+                        </div>
+                        <div class="sidebar_menu">
+                            <img src="../img/addtask-icon.png" alt="" />
+                            <p>Add Task</p>
+                        </div>
+                        <div class="sidebar_menu">
+                            <img src="../img/contact-icon.png" alt="" />
+                            <p>Contacts</p>
+                        </div>
+                    </div>
+                    <div class="sidebar_part3">
+                        <div class="legalnotice">
+                            <img src="../img/legalnotice-icon.png" alt="">
+                            <p> Legal notice</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="sidebar_menu">
-                  <img src="../img/board-icon.png" alt="" />
-                  <p>Board</p>
-                </div>
-                <div class="sidebar_menu">
-                  <img src="../img/addtask-icon.png" alt="" />
-                  <p>Add Task</p>
-                </div>
-                <div class="sidebar_menu">
-                  <img src="../img/contact-icon.png" alt="" />
-                  <p>Contacts</p>
-                </div>
-              </div>
-              <div class="sidebar_part3">
-                  <div class="legalnotice">
-                      <img src="../img/legalnotice-icon.png" alt="">
-                      <p> Legal notice</p>
-                  </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div> -->
+
+    <div class="add-taskt-whole-side">
+        <h1 class="headline-task">Add Task</h1>
+        <div class="two-task-areas flex">
+            <div class="left-side flex column">
+                <div class="title flex column margin-for-fields">
+                    <span class="header-for-fields">Title</span>
+                    <input type="text" min="2" max="40" required placeholder="Enter a title">
+                </div>
+                <div class="description flex column margin-for-fields">
+                    <span class="header-for-fields">Description</span>
+                    <textarea required name="description" id="description" maxlength="500"
+                        placeholder="Enter a Description"></textarea>
+                </div>
+                <div class="flex column margin-for-fields">
+                    <span>Category</span>
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+            <div class="right-side">asddsasdasda</div>
+        </div>
+    </div>
+
+
+
+    <!-- Add Task Page Begin -->
+
+
+
 </body>
+
 </html>

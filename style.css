@@ -3,3 +3,14 @@ body{
     margin: 0px;
 }
 
+.flex {
+    display: flex;
+}
+
+.relative {
+    position: relative;
+}
+
+.column {
+    flex-direction: column;
+}
