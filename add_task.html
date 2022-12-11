@@ -9,51 +9,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="add_task.css">
+    <script src="script.js"></script>
     <title>Add Task</title>
 
 </head>
 
-<body>
-    <!-- <div class="wrapper" id="wrapper">
-        <div class="header">
-            <p class="Kanban_headline">Kanban Project Management Tool</p>
-            <div class="header_left_side">
-                <img class="help-icon" src="../img/help-icon.png" alt="" />
-                <img class="profile-img" src="../img/profile-img.png" />
-            </div>
-        </div>
-        <div class="wrapper_sidebar">
-            <div class="sidebar">
-                <img class="logo" src="../img/Logo.png" alt="" />
-                <div>
-                    <div class="sidebar_menu_container">
-                        <div class="sidebar_menu">
-                            <img src="../img/summary-icon.png" alt="" />
-                            <p>Summary</p>
-                        </div>
-                        <div class="sidebar_menu">
-                            <img src="../img/board-icon.png" alt="" />
-                            <p>Board</p>
-                        </div>
-                        <div class="sidebar_menu">
-                            <img src="../img/addtask-icon.png" alt="" />
-                            <p>Add Task</p>
-                        </div>
-                        <div class="sidebar_menu">
-                            <img src="../img/contact-icon.png" alt="" />
-                            <p>Contacts</p>
-                        </div>
-                    </div>
-                    <div class="sidebar_part3">
-                        <div class="legalnotice">
-                            <img src="../img/legalnotice-icon.png" alt="">
-                            <p> Legal notice</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+<body onload="includeHTML()">
+    <div w3-include-html="/assets/templates/desktop_template.html"></div>
 
     <div class="add-taskt-whole-side">
         <h1 class="headline-task">Add Task</h1>
@@ -69,8 +31,28 @@
                         placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="flex column margin-for-fields">
-                    <span>Category</span>
-                </div>
+                    <span class="header-for-fields">Category</span>
+                    <span class="dropdown-category-container">
+                        <div class="dropdown-category">
+                            <span class="flex">Select task category</span>
+                            <img src="./assets/img/vector-2.png" alt="klick">
+                        </div>
+                    </div>
+
+
+                    <div class="flex column margin-for-fields">
+                    <span class="header-for-fields">Assigned to</span>
+                    <div class="dropdown-category-container">
+                        <div class="dropdown-category">
+                            <span class="flex">Select contacts to assign</span>
+                            <img src="./assets/img/vector-2.png" alt="klick">
+                        </div>
+                    </div>
+                    </div>
+                  
+                    
+               
+
 
 
 
