@@ -111,3 +111,12 @@ body {
     color: #D1D1D1;
     border: none;
 }
+
+.dragarea {
+    width: 250px;
+    height: 200px;
+}
+
+.dragarea-highlight {
+    background-color: rgba(0, 0, 0, 0.2);
+}

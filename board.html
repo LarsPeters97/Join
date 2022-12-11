@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="board.css">
+    <script src="js/board.js"></script>
     <title>Board</title>
 </head>
 
@@ -16,7 +17,7 @@
             <div class="searchbar">
                 <div class="searchinfield">
                     <input type="text" onkeydown="findTask()" placeholder="Find Task">
-                    <img src="assets/img/Search1.png">
+                    <img src="assets/img/Search.png">
                 </div>
             </div>
             <button onclick="taskPopup()" class="addtask">Add task +</button>
@@ -30,7 +31,7 @@
                 </div>
                 <div class="plusbutton">+</div>
             </div>
-            <div class="taskbox" id="toDo"></div>
+            <div class="taskbox" id="toDos"></div>
         </div>
         <div>
             <div class="taskHeader">
