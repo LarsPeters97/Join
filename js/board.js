@@ -11,6 +11,20 @@ let tasklist = [{
     'assignedToIcoColor': ['#0190E0', '#02CF2F', '#FF5C00', '#9327FF'],
     'assignetTo': ['me', 'Marcel Küpper', 'You', 'Someone Else'],
     'priority': 'high.png',
+},
+{
+    'progress': 'inprogresss',
+    'id': 1,
+    'color': 'green',
+    'category': 'Sales',
+    'title': 'Website redesign',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero recusandae earum iure ut impedit voluptas aliquid reprehenderit sapiente iste sint, officia cumque ex, quibusdam atque natus veritatis veniam repellendus modi.',
+    'subtasks': ['lorem ipsum', 'lorem ipsum duo', 'lorem ipsum tria'],
+    'completedtasks': ['lorem ipsum', 'lorem ipsum duo'],
+    'assignedToIco': ['ME', 'MK', 'YU'],
+    'assignedToIcoColor': ['#0190E0', '#02CF2F', '#FF5C00',],
+    'assignetTo': ['me', 'Marcel Küpper', 'You',],
+    'priority': 'low.png',
 }];
 let todos = [];
 let inProgress = [];
@@ -152,7 +166,7 @@ function assignedTo(assignedToIco, assignedToIcoColor) {
 function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority) {
     let width = completedtasks / subtasks * 100
     return /**html*/`
-    <div class="todo" draggable=true ondragstart="startDragging(${id})">
+    <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
         <div class="category" style="background-color: ${color}">${category}</div>
         <div class="title">${title}</div>
         <div class="description">${description}</div>
