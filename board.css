@@ -1,5 +1,12 @@
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #F5F5F5;
+}
+
+.content {
+    margin-top: 140px;
+    margin-left: 300px;
+    margin-right: 60px;
 }
 
 .headline {
@@ -112,11 +119,107 @@ body {
     border: none;
 }
 
+.todo {
+    display: flex;
+    flex-direction: column;
+    width: 210px;
+    padding: 18px 19px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+    gap: 10px;
+}
+
+.category {
+    display: flex;
+    width: max-content;
+    height: max-content;
+    padding: 4px 25px;
+    gap: 10px;
+    border-radius: 8px;
+    color: white;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2A3647;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    color: #A8A8A8;
+}
+
+.subtaskbar {
+    display: flex;
+    align-items: center;
+}
+
+.todofooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .dragarea {
     width: 250px;
     height: 200px;
+    border-radius: 30px;
+    border: dotted transparent 1px;
 }
 
 .dragarea-highlight {
-    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #2A3647;
+}
+
+.progress {
+    width: 138px;
+    height: 8px;
+    border-radius: 3px;
+    background-color: #F4F4F4;
+}
+
+.progress-bar {
+    background-color: #29ABE2;
+    height: 100%;
+    border-radius: 3px;
+    width: 0%;
+}
+
+.assigned {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    display: flex;
+    width: 35px;
+    height: 35px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FFFFFF;
+    border-radius: 100%;
+    margin-left: -8px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.number{
+    display: flex;
+    width: 35px;
+    height: 35px;
+    background-color: #2A3647;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FFFFFF;
+    border-radius: 100%;
+    margin-left: -8px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #FFFFFF;
 }
