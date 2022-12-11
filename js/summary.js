@@ -15,8 +15,6 @@ function showGreeting() {
     let greetingSlogan = returnGreetingSlogan(hours);
     document.getElementById('greeting-slogan').innerHTML = greetingSlogan;
     document.getElementById('greeting-name').innerHTML = userAccounts[activeUser].userName;
-    document.getElementById('greeting-slogan-mobile').innerHTML = greetingSlogan;
-    document.getElementById('greeting-name-mobile').innerHTML = userAccounts[activeUser].userName;
 }
 
 /**
