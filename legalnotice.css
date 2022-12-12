@@ -60,3 +60,7 @@ p {
 .back-btn a :hover {
     opacity: 0.7;
 }
+
+.legal-notice a:hover {
+    color: blue;
+}
