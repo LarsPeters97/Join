@@ -1,6 +1,7 @@
-body{
+body {
     font-family: 'inter', sans-serif;
     margin: 0px;
+    background: #F6F7F8;
 }
 
 .flex {
@@ -13,4 +14,100 @@ body{
 
 .column {
     flex-direction: column;
+}
+
+.logo_login_page {
+    position: absolute;
+    top: 40px;
+    left: 77px;
+}
+
+.header_startscreen {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_startscreen_left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 130px;
+    padding-top: 40px;
+}
+
+.header_startscreen_left button {
+    margin-left: 25px;
+    padding: 4px 16px;
+    width: 91px;
+    height: 51px;
+    background: #2A3647;
+    border-radius: 8px;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header_startscreen_left button:hover {
+    background-color: #29ABE2;
+}
+
+.header_startscreen_left p {
+    font-size: 21px;
+}
+
+.wrapper_form {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 652px;
+    height: 513px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-radius: 30px;
+    margin-top: 100px;
+}
+
+.signup_form h2 {
+    font-size: 61px;
+    line-height: 73px;
+    border-bottom: 3px solid #29ABE2;
+    padding-bottom: 15px;
+
+}
+
+.input_mail {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 21px;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+}
+
+.input_mail::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #D1D1D1;
+    font-size: 21px;
+}
+
+.input_mail:focus {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
 }
