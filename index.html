@@ -28,10 +28,21 @@
         </div>
     </div>
     <div  class="wrapper_form">
-        <div class="signup_form">
+        <div class="login_form">
             <h2>Log in</h2>
             <form>
-                <input class="input_mail" type="email" placeholder="Email" id="Email_login">
+                <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
+                <input type="password" placeholder="Password" id="password_login"class="input_password" required>
+
+                <div class="login_form_part3">
+                    <input type="checkbox" id="remember_me">
+                    <p>Remember me</p>
+                    <p class="forgot_password">Forgott my password</p>
+                </div>
+                <div class="loginform_buttonarea">
+                    <button class="login_button" type="submit">Log in</button>
+                    <button class="guest_button">Guest Log in</button>
+                </div>
             </form>
         </div>
     </div>

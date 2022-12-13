@@ -33,6 +33,7 @@ body {
     align-items: center;
     padding-right: 130px;
     padding-top: 40px;
+    z-index: 10;
 }
 
 .header_startscreen_left button {
@@ -50,6 +51,7 @@ body {
 
 .header_startscreen_left button:hover {
     background-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header_startscreen_left p {
@@ -67,7 +69,7 @@ body {
     left: 0;
 }
 
-.signup_form {
+.login_form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,7 +81,7 @@ body {
     margin-top: 100px;
 }
 
-.signup_form h2 {
+.login_form h2 {
     font-size: 61px;
     line-height: 73px;
     border-bottom: 3px solid #29ABE2;
@@ -98,16 +100,113 @@ body {
     background: #FFFFFF;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+    background-image: url("./assets/img/Mail_icon.png");
+    background-repeat: no-repeat;
+    background-position: 390px 16px;
+    margin-bottom: 15px;
 }
 
 .input_mail::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #D1D1D1;
     font-size: 21px;
+    display: flex;
+    align-items: center;
 }
 
 .input_mail:focus {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     font-size: 21px;
+    outline: none;
+}
+
+.input_password {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 21px;
+    width: 422px;
+    height: 51px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-image: url("./assets/img/password_icon.png");
+    background-repeat: no-repeat;
+    background-position: 390px 16px;
+    margin-bottom: 15px;
+}
+
+.input_password::placeholder {
+    color: #D1D1D1;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.input_password:focus {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
+    outline: none;
+}
+
+.login_form_part3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.login_form_part3 p {
+    font-size: 16px;
+}
+
+.forgot_password {
+    color: #29ABE2;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.login_button {
+    background: #2A3647;
+    border-radius: 8px;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    width: 145px;
+    height: 51px;
+    font-size: 21px;
+}
+
+.login_button:hover{
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.guest_button{
+    background:white;
+    border-radius: 8px;
+    color: #2A3647;
+    border-style: solid 2px;
+    border-color: #2A3647;
+    cursor: pointer;
+    width: 145px;
+    height: 51px;
+    font-size: 21px;
+}
+
+.guest_button:hover{
+    color: #29ABE2;
+    border-color: #29ABE2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loginform_buttonarea{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
 }
