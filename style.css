@@ -80,7 +80,7 @@ body {
     border-radius: 30px;
     margin-top: 100px;
     position: relative;
-    padding: 40px;
+    padding: 40px 70px;
 }
 
 .login_form h2 {
@@ -177,9 +177,10 @@ body {
     color: white;
     border-style: none;
     cursor: pointer;
-    width: 145px;
-    height: 51px;
+    width: fit-content;
+    height: fit-content;
     font-size: 21px;
+    padding: 13.5px 37px;
 }
 
 .login_button:hover{
@@ -191,12 +192,15 @@ body {
     background:white;
     border-radius: 8px;
     color: #2A3647;
-    border-style: solid 2px;
-    border-color: #2A3647;
     cursor: pointer;
     width: 145px;
     height: 51px;
     font-size: 21px;
+    border: solid 2px #2A3647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .guest_button:hover{

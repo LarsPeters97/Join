@@ -44,11 +44,11 @@ function htmlLogin(){
                 <div class="login_form_part3">
                     <input type="checkbox" id="remember_me">
                     <p>Remember me</p>
-                    <p class="forgot_password">Forgot my password</p>
+                    <p onclick="loadForgotPassword()" class="forgot_password">Forgot my password</p>
                 </div>
                 <div class="loginform_buttonarea">
                     <button class="login_button" type="submit">Log in</button>
-                    <button class="guest_button">Guest Log in</button>
+                    <a href="./summary.html" class="guest_button" formnovalidate >Guest Log in</a>
                 </div>
             </form>
   `;
@@ -75,4 +75,26 @@ function htmlSignup(){
        </div>
    </form>
 `;
+}
+
+function loadForgotPassword(){
+  let signUpForm = document.getElementById('form');
+  document.getElementById('header_left').classList.add('d-none');
+  signUpForm.innerHTML = ``;
+  signUpForm.innerHTML = htmlForgotPassword();
+}
+
+function htmlForgotPassword() {
+  return `
+  <h2>I forgot my Password</h2>
+  <img onclick="init()" class="arrow" src="./assets/img/arrow-left.png">
+  <p style="margin-top:-20px; margin-bottom:40px; text-align:center;">Don´t worry! We will send an email with the instructions to <br> reset your password.</p>
+  <form>
+       <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
+       <div class="loginform_buttonarea">
+       <button class="login_button" style="margin-top:20px;" type="submit">Send me the email</button>
+       </div>
+   </form>
+   `;
+  
 }
