@@ -211,7 +211,7 @@ body {
     color: #FFFFFF;
 }
 
-.number{
+.number {
     display: flex;
     width: 35px;
     height: 35px;
@@ -225,4 +225,108 @@ body {
     font-weight: 400;
     font-size: 12px;
     color: #FFFFFF;
+}
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.taskform {
+    background-color: white;
+    display: flex;
+    width: 25%;
+    min-width: 300px;
+    height: 60%;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    z-index: 100;
+    position: relative;
+}
+
+.taskform div {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskform h2 {
+    font-weight: 700;
+    font-size: 40px;
+    margin: 0;
+    padding-top: 25px;
+}
+
+.taskform p {
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.duedate {
+    display: flex;
+    flex-direction: row !important;
+    width: 200px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.priority {
+    display: flex;
+    flex-direction: row !important;
+    width: 200px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.assignedto {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.user div {
+    margin-right: 20px;
+}
+
+.close {
+    position: absolute !important;
+    top: 41px !important;
+    right: 41px !important;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.edit {
+    position: absolute !important;
+    bottom: 30px !important;
+    right: 41px !important;
+    width: 57px;
+    height: 57px;
+    background: #2A3647;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 98vh;
 }

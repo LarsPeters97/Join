@@ -104,7 +104,7 @@ async function initBoard() {
 }
 
 async function loadAll() {
-    /**await loadTasklist()*/
+    /*await loadTasklist()*/
     loadTodos();
     loadInProgress();
     loadAwaitFeedback();
@@ -112,11 +112,13 @@ async function loadAll() {
 }
 
 async function save() {
-
+    let tasklistAsString = JSON.stringify(tasklist)
+    await backend.setItem('tasklist', tasklistAsString)
 }
 
 async function loadTasklist() {
-
+    await downloadFromServer();
+    tasklist = JSON.parse(backend.getItem('tasklist')) || [];
 }
 
 function loadTodos() {
@@ -255,7 +257,7 @@ function assignedTo(assignedTo) {
 
 function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority) {
     let width = completedtasks / subtasks * 100
-    return /**html*/`
+    return `
     <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
         <div class="category" style="background-color: ${color}">${category}</div>
         <div class="title">${title}</div>
@@ -290,7 +292,7 @@ function allowDrop(ev) {
 
 function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
-    /**save();*/
+    save();
     loadAll();
     renderBoard();
 }
@@ -301,4 +303,28 @@ function highlight(id) {
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragarea-highlight');
+}
+
+function taskPopup() {
+    document.getElementById('popup').innerHTML = `
+    <div w3-include-html="/assets/templates/add_task_mini.html"></div>
+    `;
+    includeHTML();
+}
+
+function openTask(id){
+    task = tasklist.filter(t => t['id'] == id);
+    let category = task[0]['category']['categoryName'];
+    let color = task[0]['category']['color'];
+    let title = task[0]['title'];
+    let description = task[0]['description'];
+    let duedate = task[0]['duedate'];
+    let priority = task[0]['priority'];
+    let assignedTo = task[0]['assignedTo'];
+    document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority);
+    renderAssignedTo(assignedTo);
+}
+
+function closePopup() {
+    document.getElementById('popup').innerHTML = '';
 }
