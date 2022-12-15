@@ -1,10 +1,7 @@
-let users = [
-    {
-        "name": "alex vermeersch",
-        "email": "alex@test.de",
-        "password": "test123",
-    },
-];
+
+let users = [];
+
+setURL('https://gruppe-397.developerakademie.net/smallest_backend_ever');
 
 async function init() {
     await downloadFromServer();
