@@ -71,7 +71,7 @@ function htmlSignup() {
     return `
   <h2>Sign up</h2>
   <img onclick="htmlLogin()" class="arrow" src="./assets/img/arrow-left.png">
-  <form onsubmit="addUser()">
+  <form onsubmit="addUser(); return false">
        <input class="input_name" type="text" placeholder="Name" id="Name_signup" required>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
        <input type="password" placeholder="Password" id="password_signup"class="input_password" required>
