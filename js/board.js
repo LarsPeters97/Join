@@ -9,15 +9,15 @@ let tasklist =
             },
             'duedate': "23.12.2022",
             'title': 'Website redesign',
-            'description': 'lorem ipsum',
+            'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro',
             'subtasks': {
                 'tasks': [
                     {
-                        'task': 'lorem ipsum',
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
                         'completed': true,
                     },
                     {
-                        'task': 'lorem ipsum duo',
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
                         'completed': false,
                     },
                 ],
@@ -44,8 +44,18 @@ let tasklist =
                         'icon': 'SE',
                         'iconcolor': '#9327FF',
                     },
+                    {
+                        'name': 'You',
+                        'icon': 'Yo',
+                        'iconcolor': '#FF5C00',
+                    },
+                    {
+                        'name': 'Someone Else',
+                        'icon': 'SE',
+                        'iconcolor': '#9327FF',
+                    },
                 ]},
-                'priority': 'high',
+                'priority': 'urgent',
 },
 {
             'progress': 'todo',
@@ -60,11 +70,11 @@ let tasklist =
             'subtasks': {
                 'tasks': [
                     {
-                        'task': 'lorem ipsum',
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
                         'completed': true,
                     },
                     {
-                        'task': 'lorem ipsum duo',
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
                         'completed': false,
                     },
                     {
@@ -90,7 +100,7 @@ let tasklist =
                         'iconcolor': '#02CF2F',
                     },
                 ]},
-                'priority': 'high',
+                'priority': 'urgent',
 }];
 let todos = [];
 let inProgress = [];
@@ -323,6 +333,7 @@ function openTask(id){
     let assignedTo = task[0]['assignedTo'];
     document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority);
     renderAssignedTo(assignedTo);
+    renderSubTasks(id);
 }
 
 function closePopup() {
