@@ -48,7 +48,7 @@
     margin-bottom: 8px;
 }
 
-.title input {
+.input-text-type {
     padding: 13px 21px;
     width: 422px;
     height: 51px;
@@ -123,4 +123,30 @@
 
 .prio-btns:hover {
     transform: scale(1.03);
+}
+
+.subtask {
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-subtask {
+    border: none;
+    outline: none;
+    width: 85%;
+    font-size: 21px;
+}
+
+.task-btns {
+    background-color: seagreen;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 48px;
+    width: 100%;
+}
+
+.xy {
+    display: flex;
+    flex-direction: column;
 }
