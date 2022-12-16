@@ -7,7 +7,7 @@ let tasklist =
                 'color': 'orange',
                 'categoryName': 'Design',
             },
-            'duedate': "23.12.2022",
+            'duedate': 20230114,
             'title': 'Website redesign',
             'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro',
             'subtasks': {
@@ -64,7 +64,7 @@ let tasklist =
                 'color': 'orange',
                 'categoryName': 'Design',
             },
-            'duedate': "23.12.2022",
+            'duedate': 20221225,
             'title': 'Website redesign',
             'description': 'lorem ipsum',
             'subtasks': {
@@ -101,6 +101,96 @@ let tasklist =
                     },
                 ]},
                 'priority': 'urgent',
+},
+{
+            'progress': 'todo',
+            'id': 2,
+            'category': {
+                'color': 'orange',
+                'categoryName': 'Design',
+            },
+            'duedate': 20221228,
+            'title': 'Website redesign',
+            'description': 'lorem ipsum',
+            'subtasks': {
+                'tasks': [
+                    {
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+                        'completed': true,
+                    },
+                    {
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                ],
+            },
+            'assignedTo': {
+                'user': [
+                    {
+                        'name': 'me',
+                        'icon': 'ME',
+                        'iconcolor': '#0190E0',
+                    },
+                    {
+                        'name': 'Marcel Küpper',
+                        'icon': 'MK',
+                        'iconcolor': '#02CF2F',
+                    },
+                ]},
+                'priority': 'low',
+},
+{
+            'progress': 'todo',
+            'id': 3,
+            'category': {
+                'color': 'orange',
+                'categoryName': 'Design',
+            },
+            'duedate': 20221230,
+            'title': 'Website redesign',
+            'description': 'lorem ipsum',
+            'subtasks': {
+                'tasks': [
+                    {
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+                        'completed': true,
+                    },
+                    {
+                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                    {
+                        'task': 'lorem ipsum duo',
+                        'completed': false,
+                    },
+                ],
+            },
+            'assignedTo': {
+                'user': [
+                    {
+                        'name': 'me',
+                        'icon': 'ME',
+                        'iconcolor': '#0190E0',
+                    },
+                    {
+                        'name': 'Marcel Küpper',
+                        'icon': 'MK',
+                        'iconcolor': '#02CF2F',
+                    },
+                ]},
+                'priority': 'medium',
 }];
 let todos = [];
 let inProgress = [];
@@ -328,7 +418,11 @@ function openTask(id) {
     let color = task[0]['category']['color'];
     let title = task[0]['title'];
     let description = task[0]['description'];
-    let duedate = task[0]['duedate'];
+    let duedateunformated = JSON.stringify(task[0]['duedate']);
+    let year = duedateunformated.slice(0, 4);
+    let month = duedateunformated.slice(4, 6);
+    let day = duedateunformated.slice(6);
+    let duedate = day + '.' + month + '.' + year;
     let priority = task[0]['priority'];
     let assignedTo = task[0]['assignedTo'];
     document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority);
