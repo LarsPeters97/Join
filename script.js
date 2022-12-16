@@ -43,7 +43,7 @@ function loadHtml() {
 function htmlLogin() {
     return `
   <h2>Log in</h2>
-            <form>
+            <form onsubmit="login(); return false;">
                 <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
                 <input type="password" placeholder="Password" id="password_login"class="input_password" required>
 
@@ -59,6 +59,20 @@ function htmlLogin() {
             </form>
   `;
 }
+
+
+function login(){
+    let email = document.getElementById('Email_login');
+    let password = document.getElementById('password_login');
+    let user = users.find( u => u.email == email.value && u.password == password.value);
+
+    if (user) {
+        window.location.href = './summary.html';
+    } else {
+        alert('Please Sign up befor login!');
+    }
+}
+
 
 function loadSignUpForm() {
     let signUpForm = document.getElementById("form");

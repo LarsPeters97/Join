@@ -17,7 +17,7 @@ body {
 }
 
 .logo_login_page {
-    animation: myAnim 1s linear 300ms 1 normal both;
+    animation: myAnim 1s linear 225ms 1 normal both;
     z-index: 2;
     position: absolute;
     top: 40px;
