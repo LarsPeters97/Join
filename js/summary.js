@@ -277,6 +277,12 @@ return -1;
 }
 });
 document.getElementById('amount-urgent').innerHTML = `<b>${urgentTasks.length}</b>`; 
+let duedateunformated = JSON.stringify(urgentTasks[0]['duedate']);
+    let year = duedateunformated.slice(0, 4);
+    let month = duedateunformated.slice(4, 6);
+    let day = duedateunformated.slice(6);
+    let duedate = day + '.' + month + '.' + year;
+document.getElementById('upcoming-date').innerHTML = `<b>${duedate}</b>`;
 }
 
 function loadTotalamount() {
