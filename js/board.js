@@ -44,10 +44,11 @@ let tasklist =
                         'icon': 'SE',
                         'iconcolor': '#9327FF',
                     },
-                ]},
-                'priority': 'high',
-},
-{
+                ]
+            },
+            'priority': 'high',
+        },
+        {
             'progress': 'todo',
             'id': 1,
             'category': {
@@ -89,9 +90,10 @@ let tasklist =
                         'icon': 'MK',
                         'iconcolor': '#02CF2F',
                     },
-                ]},
-                'priority': 'high',
-}];
+                ]
+            },
+            'priority': 'high',
+        }];
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];
@@ -157,7 +159,7 @@ function renderTodos() {
         let completedtasks = 0;
         for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
             let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']){
+            if (task['completed']) {
                 completedtasks++
             }
         }
@@ -181,7 +183,7 @@ function renderInProgress() {
         let completedtasks = 0;
         for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
             let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']){
+            if (task['completed']) {
                 completedtasks++
             }
         }
@@ -205,7 +207,7 @@ function renderAwaitFeedback() {
         let completedtasks = 0;
         for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
             let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']){
+            if (task['completed']) {
                 completedtasks++
             }
         }
@@ -229,7 +231,7 @@ function renderDoneTasks() {
         let completedtasks = 0;
         for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
             let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']){
+            if (task['completed']) {
                 completedtasks++
             }
         }
@@ -312,7 +314,7 @@ function taskPopup() {
     includeHTML();
 }
 
-function openTask(id){
+function openTask(id) {
     task = tasklist.filter(t => t['id'] == id);
     let category = task[0]['category']['categoryName'];
     let color = task[0]['category']['color'];
