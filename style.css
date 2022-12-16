@@ -17,9 +17,25 @@ body {
 }
 
 .logo_login_page {
+    animation: myAnim 1s linear 300ms 1 normal both;
+    z-index: 2;
     position: absolute;
     top: 40px;
     left: 77px;
+}
+
+@keyframes myAnim {
+    0% {
+        transform: scale(0);
+        top: 40px;
+        left: 77px;
+    }
+
+    100% {
+        transform: scale(1);
+        top: 40px;
+        left: 77px;
+    }
 }
 
 .header_startscreen {
