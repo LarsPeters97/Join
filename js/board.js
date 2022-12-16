@@ -361,7 +361,7 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
     <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
         <div class="category" style="background-color: ${color}">${category}</div>
         <div class="title">${title}</div>
-        <div class="description">${description}</div>
+        <div class="description">${description.slice(0, 50)}</div>
         <div class="subtaskbar">
             <div class="progress">
                 <div class="progress-bar" style="width: ${width}%">
@@ -425,7 +425,7 @@ function openTask(id) {
     let duedate = day + '.' + month + '.' + year;
     let priority = task[0]['priority'];
     let assignedTo = task[0]['assignedTo'];
-    document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority);
+    document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority, id);
     renderAssignedTo(assignedTo);
     renderSubTasks(id);
 }
