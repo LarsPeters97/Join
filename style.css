@@ -265,13 +265,17 @@ body {
     outline: none;
 }
 
-.arrow{
+.arrow {
     position: absolute;
     top: 30px;
     left: 30px;
     cursor: pointer;
 }
 
-.d-none{
-    display: none;
+.d-none {
+    display: none !important;
+}
+
+.select-bg-color:hover {
+    background-color: rgb(224,224,224);
 }

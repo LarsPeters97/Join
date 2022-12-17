@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="add_task.css">
-    <script src="script.js"></script>
-    <script src="./js/add_task.js"></script>
+    <script src="mini_backend.js"></script>
+    <script defer src="script.js"></script>
+    <script defer src="./js/add_task.js"></script>
+    <script defer src="register.js"></script>
     <title>Add Task</title>
 
 </head>
@@ -21,78 +23,113 @@
     <div class="add-taskt-whole-side">
         <div class="inner-side">
             <h1 class="headline-task">Add Task</h1>
-            <div class="flex">
-                <div class="left-side flex column">
-                    <div class="title flex column margin-for-fields">
-                        <span class="header-for-fields">Title</span>
-                        <input class="input-text-type" type="text" min="2" max="40" required
-                            placeholder="Enter a title">
-                    </div>
-                    <div class="description flex column margin-for-fields">
-                        <span class="header-for-fields">Description</span>
-                        <textarea required name="description" id="description" maxlength="500"
-                            placeholder="Enter a Description"></textarea>
-                    </div>
-                    <div class="flex column margin-for-fields">
-                        <span class="header-for-fields">Category</span>
-                        <span class="dropdown-category-container">
-                            <div class="dropdown-category">
-                                <span class="flex">Select task category</span>
-                                <img src="./assets/img/vector-2.png" alt="klick">
+            <form onsubmit="createNewTask(); return false">
+                <div class="flex">
+                    <div class="left-side flex column">
+                        <div class="title flex column margin-for-fields">
+                            <span class="header-for-fields">Title</span>
+                            <input class="input-text-type" type="text" min="2" max="40" required
+                                placeholder="Enter a title">
+                        </div>
+                        <div class="description flex column margin-for-fields">
+                            <span class="header-for-fields">Description</span>
+                            <textarea required name="description" id="description" maxlength="500"
+                                placeholder="Enter a Description"></textarea>
+                        </div>
+                        <div class="flex column margin-for-fields">
+                            <span class="header-for-fields">Category</span>
+
+
+
+
+
+
+
+
+                            <div class="dropdown-category-container">
+                                <div class="dropdown-category border-radius-fields"
+                                    onclick="openNewCategoryAndExistingCategories()" id="category-container">
+                                    <span class="flex" id="dropdown-category">Select task category</span>
+                                    <img src="./assets/img/vector-2.png" alt="klick">
+                                </div>
+                                <div class="dropdown-category-new select-bg-color d-none" id="new-category"
+                                    onclick="createNewCategory()">
+                                    <span class="flex">New Category</span><img src="./assets/img/plus-subtask.png">
+                                </div>
+                                <div id="existing-categories"></div>
+
                             </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="flex column margin-for-fields">
+                            <span class="header-for-fields">Assigned to</span>
+                            <div class="dropdown-category-container">
+                                <div class="dropdown-category">
+                                    <span class="flex">Select contacts to assign</span>
+                                    <img src="./assets/img/vector-2.png" alt="klick">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-
-                    <div class="flex column margin-for-fields">
-                        <span class="header-for-fields">Assigned to</span>
-                        <div class="dropdown-category-container">
-                            <div class="dropdown-category">
-                                <span class="flex">Select contacts to assign</span>
-                                <img src="./assets/img/vector-2.png" alt="klick">
+                    <div class="right-side flex column">
+                        <div class="due-date flex column margin-for-fields">
+                            <span class="header-for-fields">Due date</span>
+                            <input type="date" required placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31"
+                                id="date">
+                        </div>
+                        <div class="flex column margin-for-fields">
+                            <span class="header-for-fields">Prio</span>
+                            <div class="flex prio-buttons-section">
+                                <button type="button" class="prio-btns">Urgent <img
+                                        src="./assets/img/urgent.svg"></button>
+                                <button type="button" class="prio-btns">Medium <img
+                                        src="./assets/img/medium.svg"></button>
+                                <button type="button" class="prio-btns">Low <img src="./assets/img/low.svg"></button>
+                            </div>
+                        </div>
+                        <div class="flex column margin-for-fields">
+                            <span class="header-for-fields">Subtasks</span>
+                            <div class="input-text-type subtask">
+                                <input class="input-subtask" type="text" min="2" max="100" required
+                                    placeholder="Add new subtask">
+                                <img src="./assets/img/plus-subtask.png" alt="Add">
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-                <div class="right-side flex column">
-                    <div class="due-date flex column margin-for-fields">
-                        <span class="header-for-fields">Due date</span>
-                        <input type="date" required placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31">
-                    </div>
-                    <div class="flex column margin-for-fields">
-                        <span class="header-for-fields">Prio</span>
-                        <div class="flex prio-buttons-section">
-                            <button type="button" class="prio-btns">Urgent <img src="./assets/img/urgent.svg"></button>
-                            <button type="button" class="prio-btns">Medium <img src="./assets/img/medium.svg"></button>
-                            <button type="button" class="prio-btns">Low <img src="./assets/img/low.svg"></button>
-                        </div>
-                    </div>
-                    <div class="flex column margin-for-fields">
-                        <span class="header-for-fields">Subtasks</span>
-                        <div class="input-text-type subtask">
-                            <input class="input-subtask" type="text" min="2" max="100" required
-                                placeholder="Add new subtask">
-                            <img src="./assets/img/plus-subtask.png" alt="Add">
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-            <div class="task-btns">
-                <button class="clear-btn btns-clear-and-create">Clear <img src="./assets/img/clear-x.svg"></button>
-                <button class="create-btn btns-clear-and-create" onmouseover="showCreateImgBlue()"
-                    onmouseout="showCreateImgWhite()">Create Task <img src="./assets/img/create-check.svg"
-                        id="create-img"></button>
-
-            </div>
+                <div class="task-btns">
+                    <button class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()"
+                        onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
+                            id="clear-img"></button>
+                    <button class="create-btn btns-clear-and-create">Create Task <img
+                            src="./assets/img/create-check.svg" id="create-img"></button>
+            </form>
 
         </div>
 
-
-
+    </div>
 
 
     </div>
