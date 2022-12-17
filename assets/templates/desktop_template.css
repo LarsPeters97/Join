@@ -164,3 +164,9 @@
     cursor: pointer;
     text-decoration: none;
 }
+
+.header_left_side a:hover {
+  opacity: 0.7;
+    width: 40px;
+    height: 40px;
+}
