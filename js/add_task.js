@@ -7,8 +7,36 @@ let categories = [{
     'color': '#1FD7C1'
 }];
 
+
+let selectedCategoryColor;
+let selectedTaskValues = [];
+let selectedCategoryValues = [];
+let taskCategoryFinaly = [];
+let taskCategoryColorFinaly = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
 
+
+function addTask() {
+ 
+        let taskInputTitle = document.getElementById('input-title').value;
+        let description = document.getElementById('description').value;
+        let dueDate = document.getElementById('due-date').value;
+        tasks.push({
+            taskTitle: taskInputTitle,
+            taskDescription: description,
+            toDueDate: dueDate,
+            taskCategory: {
+                Category: taskCategoryFinaly,
+                TaskColor: taskCategoryColorFinaly
+            },
+            subTask: checkedSubtaskValue,
+            taskID: tasks.length,
+            priority: prioritySelect,
+            assignedTo: contactCheckedValue,
+            taskStatus: selectedTaskStatus,
+        });
+        window.location.href = "board.html";
+}
 
 async function init() {
     await downloadFromServer();
@@ -75,7 +103,8 @@ function createNewCategory() {
 
 function templateCreateNewCategory() {
     return /*html*/`
-    <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required>
+    <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
+    <span class="dot" id="selected-color" style="margin-left: 16px;"></span>
     <div class="flex category-icons">
         <img src="./assets/img/false-x.png" class="false-x"> | <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
     </div>`;
@@ -84,16 +113,43 @@ function templateCreateNewCategory() {
 
 function colorsForNewCategory() {
     let categoriesForColors = document.getElementById('categories-for-colors');
-    for(let i = 0; i < categoryColors.length; i++) {
-        categoryColor = categoryColors[i];
-        categoriesForColors.innerHTML += templateColorsForNewCategory(i, categoryColor);
+    for (let c = 0; c < categoryColors.length; c++) {
+        categoryColor = categoryColors[c];
+        categoriesForColors.innerHTML += templateColorsForNewCategory(c, categoryColor);
     }
 }
 
-function templateColorsForNewCategory(i, categoryColor) {
+
+function templateColorsForNewCategory(colorIndex, categoryColor) {
     return /*html*/`
-    <span class="all-colors" style="background-color: ${categoryColor}" id="selected-color-${i}"></span>`;
+    <span class="all-colors" style="background-color: ${categoryColor}" 
+    id="selected-color-${colorIndex}" onclick="addNewCategoryColor('${categoryColor}')"></span>`;
 }
 
 
+function addNewCategoryColor(categoryColor) {
+    if (document.getElementById('new-category-name').value) {
+        selectedCategoryColor = categoryColor;
+        document.getElementById('categories-for-colors').innerHTML = '';
+        document.getElementById('selected-color').style.backgroundColor = `${categoryColor}`;
+        document.getElementById('mistake-category-fields').innerHTML = '';
+    }
+    else {
+        document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
+    }
+}
 
+
+function addNewCategory() {
+    let newCategoryName = document.getElementById('new-category-name').value;
+    if(selectedCategoryColor && newCategoryName) {
+        selectedTaskValues = JSON.parse(localStorage.getItem("task-category")) || [];
+        selectedTaskValues.push({
+            taskCategoryName: newCategoryName,
+            taskColor: selectedCategoryColor
+        });
+    }
+    else {
+        document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
+    }
+}

@@ -276,4 +276,10 @@
     transform: scale(1.1);
 }
 
+.mistake-category-fields {
+    color: red;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
 
