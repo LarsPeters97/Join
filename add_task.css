@@ -230,3 +230,50 @@
     width: 21px;
     border-radius: 50%;
 }
+
+.input-category {
+    width: 80%;
+    height: 100%;
+    font-size: 21px;
+    border: none;
+    outline: none;
+}
+
+.category-icons {
+    align-items: center;
+    width: 20%;
+    justify-content: flex-end;
+}
+
+.false-x {
+    width: 27px;
+    object-fit: cover;
+}
+
+.checkmark {
+    width: 22px;
+    object-fit: cover;
+    margin-left: 3px;
+}
+
+.colors {
+    width: 250px;
+    justify-content: space-evenly;
+    margin-top: 12px;
+}
+
+
+.all-colors {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.all-colors:hover {
+    transform: scale(1.1);
+}
+
+
