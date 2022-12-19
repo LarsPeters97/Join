@@ -53,10 +53,12 @@ function renderEditTask(id){
     let day = duedateunformated.slice(6);
     let duedate = year + '-' + month + '-' + day;
     let priority = task[0]['priority'];
+    let subtasks = task[0]['subtasks']['tasks'];
     document.getElementById('popup').innerHTML = editTaskTemplate();
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
+    loadSubtasks(subtasks, id);
 }
 
 function editTaskTemplate() {
@@ -91,6 +93,32 @@ function editTaskTemplate() {
         </div
     </div>
     `;
+}
+
+function loadSubtasks(subtasks, id) {
+    document.getElementById('subtasks').innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        let subtask = subtasks[i];
+        document.getElementById('subtasks').innerHTML += `
+        <div class="subtask" id="subtask${i}">
+            <div><p>${subtask['task']}</p></div>
+            <div>
+                <button onclick="deleteSubtask(${i}, ${id})">Delete</button>
+                <button onclick="editSubtask(${i}, ${id})">Edit</button>
+            </div>
+        </div>
+        `
+    }
+}
+
+function deleteSubtask(index, id){
+    task = tasklist.filter(t => t['id'] == id);
+    task[0]['subtasks']['tasks'].splice(index, 1);
+    let subtasks = task[0]['subtasks']['tasks'];
+    save();
+    loadAll();
+    renderBoard();
+    loadSubtasks(subtasks, id);
 }
 
 function taskStatusChange(task, id){
