@@ -65,6 +65,7 @@
     position: absolute;
     bottom: 60px;
     right: 55px;
+    cursor: pointer;
 }
 
 .button-addcontact:hover{
@@ -78,4 +79,189 @@
 
 .button-addcontact p {
     margin: 0px;
+}
+
+.container-addcontact{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-contact{
+    width: 900px;
+    height: 420px;
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.add-contact-first-part{
+    width: 40%;
+    height: 100%;
+    background-color: #2a3647;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+}
+
+.container-logo-addcontact{
+    width: 100%;
+    padding-left: 80px;
+}
+
+.container-logo-addcontact img{
+    width: 50px;
+}
+
+.container-logo-addcontact h2{
+    width: 100%;
+    font-size: 48px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+}
+
+.container-logo-addcontact p{
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+.vertikal-line-addcontact{
+    width: 25%;
+    height: 3px;
+    background-color: #29abe2;
+}
+
+.add-contact-second-part{
+    width: 20%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-contact-second-part img{
+    position: absolute;
+}
+
+.add-contact-third-part{
+    width: 40%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    flex-direction: column;
+}
+
+.input_name{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 21px;
+    width: 320px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-image: url("./assets/img/name_icon.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 10px;
+    background-origin: content-box;
+    margin-bottom: 15px;
+}
+
+.input_name::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #D1D1D1;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.input_name:focus {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
+    outline: none;
+}
+
+.input_email{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 21px;
+    width: 320px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-image: url("./assets/img/Mail_icon.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 10px;
+    background-origin: content-box;
+    margin-bottom: 15px;
+}
+
+.input_email::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #D1D1D1;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.input_email:focus {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
+    outline: none;
+}
+
+.input_phone{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 21px;
+    width: 320px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-image: url("./assets/img/logo-phone.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 10px;
+    background-origin: content-box;
+    margin-bottom: 15px;
+}
+
+.input_phone::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #D1D1D1;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+}
+
+.input_phone:focus {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
+    outline: none;
 }
