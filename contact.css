@@ -1,0 +1,81 @@
+.container-contacts {
+    height: 100%;
+    width: 350px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 252;
+}
+
+.wrapper {
+    position: fixed;
+    top: 92px;
+    left: 233px;
+    width: calc(100vw - 252px);
+    height: calc(100vh - 92px);
+    box-sizing: border-box;
+}
+
+.header-contacts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-contactarea {
+    position: fixed;
+    top: 92px;
+    left: 583px;
+    width: calc(100vw - 583px);
+    height: calc(100vh - 92px);
+    box-sizing: border-box;
+}
+
+.header-contacts h1 {
+    font-size: 50px;
+}
+
+.header-contacts p {
+    font-size: 24px;
+}
+
+.horizontal-line {
+    height: 60px;
+    width: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #29abe2;
+}
+
+.button-addcontact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 16px;
+    gap: 10px;
+    background: #2a3647;
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 60px;
+    right: 55px;
+}
+
+.button-addcontact:hover{
+    background-color: #29abe2;
+}
+
+.button-addcontact img {
+    width: 21px;
+    height: 21px;
+}
+
+.button-addcontact p {
+    margin: 0px;
+}

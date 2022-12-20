@@ -9,6 +9,7 @@
   width: 100vw;
   height: fit-content;
   background: #f6f7f8;
+  z-index: 100;
 }
 
 .header {
@@ -56,6 +57,7 @@
   position: absolute;
   left: 0px;
   top: 0px;
+  z-index: 100;
 }
 
 .sidebar {
@@ -73,6 +75,7 @@
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   border-radius: 0px;
   box-sizing: content-box;
+  z-index: 1;
 }
 
 .logo {
