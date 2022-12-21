@@ -54,14 +54,14 @@ function renderEditTask(id){
     let duedate = year + '-' + month + '-' + day;
     let priority = task[0]['priority'];
     let subtasks = task[0]['subtasks']['tasks'];
-    document.getElementById('popup').innerHTML = editTaskTemplate();
+    document.getElementById('popup').innerHTML = editTaskTemplate(id);
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
     loadSubtasks(subtasks, id);
 }
 
-function editTaskTemplate() {
+function editTaskTemplate(id) {
     return `
     <div class="background" onclick="closePopup()"></div>
     <div class="taskform">
@@ -79,9 +79,9 @@ function editTaskTemplate() {
             <div class="editsubtask">
                 Subtasks
                 <div class="subtaskedit">
-                    <input class="input-subtask" type="text" min="2" max="100" required
-                    placeholder="Add new subtask">
-                    <img src="./assets/img/plus-subtask.png" alt="Add">
+                    <input class="input-subtask" type="text" min="2" max="200" required
+                    placeholder="Add new subtask" id="newsubtask">
+                    <img src="./assets/img/plus-subtask.png" alt="Add" onclick="addNewSubask(${id})">
                 </div>
                 <div id="subtasks"></div>
             </div>
@@ -111,6 +111,17 @@ function loadSubtasks(subtasks, id) {
     }
 }
 
+function addNewSubask(id) {
+    let newtask = document.getElementById('newsubtask').value;
+    tasklist[id]['subtasks']['tasks'].push({'task': newtask, 'completed': false})
+    document.getElementById('newsubtask').value = '';
+    loadAll();
+    renderBoard();
+    task = tasklist.filter(t => t['id'] == id);
+    let subtasks = task[0]['subtasks']['tasks'];
+    loadSubtasks(subtasks, id);
+}
+
 function deleteSubtask(index, id){
     task = tasklist.filter(t => t['id'] == id);
     task[0]['subtasks']['tasks'].splice(index, 1);
@@ -119,6 +130,44 @@ function deleteSubtask(index, id){
     loadAll();
     renderBoard();
     loadSubtasks(subtasks, id);
+}
+
+function editSubtask(index, id) {
+    task = tasklist.filter(t => t['id'] == id);
+    let subtask = task[0]['subtasks']['tasks'][index];
+    document.getElementById(`subtask${index}`).innerHTML = `
+    <textarea id="subedit${index}" cols="30" rows="10" minlength="2" maxlength="200">${subtask['task']}</textarea>
+    <div>
+        <button onclick="saveSubEdit(${index}, ${id})">Save</button>
+        <button onclick="cancelSubEdit(${index}, ${id})">Cancel</button>
+    </div>
+    `
+}
+
+function saveSubEdit(index, id) {
+    newsubtask = document.getElementById(`subedit${index}`).value;
+    tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
+    loadAll();
+    renderBoard();
+    document.getElementById(`subtask${index}`).innerHTML = `
+    <div><p>${newsubtask}</p></div>
+    <div>
+        <button onclick="deleteSubtask(${index}, ${id})">Delete</button>
+        <button onclick="editSubtask(${index}, ${id})">Edit</button>
+    </div>
+    `
+}
+
+function cancelSubEdit(index, id) {
+    task = tasklist.filter(t => t['id'] == id);
+    let subtask = task[0]['subtasks']['tasks'][index];
+    document.getElementById(`subtask${index}`).innerHTML = `
+    <div><p>${subtask['task']}</p></div>
+    <div>
+        <button onclick="deleteSubtask(${index}, ${id})">Delete</button>
+        <button onclick="editSubtask(${index}, ${id})">Edit</button>
+    </div>
+    `
 }
 
 function taskStatusChange(task, id){
@@ -130,4 +179,22 @@ function taskStatusChange(task, id){
     save();
     loadAll();
     renderBoard();
+}
+
+function selectPrio(prio) {
+    if (prio == 'urgent'){
+        document.getElementById('urgent').classList.add('urgent');
+        document.getElementById('medium').classList.remove('medium');
+        document.getElementById('low').classList.remove('low');
+    }
+    if (prio == 'medium'){
+        document.getElementById('urgent').classList.remove('urgent');
+        document.getElementById('medium').classList.add('medium');
+        document.getElementById('low').classList.remove('low');
+    }
+    if (prio == 'low'){
+        document.getElementById('urgent').classList.remove('urgent');
+        document.getElementById('medium').classList.remove('medium');
+        document.getElementById('low').classList.add('low');
+    }
 }
