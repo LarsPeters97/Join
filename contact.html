@@ -23,15 +23,15 @@
                     <div class="horizontal-line"></div>
                     <p>Better with a team</p>
                 </div>
-                <button class="button-addcontact">
+                <button onclick="showAddcontact()" class="button-addcontact">
                     <p>New contact</p>
                     <img src="./assets/img/logo-addcontact.png" alt="" />
                 </button>
             </div>
         </div>
 
-        <div class="container-addcontact">
-            <div class="add-contact">
+        <div onclick="closeAddcontact()" id="addcontact" class="container-addcontact d-none">
+            <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
                     <div class="container-logo-addcontact">
                         <img src="./assets/img/Logo.png" alt="" />
@@ -47,23 +47,31 @@
                     <img src="./assets/img/contact.png" alt="" />
                 </div>
                 <div class="add-contact-third-part">
+                    <img onclick="closeAddcontact()" id="closeAddcontact" class="close-addcontact" src="./assets/img/x-blue.png" alt="">
                     <div>
-                        <input
+                        <input id="input_name"
                             class="input_name"
                             type="text"
                             placeholder="Name" />
                     </div>
                     <div>
-                        <input
+                        <input id="input_email"
                             class="input_email"
                             type="text"
                             placeholder="Email" />
                     </div>
                     <div>
-                        <input
+                        <input id="input_phone"
                             class="input_phone"
                             type="text"
                             placeholder="Phone" />
+                    </div>
+                    <div class="container-button">
+                        <button onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
+                        <button onclick="createContact()" class="button-create">
+                            Create contact
+                            <img src="./assets/img/check-white.png" alt="" />
+                        </button>
                     </div>
                 </div>
             </div>
