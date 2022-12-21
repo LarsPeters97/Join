@@ -14,6 +14,6 @@ async function addUser(){
     let password = document.getElementById('password_signup');
     users.push({name: name.value, email: email.value, password: password.value});
     await  backend.setItem('users', JSON.stringify(users));
-    //weiterleitung zum login bereich + message erfolgreich registriert
+    //weiterleitung zum login bereich
     window.location.href = './index.html';
 }
