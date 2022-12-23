@@ -42,6 +42,8 @@ function addTask() {
 async function init() {
     await downloadFromServer();
     categories = JSON.parse(backend.getItem("categories")) || [];
+    let categoriesasString = JSON.stringify(categories);
+    localStorage.setItem('task-category', categoriesasString);
 }
 
 
@@ -75,20 +77,22 @@ function templateExistingCategories(i, category) {
 
 
 function selectedCategory(i) {
+    newCategoryName = categories[i]['name'];
+    selectedCategoryColor = categories[i]['color'];
+    selectedTaskValues = JSON.parse(localStorage.getItem("task-category"));
     document.getElementById('new-category').classList.add('d-none');
     document.getElementById('category-container').style.borderRadius = '9px';
     let existingCategories = document.getElementById('existing-categories');
     existingCategories.innerHTML = '';
     let categoryContainer = document.getElementById('category-container');
-    categoryContainer.innerHTML = templateSelectedCategory(i);
+    categoryContainer.innerHTML = templateSelectedCategory();
 }
 
 
-function templateSelectedCategory(i) {
+function templateSelectedCategory() {
     return /*html*/`
-        <span class="flex">Category: ${categories[i]['name']}</span>
-        <span class="dot" style="background-color: ${categories[i]['color']}"></span>`;
-}
+        <span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
+    }
 
 
 function createNewCategory() {
@@ -146,8 +150,8 @@ function addNewCategory() {
     if(selectedCategoryColor && newCategoryName) {
         selectedTaskValues = JSON.parse(localStorage.getItem("task-category")) || [];
         selectedTaskValues.push({
-            taskCategoryName: newCategoryName,
-            taskColor: selectedCategoryColor
+            'name': newCategoryName,
+            'color': selectedCategoryColor
         });
         document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
     }
@@ -157,5 +161,20 @@ function addNewCategory() {
 }
 
 function reopenExistigCategorys() {
-    
+    document.getElementById('new-category').classList.remove('d-none');
+    document.getElementById('existing-categories').classList.remove('d-none');
+    document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">Select task category</span>
+    <img src="./assets/img/vector-2.png" alt="klick" onclick="closeDropdownCategory()">`
+    let existingCategories = document.getElementById('existing-categories');
+    existingCategories.innerHTML = '';
+    for (let i = 0; i < selectedTaskValues.length; i++) {
+        let category = selectedTaskValues[i];
+        existingCategories.innerHTML += templateExistingCategories(i, category);
+    }
+}
+
+function closeDropdownCategory() {
+    document.getElementById('new-category').classList.add('d-none');
+    document.getElementById('existing-categories').classList.add('d-none');
+    document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
 }
