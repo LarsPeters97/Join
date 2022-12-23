@@ -94,6 +94,16 @@
     border-radius: 9px;
 }
 
+.input-section {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dropdown-img {
+    width: 16px;
+    object-fit: contain;
+}
+
 .dropdown-category-new {
     height: 40px;
     display: flex;
