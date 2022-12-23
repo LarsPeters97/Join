@@ -14,6 +14,7 @@ let selectedCategoryValues = [];
 let taskCategoryFinaly = [];
 let taskCategoryColorFinaly = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
+let newCategoryName = [];
 
 
 function addTask() {
@@ -91,8 +92,8 @@ function templateSelectedCategory(i) {
 
 
 function createNewCategory() {
-    document.getElementById('new-category').style.display = 'none';
-    document.getElementById('existing-categories').style.display = 'none';
+    document.getElementById('new-category').classList.add('d-none');
+    document.getElementById('existing-categories').classList.add('d-none');
     document.getElementById('category-container').style.borderRadius = '9px';
     colorsForNewCategory();
 
@@ -141,15 +142,20 @@ function addNewCategoryColor(categoryColor) {
 
 
 function addNewCategory() {
-    let newCategoryName = document.getElementById('new-category-name').value;
+    newCategoryName = document.getElementById('new-category-name').value;
     if(selectedCategoryColor && newCategoryName) {
         selectedTaskValues = JSON.parse(localStorage.getItem("task-category")) || [];
         selectedTaskValues.push({
             taskCategoryName: newCategoryName,
             taskColor: selectedCategoryColor
         });
+        document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
     }
     else {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
     }
+}
+
+function reopenExistigCategorys() {
+    
 }

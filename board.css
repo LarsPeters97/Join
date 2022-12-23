@@ -331,6 +331,10 @@ body {
     padding-left: 10px;
 }
 
+.assignedto select {
+    width: 70%;
+}
+
 .user {
     display: flex;
     flex-direction: row !important;
@@ -583,4 +587,14 @@ body {
     overflow-y: auto;
     overflow-x: hide;
     border-radius: 10px;
+}
+
+.assignedpersons {
+    display: flex;
+    flex-direction: row !important;
+    padding-top: 10px;
+}
+
+.assignedpersons div {
+    margin-left: 5px;
 }

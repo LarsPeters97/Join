@@ -59,6 +59,8 @@ function renderEditTask(id){
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
     loadSubtasks(subtasks, id);
+    selectPrio(priority);
+    loadAssignetPersons(id);
 }
 
 function editTaskTemplate(id) {
@@ -85,7 +87,9 @@ function editTaskTemplate(id) {
                 </div>
                 <div id="subtasks"></div>
             </div>
-            <div class="assignedto">Assigned to <select id="assign" placeholder="Select contacts to assign"></select></div>
+            <div class="assignedto">Assigned to <select id="assign" placeholder="Select contacts to assign"></select>
+                <div class="assignedpersons" id="assignedpersons"></div>
+            </div>
         </div>
         <div>
             <div class="close" onclick="closePopup()">x</div>
@@ -196,5 +200,14 @@ function selectPrio(prio) {
         document.getElementById('urgent').classList.remove('urgent');
         document.getElementById('medium').classList.remove('medium');
         document.getElementById('low').classList.add('low');
+    }
+    selectedPrio = prio;
+}
+
+function loadAssignetPersons(id) {
+    task = tasklist.filter(t => t['id'] == id);
+    for (let i = 0; i < task[0]['assignedTo']['user'].length; i++) {
+        let assignetperson = task[0]['assignedTo']['user'][i];
+        document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
 }
