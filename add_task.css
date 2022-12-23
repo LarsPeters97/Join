@@ -286,6 +286,10 @@
     transform: scale(1.1);
 }
 
+.margin-color {
+    margin-left: 12px;
+}
+
 .mistake-category-fields {
     color: red;
     font-size: 14px;

@@ -39,8 +39,6 @@ function addTask() {
     window.location.href = "board.html";
 }
 
-/*await downloadFromServer();
-categories = JSON.parse(backend.getItem("categories")) || [];*/
 
 function initialize() {
     let categoriesasString = JSON.stringify(categories);
@@ -60,8 +58,7 @@ function showClearImgDarkBlue() {
 
 
 function openNewCategoryAndExistingCategories() {
-    // let inputSection = document.getElementById('input-section');
-    // inputSection.innerHTML = templateInputSectionWhenOpen();
+    document.getElementById('category-container').style.borderRadius = '9px 9px 0px 0px';
     document.getElementById('new-category').classList.remove('d-none');
     document.getElementById('existing-categories').classList.remove('d-none');
     let existingCategories = document.getElementById('existing-categories');
@@ -73,15 +70,6 @@ function openNewCategoryAndExistingCategories() {
 }
 
 
-// function templateInputSectionWhenOpen() {
-//     return /*html*/`
-//     <div class="flex input-section" onclick="closeNewCategoryAndExistingCategories()" id="input-section">
-//     <span class="flex" id="dropdown-category">Select task category</span>
-//     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-//     </div>`;
-// }
-
-
 function closeNewCategoryAndExistingCategories() {
     document.getElementById('existing-categories').classList.add('d-none');
     document.getElementById('new-category').classList.add('d-none');
@@ -89,11 +77,12 @@ function closeNewCategoryAndExistingCategories() {
 
 function abc() {
     let newCategory = document.getElementById('new-category');
-    if(newCategory.classList.contains('d-none')) {
+    if (newCategory.classList.contains('d-none')) {
         openNewCategoryAndExistingCategories();
     }
     else {
         closeNewCategoryAndExistingCategories();
+        document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
     }
 }
 
@@ -101,7 +90,7 @@ function abc() {
 function templateExistingCategories(i, category) {
     return /*html*/`
     <div class="dropdown-category-existing select-bg-color" onclick="selectedCategory(${i})">
-        <span class="flex">${category['name']}</span><span class="dot" style="background-color: ${category['color']}"></span>        
+        <span class="flex">${category['name']}<span class="dot margin-color" style="background-color: ${category['color']}"></span></span>        
     </div>`;
 }
 
@@ -122,7 +111,7 @@ function templateSelectedCategory() {
     return /*html*/`
     <div class="flex input-section" onclick="reopenExistigCategorys()">
         <span class="flex" id="dropdown-category">${newCategoryName} 
-        <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span>
+        <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
 }
@@ -144,8 +133,21 @@ function templateCreateNewCategory() {
     <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
     <span class="dot" id="selected-color" style="margin-left: 16px;"></span>
     <div class="flex category-icons">
-        <img src="./assets/img/false-x.png" class="false-x"> | <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
+        <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
+        <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
     </div>`;
+}
+
+
+function removeCategoryInput() {
+    document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
+    document.getElementById('categories-for-colors').innerHTML = '';
+    document.getElementById('category-container').innerHTML = `
+    <div class="flex input-section" onclick="abc()" id="input-section">
+    <span class="flex" id="dropdown-category">Select task category</span>
+    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+    </div>`;
+    
 }
 
 
@@ -189,7 +191,7 @@ function addNewCategory() {
         localStorage.setItem('task-category', TaskValuesAsString);
         document.getElementById('category-container').innerHTML = `
         <div class="flex input-section" onclick="reopenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
-        <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span>
+        <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
         document.getElementById('categories-for-colors').innerHTML = '';
     }
