@@ -42,7 +42,7 @@ function addTask() {
     /*await downloadFromServer();
     categories = JSON.parse(backend.getItem("categories")) || [];*/
 
-function initilaze() {
+function initialize() {
     let categoriesasString = JSON.stringify(categories);
     localStorage.setItem('task-category', categoriesasString);
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
@@ -136,7 +136,6 @@ function templateColorsForNewCategory(colorIndex, categoryColor) {
 function addNewCategoryColor(categoryColor) {
     if (document.getElementById('new-category-name').value) {
         selectedCategoryColor = categoryColor;
-        document.getElementById('categories-for-colors').innerHTML = '';
         document.getElementById('selected-color').style.backgroundColor = `${categoryColor}`;
         document.getElementById('mistake-category-fields').innerHTML = '';
     }
@@ -157,6 +156,7 @@ function addNewCategory() {
         let TaskValuesAsString = JSON.stringify(selectedTaskValues);
         localStorage.setItem('task-category', TaskValuesAsString);
         document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
+        document.getElementById('categories-for-colors').innerHTML = '';
     }
     else {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
