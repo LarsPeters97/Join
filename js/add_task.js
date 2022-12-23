@@ -39,11 +39,13 @@ function addTask() {
         window.location.href = "board.html";
 }
 
-async function init() {
-    await downloadFromServer();
-    categories = JSON.parse(backend.getItem("categories")) || [];
+    /*await downloadFromServer();
+    categories = JSON.parse(backend.getItem("categories")) || [];*/
+
+function initilaze() {
     let categoriesasString = JSON.stringify(categories);
     localStorage.setItem('task-category', categoriesasString);
+    selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
 }
 
 
@@ -61,8 +63,8 @@ function openNewCategoryAndExistingCategories() {
     document.getElementById('new-category').classList.remove('d-none');
     let existingCategories = document.getElementById('existing-categories');
     existingCategories.innerHTML = '';
-    for (let i = 0; i < categories.length; i++) {
-        let category = categories[i];
+    for (let i = 0; i < selectedTaskValues.length; i++) {
+        let category = selectedTaskValues[i];
         existingCategories.innerHTML += templateExistingCategories(i, category);
     }
 }
@@ -77,9 +79,8 @@ function templateExistingCategories(i, category) {
 
 
 function selectedCategory(i) {
-    newCategoryName = categories[i]['name'];
-    selectedCategoryColor = categories[i]['color'];
-    selectedTaskValues = JSON.parse(localStorage.getItem("task-category"));
+    newCategoryName = selectedTaskValues[i]['name'];
+    selectedCategoryColor = selectedTaskValues[i]['color'];
     document.getElementById('new-category').classList.add('d-none');
     document.getElementById('category-container').style.borderRadius = '9px';
     let existingCategories = document.getElementById('existing-categories');
@@ -153,6 +154,8 @@ function addNewCategory() {
             'name': newCategoryName,
             'color': selectedCategoryColor
         });
+        let TaskValuesAsString = JSON.stringify(selectedTaskValues);
+        localStorage.setItem('task-category', TaskValuesAsString);
         document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span><img src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
     }
     else {
