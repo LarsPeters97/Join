@@ -87,8 +87,14 @@ function editTaskTemplate(id) {
                 </div>
                 <div id="subtasks"></div>
             </div>
-            <div class="assignedto">Assigned to <select id="assign" placeholder="Select contacts to assign"></select>
-                <div class="assignedpersons" id="assignedpersons"></div>
+            <div class="assignedto" id="assignedto">Assigned to 
+            <div class="dropdown-assign" id="assign-container">
+                <div onclick="openDropdownAssignTo()">
+                    <span class="flex">Select contacts to assign</span>
+                    <img src="./assets/img/vector-2.png" alt="klick">
+                </div>
+            </div>
+            <div class="assignedpersons" id="assignedpersons"></div>
             </div>
         </div>
         <div>

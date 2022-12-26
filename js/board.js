@@ -192,6 +192,17 @@ let tasklist =
                 ]},
                 'priority': 'medium',
 }];
+let contacts = [
+    {
+        'name': 'me',
+        'icon': 'ME',
+        'iconcolor': '#0190E0',
+    },
+    {
+        'name': 'Marcel Küpper',
+        'icon': 'MK',
+        'iconcolor': '#02CF2F',
+    }];
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];

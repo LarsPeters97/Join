@@ -320,6 +320,7 @@ body {
 
 .assignedto {
     margin-bottom: 15px;
+    margin-top: 15px;
     font-size: 18px;
 }
 
@@ -327,7 +328,7 @@ body {
     max-height: 150px !important;
     overflow-y: auto;
     overflow-x: visible;
-    width: 85%;
+    width: 70%;
     padding-left: 10px;
 }
 
@@ -597,4 +598,26 @@ body {
 
 .assignedpersons div {
     margin-left: 5px;
+}
+
+.dropdown-assign {
+    display: flex;
+    flex-direction: row !important;
+    width: 95%;
+    border: 1px solid #000009;
+    border-radius: 5px;
+}
+
+.dropdown-assign div{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 18px;
+    align-items: center;
+}
+
+.dropdown-assign img{
+    width: 15px;
+    height: 10px;
 }
