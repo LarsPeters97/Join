@@ -1,20 +1,34 @@
 let categories = [{
-    'name': 'Sales',
+    'name': 'General topics',
     'color': '#FC71FF'
-},
-{
-    'name': 'Backoffice',
-    'color': '#1FD7C1'
 }];
+
+let contactExample = [
+    {
+        'name': 'me',
+        'icon': 'ME',
+        'iconcolor': '#800000'
+    },
+    {
+        'name': 'Marcel Küpper',
+        'icon': 'MK',
+        'iconcolor': '#3cb44b'
+    },
+    {
+        'name': 'Toni Jacobs',
+        'icon': 'TJ',
+        'iconcolor': '#000075'
+    }];
+
+let assignedToContacts = [];
 
 
 let selectedCategoryColor;
 let selectedTaskValues = [];
 let selectedCategoryValues = [];
-let taskCategoryFinaly = [];
-let taskCategoryColorFinaly = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
-let newCategoryName = [];
+let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '##ffe119', '#9A6324', '#469990'];
+let newCategoryName;
 
 
 function addTask() {
@@ -30,11 +44,10 @@ function addTask() {
             Category: taskCategoryFinaly,
             TaskColor: taskCategoryColorFinaly
         },
+        assignedTo: contactCheckedValue,
         subTask: checkedSubtaskValue,
         taskID: tasks.length,
-        priority: prioritySelect,
-        assignedTo: contactCheckedValue,
-        taskStatus: selectedTaskStatus,
+        priority: prioritySelect
     });
     window.location.href = "board.html";
 }
@@ -58,15 +71,15 @@ function showClearImgDarkBlue() {
 
 
 function openNewCategoryAndExistingCategories() {
-    document.getElementById('category-container').style.borderRadius = '9px 9px 0px 0px';
-    document.getElementById('new-category').classList.remove('d-none');
-    document.getElementById('existing-categories').classList.remove('d-none');
     let existingCategories = document.getElementById('existing-categories');
     existingCategories.innerHTML = '';
     for (let i = 0; i < selectedTaskValues.length; i++) {
         let category = selectedTaskValues[i];
         existingCategories.innerHTML += templateExistingCategories(i, category);
     }
+    document.getElementById('category-container').style.borderRadius = '9px 9px 0px 0px';
+    document.getElementById('new-category').classList.remove('d-none');
+    document.getElementById('existing-categories').classList.remove('d-none');
 }
 
 
@@ -75,7 +88,7 @@ function closeNewCategoryAndExistingCategories() {
     document.getElementById('new-category').classList.add('d-none');
 }
 
-function abc() {
+function checkIfCategoryContainerOpen() {
     let newCategory = document.getElementById('new-category');
     if (newCategory.classList.contains('d-none')) {
         openNewCategoryAndExistingCategories();
@@ -121,6 +134,8 @@ function createNewCategory() {
     document.getElementById('new-category').classList.add('d-none');
     document.getElementById('existing-categories').classList.add('d-none');
     document.getElementById('category-container').style.borderRadius = '9px';
+    newCategoryName = undefined;
+    selectedCategoryColor = undefined;
     colorsForNewCategory();
 
     let categoryContainer = document.getElementById('category-container');
@@ -141,13 +156,14 @@ function templateCreateNewCategory() {
 
 function removeCategoryInput() {
     document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
+    document.getElementById('mistake-category-fields').innerHTML = '';
     document.getElementById('categories-for-colors').innerHTML = '';
     document.getElementById('category-container').innerHTML = `
     <div class="flex input-section" onclick="abc()" id="input-section">
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
-    
+
 }
 
 
@@ -182,7 +198,6 @@ function addNewCategoryColor(categoryColor) {
 function addNewCategory() {
     newCategoryName = document.getElementById('new-category-name').value;
     if (selectedCategoryColor && newCategoryName) {
-        selectedTaskValues = JSON.parse(localStorage.getItem("task-category")) || [];
         selectedTaskValues.push({
             'name': newCategoryName,
             'color': selectedCategoryColor
@@ -195,8 +210,11 @@ function addNewCategory() {
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
         document.getElementById('categories-for-colors').innerHTML = '';
     }
-    else {
+    else if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
+    }
+    else {
+        document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
     }
 }
 
@@ -223,4 +241,94 @@ function closeDropdownCategory() {
     document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} 
     <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
+}
+
+
+
+
+
+function checkIfAssignedToIsOpen() {
+    let existingContacts = document.getElementById('existing-contacts');
+    if (existingContacts.classList.contains('d-none')) {
+        openExistingContacts();
+    }
+    else {
+        closeExistingContacts();
+    }
+}
+
+
+function openExistingContacts() {
+    document.getElementById('existing-contacts').classList.remove('d-none');
+    let existingContacts = document.getElementById('existing-contacts');
+    existingContacts.innerHTML = '';
+
+    for (let i = 0; i < contactExample.length; i++) {
+        let contact = contactExample[i];
+        existingContacts.innerHTML += templateExistingContacts(i, contact);
+    }
+}
+
+
+function templateExistingContacts(i, contact) {
+    return /*html*/`
+    <div class="dropdown-category-existing select-bg-color flex">
+        <label for="checkbox${i}" class="flex checkbox-style">    
+                    <span>${contact['name']}</span>
+                    <input value="${i}" class="contacts-cb" id="checkbox${i}" type="checkbox" 
+                    onclick="checkAssignedToIcons(${i})">
+            </label>      
+    </div>`;
+}
+
+
+
+
+function closeExistingContacts() {
+    document.getElementById('existing-contacts').classList.add('d-none');
+}
+
+
+function checkAssignedToIcons(i) {
+    let findIndex = assignedToContacts.indexOf(i);
+    if (assignedToContactIsInArray(findIndex)) {
+        removeAssignedToIcon(findIndex);
+    }
+    else {
+        addAssignedToIcon(i);
+    }
+    renderAssignedToIconsSection();
+}
+
+
+function assignedToContactIsInArray(findIndex) {
+    return findIndex > -1;
+}
+
+
+function removeAssignedToIcon(findIndex) {
+    assignedToContacts.splice(findIndex, 1);
+}
+
+
+function addAssignedToIcon(i) {
+    assignedToContacts.push(i);
+}
+
+
+function renderAssignedToIconsSection() {
+    let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
+    assignedToIconsSection.innerHTML = '';
+    for(let i = 0; i < assignedToContacts.length; i++) {
+        assignedToIndex = assignedToContacts[i];
+        assignedToIconsSection.innerHTML += templateAssignedToContactIcons(assignedToIndex);
+    }
+
+    
+}
+
+
+function templateAssignedToContactIcons(assignedToIndex) {
+    return /*html*/`
+    <div class="name icons-add-task" style="background-color: ${contactExample[assignedToIndex]['iconcolor']}">${contactExample[assignedToIndex]['icon']}</div>`;
 }
