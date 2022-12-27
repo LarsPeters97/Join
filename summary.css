@@ -177,7 +177,7 @@ body {
 }
 
 .summary-urgency-image {
-    background-image: url(./assets/img/1.png);
+    background-color: white;
     width: 60px;
     height: 60px;
     border-radius: 100%;
@@ -355,5 +355,9 @@ body {
 }
 
 .responsive-container {
+    display: none;
+}
+
+.d-none {
     display: none;
 }

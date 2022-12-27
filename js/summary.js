@@ -1,9 +1,15 @@
+/**
+ * Varriables
+ */
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];
 let doneTasks = [];
 let urgentTasks = [];
 
+/**
+ * Array
+ */
 let tasklist =
     [
         {
@@ -210,6 +216,7 @@ let tasklist =
         loadDoneTasks();
         loadurgentTasks();
         loadTotalamount();
+        urgentImage();
 }
 
 
@@ -247,27 +254,40 @@ function returnGreetingSlogan(hours) {
    }
    return greetingSlogan;
 }
-
+/**
+ * function for filtering the array, for the value todo
+ */
 function loadTodos() {
     todos = tasklist.filter(t => t['progress'] == 'todo');
     document.getElementById('amount-todo').innerHTML = `<b>${todos.length}</b>`;
 }
 
+/**
+ * function for filtering the array, for the value inProgress
+ */
 function loadInProgress() {
-    inProgress = tasklist.filter(t => t['progress'] == 'inprogresss');
+    inProgress = tasklist.filter(t => t['progress'] == 'inProgresss');
     document.getElementById('amount-progress').innerHTML = `<b>${inProgress.length}</b>`;
 }
 
+/**
+ * function for filtering the array, for the value awaitFeedback
+ */
 function loadAwaitFeedback() {
     awaitFeedback = tasklist.filter(t => t['progress'] == 'awaitfeedback');
     document.getElementById('amount-feedback').innerHTML = `<b>${awaitFeedback.length}</b>`;
 }
 
+/**
+ * function for filtering the array, for the value doneTasks
+ */
 function loadDoneTasks() {
     doneTasks = tasklist.filter(t => t['progress'] == 'donetask');
     document.getElementById('amount-done').innerHTML = `<b>${doneTasks.length}</b>`;
 }
-
+/**
+ * function for filtering the array, for the value urgent and sort the date 
+ */
 function loadurgentTasks() {
 urgentTasks=tasklist.filter(t=>t['progress']!='donetask');
 urgentTasks=urgentTasks.filter(t=>t['priority']=='urgent');
@@ -287,4 +307,17 @@ document.getElementById('upcoming-date').innerHTML = `<b>${duedate}</b>`;
 
 function loadTotalamount() {
     document.getElementById('amount-total').innerHTML = `<b>${tasklist.length}</b>`;
+}
+
+function urgentImage() {
+    urgentTasks=tasklist.filter(t=>t['progress']!='donetask');
+    urgentTasks=urgentTasks.filter(t=>t['priority']=='urgent');
+   if (urgentTasks.length >0) {
+    return changeImage();
+   }
+    
+}
+
+function changeImage() {
+    document.getElementById('urgent-img').classList.remove('d-none');
 }
