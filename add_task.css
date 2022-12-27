@@ -306,3 +306,7 @@
     margin-top: 20px;
 }
 
+.max-height-and-scroll {
+    max-height: 120px;
+    overflow: auto;
+}

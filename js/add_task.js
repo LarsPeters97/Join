@@ -18,6 +18,11 @@ let contactExample = [
         'name': 'Toni Jacobs',
         'icon': 'TJ',
         'iconcolor': '#000075'
+    },
+    {
+        'name': 'Toni Jacobs',
+        'icon': 'TJ',
+        'iconcolor': '#000075'
     }];
 
 let assignedToContacts = [];
@@ -330,5 +335,6 @@ function renderAssignedToIconsSection() {
 
 function templateAssignedToContactIcons(assignedToIndex) {
     return /*html*/`
-    <div class="name icons-add-task" style="background-color: ${contactExample[assignedToIndex]['iconcolor']}">${contactExample[assignedToIndex]['icon']}</div>`;
+    <div class="name icons-add-task" style="background-color: ${contactExample[assignedToIndex]['iconcolor']}">
+    ${contactExample[assignedToIndex]['icon']}</div>`;
 }
