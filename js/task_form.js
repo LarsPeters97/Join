@@ -32,18 +32,19 @@ function renderAssignedTo(assignedTo) {
 function renderSubTasks(id) {
     for (let i = 0; i < tasklist[id]['subtasks']['tasks'].length; i++) {
         let subtask = tasklist[id]['subtasks']['tasks'][i];
-        if (subtask['completed'] == false){
-        document.getElementById('subtasks').innerHTML += `
+        if (subtask['completed'] == false) {
+            document.getElementById('subtasks').innerHTML += `
         <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})"><label for="${i}">${subtask['task']}</label></div>
-        `;}else {
-        document.getElementById('subtasks').innerHTML += `
+        `;
+        } else {
+            document.getElementById('subtasks').innerHTML += `
         <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})" checked><label for="${i}">${subtask['task']}</label></div>
         `;
         }
     }
 }
 
-function renderEditTask(id){
+function renderEditTask(id) {
     task = tasklist.filter(t => t['id'] == id);
     let title = task[0]['title'];
     let description = task[0]['description'];
@@ -89,7 +90,7 @@ function editTaskTemplate(id) {
             </div>
             <div class="assignedto" id="assignedto">Assigned to 
             <div class="dropdown-assign" id="assign-container">
-                <div onclick="openDropdownAssignTo()">
+                <div onclick="openDropdownAssignTo(${id})">
                     <span class="flex">Select contacts to assign</span>
                     <img src="./assets/img/vector-2.png" alt="klick">
                 </div>
@@ -123,7 +124,7 @@ function loadSubtasks(subtasks, id) {
 
 function addNewSubask(id) {
     let newtask = document.getElementById('newsubtask').value;
-    tasklist[id]['subtasks']['tasks'].push({'task': newtask, 'completed': false})
+    tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
     document.getElementById('newsubtask').value = '';
     loadAll();
     renderBoard();
@@ -132,7 +133,7 @@ function addNewSubask(id) {
     loadSubtasks(subtasks, id);
 }
 
-function deleteSubtask(index, id){
+function deleteSubtask(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     task[0]['subtasks']['tasks'].splice(index, 1);
     let subtasks = task[0]['subtasks']['tasks'];
@@ -180,8 +181,8 @@ function cancelSubEdit(index, id) {
     `
 }
 
-function taskStatusChange(task, id){
-    if (tasklist[id]['subtasks']['tasks'][task]['completed'] == true){
+function taskStatusChange(task, id) {
+    if (tasklist[id]['subtasks']['tasks'][task]['completed'] == true) {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = false;
     } else {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = true;
@@ -192,17 +193,17 @@ function taskStatusChange(task, id){
 }
 
 function selectPrio(prio) {
-    if (prio == 'urgent'){
+    if (prio == 'urgent') {
         document.getElementById('urgent').classList.add('urgent');
         document.getElementById('medium').classList.remove('medium');
         document.getElementById('low').classList.remove('low');
     }
-    if (prio == 'medium'){
+    if (prio == 'medium') {
         document.getElementById('urgent').classList.remove('urgent');
         document.getElementById('medium').classList.add('medium');
         document.getElementById('low').classList.remove('low');
     }
-    if (prio == 'low'){
+    if (prio == 'low') {
         document.getElementById('urgent').classList.remove('urgent');
         document.getElementById('medium').classList.remove('medium');
         document.getElementById('low').classList.add('low');
@@ -216,4 +217,48 @@ function loadAssignetPersons(id) {
         let assignetperson = task[0]['assignedTo']['user'][i];
         document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
+}
+
+function openDropdownAssignTo(id) {
+    task = tasklist.filter(t => t['id'] == id);
+    assignetcontacts = task[0]['assignedTo']['user'];
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="closeDropdownAssignTo(${id})">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>`;
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        if (checkOnAssigned(contact) == true) {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${i}">${contact['name']}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignChange(${contact['name']}, ${id})" checked>
+        </div>`;
+        } else {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${i}">${contact['name']}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignChange(${contact['name']}, ${id})">
+        </div>`;
+        }
+    }
+}
+
+function checkOnAssigned(contact) {
+    for (let i = 0; i < assignetcontacts.length; i++) {
+        let name = assignetcontacts[i]['name'];
+        if (name == contact['name']) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function closeDropdownAssignTo(id) {
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openDropdownAssignTo(${id})">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>`
 }

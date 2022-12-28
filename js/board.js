@@ -208,6 +208,7 @@ let inProgress = [];
 let awaitFeedback = [];
 let doneTasks = [];
 let currentDraggedElement;
+let assignetcontacts = [];
 
 async function initBoard() {
     await loadAll()

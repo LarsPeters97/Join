@@ -325,9 +325,9 @@ body {
 }
 
 #assignedto {
-    max-height: 150px !important;
+    max-height: 250px !important;
     overflow-y: auto;
-    overflow-x: visible;
+    overflow-x: hidden;
     width: 70%;
     padding-left: 10px;
 }
@@ -477,7 +477,7 @@ body {
     cursor: pointer;
 }
 
-.low{
+.low {
     background-color: #7AE229 !important;
     color: #FFFFFF !important;
 }
@@ -540,7 +540,7 @@ body {
     flex-direction: column !important;
 }
 
-.duedate input{
+.duedate input {
     width: 100%;
     border-radius: 10px;
     padding: 13px 21px;
@@ -561,7 +561,7 @@ body {
     flex-direction: row !important;
 }
 
-.subtaskedit{
+.subtaskedit {
     display: flex;
     flex-direction: row !important;
     justify-content: space-between;
@@ -571,11 +571,11 @@ body {
     border-radius: 8px;
 }
 
-.subtaskedit img{
+.subtaskedit img {
     cursor: pointer;
 }
 
-.input-subtask{
+.input-subtask {
     border: none;
     font-weight: 400;
     font-size: 18px;
@@ -602,13 +602,13 @@ body {
 
 .dropdown-assign {
     display: flex;
-    flex-direction: row !important;
-    width: 95%;
+    flex-direction: column;
+    width: 90%;
     border: 1px solid #000009;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
-.dropdown-assign div{
+.dropdown-assign div {
     display: flex;
     flex-direction: row !important;
     justify-content: space-between;
@@ -617,7 +617,63 @@ body {
     align-items: center;
 }
 
-.dropdown-assign img{
+.dropdown-assign img {
     width: 15px;
     height: 10px;
+    margin-right: 30px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+}
+
+.contact :hover {
+    background-color: #A8A8A8;
+    cursor: pointer;
+}
+
+.contact input {
+    margin-right: 30px !important;
+}
+
+.contact input :hover {
+    background-color: #A8A8A8;
+}
+
+.contact input[type="checkbox"] {
+    display: grid;
+    place-content: center;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+}
+
+.contact input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    background-color: CanvasText;
+}
+
+.contact input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+.form-control+.form-control {
+    margin-top: 1em;
 }
