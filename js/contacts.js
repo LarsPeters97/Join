@@ -1,6 +1,7 @@
 let contacts = [];
+let colors = ['blue', 'red', 'orange', 'yellow', 'green', 'aquamarine', 'blueviolet', 'cadetblue'];
 
-setURL('https://gruppe-397.developerakademie.net/smallest_backend_ever');
+setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
 
 async function init() {
     await downloadFromServer();
@@ -31,20 +32,28 @@ async function createContact() {
     let name = document.getElementById("input_name");
     let email = document.getElementById("input_email");
     let phone = document.getElementById("input_phone");
-    contacts.push({name: name.value, email: email.value, phone: phone.value});
-    await  backend.setItem('contacts', JSON.stringify(contacts));
-    window.location.href = './contact.html';
+    contacts.push({ name: name.value, email: email.value, phone: phone.value });
+    await backend.setItem("contacts", JSON.stringify(contacts));
+    window.location.href = "./contact.html";
 }
 
-function showContacts(){
-    document.getElementById('contactsContainer').innerHtml = '';
+function showContacts() {
+    document.getElementById("contactsContainer").innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        console.log(contact);
-    document.getElementById('contactsContainer').innerHtml +=`
-    <div class="contact-card"> 
-    <p> ${contact.name} </p>
-    </div>`;
-        
+        splittedName = contact.name.split(" ");
+        document.getElementById("contactsContainer").innerHTML += showContactsHtml(contact);
+    
     }
+}
+
+function showContactsHtml(contact){
+    return  `
+    <div class="contact-card">
+     <div class="initials-contact">${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}</div>
+     <div class="contact-card-text"> 
+         <p> ${contact.name} </p>
+         <span> ${contact.email}</span>
+     </div>
+    </div>`
 }
