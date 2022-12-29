@@ -25,7 +25,7 @@ let tasklist =
             'assignedTo': {
                 'user': [
                     {
-                        'name': 'me',
+                        'name': 'mee',
                         'icon': 'ME',
                         'iconcolor': '#0190E0',
                     },
@@ -90,7 +90,7 @@ let tasklist =
             'assignedTo': {
                 'user': [
                     {
-                        'name': 'me',
+                        'name': 'mee',
                         'icon': 'ME',
                         'iconcolor': '#0190E0',
                     },
@@ -135,7 +135,7 @@ let tasklist =
             'assignedTo': {
                 'user': [
                     {
-                        'name': 'me',
+                        'name': 'mee',
                         'icon': 'ME',
                         'iconcolor': '#0190E0',
                     },
@@ -180,7 +180,7 @@ let tasklist =
             'assignedTo': {
                 'user': [
                     {
-                        'name': 'me',
+                        'name': 'mee',
                         'icon': 'ME',
                         'iconcolor': '#0190E0',
                     },
@@ -194,7 +194,7 @@ let tasklist =
 }];
 let contacts = [
     {
-        'name': 'me',
+        'name': 'mee',
         'icon': 'ME',
         'iconcolor': '#0190E0',
     },

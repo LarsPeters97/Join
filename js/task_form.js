@@ -46,6 +46,7 @@ function renderSubTasks(id) {
 
 function renderEditTask(id) {
     task = tasklist.filter(t => t['id'] == id);
+    assignetcontacts = task[0]['assignedTo']['user'];
     let title = task[0]['title'];
     let description = task[0]['description'];
     let duedateunformated = JSON.stringify(task[0]['duedate']);
@@ -212,16 +213,15 @@ function selectPrio(prio) {
 }
 
 function loadAssignetPersons(id) {
-    task = tasklist.filter(t => t['id'] == id);
-    for (let i = 0; i < task[0]['assignedTo']['user'].length; i++) {
-        let assignetperson = task[0]['assignedTo']['user'][i];
+    document.getElementById('assignedpersons').innerHTML = ``;
+    for (let i = 0; i < assignetcontacts.length; i++) {
+        let assignetperson = assignetcontacts[i];
         document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
 }
 
 function openDropdownAssignTo(id) {
     task = tasklist.filter(t => t['id'] == id);
-    assignetcontacts = task[0]['assignedTo']['user'];
     document.getElementById('assign-container').innerHTML = `
     <div onclick="closeDropdownAssignTo(${id})">
         <span class="flex">Select contacts to assign</span>
@@ -229,20 +229,104 @@ function openDropdownAssignTo(id) {
     </div>`;
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        if (checkOnAssigned(contact) == true) {
+        if (checkOnAssigned(contact) != false) {
             document.getElementById('assign-container').innerHTML += `
         <div class="contact">
             <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignChange(${contact['name']}, ${id})" checked>
+            <input type="checkbox" id="contact${i}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})" checked>
         </div>`;
         } else {
             document.getElementById('assign-container').innerHTML += `
         <div class="contact">
             <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignChange(${contact['name']}, ${id})">
+            <input type="checkbox" id="contact${i}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})">
         </div>`;
         }
     }
+    for (let j = 0; j < assignetcontacts.length; j++) {
+        let contact = assignetcontacts[j];
+        if (checkOnContact(contact) == false) {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${j+contacts.length}">${contact['name']}</label>
+            <input type="checkbox" id="contact${j+contacts.length}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})" checked>
+        </div>`;
+        }
+    }
+    document.getElementById('assign-container').innerHTML += `
+    <div class="contact" onclick="assignNewContact(${id})">
+        <span>Invite new contact</span>
+        <img src="./assets/img/contact-icon.png">
+    </div>
+    `;
+}
+
+function assignChange(name, icon, color, id) {
+    let contact = {'name': name, 'icon': icon, 'iconcolor': color}
+    let index = indexOfAssigned(contact);
+    if (checkOnAssigned(contact) == true){
+        assignetcontacts.splice(index, 1);
+    } else {
+        assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color});
+    }
+    loadAssignetPersons(id);
+}
+
+function assignNewContact(id) {
+    document.getElementById('assign-container').innerHTML = `
+    <div class="newcontact">
+        <input type="email" placeholder="Contact email" id="email">
+        <div class="check">
+            <img src="./assets/img/false-x.png" onclick="exitNewContact(${id})">
+            |
+            <img src="./assets/img/checkmark.png" onclick="addNewContact(${id})">
+        </div>
+    </div>
+    `;
+}
+
+function exitNewContact(id) {
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openDropdownAssignTo(${id})">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>
+    `;
+}
+
+function addNewContact(id) {
+    let email = document.getElementById('email').value;
+    let name = email.split('@');
+    let icon = email.slice(0, 2);
+    let color = getRandomColor();
+    assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color,});
+    /**email needs to be send to new contact*/
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openDropdownAssignTo(${id})">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>
+    `;
+    loadAssignetPersons(id);
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+function checkOnContact(contact) {
+    for (let i = 0; i < contacts.length; i++) {
+        let name = contacts[i]['name'];
+        if (name == contact['name']) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function checkOnAssigned(contact) {
@@ -253,6 +337,15 @@ function checkOnAssigned(contact) {
         }
     }
     return false;
+}
+
+function indexOfAssigned(contact) {
+    for (let i = 0; i < assignetcontacts.length; i++) {
+        let name = assignetcontacts[i]['name'];
+        if (name == contact['name']) {
+            return i;
+        }
+    }
 }
 
 function closeDropdownAssignTo(id) {

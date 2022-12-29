@@ -606,6 +606,9 @@ body {
     width: 90%;
     border: 1px solid #000009;
     border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .dropdown-assign div {
@@ -629,6 +632,13 @@ body {
     justify-content: space-between;
     width: 100%;
     height: auto;
+}
+
+.contact img {
+    width: 18px;
+    height: 20px;
+    margin-right: 32px;
+    filter: invert();
 }
 
 .contact :hover {
@@ -676,4 +686,33 @@ body {
 
 .form-control+.form-control {
     margin-top: 1em;
+}
+
+.newcontact {
+    margin: 0 !important;
+    padding: 0 10px !important;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.newcontact input{
+    border: none;
+    font-size: 18px;
+    width: 100%;
+}
+
+.check {
+    font-size: 20px;
+    width: 70px !important;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.check img {
+    margin: 0;
+    width: 20px;
+    height: 20px;
 }
