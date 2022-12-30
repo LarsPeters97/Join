@@ -1,5 +1,5 @@
 let contacts = [];
-
+let letters = [];
 let currentcolor = 0;
 
 
@@ -54,6 +54,10 @@ function showContacts() {
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         splittedName = contact.name.split(" ");
+        const firstLetter = contact.name.charAt(0);
+        if (!letters.includes(firstLetter)) {
+            letters.push(firstLetter);
+        }
         document.getElementById("contactsContainer").innerHTML +=
             showContactsHtml(contact, splittedName, i);
     }
