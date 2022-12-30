@@ -63,14 +63,14 @@ function showContacts() {
             const letter = letters[j]; 
             document.getElementById("contactsContainer").innerHTML +=
             renderLetters(letter,j);
-            document.getElementById('filtered_container').innerHTML+=
-            showContactsHtml(contact, splittedName, i);
         }
+        /*document.getElementById('filtered_container').innerHTML+=
+        showContactsHtml(contact, splittedName, i);*/
     }
 }
 
 function pushFirstLetter(contact) {
-    const firstLetter = contact.name.charAt(0);
+    const firstLetter = contact.name.charAt(0).toUpperCase();
     if (!letters.includes(firstLetter)) {
         letters.push(firstLetter);
     }
@@ -78,7 +78,7 @@ function pushFirstLetter(contact) {
 
 function renderLetters(letter,j) {
     return `
-    <div id="filtered_container" class="container-filtered-contacts">
+    <div class="container-filtered-contacts">
         <span class="letters">${letter}</span>
     </div>`;
 }

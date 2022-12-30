@@ -9,10 +9,9 @@
     top: 0;
     padding-left: 32px;
     padding-right: 32px;
-    
 }
 
-.initials-contact{
+.initials-contact {
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -20,10 +19,9 @@
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    
 }
 
-.initials-contact-body{
+.initials-contact-body {
     width: 100px;
     height: 100px;
     border-radius: 100%;
@@ -35,7 +33,7 @@
     border: solid 2px white;
 }
 
-.add-task-link{
+.add-task-link {
     color: #29abe2;
     font-size: 18px;
     display: flex;
@@ -43,29 +41,28 @@
     cursor: pointer;
 }
 
-.add-task-link img{
+.add-task-link img {
     width: 16px;
     height: 16px;
     margin-right: 10px;
 }
 
-.contactarea-body-name{
+.contactarea-body-name {
     display: flex;
     align-items: center;
-
 }
 
-.contactarea-body-name h3{
+.contactarea-body-name h3 {
     font-size: 40px;
     margin-bottom: 10px;
     margin-top: 0px;
 }
 
-.container-name{
+.container-name {
     margin-left: 40px;
 }
 
-.edit-link{
+.edit-link {
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -73,72 +70,71 @@
     cursor: pointer;
 }
 
-.edit-link span{
+.edit-link span {
     margin-bottom: -10px;
 }
 
-.text-contact-info{
+.text-contact-info {
     font-size: 21px;
 }
 
-.contactarea-body-contactinfo{
+.contactarea-body-contactinfo {
     display: flex;
     align-items: center;
     margin-top: 40px;
 }
 
-.contactarea-body-info{
+.contactarea-body-info {
     margin-top: 40px;
 }
 
-.contactarea-body-info h5{
+.contactarea-body-info h5 {
     margin-bottom: 20px;
 }
 
-.container-filtered-contacts{
+.container-filtered-contacts {
     width: 280px;
     display: flex;
     flex-direction: row;
 }
 
-.letters{
+
+.letters {
     font-size: 21px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.5);
     padding: 20px 10px;
     width: 280px;
 }
 
-.contact-card{
+.contact-card {
     width: 280px;
     padding: 8px 0px 8px 16px;
     display: flex;
     align-items: center;
     cursor: pointer;
     margin-top: 5px;
-    
 }
 
-.contact-card:hover{
+.contact-card:hover {
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-
 }
 
-.contact-card-text{
+.contact-card-text {
     display: flex;
     flex-direction: column;
     padding-left: 20px;
 }
 
-.contact-card-text p{
+.contact-card-text p {
     font-size: 21px;
     font-weight: 400;
     margin: 0px;
     margin-bottom: 5px;
 }
 
-.contact-card-text span{
-    color:#29abe2;
+.contact-card-text span {
+    color: #29abe2;
     margin: 0px;
 }
 
@@ -165,7 +161,6 @@
     height: calc(100vh - 92px);
     box-sizing: border-box;
     padding-left: 50px;
-    
 }
 
 .header-contacts h1 {
@@ -233,14 +228,14 @@
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    animation:flyin 1s linear;
+    animation: flyin 1s linear;
 }
 
-@keyframes flyin{
-    from{
+@keyframes flyin {
+    from {
         transform: scale(0);
     }
-    to{
+    to {
         transform: scale(1);
     }
 }
@@ -429,24 +424,23 @@
     background-image: url("./assets/img/x-blue.png");
     background-repeat: no-repeat;
     background-position: right;
-    background-origin:content-box;
+    background-origin: content-box;
     margin-right: 15px;
-    
 }
 
-.button-cancel p{
+.button-cancel p {
     margin: 0px;
     padding-right: 20px;
 }
 
 .button-cancel:hover {
     background-image: url("./assets/img/x-lightblue.png");
-    border:solid 2px #29abe2;
+    border: solid 2px #29abe2;
     color: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.button-create{
+.button-create {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -461,13 +455,13 @@
     cursor: pointer;
 }
 
-.button-create:hover{
-    border:solid 2px #29abe2;
+.button-create:hover {
+    border: solid 2px #29abe2;
     background-color: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.container-button{
+.container-button {
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -475,14 +469,14 @@
     width: 320px;
 }
 
-.close-addcontact{
+.close-addcontact {
     position: absolute;
     top: 15px;
     right: 15px;
     cursor: pointer;
 }
 
-.container-edit-contact{
+.container-edit-contact {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
@@ -493,10 +487,10 @@
     justify-content: center;
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
-.text-lightblue{
+.text-lightblue {
     color: #29abe2;
 }
