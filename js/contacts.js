@@ -1,14 +1,4 @@
 let contacts = [];
-let colors = [
-    "blue",
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "aquamarine",
-    "blueviolet",
-    "cadetblue",
-];
 
 let currentcolor = 0;
 
@@ -40,31 +30,47 @@ function clearInput() {
     document.getElementById("input_phone").value = "";
 }
 
+function randomColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+
+    return `rgb(${r} ,${g} , ${b})`;
+}
+
 async function createContact() {
     let name = document.getElementById("input_name");
     let email = document.getElementById("input_email");
     let phone = document.getElementById("input_phone");
-    contacts.push({ name: name.value, email: email.value, phone: phone.value });
+    let color = randomColor();
+    contacts.push({ name: name.value, email: email.value, phone: phone.value, color: color });
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";
 }
 
 function showContacts() {
+    sortContacts(contacts);
     document.getElementById("contactsContainer").innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
-        currentcolor ++;
-        let bgcolor = colors[currentcolor%contacts.length];
         splittedName = contact.name.split(" ");
         document.getElementById("contactsContainer").innerHTML +=
-            showContactsHtml(contact, splittedName, i, bgcolor);
+            showContactsHtml(contact, splittedName, i);
     }
 }
 
-function showContactsHtml(contact, splittedName, i, bgcolor) {
+function sortContacts(contacts){
+    contacts = contacts.sort((a, b) => {
+        let a1 = a.name.toLowerCase();
+        let b1 = b.name.toLowerCase();
+        return a1 < b1 ? -1 : a1 > b1 ? 1 : 0;
+    })
+}
+
+function showContactsHtml(contact, splittedName, i) {
     return `
-    <div onclick="showContact(${i},${bgcolor})" class="contact-card">
-     <div style="background-color:${bgcolor}" class="initials-contact">${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}</div>
+    <div onclick="showContact(${i})" class="contact-card">
+     <div style="background-color:${contact.color}" class="initials-contact">${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}</div>
      <div class="contact-card-text"> 
          <p> ${contact.name} </p>
          <span> ${contact.email} </span>
@@ -72,18 +78,18 @@ function showContactsHtml(contact, splittedName, i, bgcolor) {
     </div>`;
 }
 
-function showContact(i, bgcolor) {
+function showContact(i) {
     document.getElementById("contactAreaBody").innerHTML = "";
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
     document.getElementById("contactAreaBody").innerHTML = 
-    showContactHtml(contact,splittedName, bgcolor);
+    showContactHtml(contact,splittedName);
 }
 
-function showContactHtml(contact,splittedName, bgcolor ){
+function showContactHtml(contact,splittedName){
 return `
 <div class="contactarea-body-name">
-    <div style="background-color:${bgcolor}" class="initials-contact-body">
+    <div  style="background-color:${contact.color}" class="initials-contact-body">
         ${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}
     </div>
     <div class="container-name">
