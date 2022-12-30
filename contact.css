@@ -95,6 +95,19 @@
     margin-bottom: 20px;
 }
 
+.container-filtered-contacts{
+    width: 280px;
+    display: flex;
+    flex-direction: row;
+}
+
+.letters{
+    font-size: 21px;
+    border-bottom: solid 2px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    width: 280px;
+}
+
 .contact-card{
     width: 280px;
     padding: 8px 0px 8px 16px;
