@@ -16,12 +16,82 @@
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    background-color: #29abe2;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     
+}
+
+.initials-contact-body{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 36px;
+    border: solid 2px white;
+}
+
+.add-task-link{
+    color: #29abe2;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-task-link img{
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.contactarea-body-name{
+    display: flex;
+    align-items: center;
+
+}
+
+.contactarea-body-name h3{
+    font-size: 40px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.container-name{
+    margin-left: 40px;
+}
+
+.edit-link{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 50px;
+}
+
+.edit-link span{
+    margin-bottom: -10px;
+}
+
+.text-contact-info{
+    font-size: 21px;
+}
+
+.contactarea-body-contactinfo{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.contactarea-body-info{
+    margin-top: 40px;
+}
+
+.contactarea-body-info h5{
+    margin-bottom: 20px;
 }
 
 .contact-card{
@@ -70,16 +140,18 @@
 .header-contacts {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 .container-contactarea {
     position: fixed;
     top: 92px;
-    left: 583px;
-    width: calc(100vw - 583px);
+    left: 596px;
+    width: calc(100vw - 596px);
     height: calc(100vh - 92px);
     box-sizing: border-box;
+    padding-left: 50px;
+    
 }
 
 .header-contacts h1 {
@@ -395,4 +467,8 @@
 
 .d-none{
     display: none;
+}
+
+.text-lightblue{
+    color: #29abe2;
 }
