@@ -87,10 +87,10 @@ function showContact(i) {
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
     document.getElementById("contactAreaBody").innerHTML = 
-    showContactHtml(contact,splittedName);
+    showContactHtml(contact,splittedName, i);
 }
 
-function showContactHtml(contact,splittedName){
+function showContactHtml(contact,splittedName, i){
 return `
 <div class="contactarea-body-name">
     <div  style="background-color:${contact.color}" class="initials-contact-body">
@@ -106,7 +106,7 @@ return `
 </div>    
 <div class="contactarea-body-contactinfo">
     <span class="text-contact-info">Contact Information</span>
-    <div class="edit-link">
+    <div onclick="openEditContact(${i})" class="edit-link">
         <img src="./assets/img/pen-blue.png" />
         <span>Edit Contact</span>
     </div>
@@ -118,4 +118,57 @@ return `
     <span>${contact.phone}</span>
 </div>
 `;
+}
+
+function closeEditContact(){
+    document.getElementById("editContact").classList.add("d-none");
+}
+
+function openEditContact(i){
+    document.getElementById("editContact").classList.remove("d-none");
+    document.getElementById('editContact').innerHTML ='';
+    let contact = contacts[i];
+    let splittedName = contact.name.split(" ");
+    document.getElementById('editContact').innerHTML =`
+    <div onclick="notClose(event)" class="add-contact">
+                <div class="add-contact-first-part">
+                    <div class="container-logo-addcontact">
+                        <img src="./assets/img/Logo.png" alt="" />
+                        <h2>Edit contact</h2>
+                        <div class="vertikal-line-addcontact"></div>
+                    </div>
+                </div>
+                
+            <div class="add-contact-second-part">
+                <div  style="background-color:${contact.color}" class="initials-contact-body">
+                    ${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}
+                </div>
+            </div>
+            <div class="add-contact-third-part">
+                    <img onclick="closeEditContact()" class="close-addcontact" src="./assets/img/x-blue.png" alt="">
+                    <div>
+                        <input id="input_name_edit"
+                            class="input_name"
+                            type="text"
+                            placeholder="Name" />
+                    </div>
+                    <div>
+                        <input id="input_email_edit"
+                            class="input_email"
+                            type="text"
+                            placeholder="Email" />
+                    </div>
+                    <div>
+                        <input id="input_phone_edit"
+                            class="input_phone"
+                            type="text"
+                            placeholder="Phone" />
+                    </div>
+                    <div class="container-button">
+                        <button onclick="" class="button-create">
+                            Save  
+                        </button>
+                    </div>
+                </div>
+    </div>`;
 }

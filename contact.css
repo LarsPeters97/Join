@@ -312,6 +312,7 @@
     padding-right: 10px;
     background-origin: content-box;
     margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .input_name::placeholder {
@@ -346,6 +347,7 @@
     padding-right: 10px;
     background-origin: content-box;
     margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .input_email::placeholder {
@@ -380,6 +382,7 @@
     padding-right: 10px;
     background-origin: content-box;
     margin-bottom: 15px;
+    margin-top: 10px;
 }
 
 .input_phone::placeholder {
@@ -464,6 +467,17 @@
     top: 15px;
     right: 15px;
     cursor: pointer;
+}
+
+.container-edit-contact{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .d-none{
