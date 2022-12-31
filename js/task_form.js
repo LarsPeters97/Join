@@ -101,7 +101,7 @@ function editTaskTemplate(id) {
         </div>
         <div>
             <div class="close" onclick="closePopup()">x</div>
-            <div class="editTask" onclick="editTask()"><img src="../assets/img/check-button.png" alt="Ok"></div>
+            <div class="editTask" onclick="editTask(${id})"><img src="../assets/img/check-button.png" alt="Ok"></div>
         </div
     </div>
     `;
@@ -355,4 +355,20 @@ function closeDropdownAssignTo(id) {
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>`
+}
+
+function editTask(id) {
+    let newTitle = document.getElementById('titleinput').value;
+    let newDescription = document.getElementById('descriptioninput').value;
+    let newDate = document.getElementById('duedate').value;
+    let year = newDate.slice(0, 4);
+    let month = newDate.slice(5, 7);
+    let day = newDate.slice(8);
+    let newDuedate = year + month + day;
+    tasklist[id]['title'] = newTitle;
+    tasklist[id]['description'] = newDescription;
+    tasklist[id]['duedate'] = newDuedate;
+    tasklist[id]['priority'] = selectedPrio;
+    tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    initBoard();
 }

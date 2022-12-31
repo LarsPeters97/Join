@@ -209,9 +209,10 @@ let awaitFeedback = [];
 let doneTasks = [];
 let currentDraggedElement;
 let assignetcontacts = [];
+let selectedPrio = [];
 
 async function initBoard() {
-    await loadAll()
+    await loadAll();
     renderBoard();
 }
 

@@ -4,7 +4,7 @@ body {
 }
 
 .content {
-    position: fixed;
+    position: absolute;
     left: 232px;
     top: 89px;
     margin-left: 16px;
@@ -230,9 +230,9 @@ body {
 .background {
     width: 100vw;
     height: 100vh;
-    z-index: 99;
+    z-index: 999;
     background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 }
@@ -246,7 +246,7 @@ body {
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 50px;
-    z-index: 100;
+    z-index: 1009;
     position: relative;
 }
 
@@ -663,17 +663,17 @@ body {
     margin: 0;
     font: inherit;
     color: currentColor;
-    width: 1.15em;
-    height: 1.15em;
-    border: 0.15em solid currentColor;
+    width: 0.55em;
+    height: 0.55em;
+    border: 0.05em solid currentColor;
     border-radius: 0.15em;
     transform: translateY(-0.075em);
 }
 
 .contact input[type="checkbox"]::before {
     content: "";
-    width: 0.65em;
-    height: 0.65em;
+    width: 0.2em;
+    height: 0.2em;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
     box-shadow: inset 1em 1em var(--form-control-color);
