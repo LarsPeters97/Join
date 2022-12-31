@@ -24,7 +24,7 @@
     <div class="add-taskt-whole-side">
         <div class="inner-side">
             <h1 class="headline-task">Add Task</h1>
-            <form onsubmit="createNewTask(); return false">
+            <form onsubmit="createNewTask(); return false;">
                 <div class="flex">
                     <div class="left-side flex column">
                         <div class="title flex column margin-for-fields">
@@ -92,7 +92,7 @@
                                     <span class="flex">Select contacts to assign</span>
                                     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
                                 </div>
-                                <div id="existing-contacts" class="d-none max-height-and-scroll"></div>    
+                                <div id="existing-contacts" class="d-none max-height-and-scroll"></div>
                             </div>
                             <div id="assigned-to-icons-section" class="flex"></div>
                         </div>
@@ -100,42 +100,48 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
+
+
+
+
 
                     <div class="right-side flex column">
                         <div class="due-date flex column margin-for-fields">
                             <span class="header-for-fields">Due date</span>
                             <input type="date" required placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31"
-                                id="due-date">
+                                id="due-date" onblur="convertDate()">
                         </div>
+
+
+
+
+
+
+
+
+
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Prio</span>
-                            <div class="flex prio-buttons-section">
-                                <button type="button" class="prio-btns">Urgent <img
-                                        src="./assets/img/urgent.svg"></button>
-                                <button type="button" class="prio-btns">Medium <img
-                                        src="./assets/img/medium.svg"></button>
-                                <button type="button" class="prio-btns">Low <img src="./assets/img/low.svg"></button>
+                            <div class="flex prio-buttons-section" id="prio-buttons-section">
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Subtasks</span>
                             <div class="input-text-type subtask">
@@ -150,7 +156,7 @@
                     <button class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()"
                         onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
                             id="clear-img"></button>
-                    <button class="create-btn btns-clear-and-create">Create Task <img
+                    <button class="create-btn btns-clear-and-create" onclick="convertDate()">Create Task <img
                             src="./assets/img/create-check.svg" id="create-img"></button>
             </form>
 

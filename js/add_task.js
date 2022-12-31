@@ -3,6 +3,30 @@ let categories = [{
     'color': '#FC71FF'
 }];
 
+let priorities = [
+    {
+        'name': 'Urgent',
+        'index': 0,
+        'image': './assets/img/urgent.svg',
+        'selected-image': './assets/img/urgent-white.svg',
+        'color': '#FF3D00'
+    },
+    {
+        'name': 'Medium',
+        'index': 1,
+        'image': './assets/img/medium.svg',
+        'selected-image': './assets/img/medium-white.svg',
+        'color': '#FFA800'
+    },
+    {
+        'name': 'Low',
+        'index': 2,
+        'image': './assets/img/low.svg',
+        'selected-image': './assets/img/low-white.svg',
+        'color': '#7AE229'
+    }
+]
+
 let contactExample = [
     {
         'name': 'me',
@@ -62,6 +86,7 @@ function initialize() {
     let categoriesasString = JSON.stringify(categories);
     localStorage.setItem('task-category', categoriesasString);
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
+    renderPrioButtonsSection();
 }
 
 
@@ -324,12 +349,12 @@ function addAssignedToIcon(i) {
 function renderAssignedToIconsSection() {
     let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
     assignedToIconsSection.innerHTML = '';
-    for(let i = 0; i < assignedToContacts.length; i++) {
+    for (let i = 0; i < assignedToContacts.length; i++) {
         assignedToIndex = assignedToContacts[i];
         assignedToIconsSection.innerHTML += templateAssignedToContactIcons(assignedToIndex);
     }
 
-    
+
 }
 
 
@@ -337,4 +362,63 @@ function templateAssignedToContactIcons(assignedToIndex) {
     return /*html*/`
     <div class="name icons-add-task" style="background-color: ${contactExample[assignedToIndex]['iconcolor']}">
     ${contactExample[assignedToIndex]['icon']}</div>`;
+}
+
+
+function convertDate() {
+    let dueDate = document.getElementById('due-date').value;
+    let year = dueDate.slice(0, 4);
+    let month = dueDate.slice(5, 7);
+    let day = dueDate.slice(8, 10);
+    let date = year + month + day;
+    console.log(date);
+}
+
+
+function renderPrioButtonsSection() {
+    let prioButtonsSection = document.getElementById('prio-buttons-section');
+    for (let i = 0; i < priorities.length; i++) {
+        prioButtonsSection.innerHTML += templatePrioButtonsSection(i);
+    }
+}
+
+
+function templatePrioButtonsSection(i) {
+    return /*html*/`
+     <button id="prio-btns-${i}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
+     <img src="${priorities[i]['image']}" id="prio-img-${i}"></button>`;
+}
+
+
+function selectedPriority(i) {
+    changeStyleOfSelectedButton(i);
+    resetOtherPriorityButtons(i);
+}
+
+
+function changeStyleOfSelectedButton(i) {
+    let selectedButtonImg = document.getElementById(`prio-img-${i}`);
+    let selectedButton = document.getElementById(`prio-btns-${i}`);
+    selectedButtonImg.src = priorities[i]['selected-image'];
+    selectedButton.classList.add('white');
+    selectedButton.style.backgroundColor = `${priorities[i]['color']}`;
+}
+
+
+function resetOtherPriorityButtons(i) {
+    for (let j = 0; j < priorities.length; j++) {
+        let otherButton = document.getElementById(`prio-btns-${j}`);
+        if (j != i && otherButton.classList.contains('white'))
+            console.log('other button has been clicked!');
+            removeStyleOfUnclickedButtom(otherButton, j);
+    }
+}
+
+
+function removeStyleOfUnclickedButtom(otherButton, j) {
+    // let selectedButtonImg = document.getElementById(`${otherButton}`);
+    // let selectedButton = document.getElementById(`${otherButton}`);
+    selectedButtonImg.src = priorities[j]['image'];
+    selectedButton.classList.remove('white');
+    selectedButton.style.backgroundColor = 'white';
 }
