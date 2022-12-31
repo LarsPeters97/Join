@@ -7,7 +7,6 @@ setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
 async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
-    console.log(contacts);
     renderLetters();
 }
 
@@ -70,7 +69,6 @@ function showContacts(letter) {
 
 function renderInitials(splittedName, i){
     document.getElementById(`initial${i}`).innerHTML = '';
-    console.log(splittedName);
     for (let k = 0; k < splittedName.length; k++) {
         const initials = splittedName[k];
         document.getElementById(`initial${i}`).innerHTML += `
