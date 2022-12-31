@@ -4,7 +4,7 @@ body {
 }
 
 .content {
-    position: fixed;
+    position: absolute;
     left: 232px;
     top: 89px;
     margin-left: 16px;
@@ -230,9 +230,9 @@ body {
 .background {
     width: 100vw;
     height: 100vh;
-    z-index: 99;
+    z-index: 999;
     background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 }
@@ -246,7 +246,7 @@ body {
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 50px;
-    z-index: 100;
+    z-index: 1009;
     position: relative;
 }
 
