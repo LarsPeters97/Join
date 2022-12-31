@@ -370,4 +370,5 @@ function editTask(id) {
     tasklist[id]['priority'] = selectedPrio;
     tasklist[id]['assignedTo']['user'] = assignetcontacts;
     initBoard();
+    closePopup();
 }
