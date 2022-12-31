@@ -353,8 +353,6 @@ function renderAssignedToIconsSection() {
         assignedToIndex = assignedToContacts[i];
         assignedToIconsSection.innerHTML += templateAssignedToContactIcons(assignedToIndex);
     }
-
-
 }
 
 

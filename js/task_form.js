@@ -285,6 +285,7 @@ function assignNewContact(id) {
     `;
 }
 
+
 function exitNewContact(id) {
     document.getElementById('assign-container').innerHTML = `
     <div onclick="openDropdownAssignTo(${id})">
