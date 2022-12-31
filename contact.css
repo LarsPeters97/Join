@@ -9,6 +9,7 @@
     top: 0;
     padding-left: 32px;
     padding-right: 32px;
+    overflow-y: scroll;
 }
 
 .initials-contact {
@@ -95,7 +96,7 @@
 .container-filtered-contacts {
     width: 280px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 

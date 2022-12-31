@@ -1,5 +1,5 @@
 let contacts = [];
-let letters = [];
+let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 let currentcolor = 0;
 
 setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
@@ -8,7 +8,7 @@ async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
     console.log(contacts);
-    showContacts();
+    renderLetters();
 }
 
 function showAddcontact() {
@@ -52,34 +52,49 @@ async function createContact() {
     window.location.href = "./contact.html";
 }
 
-function showContacts() {
+function showContacts(letter) {
     sortContacts(contacts); 
+    document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML ='';
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         splittedName = contact.name.split(" ");
-        pushFirstLetter(contact);
-        document.getElementById("contactsContainer").innerHTML = "";
-        for (let j = 0; j < letters.length; j++) {
-            const letter = letters[j]; 
-            document.getElementById("contactsContainer").innerHTML +=
-            renderLetters(letter,j);
+        if (contact.name.charAt(0).toUpperCase() == letter.charAt(0).toUpperCase()) {
+            document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML+=
+                showContactsHtml(contact, splittedName, i);
+                renderInitials(splittedName, i);
+            }
+            
         }
-        /*document.getElementById('filtered_container').innerHTML+=
-        showContactsHtml(contact, splittedName, i);*/
+        
+    }
+
+function renderInitials(splittedName, i){
+    document.getElementById(`initial${i}`).innerHTML = '';
+    console.log(splittedName);
+    for (let k = 0; k < splittedName.length; k++) {
+        const initials = splittedName[k];
+        document.getElementById(`initial${i}`).innerHTML += `
+        <span>${initials.charAt(0).toUpperCase()}</span>`;
     }
 }
 
-function pushFirstLetter(contact) {
-    const firstLetter = contact.name.charAt(0).toUpperCase();
-    if (!letters.includes(firstLetter)) {
-        letters.push(firstLetter);
+
+function renderLetters(){
+    document.getElementById("contactsContainer").innerHTML = "";
+    for (let j = 0; j < letters.length; j++) {
+        const letter = letters[j];
+        document.getElementById("contactsContainer").innerHTML += 
+        renderLettersHtml(letter,j); 
+        showContacts(letter);
     }
+    
 }
 
-function renderLetters(letter,j) {
+function renderLettersHtml(letter,j) {
     return `
     <div class="container-filtered-contacts">
         <span class="letters">${letter}</span>
+        <div id="containerContact${letter.charAt(0)}"></div>
     </div>`;
 }
 
@@ -94,11 +109,9 @@ function sortContacts(contacts) {
 function showContactsHtml(contact, splittedName, i) {
     return `
     <div onclick="showContact(${i})" class="contact-card">
-     <div style="background-color:${
+     <div id="initial${i}" style="background-color:${
          contact.color
-     }" class="initials-contact">${splittedName[0].charAt(
-        0
-    )}${splittedName[1].charAt(0)}</div>
+     }" class="initials-contact"></div>
      <div class="contact-card-text"> 
          <p> ${contact.name} </p>
          <span> ${contact.email} </span>
@@ -110,20 +123,23 @@ function showContact(i) {
     document.getElementById("contactAreaBody").innerHTML = "";
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
-    document.getElementById("contactAreaBody").innerHTML = showContactHtml(
-        contact,
-        splittedName,
-        i
-    );
+    document.getElementById("contactAreaBody").innerHTML = showContactHtml(contact,i);
+    document.getElementById(`initialsBody${i}`).innerHTML = '';
+    for (let k = 0; k < splittedName.length; k++) {
+        const initials = splittedName[k];
+        document.getElementById(`initialsBody${i}`).innerHTML += `
+        <span>${initials.charAt(0).toUpperCase()}</span>`;
+    }
+
 }
 
-function showContactHtml(contact, splittedName, i) {
+function showContactHtml(contact, i) {
     return `
 <div class="contactarea-body-name">
-    <div  style="background-color:${
+    <div id="initialsBody${i}"  style="background-color:${
         contact.color
     }" class="initials-contact-body">
-        ${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}
+        
     </div>
     <div class="container-name">
         <h3>${contact.name} </h3>
@@ -158,7 +174,18 @@ function openEditContact(i) {
     document.getElementById("editContact").innerHTML = "";
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
-    document.getElementById("editContact").innerHTML = `
+    document.getElementById("editContact").innerHTML = 
+    editContactHtml(contact, i);
+    document.getElementById(`initialsedit${i}`).innerHTML = '';
+    for (let k = 0; k < splittedName.length; k++) {
+        const initials = splittedName[k];
+        document.getElementById(`initialsedit${i}`).innerHTML += `
+        <span>${initials.charAt(0).toUpperCase()}</span>`;
+    }
+}
+
+function editContactHtml(contact, i){
+    return `
     <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
                     <div class="container-logo-addcontact">
@@ -169,10 +196,9 @@ function openEditContact(i) {
                 </div>
                 
             <div class="add-contact-second-part">
-                <div  style="background-color:${
+                <div id="initialsedit${i}"  style="background-color:${
                     contact.color
                 }" class="initials-contact-body">
-                    ${splittedName[0].charAt(0)}${splittedName[1].charAt(0)}
                 </div>
             </div>
             <div class="add-contact-third-part">
