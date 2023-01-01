@@ -99,7 +99,6 @@
     flex-direction: column;
 }
 
-
 .letters {
     font-size: 21px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.5);
@@ -487,10 +486,24 @@
     justify-content: center;
 }
 
-.d-none {
-    display: none;
-}
-
 .text-lightblue {
     color: #29abe2;
+}
+
+@media (max-width: 1050px) {
+    .wrapper {
+        height: calc(100vh - 184px);
+        left: 0px;
+    }
+
+    .container-contactarea {
+        top: 84px;
+        left: 358px;
+        width: calc(100vw - 358px);
+        height: calc(100vh - 150px);
+    }
+}
+
+.d-none {
+    display: none;
 }
