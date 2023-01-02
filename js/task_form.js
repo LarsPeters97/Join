@@ -1,6 +1,6 @@
 function taskformTemplate(category, color, title, description, duedate, priority, id) {
     return `
-<div class="background" onclick="closePopup()">
+<div class="background" onclick="closeBoardPopup()">
 </div>
     <div class="taskform">
         <div>
@@ -15,7 +15,7 @@ function taskformTemplate(category, color, title, description, duedate, priority
                 <div id="assignedto"></div>
             </div>
         </div>
-            <div class="close" onclick="closePopup()">x</div>
+            <div class="close" onclick="closeBoardPopup()">x</div>
             <div class="edit" onclick="renderEditTask(${id})"><img src="../assets/img/edit-button.png" alt="edit"></div>
     </div>`;
 }
@@ -56,7 +56,7 @@ function renderEditTask(id) {
     let duedate = year + '-' + month + '-' + day;
     let priority = task[0]['priority'];
     let subtasks = task[0]['subtasks']['tasks'];
-    document.getElementById('popup').innerHTML = editTaskTemplate(id);
+    document.getElementById('Boardpopup').innerHTML = editTaskTemplate(id);
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
@@ -67,7 +67,7 @@ function renderEditTask(id) {
 
 function editTaskTemplate(id) {
     return `
-    <div class="background" onclick="closePopup()"></div>
+    <div class="background" onclick="closeBoardPopup()"></div>
     <div class="taskform">
         <div>
             <div class="edittitle">Title <input type="text" required placeholder="Enter a Title" id="titleinput"></div>
@@ -100,7 +100,7 @@ function editTaskTemplate(id) {
             </div>
         </div>
         <div>
-            <div class="close" onclick="closePopup()">x</div>
+            <div class="close" onclick="closeBoardPopup()">x</div>
             <div class="editTask" onclick="editTask(${id})"><img src="../assets/img/check-button.png" alt="Ok"></div>
         </div
     </div>
@@ -370,5 +370,5 @@ function editTask(id) {
     tasklist[id]['priority'] = selectedPrio;
     tasklist[id]['assignedTo']['user'] = assignetcontacts;
     initBoard();
-    closePopup();
+    closeBoardPopup();
 }

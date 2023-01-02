@@ -3,11 +3,16 @@ body {
     background-color: #F5F5F5;
 }
 
+.d-none {
+    display: none;
+}
+
 .content {
     position: absolute;
     left: 232px;
     top: 89px;
     margin-left: 16px;
+    max-width: 90vw;
 }
 
 .headline {
@@ -47,11 +52,25 @@ body {
 .taskbar {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.taskbar_1 {
+    display: flex;
+    min-width: 50%;
+    max-width: 90vw;
+}
+
+.taskbar_2 {
+    display: flex;
 }
 
 .taskHeader {
     display: flex;
-    width: 230px;
+    min-width: 155px;
+    width: 15vw;
+    max-width: 40vw;
     height: 30px;
     justify-content: space-between;
     align-items: center;
@@ -79,6 +98,29 @@ body {
     font-weight: 700;
     font-size: 21px;
     color: #FFFFFF;
+}
+
+.searchMobile {
+    display: none;
+}
+
+.addTaskMobile {
+    display: none;
+}
+
+.plusbuttonMobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    width: 40px;
+    height: 40px;
+    background: #2A3647;
+    border-radius: 10px;
+    color: white;
+    font-size: 40px;
+    font-family: 'Inter';
+    font-weight: lighter;
 }
 
 .searchbar {
@@ -230,7 +272,7 @@ body {
 .background {
     width: 100vw;
     height: 100vh;
-    z-index: 999;
+    z-index: 1000;
     background-color: rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
@@ -246,7 +288,7 @@ body {
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 50px;
-    margin-top: 100px;
+    margin-top: -300px;
     z-index: 1009;
     position: relative;
 }
@@ -369,7 +411,7 @@ body {
     cursor: pointer;
 }
 
-#popup {
+#Boardpopup {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -699,7 +741,7 @@ body {
     width: 100%;
 }
 
-.newcontact input{
+.newcontact input {
     border: none;
     font-size: 18px;
     width: 100%;
@@ -716,4 +758,77 @@ body {
     margin: 0;
     width: 20px;
     height: 20px;
+}
+
+@media (max-width: 1050px) {
+    .content {
+        left: 0;
+        max-width: 95vw;
+    }
+
+    .taskform {
+        margin-top: 100px;
+    }
+
+    .taskbar {
+        width: 95vw;
+    }
+
+    .taskbar_1 {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .taskbar_2 {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 800px) {
+    .taskbar_1 {
+        flex-direction: column;
+        align-items: center;
+        width: 80vw;
+    }
+
+    .taskbar_2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .headaction {
+        display: none;
+    }
+
+    .searchMobile {
+        display: flex;
+        margin-left: 10px;
+    }
+
+    .addTaskMobile {
+        display: flex;
+    }
+
+    .headline {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .taskHeader {
+        width: 80vw;
+        max-width: 80vw;
+    }
+
+    .todo {
+        width: 80vw;
+    }
+
+    .dragarea {
+        width: 80vw;
+    }
+
+    .progress {
+        width: 85%;
+    }
 }
