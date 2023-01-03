@@ -258,12 +258,14 @@
 .false-x {
     width: 27px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .checkmark {
     width: 22px;
     object-fit: cover;
     margin-left: 3px;
+    cursor: pointer;
 }
 
 .colors {
@@ -309,4 +311,8 @@
 .max-height-and-scroll {
     max-height: 120px;
     overflow: auto;
+}
+
+.margin-checkbox {
+    margin-right: 16px;
 }

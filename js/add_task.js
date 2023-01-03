@@ -1,3 +1,5 @@
+let tasks = [];
+
 let categories = [{
     'name': 'General topics',
     'color': '#FC71FF'
@@ -176,7 +178,6 @@ function createNewCategory() {
 function templateCreateNewCategory() {
     return /*html*/`
     <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
-    <span class="dot" id="selected-color" style="margin-left: 16px;"></span>
     <div class="flex category-icons">
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
@@ -189,7 +190,7 @@ function removeCategoryInput() {
     document.getElementById('mistake-category-fields').innerHTML = '';
     document.getElementById('categories-for-colors').innerHTML = '';
     document.getElementById('category-container').innerHTML = `
-    <div class="flex input-section" onclick="abc()" id="input-section">
+    <div class="flex input-section" id="input-section">
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
@@ -252,7 +253,7 @@ function addNewCategory() {
 function reopenExistigCategorys() {
     document.getElementById('new-category').classList.remove('d-none');
     document.getElementById('existing-categories').classList.remove('d-none');
-    document.getElementById('category-container').innerHTML = ` <div class="flex input-section" onclick="abc()" id="input-section">
+    document.getElementById('category-container').innerHTML = ` <div class="flex input-section" id="input-section">
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
 </div>`;
@@ -445,7 +446,130 @@ function removeStyleOfUnclickedButton(button, j) {
 
 
 function changeSubtaskInputField() {
-    // <img src="./assets/img/false-x.png" class="false-x">
-    // <img src="./assets/img/checkmark.png" class="checkmark">`;
+    document.getElementById('subtask-before').classList.add('d-none');
+    document.getElementById('subtask-after').classList.remove('d-none');
+    focusOnTaskInput();
+}
 
-}   
+
+function focusOnTaskInput() {
+    document.getElementById('input-subtask-area').focus();
+}
+
+
+function closeSubtaskInputField() {
+    document.getElementById('subtask-before').classList.remove('d-none');
+    document.getElementById('subtask-after').classList.add('d-none');
+}
+
+
+
+
+
+function checkSubtaskInputValue() {
+    let inputSubtask = document.getElementById('input-subtask-area');
+    let subtaskToShort = document.getElementById('subtask-to-short');
+    if (inputSubtask.value.length < 3) {
+        subtaskToShort.innerHTML = 'Your entry must be at least 3 characters long.';
+    }
+    else {
+        subtaskToShort.innerHTML = '';
+        addSubtask(inputSubtask.value);
+        document.getElementById('input-subtask-area').value = '';
+        closeSubtaskInputField();
+    }
+}
+
+function addSubtask(inputSubtask) {
+    tasks.push({ task: inputSubtask, completed: false });
+    renderSubtasks();
+}
+
+
+function renderSubtasks() {
+    let subtaskList = document.getElementById('subtask-list');
+    subtaskList.innerHTML = '';
+    for (let i = 0; i < tasks.length; i++) {
+        let taskElement = tasks[i];
+        checkCompletedStatus(i);
+        if(checkCompletedStatus(i) == false) {
+            subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
+        }
+        else {
+            subtaskList.innerHTML += templateRenderSubtasksWichAreCompleted(taskElement, i);
+        }
+        
+    }
+}
+
+
+function templateRenderSubtasksNotCompleted(taskElement, i) {
+    return /*html*/`
+        <div class="flex"> 
+            <label for="checkbox-${i}" class="flex margin-checkbox">
+                <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="checkCurrentCompleteStatus(${i})">
+            </label>
+            <div>${taskElement.task}</div>
+        </div>
+        `;
+}
+
+
+function templateRenderSubtasksWichAreCompleted(taskElement, i) {
+    return /*html*/`
+    <div class="flex"> 
+            <label for="checkbox-${i}" class="flex margin-checkbox">
+                <input onclick="checkCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>
+            </label>
+            <div>${taskElement.task}</div>
+        </div>`;
+}
+
+{/* <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
+                    <span>${contact['name']}</span>
+                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
+                    onclick="checkAssignedToIcons(${i})">
+            </label>       */}
+
+
+function checkCompletedStatus(i) {
+    if(!tasks[i].completed) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
+function checkCurrentCompleteStatus(i) {
+    let currentCheckbox = document.getElementById(`checkbox-${i}`);
+    if(currentCheckbox.checked) {
+        console.log('Checkbox' + i + 'ist angehakt');
+    }
+    else {
+        console.log('Checkbox' + i + 'ist NICHT  angehakt');
+    }
+}
+
+
+// 'subtasks': {
+//     'tasks': [
+//         {
+//             'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//             'completed': true,
+//         },
+//         {
+//             'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//             'completed': false,
+//         },
+//         {
+//             'task': 'lorem ipsum duo',
+//             'completed': false,
+//         },
+//         {
+//             'task': 'lorem ipsum duo',
+//             'completed': false,
+//         },
+//     ],
+// },
