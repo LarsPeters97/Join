@@ -849,6 +849,10 @@ body {
         padding-left: 10px;
     }
 
+    .taskform p {
+        width: 400px;
+    }
+
     .edittaskform {
         margin-top: 179px !important;
     }

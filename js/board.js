@@ -210,6 +210,10 @@ let doneTasks = [];
 let currentDraggedElement;
 let assignetcontacts = [];
 let selectedPrio = [];
+let searchTodos = [];
+let searchInProgress = [];
+let searchAwaitFeedback = [];
+let searchDoneTasks = [];
 
 async function initBoard() {
     await loadAll();
@@ -445,4 +449,88 @@ function openTask(id) {
 
 function closeBoardPopup() {
     document.getElementById('Boardpopup').innerHTML = '';
+}
+
+function findTask(id) {
+    let search = document.getElementById(id).value;
+    searchInTodos(search);
+    searchInInProgress(search);
+    searchInAwaitFeedback(search);
+    searchInDoneTasks(search);
+    rendersearchedTodos(searchTodos, 'toDos', 'todo');
+    rendersearchedTodos(searchInProgress, 'inProgress', 'inprogresss');
+    rendersearchedTodos(searchAwaitFeedback, 'awaitingFeedback', 'awaitfeedback');
+    rendersearchedTodos(searchDoneTasks, 'doneTasks', 'donetask');
+}
+
+function searchInTodos(search) {
+    searchTodos = [];
+    for (let i = 0; i < todos.length; i++) {
+        let todo = todos[i];
+        if (todo['title'].includes(search)){
+            searchTodos.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchTodos.push(todo)
+        }
+    }
+}
+
+function searchInInProgress(search) {
+    searchInProgress = [];
+    for (let i = 0; i < inProgress.length; i++) {
+        let todo = inProgress[i];
+        if (todo['title'].includes(search)){
+            searchInProgress.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchInProgress.push(todo)
+        }
+    }
+}
+
+function searchInAwaitFeedback(search) {
+    searchAwaitFeedback = [];
+    for (let i = 0; i < awaitFeedback.length; i++) {
+        let todo = awaitFeedback[i];
+        if (todo['title'].includes(search)){
+            searchAwaitFeedback.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchAwaitFeedback.push(todo)
+        }
+    }
+}
+
+function searchInDoneTasks(search) {
+    searchDoneTasks = [];
+    for (let i = 0; i < doneTasks.length; i++) {
+        let todo = doneTasks[i];
+        if (todo['title'].includes(search)){
+            searchDoneTasks.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchDoneTasks.push(todo)
+        }
+    }
+}
+
+function rendersearchedTodos(array, id1, id2) {
+    document.getElementById(id1).innerHTML = ``;
+    for (let i = 0; i < array.length; i++) {
+        let toDo = array[i];
+        let id = toDo['id'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
+        let title = toDo['title'];
+        let description = toDo['description'];
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']) {
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
+        let priority = toDo['priority'];
+        document.getElementById(id1).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
+    }
+    document.getElementById(id1).innerHTML += addDragarea(id2);
 }
