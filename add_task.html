@@ -10,17 +10,20 @@
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="add_task.css">
     <link rel="stylesheet" href="board.css">
+    <!-- <link rel="stylesheet" href="/assets/templates/mobile_template.css"> -->
     <script src="mini_backend.js"></script>
     <script defer src="script.js"></script>
     <script defer src="./js/add_task.js"></script>
     <script defer src="register.js"></script>
-    <script src="./js/desktop_template.js"></script>
+    <!-- <script src="./js/desktop_template.js"></script> -->
+    <!-- <script src="/js/mobile_template.js"></script> -->
     <title>Add Task</title>
 
 </head>
 
 <body onload="includeHTML(); initialize();">
     <div w3-include-html="/assets/templates/desktop_template.html"></div>
+    <!-- <div w3-include-html="/assets/templates/mobile_template.html"></div> -->
     <div class="add-task"></div>
     <div class="add-taskt-whole-side">
         <div class="inner-side">
@@ -28,26 +31,21 @@
             <form onsubmit="createNewTask(); return false;">
                 <div class="flex">
                     <div class="left-side flex column">
+
                         <div class="title flex column margin-for-fields">
                             <span class="header-for-fields">Title</span>
                             <input class="input-text-type" type="text" min="2" max="40" required
                                 placeholder="Enter a title" id="input-title">
                         </div>
+
                         <div class="description flex column margin-for-fields">
                             <span class="header-for-fields">Description</span>
                             <textarea required name="description" id="description" maxlength="500"
                                 placeholder="Enter a Description"></textarea>
                         </div>
+
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Category</span>
-
-
-
-
-
-
-
-
                             <div class="dropdown-category-container" id="dropdown-category-container">
                                 <div class="dropdown-category border-radius-fields" id="category-container">
                                     <div class="flex input-section" onclick="checkIfCategoryContainerOpen()"
@@ -61,33 +59,14 @@
                                     <span class="flex">New Category</span><img src="./assets/img/plus-subtask.png">
                                 </div>
                                 <div id="existing-categories" class="max-height-and-scroll"></div>
-
                             </div>
-
                             <div id="categories-for-colors" class="flex colors"></div>
                             <div id="mistake-category-fields" class="mistake-category-fields"></div>
                         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Assigned to</span>
-
-
-
                             <div class="dropdown-category-container" id="assigned-container">
                                 <div class="dropdown-category border-radius-fields" onclick="checkIfAssignedToIsOpen()">
                                     <span class="flex">Select contacts to assign</span>
@@ -97,15 +76,7 @@
                             </div>
                             <div id="assigned-to-icons-section" class="flex"></div>
                         </div>
-
-
-
-
                     </div>
-
-
-
-
 
                     <div class="right-side flex column">
                         <div class="due-date flex column margin-for-fields">
@@ -113,14 +84,6 @@
                             <input type="date" required placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31"
                                 id="due-date" onblur="convertDate()">
                         </div>
-
-
-
-
-
-
-
-
 
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Prio</span>
@@ -145,12 +108,52 @@
 
                         <div class="flex column margin-for-fields">
                             <span class="header-for-fields">Subtasks</span>
-                            <div class="input-text-type subtask">
+
+
+
+
+
+
+
+
+
+                            <div class="input-text-type subtask" id="subtask-section"
+                                onclick="changeSubtaskInputField()">
                                 <input class="input-subtask" type="text" min="2" max="100" required
                                     placeholder="Add new subtask">
-                                <img src="./assets/img/plus-subtask.png" alt="Add">
+                                <div id="subtask-icons">
+                                    <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+                                </div>
                             </div>
                         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
                 <div class="task-btns">

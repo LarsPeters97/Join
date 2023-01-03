@@ -274,9 +274,6 @@ function closeDropdownCategory() {
 }
 
 
-
-
-
 function checkIfAssignedToIsOpen() {
     let existingContacts = document.getElementById('existing-contacts');
     if (existingContacts.classList.contains('d-none')) {
@@ -295,23 +292,39 @@ function openExistingContacts() {
 
     for (let i = 0; i < contactExample.length; i++) {
         let contact = contactExample[i];
-        existingContacts.innerHTML += templateExistingContacts(i, contact);
+        let findIndex = assignedToContacts.indexOf(i);
+        if (assignedToContactIsInArray(findIndex)) {
+            existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
+        }
+        else {
+            existingContacts.innerHTML += templateExistingContacts(i, contact);
+        }
     }
+}
+
+
+function templateExistingContactsChecked(i, contact) {
+    return /*html*/`
+
+        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
+                    <span>${contact['name']}</span>
+                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
+                    onclick="checkAssignedToIcons(${i})">
+            </label>      
+   `;
 }
 
 
 function templateExistingContacts(i, contact) {
     return /*html*/`
-    <div class="dropdown-category-existing select-bg-color flex">
-        <label for="checkbox${i}" class="flex checkbox-style">    
+
+        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
                     <span>${contact['name']}</span>
-                    <input value="${i}" class="contacts-cb" id="checkbox${i}" type="checkbox" 
+                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox"
                     onclick="checkAssignedToIcons(${i})">
             </label>      
-    </div>`;
+   `;
 }
-
-
 
 
 function closeExistingContacts() {
@@ -383,8 +396,8 @@ function renderPrioButtonsSection() {
 
 function templatePrioButtonsSection(i) {
     return /*html*/`
-     <button id="prio-btns-${i}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
-     <img src="${priorities[i]['image']}" id="prio-img-${i}"></button>`;
+     <button id="${priorities[i]['name']}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
+     <img src="${priorities[i]['image']}" id="img-${i}"></button>`;
 }
 
 
@@ -395,28 +408,44 @@ function selectedPriority(i) {
 
 
 function changeStyleOfSelectedButton(i) {
-    let selectedButtonImg = document.getElementById(`prio-img-${i}`);
-    let selectedButton = document.getElementById(`prio-btns-${i}`);
-    selectedButtonImg.src = priorities[i]['selected-image'];
-    selectedButton.classList.add('white');
-    selectedButton.style.backgroundColor = `${priorities[i]['color']}`;
+    let id = priorities[i]['name'];
+    let button = document.getElementById(id);
+    if (!button.classList.contains('white')) {
+        addSelectedButtonStyle(button, i);
+    }
+    else {
+        removeStyleOfUnclickedButton(button, i);
+    }
+}
+
+
+function addSelectedButtonStyle(button, i) {
+    button.style.backgroundColor = `${priorities[i]['color']}`;
+    button.classList.add('white');
+    document.getElementById(`img-${i}`).src = `${priorities[i]['selected-image']}`;
 }
 
 
 function resetOtherPriorityButtons(i) {
     for (let j = 0; j < priorities.length; j++) {
-        let otherButton = document.getElementById(`prio-btns-${j}`);
-        if (j != i && otherButton.classList.contains('white'))
-            console.log('other button has been clicked!');
-            removeStyleOfUnclickedButtom(otherButton, j);
+        let id = priorities[j]['name'];
+        let button = document.getElementById(id);
+        if (j != i && button.classList.contains('white')) {
+            removeStyleOfUnclickedButton(button, j);
+        }
     }
 }
 
 
-function removeStyleOfUnclickedButtom(otherButton, j) {
-    // let selectedButtonImg = document.getElementById(`${otherButton}`);
-    // let selectedButton = document.getElementById(`${otherButton}`);
-    selectedButtonImg.src = priorities[j]['image'];
-    selectedButton.classList.remove('white');
-    selectedButton.style.backgroundColor = 'white';
+function removeStyleOfUnclickedButton(button, j) {
+    document.getElementById(`img-${j}`).src = `${priorities[j]['image']}`;
+    button.style.backgroundColor = 'white';
+    button.classList.remove('white');
 }
+
+
+function changeSubtaskInputField() {
+    // <img src="./assets/img/false-x.png" class="false-x">
+    // <img src="./assets/img/checkmark.png" class="checkmark">`;
+
+}   

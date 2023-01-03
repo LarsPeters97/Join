@@ -124,8 +124,8 @@
     background-color: white;
 }
 
-.dropdown-category-existing:last-child {
-    border-radius: 0px 0px 9px 9px;
+.dropdown-category-existing {
+    border-radius: 9px 9px 9px 9px;
 }
 
 .due-date input {
