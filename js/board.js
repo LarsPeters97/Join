@@ -221,7 +221,7 @@ async function initBoard() {
 }
 
 async function loadAll() {
-    /*await loadTasklist()*/
+    await loadTasklist()
     loadTodos();
     loadInProgress();
     loadAwaitFeedback();
@@ -229,12 +229,12 @@ async function loadAll() {
 }
 
 async function save() {
-    let tasklistAsString = JSON.stringify(tasklist)
-    await backend.setItem('tasklist', tasklistAsString)
+    let tasklistAsString = JSON.stringify(tasklist);
+    await backend.setItem('tasklist', tasklistAsString);
 }
 
 async function loadTasklist() {
-    await downloadFromServer();
+    /**await downloadFromServer();*/
     tasklist = JSON.parse(backend.getItem('tasklist')) || [];
 }
 
