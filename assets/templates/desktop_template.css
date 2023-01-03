@@ -6,7 +6,6 @@
 
 .wrapper {
   position: relative;
-  width: 100vw;
   height: fit-content;
   background: #f6f7f8;
   z-index: 100;
@@ -51,7 +50,39 @@
   top: 0px;
   border: 3px solid #2a3647;
   border-radius: 180px;
+  cursor: pointer;
 }
+
+.wrapper-logout{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+.logout-popup{
+  position: absolute;
+  top: 90px;
+  background-color: #091931;
+  color: white;
+  height: 40px;
+  border-radius: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 30px;
+}
+
+.logout-popup a{
+  text-decoration: none;
+  margin: 16px 32px ;
+  color: white;
+  cursor: pointer;
+}
+
+
 
 .wrapper_sidebar {
   position: absolute;
@@ -172,4 +203,16 @@
   opacity: 0.7;
     width: 40px;
     height: 40px;
+}
+
+@media (max-width:1050px) {
+
+  .wrapper_sidebar{
+    display: none;
+  }
+
+.header{
+  display: none;
+}
+  
 }

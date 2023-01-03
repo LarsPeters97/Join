@@ -1,6 +1,6 @@
 .container-contacts {
     height: 100%;
-    width: 300px;
+    width: 280px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -94,21 +94,20 @@
 }
 
 .container-filtered-contacts {
-    width: 280px;
+    width: 260px;
     display: flex;
     flex-direction: column;
 }
-
 
 .letters {
     font-size: 21px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.5);
     padding: 20px 10px;
-    width: 280px;
+    width: 260px;
 }
 
 .contact-card {
-    width: 280px;
+    width: 260px;
     padding: 8px 0px 8px 16px;
     display: flex;
     align-items: center;
@@ -143,7 +142,6 @@
     position: fixed;
     top: 92px;
     left: 233px;
-    width: calc(100vw - 252px);
     height: calc(100vh - 92px);
     box-sizing: border-box;
 }
@@ -156,7 +154,7 @@
 
 .container-contactarea {
     position: fixed;
-    top: 92px;
+    top: 125px;
     left: 596px;
     width: calc(100vw - 596px);
     height: calc(100vh - 92px);
@@ -193,7 +191,7 @@
     border: none;
     border-radius: 10px;
     position: absolute;
-    bottom: 60px;
+    bottom: 65px;
     right: 55px;
     cursor: pointer;
 }
@@ -488,10 +486,24 @@
     justify-content: center;
 }
 
-.d-none {
-    display: none;
-}
-
 .text-lightblue {
     color: #29abe2;
+}
+
+@media (max-width: 1050px) {
+    .wrapper {
+        height: calc(100vh - 184px);
+        left: 0px;
+    }
+
+    .container-contactarea {
+        top: 84px;
+        left: 358px;
+        width: calc(100vw - 358px);
+        height: calc(100vh - 150px);
+    }
+}
+
+.d-none {
+    display: none;
 }

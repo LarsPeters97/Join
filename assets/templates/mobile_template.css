@@ -1,0 +1,100 @@
+@media (max-width: 1050px) {
+    .wrapper-logout-mobile {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 999;
+    }
+
+    .logout-popup-mobile {
+        position: absolute;
+        top: 90px;
+        background-color: #091931;
+        color: white;
+        height: fit-content;
+        border-radius: 10px 0px 10px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        right: 30px;
+    }
+
+    .logout-popup-mobile a {
+        text-decoration: none;
+        margin: 4px 16px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .header-mobile {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 36px;
+        gap: 34px;
+        position: fixed;
+        width: 100vw;
+        height: 89px;
+        left: 0px;
+        top: 0px;
+        background: #ffffff;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    .logo-mobile {
+        width: 50px;
+    }
+
+    .wrapper_sidebar_mobile {
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 100;
+    }
+
+    .sidebar_menu_container_mobile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100vw;
+        height: 92px;
+        background: #2a3647;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 0px;
+        box-sizing: content-box;
+        z-index: 1;
+    }
+
+    .sidebar_menu_mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        
+    }
+    .sidebar_menu_mobile a {
+        font-weight: 400;
+        font-size: 16px;
+        color: #cdcdcd;
+        text-decoration: none;
+    }
+    .sidebar_menu_mobile:hover {
+        background: #091931;
+    }
+
+    .sidebar_menu_mobile img {
+        width: 30px;
+        height: 30px;
+    }
+}
