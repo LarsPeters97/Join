@@ -1,6 +1,6 @@
 function taskformTemplate(category, color, title, description, duedate, priority, id) {
     return `
-<div class="background" onclick="closePopup()">
+<div class="background" onclick="closeBoardPopup()">
 </div>
     <div class="taskform">
         <div>
@@ -15,7 +15,7 @@ function taskformTemplate(category, color, title, description, duedate, priority
                 <div id="assignedto"></div>
             </div>
         </div>
-            <div class="close" onclick="closePopup()">x</div>
+            <div class="close" onclick="closeBoardPopup()">x</div>
             <div class="edit" onclick="renderEditTask(${id})"><img src="../assets/img/edit-button.png" alt="edit"></div>
     </div>`;
 }
@@ -56,7 +56,7 @@ function renderEditTask(id) {
     let duedate = year + '-' + month + '-' + day;
     let priority = task[0]['priority'];
     let subtasks = task[0]['subtasks']['tasks'];
-    document.getElementById('popup').innerHTML = editTaskTemplate(id);
+    document.getElementById('Boardpopup').innerHTML = editTaskTemplate(id);
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
@@ -67,8 +67,8 @@ function renderEditTask(id) {
 
 function editTaskTemplate(id) {
     return `
-    <div class="background" onclick="closePopup()"></div>
-    <div class="taskform">
+    <div class="background" onclick="closeBoardPopup()"></div>
+    <div class="taskform edittaskform">
         <div>
             <div class="edittitle">Title <input type="text" required placeholder="Enter a Title" id="titleinput"></div>
             <div class="editdescription">Description <textarea id="descriptioninput" placeholder="Enter a Description" required></textarea></div>
@@ -99,10 +99,8 @@ function editTaskTemplate(id) {
             <div class="assignedpersons" id="assignedpersons"></div>
             </div>
         </div>
-        <div>
-            <div class="close" onclick="closePopup()">x</div>
-            <div class="editTask" onclick="editTask(${id})"><img src="../assets/img/check-button.png" alt="Ok"></div>
-        </div
+        <div class="close" onclick="closeBoardPopup()">x</div>
+        <div class="editTask" onclick="editTask(${id})"><img src="../assets/img/check-button.png" alt="Ok"></div>
     </div>
     `;
 }
@@ -359,16 +357,16 @@ function closeDropdownAssignTo(id) {
 function editTask(id) {
     let newTitle = document.getElementById('titleinput').value;
     let newDescription = document.getElementById('descriptioninput').value;
-    let newDate = document.getElementById('duedate').value;
-    let year = newDate.slice(0, 4);
-    let month = newDate.slice(5, 7);
-    let day = newDate.slice(8);
+    let mynewDate = document.getElementById('duedate').value;
+    let year = mynewDate.slice(0, 4);
+    let month = mynewDate.slice(5, 7);
+    let day = mynewDate.slice(8);
     let newDuedate = year + month + day;
     tasklist[id]['title'] = newTitle;
     tasklist[id]['description'] = newDescription;
-    tasklist[id]['duedate'] = newDuedate;
+    tasklist[id]['duedate'] = parseInt(newDuedate);
     tasklist[id]['priority'] = selectedPrio;
     tasklist[id]['assignedTo']['user'] = assignetcontacts;
     initBoard();
-    closePopup();
+    closeBoardPopup();
 }

@@ -419,7 +419,7 @@ function removeHighlight(id) {
 }
 
 function taskPopup() {
-    document.getElementById('popup').innerHTML = `
+    document.getElementById('Boardpopup').innerHTML = `
     <div w3-include-html="/assets/templates/add_task_mini.html"></div>
     `;
     includeHTML();
@@ -438,11 +438,11 @@ function openTask(id) {
     let duedate = day + '.' + month + '.' + year;
     let priority = task[0]['priority'];
     let assignedTo = task[0]['assignedTo'];
-    document.getElementById('popup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority, id);
+    document.getElementById('Boardpopup').innerHTML = taskformTemplate(category, color, title, description, duedate, priority, id);
     renderAssignedTo(assignedTo);
     renderSubTasks(id);
 }
 
-function closePopup() {
-    document.getElementById('popup').innerHTML = '';
+function closeBoardPopup() {
+    document.getElementById('Boardpopup').innerHTML = '';
 }
