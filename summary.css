@@ -361,3 +361,125 @@ body {
 .d-none {
     display: none;
 }
+
+.wrapper_mobile_menu {
+    position: fixed;
+}
+
+@media (max-width:1400px) {
+    .summary-greet-container {
+        display: none;
+    }
+}
+
+@media (max-width:1050px) {
+
+    .content {
+       display: flex;
+       flex-direction: column;
+    }
+    .summary-headline-container {
+      padding-left: 33px;
+    }
+
+    .summary-details-container {
+        padding-left: 33px;
+    }
+}
+
+@media (max-width:1050px) {
+    .summary-greet-container-mobil {
+        text-align: center;
+        font-size: 6rem;
+        font-weight: bolder;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(255, 255, 255, 1);
+        z-index: -10;
+        color: rgba(0, 0, 0, 0);
+        animation: animation-greet-container-mobil 3s;
+
+    }
+
+    @keyframes animation-greet-container-mobil {
+        0% {
+            background-color: rgba(255, 255, 255, 1);
+            color: rgba(0, 0, 0, 0);
+            z-index: 3;
+            height: 100vh;
+            width: 100vw;
+        }
+
+
+        90% {
+            background-color: rgba(255, 255, 255, 1);
+            z-index: 3;
+        }
+
+        100% {
+            background-color: rgba(255, 255, 255, 0);
+            z-index: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+    }
+
+    .summary-greet-top-mobil {
+        z-index: -10;
+        text-align: center;
+        font-size: 47px;
+        font-weight: bolder;
+        color: rgba(41, 171, 226, 0);
+        animation: animation-summary-greet-top-mobil 3s;
+    }
+
+    @keyframes animation-summary-greet-top-mobil {
+        0% {
+            color: black;
+            z-index: 3;
+        }
+
+        60% {
+            color: black;
+            z-index: 3;
+        }
+
+        100% {
+            color: black;
+            z-index: 3;
+        }
+    }
+
+    .summary-greet-bottom-mobil {
+        text-align: center;
+        font-size: 6rem;
+        font-weight: bolder;
+        color: rgb(41, 171, 226);
+        animation: summary-greet-bottom-mobil 5s;
+    }
+
+    @keyframes summary-greet-bottom-mobil {
+        0% {
+            color: rgba(41, 171, 226, 1);
+        }
+
+        50% {
+            color: rgba(41, 171, 226, 1);
+        }
+
+        100% {
+            color: rgba(41, 171, 226, 0);
+        }
+    }
+
+  
+}

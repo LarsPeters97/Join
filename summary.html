@@ -10,16 +10,26 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="assets/templates/desktop_template.css">
+    <link rel="stylesheet" href="assets/templates/mobile_template.css">
+    <script src="js/mobile_template.js"></script>
     <script src="script.js"></script>
     <script src="js/summary.js"></script>
     <script src="./js/desktop_template.js"></script>
-    
+
 </head>
 
 <body onload="summaryInit()">
 
     <div w3-include-html="/assets/templates/desktop_template.html"></div>
+    <div w3-include-html="/assets/templates/mobile_template.html"></div>
 
+    <div class="summary-greet-container-mobil">
+        <div class="summary-greet-top-mobil">Good morning,
+        </div>
+        <div class="summary-greet-bottom-mobil">Guest</div>
+    </div>
+
+    <div class="content">
     <div class="summary-headline-container">
         <div class="summary-headline-left">Summary</div>
         <div class="summary-headline-middle"></div>
@@ -29,10 +39,11 @@
     <div class="summary-greet-container">
         <div class="summary-greet-top">
             <span class="summary-greet-top" id="greeting-slogan">Good morning,
-            </span> 
+            </span>
         </div>
         <div class="summary-greet-bottom">
-            <span class="summary-greet-bottom" id="greeting-name">Guest</span> </div>
+            <span class="summary-greet-bottom" id="greeting-name">Guest</span>
+        </div>
     </div>
 
     <div class="summary-details-container">
@@ -78,12 +89,12 @@
                         </div>
                         <div class="summary-urgency-text">Urgent
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="summary-urgency-border">
                 </div>
                 <div class="summary-urgency-deadline">
-                    <div class="summary-deadline-top" id="upcoming-date">No 
+                    <div class="summary-deadline-top" id="upcoming-date">No
                     </div>
                     <div class="summary-deadline-bottom">Upcoming Deadline
                     </div>
@@ -96,12 +107,12 @@
                     <div class="summary-pen-image">
                     </div>
                     <div class="summary-to-do-check">
-                    <div class="summary-to-do-amount" id="amount-todo">0
-                    </div>
-                    <div class="summary-to-do-text">To-do 
+                        <div class="summary-to-do-amount" id="amount-todo">0
+                        </div>
+                        <div class="summary-to-do-text">To-do
+                        </div>
                     </div>
                 </div>
-            </div>
             </a>
             <a href="board.html">
                 <div class="summary-to-do-frame">
@@ -110,14 +121,15 @@
                     <div class="summary-to-do-check">
                         <div class="summary-to-do-amount" id="amount-done">0
                         </div>
-                        <div class="summary-to-do-text">Done 
+                        <div class="summary-to-do-text">Done
                         </div>
                     </div>
                 </div>
             </a>
         </div>
     </div>
-    
+</div>
+
 </body>
 
 </html>
