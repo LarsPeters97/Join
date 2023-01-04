@@ -448,12 +448,12 @@ function removeStyleOfUnclickedButton(button, j) {
 function changeSubtaskInputField() {
     document.getElementById('subtask-before').classList.add('d-none');
     document.getElementById('subtask-after').classList.remove('d-none');
-    focusOnTaskInput();
+    focusOnField('input-subtask-area');
 }
 
 
-function focusOnTaskInput() {
-    document.getElementById('input-subtask-area').focus();
+function focusOnField(idElement) {
+    document.getElementById(idElement).focus();
 }
 
 
@@ -492,13 +492,12 @@ function renderSubtasks() {
     for (let i = 0; i < tasks.length; i++) {
         let taskElement = tasks[i];
         checkCompletedStatus(i);
-        if(checkCompletedStatus(i) == false) {
+        if (checkCompletedStatus(i) == false) {
             subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
         }
         else {
             subtaskList.innerHTML += templateRenderSubtasksWichAreCompleted(taskElement, i);
         }
-        
     }
 }
 
@@ -507,7 +506,7 @@ function templateRenderSubtasksNotCompleted(taskElement, i) {
     return /*html*/`
         <div class="flex"> 
             <label for="checkbox-${i}" class="flex margin-checkbox">
-                <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="checkCurrentCompleteStatus(${i})">
+                <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="changeCurrentCompleteStatus(${i})">
             </label>
             <div>${taskElement.task}</div>
         </div>
@@ -519,7 +518,7 @@ function templateRenderSubtasksWichAreCompleted(taskElement, i) {
     return /*html*/`
     <div class="flex"> 
             <label for="checkbox-${i}" class="flex margin-checkbox">
-                <input onclick="checkCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>
+                <input onclick="changeCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>
             </label>
             <div>${taskElement.task}</div>
         </div>`;
@@ -533,7 +532,7 @@ function templateRenderSubtasksWichAreCompleted(taskElement, i) {
 
 
 function checkCompletedStatus(i) {
-    if(!tasks[i].completed) {
+    if (!tasks[i].completed) {
         return false;
     }
     else {
@@ -542,14 +541,41 @@ function checkCompletedStatus(i) {
 }
 
 
-function checkCurrentCompleteStatus(i) {
+function changeCurrentCompleteStatus(i) {
     let currentCheckbox = document.getElementById(`checkbox-${i}`);
-    if(currentCheckbox.checked) {
-        console.log('Checkbox' + i + 'ist angehakt');
+    if (currentCheckbox.checked) {
+        tasks[i].completed = true;
     }
     else {
-        console.log('Checkbox' + i + 'ist NICHT  angehakt');
+        tasks[i].completed = false;
     }
+}
+
+
+// let requiredElements = document.querySelectorAll('input[required], textarea[required]');
+
+
+// document.querySelector('form').addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     clearTask();
+// });
+
+
+function clearTask() {
+    let inputs = document.getElementsByTagName('input');
+    let textareas = document.getElementsByTagName('textarea');
+    let inputsAndTextareas = [...inputs, ... textareas];
+    // let requiredInputs = [];
+    for (let i = 0; i < inputsAndTextareas.length; i++) {
+        if (inputsAndTextareas[i].hasAttribute('required')) {
+            inputsAndTextareas[i].removeAttribute('required');
+        }
+    }
+    document.getElementById('input-title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('due-date').value = '';
+    document.getElementById('input-subtask-area').value = '';
+    closeSubtaskInputField();
 }
 
 

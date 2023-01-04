@@ -118,14 +118,14 @@
                             <div id="subtasks-section">
                                 <div class="input-text-type subtask" id="subtask-before"
                                     onclick="changeSubtaskInputField()">
-                                    <input class="input-subtask" type="text" min="2" max="100" required
+                                    <input class="input-subtask" type="text" min="2" max="100"
                                         placeholder="Add new subtask">
                                     <div id="subtask-icons">
                                         <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
                                     </div>
                                 </div>
                                 <div class="input-text-type subtask d-none" id="subtask-after">
-                                    <input class="input-subtask" type="text" minlength="2" maxlength="100" required
+                                    <input class="input-subtask" type="text" minlength="2" maxlength="100"
                                         id="input-subtask-area">
                                     <div id="subtask-icons" class="flex">
                                         <img src="./assets/img/false-x.png" class="false-x"
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="task-btns">
-                    <button class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()"
+                    <button class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()" onclick="clearTask(); return false;"
                         onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
                             id="clear-img"></button>
                     <button class="create-btn btns-clear-and-create" onclick="convertDate()">Create Task <img
