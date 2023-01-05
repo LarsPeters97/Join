@@ -12,21 +12,21 @@ let categories = [{
 
 let priorities = [
     {
-        'name': 'Urgent',
+        'name': 'urgent',
         'index': 0,
         'image': './assets/img/urgent.svg',
         'selected-image': './assets/img/urgent-white.svg',
         'color': '#FF3D00'
     },
     {
-        'name': 'Medium',
+        'name': 'medium',
         'index': 1,
         'image': './assets/img/medium.svg',
         'selected-image': './assets/img/medium-white.svg',
         'color': '#FFA800'
     },
     {
-        'name': 'Low',
+        'name': 'low',
         'index': 2,
         'image': './assets/img/low.svg',
         'selected-image': './assets/img/low-white.svg',
@@ -77,7 +77,7 @@ function addTask() {
             'color': selectedCategoryColor,
             'categoryName': newCategoryName,
         },
-        'duedate': date,
+        'duedate': parseInt(date),
         'title': taskInputTitle,
         'description': description,
         'subtasks': {
@@ -406,7 +406,7 @@ function convertDate() {
     let year = dueDate.slice(0, 4);
     let month = dueDate.slice(5, 7);
     let day = dueDate.slice(8, 10);
-    parseInt(date) = year + month + day;
+    date = year + month + day;
 }
 
 

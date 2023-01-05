@@ -371,13 +371,13 @@ body {
     margin-bottom: 15px;
     margin-top: 15px;
     font-size: 18px;
+    width: 70%;
 }
 
 #assignedto {
     max-height: 150px !important;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 70%;
     padding-left: 10px;
 }
 
