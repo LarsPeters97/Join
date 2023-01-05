@@ -1,0 +1,56 @@
+.add_task_popup {
+    position: relative;
+    top: -300px;
+    display: flex;
+    flex-direction: column;
+    align-self: center !important;
+    justify-self: center !important;
+    background-color: white;
+    z-index: 1000;
+    border-radius: 20px;
+}
+
+.add_task_headline {
+    font-size: 60px;
+    font-weight: 700;
+    margin-left: 70px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.add_task_box {
+    display: flex;
+}
+
+.add_task_box_left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
+    margin-right: 60px;
+}
+
+.add_task_box_right {
+    display: flex;
+    flex-direction: column;
+    margin-right: 70px;
+    padding-left: 60px;
+    margin-bottom: 100px;
+    border-left: 2px solid #D1D1D1;;
+}
+
+.title_label {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.title_input {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 12px 20px;
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+.category {
+    color: black;
+}

@@ -215,6 +215,7 @@ let searchInProgress = [];
 let searchAwaitFeedback = [];
 let searchDoneTasks = [];
 
+
 async function initBoard() {
     await loadAll();
     renderBoard();
@@ -228,14 +229,15 @@ async function loadAll() {
     loadDoneTasks();
 }
 
-async function save() {
+function saveBoard() {
     let tasklistAsString = JSON.stringify(tasklist);
-    await backend.setItem('tasklist', tasklistAsString);
+    backend.setItem("tasklist", tasklistAsString);
 }
 
 async function loadTasklist() {
-    /**await downloadFromServer();*/
-    tasklist = JSON.parse(backend.getItem('tasklist')) || [];
+    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    await downloadFromServer();
+    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
 
 function loadTodos() {
@@ -409,7 +411,7 @@ function allowDrop(ev) {
 
 function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
-    save();
+    saveBoard();
     loadAll();
     renderBoard();
 }
@@ -427,6 +429,7 @@ function taskPopup() {
     <div w3-include-html="/assets/templates/add_task_mini.html"></div>
     `;
     includeHTML();
+    initAddTaskPopup();
 }
 
 function openTask(id) {

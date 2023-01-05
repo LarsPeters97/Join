@@ -1,0 +1,48 @@
+<div class="background" onclick="closePopup()"></div>
+<div class="add_task_popup">
+    <div class="add_task_headline">Add Task</div>
+    <div class="add_task_box">
+        <div class="add_task_box_left">
+            <label class="title_label" for="title_input">Title</label>
+            <input class="title_input" type="text" placeholder="Enter a Title" id="title_input">
+            <label for="description_input">Description</label>
+            <textarea id="description_input" cols="30" rows="10"></textarea>
+            <p>Category</p>
+            <div class="category_selection" id="category_selection">
+                <div class="selection" onclick="openCategorySelection()">
+                    <span>Select task category</span>
+                    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                </div>
+            </div>
+            <div class="category_colors" id="category_colors"></div>
+            <p>Assigned to</p>
+            <div class="dropdown-assign" id="assign-container">
+                <div onclick="openAssignToSelection()">
+                    <span class="flex">Select contacts to assign</span>
+                    <img src="./assets/img/vector-2.png" alt="klick">
+                </div>
+            </div>
+            <div class="assignedpersons" id="assignedpersons"></div>
+        </div>
+        <div class="add_task_box_right">
+            <label for="duedate">Due date</label>
+            <input type="date" id="duedate">
+            <div class="prio">Prio 
+                <div class="prioselect">
+                    <div class="prio-urgent" id="urgent" onclick="selectPrio('urgent')">Urgent <img src="assets/img/urgent.svg"></div>
+                    <div class="prio-medium" id="medium" onclick="selectPrio('medium')">Medium <img src="assets/img/medium.svg"></div>
+                    <div class="prio-low" id="low" onclick="selectPrio('low')">Low <img src="assets/img/low.svg"></div>
+                </div>
+            </div>
+            <p>Subtasks</p>
+            <div id="subtaskinput" onclick="addInput()">
+                <span class="subtaskplaceholder">Add new subtask</span>
+                <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+            </div>
+            <div class="addedsubtasks" id="subtasks"></div>
+        </div>
+    </div>
+    <div class="exit"></div>
+    <div class="cancel"></div>
+    <div class="create_task"></div>
+</div>

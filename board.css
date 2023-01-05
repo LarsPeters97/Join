@@ -76,6 +76,7 @@ body {
     align-items: center;
     padding: 18px;
     font-size: 21px;
+    cursor: pointer;
 }
 
 .taskHeader p {
@@ -98,6 +99,7 @@ body {
     font-weight: 700;
     font-size: 21px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 #search {
