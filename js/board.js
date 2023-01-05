@@ -237,7 +237,7 @@ function saveBoard() {
 async function loadTasklist() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
-    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
+    tasklist = await JSON.parse(backend.getItem("tasklist")) || [];
 }
 
 function loadTodos() {
