@@ -37,7 +37,7 @@ async function loadCategorys() {
 }
 
 function getIdFromTasklist() {
-    taskid = tasklist.length
+    taskid = tasklist.length;
 }
 
 function openCategorySelection() {
@@ -54,7 +54,7 @@ function openCategorySelection() {
         let category_select = categorys[i];
         document.getElementById('category_selection').innerHTML += `
         <div class="category" onclick="selectCategory(${i})">
-        <span>${category_select['name']}<span class="dot margin-color" style="background-color: ${category_select['color']}"></span></span>
+        <span>${category_select['name']}<span class="all-colors" style="background-color: ${category_select['color']}"></span></span>
         </div>`
     }
 }
@@ -69,12 +69,13 @@ function closeCategorySelection() {
 
 function createNewCategory() {
     document.getElementById('category_selection').innerHTML = `
+    <div class="category-input">
     <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
     <span class="all-colors" id="selected-color"></span>
-    <div class="flex category-icons">
+    <div class="category-icons">
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
-    </div>`;
+    </div></div>`;
     for (let i = 0; i < categoryColors.length; i++) {
         let color = categoryColors[i];
         document.getElementById('category_colors').innerHTML += `
@@ -86,11 +87,17 @@ function createNewCategory() {
 function newCategoryColor(color, i) {
     category_color = color
     for (let j = 0; j < categoryColors.length; j++) {
-        let count = j;
         document.getElementById(`selected-color-${j}`).classList.remove('selectedColor');
     }
     document.getElementById(`selected-color-${i}`).classList.add('selectedColor');
-    document.getElementById('selected-color').style.add(`background-color: ${color}`)
+    document.getElementById('selected-color').style.backgroundColor = color;
+}
+
+function selectCategory(index) {
+    category = categorys[index];
+    document.getElementById('category_selection').innerHTML = `
+    <span class="selectet_category" onclick="openCategorySelection()">${categorys[index]['name']}
+    <span class="all-colors" id="selected-color" style="background-color: ${categorys[index]['color']}"></span></span>`
 }
 
 function closePopup() {
