@@ -190,7 +190,7 @@ function removeCategoryInput() {
     document.getElementById('mistake-category-fields').innerHTML = '';
     document.getElementById('categories-for-colors').innerHTML = '';
     document.getElementById('category-container').innerHTML = `
-    <div class="flex input-section" id="input-section">
+    <div class="flex input-section" id="input-section" onclick="checkIfCategoryContainerOpen()">
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
@@ -210,14 +210,14 @@ function colorsForNewCategory() {
 function templateColorsForNewCategory(colorIndex, categoryColor) {
     return /*html*/`
     <span class="all-colors" style="background-color: ${categoryColor}" 
-    id="selected-color-${colorIndex}" onclick="addNewCategoryColor('${categoryColor}')"></span>`;
+    id="selected-color-${colorIndex}" onclick="addNewCategoryColor('${categoryColor}', ${colorIndex})"></span>`;
 }
 
 
-function addNewCategoryColor(categoryColor) {
+function addNewCategoryColor(categoryColor, colorIndex) {
     if (document.getElementById('new-category-name').value) {
         selectedCategoryColor = categoryColor;
-        document.getElementById('selected-color').style.backgroundColor = `${categoryColor}`;
+        document.getElementById(`selected-color-${colorIndex}`).style.backgroundColor = `${categoryColor}`;
         document.getElementById('mistake-category-fields').innerHTML = '';
     }
     else {
@@ -389,6 +389,7 @@ function convertDate() {
 
 function renderPrioButtonsSection() {
     let prioButtonsSection = document.getElementById('prio-buttons-section');
+    prioButtonsSection.innerHTML = '';
     for (let i = 0; i < priorities.length; i++) {
         prioButtonsSection.innerHTML += templatePrioButtonsSection(i);
     }
@@ -552,50 +553,64 @@ function changeCurrentCompleteStatus(i) {
 }
 
 
-// let requiredElements = document.querySelectorAll('input[required], textarea[required]');
-
-
-// document.querySelector('form').addEventListener('submit', function (event) {
-//     event.preventDefault();
-//     clearTask();
-// });
-
-
 function clearTask() {
-    let inputs = document.getElementsByTagName('input');
-    let textareas = document.getElementsByTagName('textarea');
-    let inputsAndTextareas = [...inputs, ... textareas];
-    // let requiredInputs = [];
+    removeAllFields();
+    addRequiredAttributeToEnableFormValidation();
+}
+
+
+function removeAllFields() {
+    removeRequiredAttributeToDisableFormValidation();
+    deleteInputandTextareaValues();
+    removeCategoryInput();
+    selectedTaskValues = [];
+    assignedToContacts = [];
+    closeExistingContacts();
+    renderAssignedToIconsSection();
+    renderPrioButtonsSection();
+    closeSubtaskInputField();
+    tasks = [];
+    renderSubtasks();
+    focusOnField('input-title');
+}
+
+function removeRequiredAttributeToDisableFormValidation() {
+    let inputsAndTextareas = getInputsAndTextaresInOneArray();
     for (let i = 0; i < inputsAndTextareas.length; i++) {
         if (inputsAndTextareas[i].hasAttribute('required')) {
             inputsAndTextareas[i].removeAttribute('required');
         }
     }
+}
+
+
+function addRequiredAttributeToEnableFormValidation() {
+    let inputsAndTextareas = getInputsAndTextaresInOneArray();
+    for (let i = 0; i < inputsAndTextareas.length; i++) {
+        if (!inputsAndTextareas[i].hasAttribute('required')) {
+            inputsAndTextareas[i].setAttribute('required', '');
+        }
+    }
+}
+
+
+function getInputsAndTextaresInOneArray() {
+    let inputs = document.getElementsByTagName('input');
+    let textareas = document.getElementsByTagName('textarea');
+    let arrayOfInputsAndTextareas = [...inputs, ...textareas];
+    return arrayOfInputsAndTextareas;
+}
+
+
+function deleteInputandTextareaValues() {
     document.getElementById('input-title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('due-date').value = '';
     document.getElementById('input-subtask-area').value = '';
-    closeSubtaskInputField();
+}
+
+function createNewTask() {
+
 }
 
 
-// 'subtasks': {
-//     'tasks': [
-//         {
-//             'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-//             'completed': true,
-//         },
-//         {
-//             'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-//             'completed': false,
-//         },
-//         {
-//             'task': 'lorem ipsum duo',
-//             'completed': false,
-//         },
-//         {
-//             'task': 'lorem ipsum duo',
-//             'completed': false,
-//         },
-//     ],
-// },
