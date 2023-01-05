@@ -1,4 +1,9 @@
 let tasks = [];
+let taskid;
+let date;
+let priorityNameForTask;
+let contactsForCurrentTask = [];
+let tasklist = [];
 
 let categories = [{
     'name': 'General topics',
@@ -63,24 +68,28 @@ let newCategoryName;
 
 
 function addTask() {
-
     let taskInputTitle = document.getElementById('input-title').value;
     let description = document.getElementById('description').value;
-    let dueDate = document.getElementById('due-date').value;
-    tasks.push({
-        taskTitle: taskInputTitle,
-        taskDescription: description,
-        toDueDate: dueDate,
-        taskCategory: {
-            Category: taskCategoryFinaly,
-            TaskColor: taskCategoryColorFinaly
+    let currentTask = {
+        'progress': 'todo',
+        'id': taskid,
+        'category': {
+            'color': selectedCategoryColor,
+            'categoryName': newCategoryName,
         },
-        assignedTo: contactCheckedValue,
-        subTask: checkedSubtaskValue,
-        taskID: tasks.length,
-        priority: prioritySelect
-    });
-    window.location.href = "board.html";
+        'duedate': date,
+        'title': taskInputTitle,
+        'description': description,
+        'subtasks': {
+            'tasks': tasks
+        },
+        'assignedTo': {
+            'user': contactsForCurrentTask
+        },
+        'priority': priorityNameForTask,
+    };
+    tasklist.push(currentTask);
+    // window.location.href = "board.html";
 }
 
 
@@ -360,6 +369,21 @@ function addAssignedToIcon(i) {
 }
 
 
+function assignedToContactsForCurrentTask() {
+    for (let i = 0; i < assignedToContacts.length; i++) {
+        let contactNumber = assignedToContacts[i];
+        contactsForCurrentTask.push(contactExample[contactNumber]);
+    }
+}
+
+// let contactExample = [
+//     {
+//         'name': 'me',
+//         'icon': 'ME',
+//         'iconcolor': '#800000'
+//     },
+
+
 function renderAssignedToIconsSection() {
     let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
     assignedToIconsSection.innerHTML = '';
@@ -382,8 +406,7 @@ function convertDate() {
     let year = dueDate.slice(0, 4);
     let month = dueDate.slice(5, 7);
     let day = dueDate.slice(8, 10);
-    let date = year + month + day;
-    console.log(date);
+    parseInt(date) = year + month + day;
 }
 
 
@@ -445,6 +468,16 @@ function removeStyleOfUnclickedButton(button, j) {
     button.classList.remove('white');
 }
 
+
+function priorityForCurrentTask() {
+    for (let i = 0; i < priorities.length; i++) {
+        let id = priorities[i]['name'];
+        let button = document.getElementById(id);
+        if (button.classList.contains('white')) {
+            priorityNameForTask = id;
+        }
+    }
+}
 
 function changeSubtaskInputField() {
     document.getElementById('subtask-before').classList.add('d-none');
@@ -525,12 +558,6 @@ function templateRenderSubtasksWichAreCompleted(taskElement, i) {
         </div>`;
 }
 
-{/* <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
-                    <span>${contact['name']}</span>
-                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
-                    onclick="checkAssignedToIcons(${i})">
-            </label>       */}
-
 
 function checkCompletedStatus(i) {
     if (!tasks[i].completed) {
@@ -554,16 +581,8 @@ function changeCurrentCompleteStatus(i) {
 
 
 function clearTask() {
-    removeAllFields();
-    addRequiredAttributeToEnableFormValidation();
-}
-
-
-function removeAllFields() {
-    removeRequiredAttributeToDisableFormValidation();
     deleteInputandTextareaValues();
     removeCategoryInput();
-    selectedTaskValues = [];
     assignedToContacts = [];
     closeExistingContacts();
     renderAssignedToIconsSection();
@@ -574,33 +593,6 @@ function removeAllFields() {
     focusOnField('input-title');
 }
 
-function removeRequiredAttributeToDisableFormValidation() {
-    let inputsAndTextareas = getInputsAndTextaresInOneArray();
-    for (let i = 0; i < inputsAndTextareas.length; i++) {
-        if (inputsAndTextareas[i].hasAttribute('required')) {
-            inputsAndTextareas[i].removeAttribute('required');
-        }
-    }
-}
-
-
-function addRequiredAttributeToEnableFormValidation() {
-    let inputsAndTextareas = getInputsAndTextaresInOneArray();
-    for (let i = 0; i < inputsAndTextareas.length; i++) {
-        if (!inputsAndTextareas[i].hasAttribute('required')) {
-            inputsAndTextareas[i].setAttribute('required', '');
-        }
-    }
-}
-
-
-function getInputsAndTextaresInOneArray() {
-    let inputs = document.getElementsByTagName('input');
-    let textareas = document.getElementsByTagName('textarea');
-    let arrayOfInputsAndTextareas = [...inputs, ...textareas];
-    return arrayOfInputsAndTextareas;
-}
-
 
 function deleteInputandTextareaValues() {
     document.getElementById('input-title').value = '';
@@ -609,8 +601,29 @@ function deleteInputandTextareaValues() {
     document.getElementById('input-subtask-area').value = '';
 }
 
-function createNewTask() {
-
+async function createNewTask() {
+    await loadTasklistForId();
+    assignedToContactsForCurrentTask();
+    priorityForCurrentTask();
+    addTask();
+    saveCurrentTask();
 }
 
 
+function getIdFromTasklist() {
+    taskid = tasklist.length
+}
+
+
+async function loadTasklistForId() {
+    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    await downloadFromServer();
+    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
+    getIdFromTasklist();
+}
+
+
+function saveCurrentTask() {
+    let tasklistAsString = JSON.stringify(tasklist);
+    backend.setItem("tasklist", tasklistAsString);
+}

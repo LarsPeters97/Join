@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="input-text-type subtask d-none" id="subtask-after">
                                     <input class="input-subtask" type="text" minlength="2" maxlength="100"
-                                        id="input-subtask-area">
+                                        id="input-subtask-area" name="input-subtask">
                                     <div id="subtask-icons" class="flex">
                                         <img src="./assets/img/false-x.png" class="false-x"
                                             onclick="closeSubtaskInputField()"> |
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="task-btns">
-                    <button class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()" onclick="clearTask()"
+                    <button type="reset" class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()" onclick="clearTask()"
                         onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
                             id="clear-img"></button>
                     <button class="create-btn btns-clear-and-create" onclick="convertDate()">Create Task <img
