@@ -325,7 +325,7 @@
     filter: brightness(0);
 }
 
-.contact {
+.contact_selection {
     color: black;
     display: flex;
     align-items: center;
@@ -336,6 +336,10 @@
     padding: 8px 20px;
 }
 
+.contact_selection:hover {
+    background-color: #D1D1D1;
+}
+
 .category_option {
     font-size: 20px;
     padding: 8px 20px;
@@ -343,4 +347,19 @@
     align-items: center;
     justify-content: flex-start;
     width: 90%;
+}
+
+.newcontact {
+    display: flex;
+    width: 95%;
+    font-size: 20px;
+}
+
+.newcontact input {
+    padding: 12px 20px;
+    outline: none;
+}
+
+.check {
+    cursor: pointer;
 }

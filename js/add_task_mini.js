@@ -157,13 +157,13 @@ function openAssignToSelection() {
         let contact = contactlist[i];
         if (checkOnAssigned(contact) != false) {
             document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
+        <div class="contact_selection">
             <label for="contact${i}">${contact['name']}</label>
             <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
         </div>`;
         } else {
             document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
+        <div class="contact_selection">
             <label for="contact${i}">${contact['name']}</label>
             <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')">
         </div>`;
@@ -173,14 +173,14 @@ function openAssignToSelection() {
         let contact = assignedpeople[j];
         if (checkOnContacts(contact) == false) {
             document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
+        <div class="contact_selection">
             <label for="contact${j + contacts.length}">${contact['name']}</label>
             <input type="checkbox" id="contact${j + contacts.length}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
         </div>`;
         }
     }
     document.getElementById('assign-container').innerHTML += `
-    <div class="contact" onclick="assignNewPerson()">
+    <div class="contact_selection" onclick="assignNewPerson()">
         <span>Invite new contact</span>
         <img src="./assets/img/contact-icon.png">
     </div>
@@ -212,7 +212,7 @@ function assignNewPerson() {
 
 function exitNewPerson() {
     document.getElementById('assign-container').innerHTML = `
-    <div onclick="openAssignToSelection()">
+    <div class="selection" onclick="openAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>
@@ -227,7 +227,7 @@ function addNewPerson() {
     assignedpeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     /**email needs to be send to new contact*/
     document.getElementById('assign-container').innerHTML = `
-    <div onclick="openAssignToSelection()">
+    <div class="selection" onclick="openAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>
@@ -428,7 +428,6 @@ async function checkCategoryNew() {
     },);
     categoryasstring = JSON.stringify(categorys);
     await backend.setItem('categorys', categoryasstring);
-    
 }
 
 function transformDuedate() {
