@@ -35,7 +35,7 @@ async function loadCategorys() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     categorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
-    tempcategorys = categorys;
+    tempcategorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
 }
 
 function getIdFromTasklist() {
@@ -49,13 +49,13 @@ function openCategorySelection() {
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
     document.getElementById('category_selection').innerHTML += `
-    <div class="category" onclick="createNewCategory()">
+    <div class="category_option" onclick="createNewCategory()">
         <span>New category</span>
     </div>`;
-    for (let i = 0; i < categorys.length; i++) {
+    for (let i = 0; i < tempcategorys.length; i++) {
         let category_select = categorys[i];
         document.getElementById('category_selection').innerHTML += `
-        <div class="category" onclick="selectCategory(${i})">
+        <div class="category_option" onclick="selectCategory(${i})">
         <span>${category_select['name']}<span class="all-colors" style="background-color: ${category_select['color']}"></span></span>
         </div>`
     }
@@ -111,10 +111,9 @@ function addNewCategory() {
         });
         tempcategorys.push(category)
         document.getElementById('category_selection').innerHTML = `
-        <div class="selectet_category" onclick="reopenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
-        <span class="dot margin-color" style="background-color: ${category_color}"></span></span>
-        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
-        document.getElementById('categories-for-colors').innerHTML = '';
+        <span class="selectet_category" onclick="openCategorySelection()">${category['name']}
+        <span class="all-colors" id="selected-color" style="background-color: ${category['color']}"></span></span>`;
+        document.getElementById('category_colors').innerHTML = ``;
     }
     else if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
@@ -150,7 +149,7 @@ function closePopup() {
 
 function openAssignToSelection() {
     document.getElementById('assign-container').innerHTML = `
-    <div onclick="closeAssignToSelection()">
+    <div class="selection" onclick="closeAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>`;
@@ -286,7 +285,7 @@ function checkOnContacts(contact) {
 
 function closeAssignToSelection() {
     document.getElementById('assign-container').innerHTML = `
-    <div onclick="openAssignToSelection()">
+    <div class="selection" onclick="openAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>`
@@ -380,7 +379,7 @@ function changeCompleteStatus(i) {
     }
 }
 
-function createTask() {
+async function createTask() {
     title = document.getElementById('title_input').value;
     description = document.getElementById('description_input').value;
     duedate = transformDuedate();
@@ -409,20 +408,27 @@ function createTask() {
             temptasklist[taskid]['subtasks']['tasks'].push(subtask);
         }
         let tasksasstring = JSON.stringify(temptasklist);
-        backend.setItem('tasklist', tasksasstring);
-        checkCategoryNew();
+        await backend.setItem('tasklist', tasksasstring);
+        await checkCategoryNew();
         closePopup();
-        renderBoard();
+        initBoard();
     }
 }
 
-function checkCategoryNew() {
-    if (categorys.includes(category)) {
-    } else {
-        categorys.push(category);
-        categoryasstring = JSON.stringify(categorys);
-        backend.setItem('categorys', categoryasstring);
+async function checkCategoryNew() {
+    for (let i = 0; i < categorys.length; i++) {
+        let category1 = categorys[i];
+        if (category1['name'] == category['name']){
+            return false
+        }
     }
+    categorys.push({
+        'color': category['color'],
+        'name': category['name'],
+    },);
+    categoryasstring = JSON.stringify(categorys);
+    await backend.setItem('categorys', categoryasstring);
+    
 }
 
 function transformDuedate() {

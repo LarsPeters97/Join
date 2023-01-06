@@ -100,7 +100,7 @@ function renderInitials(splittedName, i) {
     for (let k = 0; k < splittedName.length; k++) {
         const initials = splittedName[k];
         document.getElementById(`initial${i}`).innerHTML += `
-        <span>${initials.charAt(0).toUpperCase()}</span>`;
+        <span>${initials.charAt(0).slice(0).toUpperCase()}</span>`;
     }
 }
 
@@ -132,7 +132,10 @@ function sortContacts(contacts) {
 function showContactsHtml(contact, splittedName, i) {
     return `
     <div onclick="showContact(${i})" class="contact-card">
-     <div id="initial${i}" style="background-color:${contact.color}" class="initials-contact"></div>
+        <div class="initials"> 
+            <div  id="initial${i}" style="background-color:${contact.color}" class="initials-contact">
+            </div>
+        </div>
      <div class="contact-card-text"> 
          <p> ${contact.name} </p>
          <span> ${contact.email} </span>
@@ -170,8 +173,10 @@ function closeContact() {
 
 function showContactHtml(contact, i) {
     return `
-<div class="contactarea-body-name">
-    <div id="initialsBody${i}"  style="background-color:${contact.color}" class="initials-contact-body">
+    <div class="contactarea-body-name">
+        <div class="initials_B"> 
+        <div id="initialsBody${i}"  style="background-color:${contact.color}" class="initials-contact-body">
+    </div>
         
     </div>
     <div class="container-name">
@@ -228,7 +233,11 @@ function editContactHtml(contact, i) {
                 </div>
                 
             <div class="add-contact-second-part">
-                <div id="initialsedit${i}"  style="background-color:${contact.color}" class="initials-contact-body">
+                <div class="initials_B"> 
+                        <div id="initialsedit${i}"  style="background-color:${
+                         contact.color
+                         }" class="initials-contact-body">
+                        </div>
                 </div>
             </div>
             <div class="add-contact-third-part">
@@ -261,16 +270,16 @@ function editContactHtml(contact, i) {
 }
 
 async function saveChanges(contact, i) {
-    let new_name = document.getElementById("input_name_edit").value;
-    let new_email = document.getElementById("input_email_edit").value;
-    let new_phone = document.getElementById("input_phone_edit").value;
+    let new_name = document.getElementById("input_name_edit");
+    let new_email = document.getElementById("input_email_edit");
+    let new_phone = document.getElementById("input_phone_edit");
 
-    console.log("new contact", new_name, new_email, new_phone);
-
-    contact.name = new_name;
-    contact.email = new_email;
-    contact.phone = new_phone;
+    console.log("new contact", new_name.value, new_email.value, new_phone.value);
+    console.log(contact);
+    contacts[contact].name = new_name.value;
+    contacts[contact].email = new_email.value;
+    contacts[contact].phone = new_phone.value;
 
     await backend.setItem("contacts", JSON.stringify(contacts));
-    /*window.location.href = "./contact.html";*/
+    window.location.href = "./contact.html";
 }
