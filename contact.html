@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="./contact.css" />
         <script src="./js/contacts.js"></script>
         <script src="./js/desktop_template.js"></script>
-        <link rel="stylesheet" href="/assets/templates/mobile_template.css">
+        <link rel="stylesheet" href="/assets/templates/mobile_template.css" />
         <script src="/js/mobile_template.js"></script>
     </head>
     <body onload="init(), includeHTML()">
@@ -21,22 +21,27 @@
         <div w3-include-html="/assets/templates/mobile_template.html"></div>
 
         <div class="wrapper">
-            <div id="contactsContainer" class="container-contacts">
+            <div id="contactsContainer" class="container-contacts"></div>
 
+            <div id="addcontactMobile" class="container-button-mobile">
+                <button onclick="showAddcontact()" class="button-addcontact-mobile">
+                    <p>New contact</p>
+                    <img src="./assets/img/logo-addcontact.png" alt="" />
+                </button>
             </div>
-            <div class="container-contactarea">
+
+            <div id="contact" class="container-contactarea d-none-mobile">
                 <div class="header-contacts">
                     <h1>Contacts</h1>
                     <div class="horizontal-line"></div>
                     <p>Better with a team</p>
                 </div>
-                <div class="contactarea-body" id="contactAreaBody">
-
-                </div>
+                <div class="contactarea-body" id="contactAreaBody"></div>
                 <button onclick="showAddcontact()" class="button-addcontact">
                     <p>New contact</p>
                     <img src="./assets/img/logo-addcontact.png" alt="" />
                 </button>
+                <img onclick="closeContact()" class="close-contact-mobile" src="./assets/img/arrow_left.png">
             </div>
         </div>
 
@@ -45,36 +50,34 @@
                 <div class="add-contact-first-part">
                     <div class="container-logo-addcontact">
                         <img src="./assets/img/Logo.png" alt="" />
+                        <div>
+                            <h2>Add contact</h2>
+                            <p>Tasks are better with a team!</p>
 
-                        <h2>Add contact</h2>
-                        <p>Tasks are better with a team!</p>
-                        <div class="vertikal-line-addcontact"></div>
+                            <div class="vertikal-line-addcontact"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="add-contact-second-part">
-                    <img src="./assets/img/grey-bg.png" alt="" />
-                    <img src="./assets/img/contact.png" alt="" />
+                    <img class="image-grey-mobile" src="./assets/img/grey-bg.png" alt="" />
+                    <img class="image-contact-mobile" src="./assets/img/contact.png" alt="" />
                 </div>
                 <div class="add-contact-third-part">
-                    <img onclick="closeAddcontact()" id="closeAddcontact" class="close-addcontact" src="./assets/img/x-blue.png" alt="">
+                    <img
+                        onclick="closeAddcontact()"
+                        id="closeAddcontact"
+                        class="close-addcontact"
+                        src="./assets/img/x-blue.png"
+                        alt="" />
                     <div>
-                        <input id="input_name"
-                            class="input_name"
-                            type="text"
-                            placeholder="Name" />
+                        <input id="input_name" class="input_name" type="text" placeholder="Name" />
                     </div>
                     <div>
-                        <input id="input_email"
-                            class="input_email"
-                            type="text"
-                            placeholder="Email" />
+                        <input id="input_email" class="input_email" type="text" placeholder="Email" />
                     </div>
                     <div>
-                        <input id="input_phone"
-                            class="input_phone"
-                            type="text"
-                            placeholder="Phone" />
+                        <input id="input_phone" class="input_phone" type="text" placeholder="Phone" />
                     </div>
                     <div class="container-button">
                         <button onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
@@ -86,8 +89,6 @@
                 </div>
             </div>
         </div>
-        <div onclick="closeEditContact()" id="editContact" class="container-edit-contact d-none">
-
-        </div>
+        <div onclick="closeEditContact()" id="editContact" class="container-edit-contact d-none"></div>
     </body>
 </html>

@@ -1,5 +1,3 @@
-
-
 /* include html*/
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
@@ -48,8 +46,10 @@ function htmlLogin() {
                 <input type="password" placeholder="Password" id="password_login"class="input_password" required>
 
                 <div class="login_form_part3">
-                    <input type="checkbox" id="remember_me">
-                    <p>Remember me</p>
+                    <div style="display:flex;">
+                        <input type="checkbox" id="remember_me">
+                        <p>Remember me</p>
+                    </div>
                     <p onclick="loadForgotPassword()" class="forgot_password">Forgot my password</p>
                 </div>
                 <div class="loginform_buttonarea">
@@ -60,19 +60,17 @@ function htmlLogin() {
   `;
 }
 
-
-function login(){
-    let email = document.getElementById('Email_login');
-    let password = document.getElementById('password_login');
-    let user = users.find( u => u.email == email.value && u.password == password.value);
+function login() {
+    let email = document.getElementById("Email_login");
+    let password = document.getElementById("password_login");
+    let user = users.find((u) => u.email == email.value && u.password == password.value);
 
     if (user) {
-        window.location.href = './summary.html';
+        window.location.href = "./summary.html";
     } else {
-        alert('Please Sign up befor login!');
+        alert("Please Sign up befor login!");
     }
 }
-
 
 function loadSignUpForm() {
     let signUpForm = document.getElementById("form");
@@ -84,7 +82,7 @@ function loadSignUpForm() {
 function htmlSignup() {
     return `
   <h2>Sign up</h2>
-  <img onclick="htmlLogin()" class="arrow" src="./assets/img/arrow-left.png">
+  <img onclick="loadHtml()" class="arrow" src="./assets/img/arrow-left.png">
   <form onsubmit="addUser(); return false">
        <input class="input_name" type="text" placeholder="Name" id="Name_signup" required>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
@@ -105,9 +103,9 @@ function loadForgotPassword() {
 
 function htmlForgotPassword() {
     return `
-  <h2>I forgot my Password</h2>
-  <img onclick="htmlLogin()" class="arrow" src="./assets/img/arrow-left.png">
-  <p style="margin-top:-20px; margin-bottom:40px; text-align:center;">Don´t worry! We will send an email with the instructions to <br> reset your password.</p>
+  <h2 class="text-size">I forgot my <br> Password</h2>
+  <img onclick="loadHtml()" class="arrow" src="./assets/img/arrow-left.png">
+  <p style="margin-top:-10px; margin-bottom:40px; text-align:center;">Don´t worry! We will send an email with the instructions to <br> reset your password.</p>
   <form>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
        <div class="loginform_buttonarea">

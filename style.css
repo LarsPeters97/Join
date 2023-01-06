@@ -1,7 +1,7 @@
 body {
-    font-family: 'inter', sans-serif;
+    font-family: "inter", sans-serif;
     margin: 0px;
-    background: #F6F7F8;
+    background: #f6f7f8;
 }
 
 .flex {
@@ -21,7 +21,8 @@ body {
     z-index: 2;
     position: absolute;
     top: 40px;
-    left: 77px;
+    left: 70px;
+    height: 80px;
 }
 
 .white {
@@ -31,14 +32,12 @@ body {
 @keyframes myAnim {
     0% {
         transform: scale(0);
-        top: 40px;
-        left: 77px;
+
     }
 
     100% {
         transform: scale(1);
-        top: 40px;
-        left: 77px;
+
     }
 }
 
@@ -61,7 +60,7 @@ body {
     padding: 4px 16px;
     width: 91px;
     height: 51px;
-    background: #2A3647;
+    background: #2a3647;
     border-radius: 8px;
     color: white;
     border-style: none;
@@ -70,7 +69,7 @@ body {
 }
 
 .header_startscreen_left button:hover {
-    background-color: #29ABE2;
+    background-color: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -95,7 +94,7 @@ body {
     align-items: center;
     width: fit-content;
     height: fit-content;
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
     margin-top: 100px;
@@ -106,9 +105,10 @@ body {
 .login_form h2 {
     font-size: 61px;
     line-height: 73px;
-    border-bottom: 3px solid #29ABE2;
+    border-bottom: 3px solid #29abe2;
     margin-top: 0px;
-
+    margin-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .input_mail {
@@ -119,8 +119,8 @@ body {
     padding: 0px 21px;
     width: 422px;
     height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     background-image: url("./assets/img/Mail_icon.png");
     background-repeat: no-repeat;
@@ -130,14 +130,14 @@ body {
 
 .input_mail::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-size: 21px;
     display: flex;
     align-items: center;
 }
 
 .input_mail:focus {
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     font-size: 21px;
     outline: none;
@@ -151,8 +151,8 @@ body {
     padding: 0px 21px;
     width: 422px;
     height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     background-image: url("./assets/img/password_icon.png");
     background-repeat: no-repeat;
@@ -161,14 +161,14 @@ body {
 }
 
 .input_password::placeholder {
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-size: 21px;
     display: flex;
     align-items: center;
 }
 
 .input_password:focus {
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     font-size: 21px;
     outline: none;
@@ -186,13 +186,13 @@ body {
 }
 
 .forgot_password {
-    color: #29ABE2;
+    color: #29abe2;
     margin-left: 10px;
     cursor: pointer;
 }
 
 .login_button {
-    background: #2A3647;
+    background: #2a3647;
     border-radius: 8px;
     color: white;
     border-style: none;
@@ -203,33 +203,33 @@ body {
     padding: 13.5px 37px;
 }
 
-.login_button:hover{
-    background-color: #29ABE2;
+.login_button:hover {
+    background-color: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.guest_button{
-    background:white;
+.guest_button {
+    background: white;
     border-radius: 8px;
-    color: #2A3647;
+    color: #2a3647;
     cursor: pointer;
     width: 145px;
     height: 51px;
     font-size: 21px;
-    border: solid 2px #2A3647;
+    border: solid 2px #2a3647;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
 }
 
-.guest_button:hover{
-    color: #29ABE2;
-    border-color: #29ABE2;
+.guest_button:hover {
+    color: #29abe2;
+    border-color: #29abe2;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
 
-.loginform_buttonarea{
+.loginform_buttonarea {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,7 +237,7 @@ body {
     gap: 20px;
 }
 
-.input_name{
+.input_name {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -245,8 +245,8 @@ body {
     padding: 0px 21px;
     width: 422px;
     height: 51px;
-    background: #FFFFFF;
-    border: 1px solid #D1D1D1;
+    background: #ffffff;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     background-image: url("./assets/img/name_icon.png");
     background-repeat: no-repeat;
@@ -256,14 +256,14 @@ body {
 
 .input_name::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #D1D1D1;
+    color: #d1d1d1;
     font-size: 21px;
     display: flex;
     align-items: center;
 }
 
 .input_name:focus {
-    border: 1px solid #D1D1D1;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     font-size: 21px;
     outline: none;
@@ -281,5 +281,94 @@ body {
 }
 
 .select-bg-color:hover {
-    background-color: rgb(224,224,224);
+    background-color: rgb(224, 224, 224);
+}
+
+@media (max-width: 1000px) {
+    .header_startscreen_left {
+        padding-right: 60px;
+    }
+}
+
+@media (max-width: 650px) {
+    .header_startscreen_left {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-right: 0px;
+        margin-bottom: 40px;
+    }
+
+    .input_mail {
+        width: 300px;
+        height: 40px;
+        background-position: 273px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .input_password {
+        width: 300px;
+        height: 40px;
+        background-position: 273px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .input_name {
+        width: 300px;
+        height: 40px;
+        background-position: 273px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .login_form_part3 {
+        flex-direction: column-reverse;
+        gap: 0px;
+        align-items: flex-start;
+    }
+    .forgot_password {
+        margin: 0px;
+    }
+
+    .loginform_buttonarea {
+        flex-direction: column;
+        margin-top: 0px;
+        gap: 10px;
+    }
+
+    .login_button {
+        padding: 15.5px 44px;
+    }
+    .login_form{
+        margin-top: 10px;
+        padding: 17px 13px;
+    }
+    .logo_login_page {
+        top: 20px;
+        left: 30px;
+    }
+    .login_form h2{
+        margin-top: 15px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .text-size {
+        font-size: 40px !important;
+        line-height: normal !important;
+        text-align: center;
+        margin-bottom: 38px!important;
+    }
+
+}
+
+@media(max-height:700px){
+    .header_startscreen_left {
+        margin-bottom: 20px;
+    }
+    
+
 }
