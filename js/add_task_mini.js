@@ -13,7 +13,7 @@ let categorys = [];
 let tempcategorys = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
 
-async function initAddTaskPopup(){
+async function initAddTaskPopup() {
     await loadTasklistForId();
     await loadContacts();
     await loadCategorys();
@@ -34,7 +34,7 @@ async function loadContacts() {
 async function loadCategorys() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
-    categorys = JSON.parse(backend.getItem("categorys")) || [{'name': 'General Topics', 'color': '#FC71FF'}];
+    categorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
     tempcategorys = categorys;
 }
 
@@ -137,6 +137,14 @@ function reopenExistigCategorys() {
 }
 
 function closePopup() {
+    category = [];
+    category_color = [];
+    description = [];
+    title = [];
+    assignedpeople = [];
+    duedate = [];
+    newselectedPrio = [];
+    subtasks = [];
     closeBoardPopup();
 }
 
@@ -167,8 +175,8 @@ function openAssignToSelection() {
         if (checkOnContacts(contact) == false) {
             document.getElementById('assign-container').innerHTML += `
         <div class="contact">
-            <label for="contact${j+contacts.length}">${contact['name']}</label>
-            <input type="checkbox" id="contact${j+contacts.length}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
+            <label for="contact${j + contacts.length}">${contact['name']}</label>
+            <input type="checkbox" id="contact${j + contacts.length}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
         </div>`;
         }
     }
@@ -217,7 +225,7 @@ function addNewPerson() {
     let name = email.split('@');
     let icon = email.slice(0, 2);
     let color = getRandomColor();
-    assignedpeople.push({'name': name, 'icon': icon, 'iconcolor': color,});
+    assignedpeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     /**email needs to be send to new contact*/
     document.getElementById('assign-container').innerHTML = `
     <div onclick="openAssignToSelection()">
@@ -237,12 +245,12 @@ function loadAssignedPeople() {
 }
 
 function assignContact(name, icon, color) {
-    let contact = {'name': name, 'icon': icon, 'iconcolor': color}
+    let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssign(contact);
-    if (checkOnAssign(contact) == true){
+    if (checkOnAssign(contact) == true) {
         assignetcontacts.splice(index, 1);
     } else {
-        assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color});
+        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
     }
     loadAssignedPeople();
 }
@@ -370,4 +378,58 @@ function changeCompleteStatus(i) {
     else {
         subtasks[i]['completed'] = true;
     }
+}
+
+function createTask() {
+    title = document.getElementById('title_input').value;
+    description = document.getElementById('description_input').value;
+    duedate = transformDuedate();
+    getIdFromTasklist()
+    if (title && description && category && assignedpeople && duedate && newselectedPrio) {
+        temptasklist.push({
+            'progress': 'todo',
+            'id': taskid,
+            'category': {
+                'color': category['color'],
+                'categoryName': category['name'],
+            },
+            'duedate': duedate,
+            'title': title,
+            'description': description,
+            'subtasks': {
+                'tasks': [],
+            },
+            'assignedTo': {
+                'user': assignedpeople,
+            },
+                'priority': newselectedPrio,
+        },);
+        for (let i = 0; i < subtasks.length; i++) {
+            let subtask = subtasks[i];
+            temptasklist[taskid]['subtasks']['tasks'].push(subtask);
+        }
+        let tasksasstring = JSON.stringify(temptasklist);
+        backend.setItem('tasklist', tasksasstring);
+        checkCategoryNew();
+        closePopup();
+        renderBoard();
+    }
+}
+
+function checkCategoryNew() {
+    if (categorys.includes(category)) {
+    } else {
+        categorys.push(category);
+        categoryasstring = JSON.stringify(categorys);
+        backend.setItem('categorys', categoryasstring);
+    }
+}
+
+function transformDuedate() {
+    let mynewDate = document.getElementById('duedate').value
+    let year = mynewDate.slice(0, 4);
+    let month = mynewDate.slice(5, 7);
+    let day = mynewDate.slice(8);
+    let newDuedate = year + month + day;
+    return parseInt(newDuedate)
 }
