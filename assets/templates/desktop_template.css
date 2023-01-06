@@ -110,8 +110,7 @@
 }
 
 .logo {
-  width: 100.03px;
-  height: 121.97px;
+  height: 100px;
 }
 
 .sidebar_menu_container {
@@ -164,7 +163,7 @@
   padding: 0px 0px 0px;
   gap: 15px;
   width: 232px;
-  height: 190px;
+  height: 130px;
 }
 
 .legalnotice {

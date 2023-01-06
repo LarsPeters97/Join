@@ -4,18 +4,23 @@
     box-sizing: border-box;
 }
 
-.add-task {
-    position: fixed;
-    top: 89px;
-    left: 232px;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .add-taskt-whole-side {
     background-color: #F6F7F8;
     width: 100%;
     height: 100%;
-    padding: 100px 25%;
+    padding: 100px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
 
 .left-side {
     padding-right: 32px;
@@ -35,7 +40,6 @@
 }
 
 .headline-task {
-    width: 466px;
     height: 78px;
     font-weight: 700;
     font-size: 61px;
@@ -48,9 +52,12 @@
     margin-bottom: 8px;
 }
 
+.width-f {
+    width: 450px;
+}
+
 .input-text-type {
     padding: 13px 21px;
-    width: 422px;
     height: 51px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -60,7 +67,6 @@
 
 .description textarea {
     height: 119px;
-    width: 422px;
     max-width: 500px;
     max-height: 200px;
     left: 0px;
@@ -70,8 +76,8 @@
     font-size: 21px;
     outline: none;
     min-height: 60px;
-    min-width: 422px;
-    max-width: 422px;
+    min-width: 450px;
+    max-width: 450px;
 }
 
 .dropdown-category-container {
@@ -124,13 +130,12 @@
     background-color: white;
 }
 
-.dropdown-category-existing:last-child {
-    border-radius: 0px 0px 9px 9px;
+.dropdown-category-existing {
+    border-radius: 9px 9px 9px 9px;
 }
 
 .due-date input {
     height: 51px;
-    width: 422px;
     border-radius: 10px;
     padding: 18px 21px 18px 21px;
     border: 1px solid #D1D1D1;
@@ -143,7 +148,6 @@
 }
 
 .prio-buttons-section {
-    width: 422px;
     justify-content: space-between;
 }
 
@@ -159,6 +163,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    text-transform: capitalize;
 }
 
 .prio-btns:hover {
@@ -258,18 +263,21 @@
 .false-x {
     width: 27px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .checkmark {
     width: 22px;
     object-fit: cover;
     margin-left: 3px;
+    cursor: pointer;
 }
 
 .colors {
     width: 250px;
     justify-content: space-evenly;
     margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 
@@ -293,7 +301,6 @@
 .mistake-category-fields {
     color: red;
     font-size: 14px;
-    margin-top: 12px;
 }
 
 .checkbox-style {
@@ -306,7 +313,75 @@
     margin-top: 20px;
 }
 
+#assigned-to-icons-section {
+    flex-wrap: wrap;
+}
+
 .max-height-and-scroll {
     max-height: 120px;
     overflow: auto;
+}
+
+.margin-checkbox {
+    margin-right: 16px;
+}
+
+@media(max-width: 1400px) {
+    .change-direction {
+        flex-direction: column;
+    }
+
+    .left-side {
+        border: none;
+        padding-right: 0px;
+    }
+
+    .right-side {
+        padding-left: 0px;
+    }
+
+    .margin-for-fields:nth-child(4) {
+        margin-bottom: 32px;
+    }
+}
+
+@media(max-width: 700px) {
+    .width-f {
+        width: 100% !important;
+    }
+
+    .form-add-task {
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .description textarea {
+        min-width: 240px;
+        max-width: none;
+    }
+
+}
+
+@media(max-width: 475px) {
+    .prio-btns {
+        width: 83px;
+        font-size: 19px;
+        flex-direction: column-reverse;
+    }
+
+    .prio-btns img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .headline-task {
+        font-size: 48px;
+    }
+
+    .input-category {
+        font-size: 17px;
+        width: 72%;
+    }
 }

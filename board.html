@@ -9,11 +9,13 @@
     <script src="js/board.js"></script>
     <script src="./script.js"></script>
     <script src="js/task_form.js"></script>
-    <script src="mini_backend.js"></script>
+    <script src="./mini_backend.js"></script>
     <link rel="stylesheet" href="./assets/templates/desktop_template.css">
     <script src="./js/desktop_template.js"></script>
     <link rel="stylesheet" href="./assets/templates/mobile_template.css">
     <script src="/js/mobile_template.js"></script>
+    <script src="/js/add_task_mini.js"></script>
+    <link rel="stylesheet" href="assets/templates/add_task_mini.css">
     <title>Board</title>
 </head>
 
@@ -27,7 +29,7 @@
             <div class="headaction">
                 <div class="searchbar">
                     <div class="searchinfield">
-                        <input type="text" onkeydown="findTask()" placeholder="Find Task">
+                        <input type="text" onkeydown="findTask('search')" placeholder="Find Task" id="search">
                         <img src="assets/img/Search.png">
                     </div>
                 </div>
@@ -38,7 +40,7 @@
         <div class="searchMobile">
             <div class="searchbar">
                 <div class="searchinfield">
-                    <input type="text" onkeydown="findTask()" placeholder="Find Task">
+                    <input type="text" onkeydown="findTask('mobileSearch')" placeholder="Find Task" id="mobileSearch">
                     <img src="assets/img/Search.png">
                 </div>
             </div>

@@ -1,197 +1,197 @@
-let tasklist =
-    [
-        {
-            'progress': 'todo',
-            'id': 0,
-            'category': {
-                'color': 'orange',
-                'categoryName': 'Design',
-            },
-            'duedate': 20230114,
-            'title': 'Website redesign',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro',
-            'subtasks': {
-                'tasks': [
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': true,
-                    },
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': false,
-                    },
-                ],
-            },
-            'assignedTo': {
-                'user': [
-                    {
-                        'name': 'mee',
-                        'icon': 'ME',
-                        'iconcolor': '#0190E0',
-                    },
-                    {
-                        'name': 'Marcel Küpper',
-                        'icon': 'MK',
-                        'iconcolor': '#02CF2F',
-                    },
-                    {
-                        'name': 'You',
-                        'icon': 'Yo',
-                        'iconcolor': '#FF5C00',
-                    },
-                    {
-                        'name': 'Someone Else',
-                        'icon': 'SE',
-                        'iconcolor': '#9327FF',
-                    },
-                    {
-                        'name': 'You',
-                        'icon': 'Yo',
-                        'iconcolor': '#FF5C00',
-                    },
-                    {
-                        'name': 'Someone Else',
-                        'icon': 'SE',
-                        'iconcolor': '#9327FF',
-                    },
-                ]},
-                'priority': 'urgent',
-},
-{
-            'progress': 'todo',
-            'id': 1,
-            'category': {
-                'color': 'orange',
-                'categoryName': 'Design',
-            },
-            'duedate': 20221225,
-            'title': 'Website redesign',
-            'description': 'lorem ipsum',
-            'subtasks': {
-                'tasks': [
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': true,
-                    },
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                ],
-            },
-            'assignedTo': {
-                'user': [
-                    {
-                        'name': 'mee',
-                        'icon': 'ME',
-                        'iconcolor': '#0190E0',
-                    },
-                    {
-                        'name': 'Marcel Küpper',
-                        'icon': 'MK',
-                        'iconcolor': '#02CF2F',
-                    },
-                ]},
-                'priority': 'urgent',
-},
-{
-            'progress': 'todo',
-            'id': 2,
-            'category': {
-                'color': 'orange',
-                'categoryName': 'Design',
-            },
-            'duedate': 20221228,
-            'title': 'Website redesign',
-            'description': 'lorem ipsum',
-            'subtasks': {
-                'tasks': [
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': true,
-                    },
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                ],
-            },
-            'assignedTo': {
-                'user': [
-                    {
-                        'name': 'mee',
-                        'icon': 'ME',
-                        'iconcolor': '#0190E0',
-                    },
-                    {
-                        'name': 'Marcel Küpper',
-                        'icon': 'MK',
-                        'iconcolor': '#02CF2F',
-                    },
-                ]},
-                'priority': 'low',
-},
-{
-            'progress': 'todo',
-            'id': 3,
-            'category': {
-                'color': 'orange',
-                'categoryName': 'Design',
-            },
-            'duedate': 20221230,
-            'title': 'Website redesign',
-            'description': 'lorem ipsum',
-            'subtasks': {
-                'tasks': [
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': true,
-                    },
-                    {
-                        'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                    {
-                        'task': 'lorem ipsum duo',
-                        'completed': false,
-                    },
-                ],
-            },
-            'assignedTo': {
-                'user': [
-                    {
-                        'name': 'mee',
-                        'icon': 'ME',
-                        'iconcolor': '#0190E0',
-                    },
-                    {
-                        'name': 'Marcel Küpper',
-                        'icon': 'MK',
-                        'iconcolor': '#02CF2F',
-                    },
-                ]},
-                'priority': 'medium',
-}];
+// let tasklist =
+//     [
+//         {
+//             'progress': 'todo',
+//             'id': 0,
+//             'category': {
+//                 'color': 'orange',
+//                 'categoryName': 'Design',
+//             },
+//             'duedate': 20230114,
+//             'title': 'Website redesign',
+//             'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro',
+//             'subtasks': {
+//                 'tasks': [
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': true,
+//                     },
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': false,
+//                     },
+//                 ],
+//             },
+//             'assignedTo': {
+//                 'user': [
+//                     {
+//                         'name': 'mee',
+//                         'icon': 'ME',
+//                         'iconcolor': '#0190E0',
+//                     },
+//                     {
+//                         'name': 'Marcel Küpper',
+//                         'icon': 'MK',
+//                         'iconcolor': '#02CF2F',
+//                     },
+//                     {
+//                         'name': 'You',
+//                         'icon': 'Yo',
+//                         'iconcolor': '#FF5C00',
+//                     },
+//                     {
+//                         'name': 'Someone Else',
+//                         'icon': 'SE',
+//                         'iconcolor': '#9327FF',
+//                     },
+//                     {
+//                         'name': 'You',
+//                         'icon': 'Yo',
+//                         'iconcolor': '#FF5C00',
+//                     },
+//                     {
+//                         'name': 'Someone Else',
+//                         'icon': 'SE',
+//                         'iconcolor': '#9327FF',
+//                     },
+//                 ]},
+//                 'priority': 'urgent',
+// },
+// {
+//             'progress': 'todo',
+//             'id': 1,
+//             'category': {
+//                 'color': 'orange',
+//                 'categoryName': 'Design',
+//             },
+//             'duedate': 20221225,
+//             'title': 'Website redesign',
+//             'description': 'lorem ipsum',
+//             'subtasks': {
+//                 'tasks': [
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': true,
+//                     },
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                 ],
+//             },
+//             'assignedTo': {
+//                 'user': [
+//                     {
+//                         'name': 'mee',
+//                         'icon': 'ME',
+//                         'iconcolor': '#0190E0',
+//                     },
+//                     {
+//                         'name': 'Marcel Küpper',
+//                         'icon': 'MK',
+//                         'iconcolor': '#02CF2F',
+//                     },
+//                 ]},
+//                 'priority': 'urgent',
+// },
+// {
+//             'progress': 'todo',
+//             'id': 2,
+//             'category': {
+//                 'color': 'orange',
+//                 'categoryName': 'Design',
+//             },
+//             'duedate': 20221228,
+//             'title': 'Website redesign',
+//             'description': 'lorem ipsum',
+//             'subtasks': {
+//                 'tasks': [
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': true,
+//                     },
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                 ],
+//             },
+//             'assignedTo': {
+//                 'user': [
+//                     {
+//                         'name': 'mee',
+//                         'icon': 'ME',
+//                         'iconcolor': '#0190E0',
+//                     },
+//                     {
+//                         'name': 'Marcel Küpper',
+//                         'icon': 'MK',
+//                         'iconcolor': '#02CF2F',
+//                     },
+//                 ]},
+//                 'priority': 'low',
+// },
+// {
+//             'progress': 'todo',
+//             'id': 3,
+//             'category': {
+//                 'color': 'orange',
+//                 'categoryName': 'Design',
+//             },
+//             'duedate': 20221230,
+//             'title': 'Website redesign',
+//             'description': 'lorem ipsum',
+//             'subtasks': {
+//                 'tasks': [
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': true,
+//                     },
+//                     {
+//                         'task': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias magnam saepe laborum molestiae quod, sapiente, fugit atque enim repudiandae sunt, cumque totam quaerat commodi praesentium fuga? Non dolore ipsam porro.',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                     {
+//                         'task': 'lorem ipsum duo',
+//                         'completed': false,
+//                     },
+//                 ],
+//             },
+//             'assignedTo': {
+//                 'user': [
+//                     {
+//                         'name': 'mee',
+//                         'icon': 'ME',
+//                         'iconcolor': '#0190E0',
+//                     },
+//                     {
+//                         'name': 'Marcel Küpper',
+//                         'icon': 'MK',
+//                         'iconcolor': '#02CF2F',
+//                     },
+//                 ]},
+//                 'priority': 'medium',
+// }];
 let contacts = [
     {
         'name': 'mee',
@@ -210,6 +210,11 @@ let doneTasks = [];
 let currentDraggedElement;
 let assignetcontacts = [];
 let selectedPrio = [];
+let searchTodos = [];
+let searchInProgress = [];
+let searchAwaitFeedback = [];
+let searchDoneTasks = [];
+
 
 async function initBoard() {
     await loadAll();
@@ -217,21 +222,22 @@ async function initBoard() {
 }
 
 async function loadAll() {
-    /*await loadTasklist()*/
+    await loadTasklist()
     loadTodos();
     loadInProgress();
     loadAwaitFeedback();
     loadDoneTasks();
 }
 
-async function save() {
-    let tasklistAsString = JSON.stringify(tasklist)
-    await backend.setItem('tasklist', tasklistAsString)
+function saveBoard() {
+    let tasklistAsString = JSON.stringify(tasklist);
+    backend.setItem("tasklist", tasklistAsString);
 }
 
 async function loadTasklist() {
+    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
-    tasklist = JSON.parse(backend.getItem('tasklist')) || [];
+    tasklist = await JSON.parse(backend.getItem("tasklist")) || [];
 }
 
 function loadTodos() {
@@ -405,7 +411,7 @@ function allowDrop(ev) {
 
 function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
-    save();
+    saveBoard();
     loadAll();
     renderBoard();
 }
@@ -423,6 +429,7 @@ function taskPopup() {
     <div w3-include-html="/assets/templates/add_task_mini.html"></div>
     `;
     includeHTML();
+    initAddTaskPopup();
 }
 
 function openTask(id) {
@@ -445,4 +452,88 @@ function openTask(id) {
 
 function closeBoardPopup() {
     document.getElementById('Boardpopup').innerHTML = '';
+}
+
+function findTask(id) {
+    let search = document.getElementById(id).value;
+    searchInTodos(search);
+    searchInInProgress(search);
+    searchInAwaitFeedback(search);
+    searchInDoneTasks(search);
+    rendersearchedTodos(searchTodos, 'toDos', 'todo');
+    rendersearchedTodos(searchInProgress, 'inProgress', 'inprogresss');
+    rendersearchedTodos(searchAwaitFeedback, 'awaitingFeedback', 'awaitfeedback');
+    rendersearchedTodos(searchDoneTasks, 'doneTasks', 'donetask');
+}
+
+function searchInTodos(search) {
+    searchTodos = [];
+    for (let i = 0; i < todos.length; i++) {
+        let todo = todos[i];
+        if (todo['title'].includes(search)){
+            searchTodos.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchTodos.push(todo)
+        }
+    }
+}
+
+function searchInInProgress(search) {
+    searchInProgress = [];
+    for (let i = 0; i < inProgress.length; i++) {
+        let todo = inProgress[i];
+        if (todo['title'].includes(search)){
+            searchInProgress.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchInProgress.push(todo)
+        }
+    }
+}
+
+function searchInAwaitFeedback(search) {
+    searchAwaitFeedback = [];
+    for (let i = 0; i < awaitFeedback.length; i++) {
+        let todo = awaitFeedback[i];
+        if (todo['title'].includes(search)){
+            searchAwaitFeedback.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchAwaitFeedback.push(todo)
+        }
+    }
+}
+
+function searchInDoneTasks(search) {
+    searchDoneTasks = [];
+    for (let i = 0; i < doneTasks.length; i++) {
+        let todo = doneTasks[i];
+        if (todo['title'].includes(search)){
+            searchDoneTasks.push(todo)
+        }else if (todo['description'].includes(search)){
+            searchDoneTasks.push(todo)
+        }
+    }
+}
+
+function rendersearchedTodos(array, id1, id2) {
+    document.getElementById(id1).innerHTML = ``;
+    for (let i = 0; i < array.length; i++) {
+        let toDo = array[i];
+        let id = toDo['id'];
+        let color = toDo['category']['color'];
+        let category = toDo['category']['categoryName'];
+        let title = toDo['title'];
+        let description = toDo['description'];
+        let subtasks = toDo['subtasks']['tasks'].length;
+        let completedtasks = 0;
+        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
+            let task = toDo['subtasks']['tasks'][j];
+            if (task['completed']) {
+                completedtasks++
+            }
+        }
+        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
+        let priority = toDo['priority'];
+        document.getElementById(id1).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
+    }
+    document.getElementById(id1).innerHTML += addDragarea(id2);
 }

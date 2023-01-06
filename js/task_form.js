@@ -136,7 +136,7 @@ function deleteSubtask(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     task[0]['subtasks']['tasks'].splice(index, 1);
     let subtasks = task[0]['subtasks']['tasks'];
-    save();
+    saveBoard();
     loadAll();
     renderBoard();
     loadSubtasks(subtasks, id);
@@ -186,7 +186,7 @@ function taskStatusChange(task, id) {
     } else {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = true;
     }
-    save();
+    saveBoard();
     loadAll();
     renderBoard();
 }
@@ -283,6 +283,7 @@ function assignNewContact(id) {
     `;
 }
 
+
 function exitNewContact(id) {
     document.getElementById('assign-container').innerHTML = `
     <div onclick="openDropdownAssignTo(${id})">
@@ -354,7 +355,7 @@ function closeDropdownAssignTo(id) {
     </div>`
 }
 
-function editTask(id) {
+async function editTask(id) {
     let newTitle = document.getElementById('titleinput').value;
     let newDescription = document.getElementById('descriptioninput').value;
     let mynewDate = document.getElementById('duedate').value;
@@ -367,6 +368,7 @@ function editTask(id) {
     tasklist[id]['duedate'] = parseInt(newDuedate);
     tasklist[id]['priority'] = selectedPrio;
     tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    await saveBoard()
     initBoard();
     closeBoardPopup();
 }

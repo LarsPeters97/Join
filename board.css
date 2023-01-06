@@ -76,6 +76,7 @@ body {
     align-items: center;
     padding: 18px;
     font-size: 21px;
+    cursor: pointer;
 }
 
 .taskHeader p {
@@ -98,6 +99,11 @@ body {
     font-weight: 700;
     font-size: 21px;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+#search {
+    outline: none;
 }
 
 .searchMobile {
@@ -365,13 +371,13 @@ body {
     margin-bottom: 15px;
     margin-top: 15px;
     font-size: 18px;
+    width: 70%;
 }
 
 #assignedto {
     max-height: 150px !important;
     overflow-y: auto;
     overflow-x: hidden;
-    width: 70%;
     padding-left: 10px;
 }
 
@@ -847,6 +853,10 @@ body {
         right: 0;
         z-index: 1;
         padding-left: 10px;
+    }
+
+    .taskform p {
+        width: 400px;
     }
 
     .edittaskform {
