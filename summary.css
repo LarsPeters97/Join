@@ -168,6 +168,7 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
+    padding: 0px !important;
 }
 
 .summary-urgency-container:hover {
@@ -313,10 +314,12 @@ body {
 
 .summary-to-do-frame:hover .summary-pen-image {
     background-image: url(./assets/img/white-pen-icon.png);
+    border-radius: 50%;
 }
 
 .summary-to-do-frame:hover .summary-done-image {
     background-image: url(./assets/img/white-check-icon.png);
+    border-radius: 50%;
 }
 
 .summary-to-do-check {
@@ -366,6 +369,10 @@ body {
     position: fixed;
 }
 
+.mobile-headline {
+    display: none;
+}
+
 @media (max-width:1400px) {
     .summary-greet-container {
         display: none;
@@ -375,19 +382,204 @@ body {
 @media (max-width:1050px) {
 
     .content {
+        display: flex;
+        flex-direction: column;
+     }
+     .summary-headline-container {
+       padding-left: 0px;
        display: flex;
-       flex-direction: column;
-    }
+       justify-content: center;
+     }
+ 
+     .summary-headline-left {
+         font-size: 50px;
+     }
+ 
+     .summary-headline-right {
+         font-size: 24px;
+     }
+ 
+     .summary-details-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 24px;
+        position: absolute;
+        width: 363px;
+        height: 378px;
+        left: 33px;
+        top: 364px;
+     }
+
     .summary-headline-container {
-      padding-left: 33px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 20px;
+        position: absolute;
+        width: 237px;
+        height: 101px;
+        left: 33px;
+        top: 160px;
     }
 
-    .summary-details-container {
-        padding-left: 33px;
+    .mobile-headline {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 20px;
+        position: absolute;
+        width: 255px;
+        height: 19px;
+        left: 33px;
+        top: 130px;
     }
-}
 
-@media (max-width:1050px) {
+    .summary-headline-left {
+        font-size: 47px;
+        width: 221px;
+        height: 56px;
+    }
+
+    .summary-headline-middle {
+        position: absolute;
+        width: 0px;
+        height: 90px;
+        left: 50px;
+        top: 90px;
+        border: 3px solid #29ABE2;
+        transform: rotate(90deg);
+    }
+
+    .summary-tasks-btn {
+        width: 110px;
+        height: 110px;
+       }
+    
+       .summary-tasks-container {
+        justify-content: start;
+        gap: 15px;
+       }
+    
+       .summary-tasks-amount {
+        width: 30px;
+        height: 56px;
+        font-size: 47px;
+    
+       }
+    
+       .summary-tasks-text {
+        font-size: 14px;
+       }
+
+       .summary-urgency-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 28px 0px;
+        gap: 20px;
+        width: 360px;
+        height: 110px;
+       }
+
+       .summary-urgency-frame {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 18px;
+        width: 108px;
+        height: 73px;
+       }
+
+       .summary-urgency-image {
+        width: 40px;
+        height: 40px;
+       }
+
+       .summary-urgency-image img {
+        width: 40px;
+        height: 40px;
+       }
+
+       .summary-urgency-text {
+        font-size: 14px;
+       }
+
+       .summary-urgency-deadline {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 8px;
+        width: 135px;
+        height: 44px;
+       }
+
+       .summary-deadline-top {
+        font-size: 16px;
+       }
+
+       .summary-deadline-bottom {
+        font-size: 14px;
+       }
+
+       .summary-to-do-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 15px;
+        width: 363px;
+        height: 110px;
+       }
+
+       .summary-to-do-frame {
+        width: 177.5px;
+        height: 110px;
+       }
+
+       .summary-pen-image {
+        width: 40px;
+        height: 40px;
+        background-image: url(assets/img/mobile_pen.png);
+        background-position: center;
+       }
+
+       .summary-to-do-check {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        width: 40px;
+        height: 73px;
+       }
+
+       .summary-to-do-amount {
+        font-size: 47px;
+       }
+
+       .summary-to-do-text {
+        font-size: 14px;
+        text-align: center;
+       }
+
+       .summary-done-image  {
+        width: 40px;
+        height: 40px;
+        background-image: url(assets/img/mobile_right.png);
+        background-position: center;
+       }
+
+       
+
+
+
     .summary-greet-container-mobil {
         text-align: center;
         font-size: 6rem;
@@ -397,39 +589,38 @@ body {
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: 0;
+        top: 90px;
         left: 0;
         right: 0;
-        bottom: 0;
-        height: 100vh;
+        bottom: 90px;
         width: 100vw;
         background-color: rgba(255, 255, 255, 1);
         z-index: -10;
         color: rgba(0, 0, 0, 0);
-        animation: animation-greet-container-mobil 3s;
-
+        animation: animation-greet-container-mobil 5s;
+        opacity: 0;
     }
 
     @keyframes animation-greet-container-mobil {
         0% {
             background-color: rgba(255, 255, 255, 1);
-            color: rgba(0, 0, 0, 0);
             z-index: 3;
-            height: 100vh;
+            opacity: 1;
             width: 100vw;
         }
 
 
-        90% {
+        60% {
             background-color: rgba(255, 255, 255, 1);
             z-index: 3;
+            opacity: 1;
         }
 
         100% {
             background-color: rgba(255, 255, 255, 0);
             z-index: 0;
-            height: 100vh;
-            width: 100vw;
+            opacity: 1;
+            
         }
     }
 
@@ -439,23 +630,24 @@ body {
         font-size: 47px;
         font-weight: bolder;
         color: rgba(41, 171, 226, 0);
-        animation: animation-summary-greet-top-mobil 3s;
+        animation: animation-summary-greet-top-mobil 2s;
+        opacity: 0;
     }
 
     @keyframes animation-summary-greet-top-mobil {
         0% {
             color: black;
-            z-index: 3;
+            opacity: 1;
         }
 
         60% {
             color: black;
-            z-index: 3;
+            opacity: 1;
         }
 
         100% {
             color: black;
-            z-index: 3;
+            opacity: 1;
         }
     }
 
@@ -464,22 +656,50 @@ body {
         font-size: 6rem;
         font-weight: bolder;
         color: rgb(41, 171, 226);
-        animation: summary-greet-bottom-mobil 5s;
+        opacity: 0;
+        animation: summary-greet-bottom-mobil 3s;
+        
     }
 
     @keyframes summary-greet-bottom-mobil {
         0% {
             color: rgba(41, 171, 226, 1);
+            opacity: 1;
         }
 
         50% {
             color: rgba(41, 171, 226, 1);
+            opacity: 1;
         }
 
         100% {
             color: rgba(41, 171, 226, 0);
+           opacity: 1;
         }
     }
 
   
+}
+
+@media (max-width:800px) {
+   .summary-tasks-btn {
+    width: 110px;
+    height: 110px;
+   }
+
+   .summary-tasks-container {
+    width: 360px;
+   }
+
+   .summary-tasks-amount {
+    width: 30px;
+    height: 56px;
+    font-size: 47px;
+
+   }
+
+   .summary-tasks-text {
+    font-size: 14px;
+   }
+
 }
