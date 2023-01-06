@@ -155,7 +155,7 @@ function openAssignToSelection() {
     </div>`;
     for (let i = 0; i < contactlist.length; i++) {
         let contact = contactlist[i];
-        if (checkOnAssigned(contact) != false) {
+        if (checkOnAssigned(contact['icon']) == true) {
             document.getElementById('assign-container').innerHTML += `
         <div class="contact_selection">
             <label for="contact${i}">${contact['name']}</label>
@@ -171,7 +171,7 @@ function openAssignToSelection() {
     }
     for (let j = 0; j < assignedpeople.length; j++) {
         let contact = assignedpeople[j];
-        if (checkOnContacts(contact) == false) {
+        if (checkOnContacts(contact['icon']) == false) {
             document.getElementById('assign-container').innerHTML += `
         <div class="contact_selection">
             <label for="contact${j + contacts.length}">${contact['name']}</label>
@@ -246,7 +246,7 @@ function loadAssignedPeople() {
 function assignContact(name, icon, color) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssign(contact);
-    if (checkOnAssign(contact) == true) {
+    if (checkOnAssign(contact['icon']) == true) {
         assignedpeople.splice(index, 1);
     } else {
         assignedpeople.push({ 'name': name, 'icon': icon, 'iconcolor': color });
@@ -265,8 +265,18 @@ function indexOfAssign(contact) {
 
 function checkOnAssign(contact) {
     for (let i = 0; i < assignedpeople.length; i++) {
-        let name = assignedpeople[i]['name'];
-        if (name == contact['name']) {
+        let name = assignedpeople[i]['icon'];
+        if (name == contact) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkOnAssigned(contact) {
+    for (let i = 0; i < assignedpeople.length; i++) {
+        let name = assignedpeople[i]['icon'];
+        if (name == contact) {
             return true;
         }
     }
@@ -274,9 +284,9 @@ function checkOnAssign(contact) {
 }
 
 function checkOnContacts(contact) {
-    for (let i = 0; i < contacts.length; i++) {
-        let name = contacts[i]['name'];
-        if (name == contact['name']) {
+    for (let i = 0; i < contactlist.length; i++) {
+        let name = contactlist[i]['icon'];
+        if (name == contact) {
             return true;
         }
     }
