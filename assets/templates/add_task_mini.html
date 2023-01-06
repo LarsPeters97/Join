@@ -25,13 +25,13 @@
             <div class="assignedpersons" id="assignedpersons"></div>
         </div>
         <div class="add_task_box_right">
-            <label for="duedate">Due date</label>
-            <input type="date" id="duedate">
+            <label class="duedate_label" for="duedate">Due date</label>
+            <input class="duedate_input" type="date" id="duedate" required placeholder="dd/mm/yyyy">
             <div class="prio">Prio 
                 <div class="prioselect">
-                    <div class="prio-urgent" id="urgent" onclick="selectPrio('urgent')">Urgent <img src="assets/img/urgent.svg"></div>
-                    <div class="prio-medium" id="medium" onclick="selectPrio('medium')">Medium <img src="assets/img/medium.svg"></div>
-                    <div class="prio-low" id="low" onclick="selectPrio('low')">Low <img src="assets/img/low.svg"></div>
+                    <div class="prio-urgent" id="urgent" onclick="selectPriority('urgent')">Urgent <img src="assets/img/urgent.svg"></div>
+                    <div class="prio-medium" id="medium" onclick="selectPriority('medium')">Medium <img src="assets/img/medium.svg"></div>
+                    <div class="prio-low" id="low" onclick="selectPriority('low')">Low <img src="assets/img/low.svg"></div>
                 </div>
             </div>
             <p>Subtasks</p>

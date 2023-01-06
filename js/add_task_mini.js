@@ -103,3 +103,166 @@ function selectCategory(index) {
 function closePopup() {
     closeBoardPopup();
 }
+
+function openAssignToSelection() {
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="closeAssignToSelection()">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>`;
+    for (let i = 0; i < contactlist.length; i++) {
+        let contact = contactlist[i];
+        if (checkOnAssigned(contact) != false) {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${i}">${contact['name']}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
+        </div>`;
+        } else {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${i}">${contact['name']}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')">
+        </div>`;
+        }
+    }
+    for (let j = 0; j < assignedpeople.length; j++) {
+        let contact = assignedpeople[j];
+        if (checkOnContacts(contact) == false) {
+            document.getElementById('assign-container').innerHTML += `
+        <div class="contact">
+            <label for="contact${j+contacts.length}">${contact['name']}</label>
+            <input type="checkbox" id="contact${j+contacts.length}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
+        </div>`;
+        }
+    }
+    document.getElementById('assign-container').innerHTML += `
+    <div class="contact" onclick="assignNewPerson()">
+        <span>Invite new contact</span>
+        <img src="./assets/img/contact-icon.png">
+    </div>
+    `;
+}
+
+function checkOnAssignedpeople(contact) {
+    for (let i = 0; i < assignedpeople.length; i++) {
+        let name = assignedpeople[i]['name'];
+        if (name == contact['name']) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function assignNewPerson() {
+    document.getElementById('assign-container').innerHTML = `
+    <div class="newcontact">
+        <input type="email" placeholder="Contact email" id="email">
+        <div class="check">
+            <img src="./assets/img/false-x.png" onclick="exitNewPerson()">
+            |
+            <img src="./assets/img/checkmark.png" onclick="addNewPerson()">
+        </div>
+    </div>
+    `
+}
+
+function exitNewPerson() {
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openAssignToSelection()">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>
+    `;
+}
+
+function addNewPerson() {
+    let email = document.getElementById('email').value;
+    let name = email.split('@');
+    let icon = email.slice(0, 2);
+    let color = getRandomColor();
+    assignedpeople.push({'name': name, 'icon': icon, 'iconcolor': color,});
+    /**email needs to be send to new contact*/
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openAssignToSelection()">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>
+    `;
+    loadAssignedPeople();
+}
+
+function loadAssignedPeople() {
+    document.getElementById('assignedpersons').innerHTML = ``;
+    for (let i = 0; i < assignedpeople.length; i++) {
+        let assigned = assignedpeople[i];
+        document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assigned['iconcolor']}">${assigned['icon']}</div>`
+    }
+}
+
+function assignContact(name, icon, color) {
+    let contact = {'name': name, 'icon': icon, 'iconcolor': color}
+    let index = indexOfAssign(contact);
+    if (checkOnAssign(contact) == true){
+        assignetcontacts.splice(index, 1);
+    } else {
+        assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color});
+    }
+    loadAssignedPeople();
+}
+
+function indexOfAssign(contact) {
+    for (let i = 0; i < assignedpeople.length; i++) {
+        let name = assignedpeople[i]['name'];
+        if (name == contact['name']) {
+            return i;
+        }
+    }
+}
+
+function checkOnAssign(contact) {
+    for (let i = 0; i < assignedpeople.length; i++) {
+        let name = assignedpeople[i]['name'];
+        if (name == contact['name']) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkOnContacts(contact) {
+    for (let i = 0; i < contacts.length; i++) {
+        let name = contacts[i]['name'];
+        if (name == contact['name']) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function closeAssignToSelection() {
+    document.getElementById('assign-container').innerHTML = `
+    <div onclick="openAssignToSelection()">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>`
+}
+
+function selectPriority(prio) {
+    if (prio == 'urgent') {
+        document.getElementById('urgent').classList.add('urgent');
+        document.getElementById('medium').classList.remove('medium');
+        document.getElementById('low').classList.remove('low');
+    }
+    if (prio == 'medium') {
+        document.getElementById('urgent').classList.remove('urgent');
+        document.getElementById('medium').classList.add('medium');
+        document.getElementById('low').classList.remove('low');
+    }
+    if (prio == 'low') {
+        document.getElementById('urgent').classList.remove('urgent');
+        document.getElementById('medium').classList.remove('medium');
+        document.getElementById('low').classList.add('low');
+    }
+    newselectedPrio = prio;
+}
