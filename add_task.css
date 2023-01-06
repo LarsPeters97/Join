@@ -40,7 +40,6 @@ body {
 }
 
 .headline-task {
-    width: 466px;
     height: 78px;
     font-weight: 700;
     font-size: 61px;
@@ -314,6 +313,10 @@ body {
     margin-top: 20px;
 }
 
+#assigned-to-icons-section {
+    flex-wrap: wrap;
+}
+
 .max-height-and-scroll {
     max-height: 120px;
     overflow: auto;
@@ -358,4 +361,27 @@ body {
         max-width: none;
     }
 
+}
+
+@media(max-width: 475px) {
+    .prio-btns {
+        width: 83px;
+        font-size: 19px;
+        flex-direction: column-reverse;
+    }
+
+    .prio-btns img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .headline-task {
+        font-size: 48px;
+    }
+
+    .input-category {
+        font-size: 17px;
+        width: 72%;
+    }
 }
