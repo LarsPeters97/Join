@@ -236,26 +236,45 @@ function editContactHtml(contact, i) {
                     <div>
                         <input id="input_name_edit"
                             class="input_name"
-                            type="text"
+                            type="text" value="${contact.name}"
                             placeholder="Name" />
                     </div>
                     <div>
                         <input id="input_email_edit"
                             class="input_email"
-                            type="text"
+                            type="text" value="${contact.email}"
                             placeholder="Email" />
                     </div>
                     <div>
                         <input id="input_phone_edit"
                             class="input_phone"
-                            type="text"
+                            type="text" value="${contact.phone}"
                             placeholder="Phone" />
                     </div>
                     <div class="container-button">
-                        <button onclick="" class="button-create">
+                        <button onclick="saveChanges(${contact, i})" class="button-create">
                             Save  
                         </button>
                     </div>
                 </div>
     </div>`;
+}
+
+async function saveChanges(contact, i){
+    let new_name = document.getElementById("input_name_edit");
+    let new_email = document.getElementById("input_email_edit");
+    let new_phone = document.getElementById("input_phone_edit");
+    
+    console.log('new contact', new_name.value, new_email.value, new_phone.value);
+   
+    contacts.push({
+        name: new_name.value,
+        email: new_email.value,
+        phone: new_phone.value
+})
+   
+    await backend.setItem("contacts", JSON.stringify(contacts));
+    window.location.href = "./contact.html";
+
+    
 }
