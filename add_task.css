@@ -14,8 +14,13 @@ body {
     background-color: #F6F7F8;
     width: 100%;
     height: 100%;
-    padding: 100px 25%;
+    padding: 100px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
 
 .left-side {
     padding-right: 32px;
@@ -325,6 +330,7 @@ body {
 
     .left-side {
         border: none;
+        padding-right: 0px;
     }
 
     .right-side {
@@ -334,4 +340,22 @@ body {
     .margin-for-fields:nth-child(4) {
         margin-bottom: 32px;
     }
+}
+
+@media(max-width: 700px) {
+    .width-f {
+        width: 100% !important;
+    }
+
+    .form-add-task {
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .description textarea {
+        min-width: 240px;
+        max-width: none;
+    }
+
 }

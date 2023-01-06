@@ -4,6 +4,13 @@ let date;
 let priorityNameForTask;
 let contactsForCurrentTask = [];
 let tasklist = [];
+let selectedCategoryColor;
+let selectedTaskValues = [];
+let selectedCategoryValues = [];
+let assignedToContacts = [];
+let newCategoryName;
+let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
+let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '##ffe119', '#9A6324', '#469990'];
 
 let categories = [{
     'name': 'General topics',
@@ -56,16 +63,6 @@ let contactExample = [
         'iconcolor': '#000075'
     }];
 
-let assignedToContacts = [];
-
-
-let selectedCategoryColor;
-let selectedTaskValues = [];
-let selectedCategoryValues = [];
-let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
-let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '##ffe119', '#9A6324', '#469990'];
-let newCategoryName;
-
 
 function addTask() {
     let taskInputTitle = document.getElementById('input-title').value;
@@ -89,7 +86,6 @@ function addTask() {
         'priority': priorityNameForTask,
     };
     tasklist.push(currentTask);
-    // window.location.href = "board.html";
 }
 
 
@@ -204,7 +200,6 @@ function removeCategoryInput() {
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
-
 }
 
 
@@ -379,13 +374,6 @@ function assignedToContactsForCurrentTask() {
     }
 }
 
-// let contactExample = [
-//     {
-//         'name': 'me',
-//         'icon': 'ME',
-//         'iconcolor': '#800000'
-//     },
-
 
 function renderAssignedToIconsSection() {
     let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
@@ -455,11 +443,11 @@ function addSelectedButtonStyle(button, i) {
 
 
 function resetOtherPriorityButtons(i) {
-    for (let j = 0; j < priorities.length; j++) {
-        let id = priorities[j]['name'];
-        let button = document.getElementById(id);
-        if (j != i && button.classList.contains('white')) {
-            removeStyleOfUnclickedButton(button, j);
+    for (let p = 0; p < priorities.length; p++) {
+        let priorityId = priorities[p]['name'];
+        let button = document.getElementById(priorityId);
+        if (p != i && button.classList.contains('white')) {
+            removeStyleOfUnclickedButton(button, p);
         }
     }
 }
@@ -474,10 +462,10 @@ function removeStyleOfUnclickedButton(button, j) {
 
 function priorityForCurrentTask() {
     for (let i = 0; i < priorities.length; i++) {
-        let id = priorities[i]['name'];
-        let button = document.getElementById(id);
+        let priorityId = priorities[i]['name'];
+        let button = document.getElementById(priorityId);
         if (button.classList.contains('white')) {
-            priorityNameForTask = id;
+            priorityNameForTask = priorityId;
         }
     }
 }
@@ -610,6 +598,7 @@ async function createNewTask() {
     priorityForCurrentTask();
     addTask();
     saveCurrentTask();
+    clearTask();
 }
 
 
