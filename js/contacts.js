@@ -82,11 +82,12 @@ async function createContact() {
 function getIcon(name) {
     let splittedName = name.split(" ");
     let initialforicon = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < splittedName.length; i++) {
         let name = splittedName[i];
         initialforicon += name.slice(0, 1);
     }
-    return initialforicon;
+    let icon = initialforicon.slice(0, 2);
+    return icon;
 }
 
 function showContacts(letter) {
