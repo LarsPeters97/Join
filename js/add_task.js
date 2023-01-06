@@ -195,6 +195,7 @@ function templateCreateNewCategory() {
 
 
 function removeCategoryInput() {
+    document.getElementById('categories-for-colors').classList.remove('colors');
     document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
     document.getElementById('mistake-category-fields').innerHTML = '';
     document.getElementById('categories-for-colors').innerHTML = '';
@@ -209,6 +210,7 @@ function removeCategoryInput() {
 
 function colorsForNewCategory() {
     let categoriesForColors = document.getElementById('categories-for-colors');
+    categoriesForColors.classList.add('colors');
     for (let c = 0; c < categoryColors.length; c++) {
         categoryColor = categoryColors[c];
         categoriesForColors.innerHTML += templateColorsForNewCategory(c, categoryColor);
@@ -249,6 +251,7 @@ function addNewCategory() {
         <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
         document.getElementById('categories-for-colors').innerHTML = '';
+        document.getElementById('categories-for-colors').classList.remove('colors');
     }
     else if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';

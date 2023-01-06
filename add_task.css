@@ -144,7 +144,6 @@ body {
 }
 
 .prio-buttons-section {
-    width: 422px;
     justify-content: space-between;
 }
 
@@ -274,6 +273,7 @@ body {
     width: 250px;
     justify-content: space-evenly;
     margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 
@@ -297,7 +297,6 @@ body {
 .mistake-category-fields {
     color: red;
     font-size: 14px;
-    margin-top: 12px;
 }
 
 .checkbox-style {
