@@ -74,8 +74,7 @@ async function createContact() {
         phone: phone.value,
         color: color,
     });
-    await backend.setItem("contacts", JSON.stringify(contacts));
-    window.location.href = "./contact.html";
+    await save();
 }
 
 function showContacts(letter) {
@@ -273,13 +272,13 @@ async function saveChanges(contact, i) {
     let new_name = document.getElementById("input_name_edit");
     let new_email = document.getElementById("input_email_edit");
     let new_phone = document.getElementById("input_phone_edit");
-
-    console.log("new contact", new_name.value, new_email.value, new_phone.value);
-    console.log(contact);
     contacts[contact].name = new_name.value;
     contacts[contact].email = new_email.value;
     contacts[contact].phone = new_phone.value;
+    await save();
+}
 
+async function save(){
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";
 }
