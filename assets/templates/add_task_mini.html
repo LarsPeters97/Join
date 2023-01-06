@@ -7,7 +7,7 @@
             <input class="title_input" type="text" placeholder="Enter a Title" id="title_input">
             <label class="description_label" for="description_input">Description</label>
             <textarea class="description_input" id="description_input" cols="30" rows="10"></textarea>
-            <p>Category</p>
+            <p class="category_label">Category</p>
             <div class="category_selection" id="category_selection">
                 <div class="selection" onclick="openCategorySelection()">
                     <span>Select task category</span>
@@ -15,9 +15,9 @@
                 </div>
             </div>
             <div class="category_colors" id="category_colors"></div>
-            <p>Assigned to</p>
-            <div class="dropdown-assign" id="assign-container">
-                <div onclick="openAssignToSelection()">
+            <p class="assign_label">Assigned to</p>
+            <div class="assign_selection" id="assign-container">
+                <div class="selection" onclick="openAssignToSelection()">
                     <span class="flex">Select contacts to assign</span>
                     <img src="./assets/img/vector-2.png" alt="klick">
                 </div>
@@ -34,10 +34,12 @@
                     <div class="prio-low" id="low" onclick="selectPriority('low')">Low <img src="assets/img/low.svg"></div>
                 </div>
             </div>
-            <p>Subtasks</p>
-            <div id="subtaskinput" onclick="addInput()">
-                <span class="subtaskplaceholder">Add new subtask</span>
-                <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+            <p class="subtask_label">Subtasks</p>
+            <div id="subtaskinput" class="subtask_input">
+                <div onclick="addInput()" class="subtask_input">
+                    <span class="subtaskplaceholder">Add new subtask</span>
+                    <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+                </div>
             </div>
             <div class="addedsubtasks" id="subtasks"></div>
         </div>

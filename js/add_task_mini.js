@@ -10,6 +10,7 @@ let subtasks = [];
 let temptasklist = [];
 let taskid = [];
 let categorys = [];
+let tempcategorys = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
 
 async function initAddTaskPopup(){
@@ -34,6 +35,7 @@ async function loadCategorys() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     categorys = JSON.parse(backend.getItem("categorys")) || [{'name': 'General Topics', 'color': '#FC71FF'}];
+    tempcategorys = categorys;
 }
 
 function getIdFromTasklist() {
@@ -98,6 +100,40 @@ function selectCategory(index) {
     document.getElementById('category_selection').innerHTML = `
     <span class="selectet_category" onclick="openCategorySelection()">${categorys[index]['name']}
     <span class="all-colors" id="selected-color" style="background-color: ${categorys[index]['color']}"></span></span>`
+}
+
+function addNewCategory() {
+    newCategoryName = document.getElementById('new-category-name').value;
+    if (category_color && newCategoryName) {
+        category = ({
+            'name': newCategoryName,
+            'color': category_color
+        });
+        tempcategorys.push(category)
+        document.getElementById('category_selection').innerHTML = `
+        <div class="selectet_category" onclick="reopenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
+        <span class="dot margin-color" style="background-color: ${category_color}"></span></span>
+        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
+        document.getElementById('categories-for-colors').innerHTML = '';
+    }
+    else if (newCategoryName) {
+        document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
+    }
+    else {
+        document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name.';
+    }
+}
+
+function reopenExistigCategorys() {
+    document.getElementById('category_selection').innerHTML = ` <div class="flex input-section" id="input-section">
+    <span class="flex" id="dropdown-category">Select task category</span>
+    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+</div>`;
+    existingCategories.innerHTML = '';
+    for (let i = 0; i < selectedTaskValues.length; i++) {
+        let category = selectedTaskValues[i];
+        existingCategories.innerHTML += templateExistingCategories(i, category);
+    }
 }
 
 function closePopup() {
@@ -265,4 +301,73 @@ function selectPriority(prio) {
         document.getElementById('low').classList.add('low');
     }
     newselectedPrio = prio;
+}
+
+function addInput() {
+    document.getElementById('subtaskinput').innerHTML = `
+    <input class="inputarea_subtask" type="text" minlength="2" maxlength="100" id="input-subtask">
+    <div id="subtask-icons" class="subtask_icons">
+        <img src="./assets/img/false-x.png" class="false-x" onclick="clearSubtaskInput()">
+        |
+        <img src="./assets/img/checkmark.png" class="checkmark" onclick="checkSubtaskInput()">
+    </div>
+    `;
+}
+
+function clearSubtaskInput() {
+    document.getElementById('input-subtask').value = ``;
+}
+
+function checkSubtaskInput() {
+    let inputSubtask = document.getElementById('input-subtask');
+    if (inputSubtask.value.length > 3) {
+        addSubtask(inputSubtask.value);
+        document.getElementById('input-subtask').value = '';
+    }
+}
+
+function addSubtask(inputSubtask) {
+    subtasks.push({ 'task': inputSubtask, 'completed': false });
+    renderSubtasks();
+}
+
+function renderSubtasks() {
+    let subtaskList = document.getElementById('subtasks');
+    subtaskList.innerHTML = '';
+    for (let i = 0; i < subtasks.length; i++) {
+        let taskElement = subtasks[i];
+        if (subtasks[i]['completed'] == false) {
+            subtaskList.innerHTML += templateSubtasks(taskElement, i);
+        }
+        else {
+            subtaskList.innerHTML += templateSubtasksCompleted(taskElement, i);
+        }
+    }
+}
+
+function templateSubtasks(taskElement, i) {
+    return /*html*/`
+        <div class="subtask_checkbox"> 
+            <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})">
+            <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
+        </div>
+        `;
+}
+
+function templateSubtasksCompleted(taskElement, i) {
+    return /*html*/`
+        <div class="subtask_checkbox"> 
+            <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})" checked>
+            <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
+        </div>
+        `;
+}
+
+function changeCompleteStatus(i) {
+    if (subtasks[i]['completed']) {
+        subtasks[i]['completed'] = false;
+    }
+    else {
+        subtasks[i]['completed'] = true;
+    }
 }
