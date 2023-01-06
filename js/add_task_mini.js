@@ -35,7 +35,7 @@ async function loadCategorys() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     categorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
-    tempcategorys = categorys;
+    tempcategorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
 }
 
 function getIdFromTasklist() {
@@ -409,19 +409,26 @@ async function createTask() {
         }
         let tasksasstring = JSON.stringify(temptasklist);
         await backend.setItem('tasklist', tasksasstring);
-        checkCategoryNew();
+        await checkCategoryNew();
         closePopup();
         initBoard();
     }
 }
 
-function checkCategoryNew() {
-    if (categorys.includes(category)) {
-    } else {
-        categorys.push(category);
-        categoryasstring = JSON.stringify(categorys);
-        backend.setItem('categorys', categoryasstring);
+async function checkCategoryNew() {
+    for (let i = 0; i < categorys.length; i++) {
+        let category1 = categorys[i];
+        if (category1['name'] == category['name']){
+            return false
+        }
     }
+    categorys.push({
+        'color': category['color'],
+        'name': category['name'],
+    },);
+    categoryasstring = JSON.stringify(categorys);
+    await backend.setItem('categorys', categoryasstring);
+    
 }
 
 function transformDuedate() {
