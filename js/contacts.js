@@ -1,5 +1,32 @@
 let contacts = [];
-let letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+let letters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+];
 let currentcolor = 0;
 
 setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
@@ -52,23 +79,24 @@ async function createContact() {
 }
 
 function showContacts(letter) {
-    sortContacts(contacts); 
-    document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML ='';
+    sortContacts(contacts);
+    document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         const contact = contacts[i];
         splittedName = contact.name.split(" ");
         if (contact.name.charAt(0).toUpperCase() == letter.charAt(0).toUpperCase()) {
-            document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML+=
-                showContactsHtml(contact, splittedName, i);
-                renderInitials(splittedName, i);
-            }
-            
+            document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML += showContactsHtml(
+                contact,
+                splittedName,
+                i
+            );
+            renderInitials(splittedName, i);
         }
-        
     }
+}
 
-function renderInitials(splittedName, i){
-    document.getElementById(`initial${i}`).innerHTML = '';
+function renderInitials(splittedName, i) {
+    document.getElementById(`initial${i}`).innerHTML = "";
     for (let k = 0; k < splittedName.length; k++) {
         const initials = splittedName[k];
         document.getElementById(`initial${i}`).innerHTML += `
@@ -76,19 +104,16 @@ function renderInitials(splittedName, i){
     }
 }
 
-
-function renderLetters(){
+function renderLetters() {
     document.getElementById("contactsContainer").innerHTML = "";
     for (let j = 0; j < letters.length; j++) {
         const letter = letters[j];
-        document.getElementById("contactsContainer").innerHTML += 
-        renderLettersHtml(letter,j); 
+        document.getElementById("contactsContainer").innerHTML += renderLettersHtml(letter, j);
         showContacts(letter);
     }
-    
 }
 
-function renderLettersHtml(letter,j) {
+function renderLettersHtml(letter, j) {
     return `
     <div class="container-filtered-contacts">
         <span class="letters">${letter}</span>
@@ -107,9 +132,7 @@ function sortContacts(contacts) {
 function showContactsHtml(contact, splittedName, i) {
     return `
     <div onclick="showContact(${i})" class="contact-card">
-     <div id="initial${i}" style="background-color:${
-         contact.color
-     }" class="initials-contact"></div>
+     <div id="initial${i}" style="background-color:${contact.color}" class="initials-contact"></div>
      <div class="contact-card-text"> 
          <p> ${contact.name} </p>
          <span> ${contact.email} </span>
@@ -118,25 +141,37 @@ function showContactsHtml(contact, splittedName, i) {
 }
 
 function showContact(i) {
+    showContactMobile();
     document.getElementById("contactAreaBody").innerHTML = "";
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
-    document.getElementById("contactAreaBody").innerHTML = showContactHtml(contact,i);
-    document.getElementById(`initialsBody${i}`).innerHTML = '';
+    document.getElementById("contactAreaBody").innerHTML = showContactHtml(contact, i);
+    document.getElementById(`initialsBody${i}`).innerHTML = "";
     for (let k = 0; k < splittedName.length; k++) {
         const initials = splittedName[k];
         document.getElementById(`initialsBody${i}`).innerHTML += `
         <span>${initials.charAt(0).toUpperCase()}</span>`;
     }
+}
 
+function showContactMobile(){
+    if (window.innerWidth < 801) {
+        document.getElementById("contact").classList.remove("d-none-mobile");
+        document.getElementById("contactsContainer").classList.add("d-none-mobile");
+        document.getElementById("addcontactMobile").classList.add("d-none-mobile");
+    }
+}
+
+function closeContact() {
+    document.getElementById("contact").classList.add("d-none-mobile");
+    document.getElementById("contactsContainer").classList.remove("d-none-mobile");
+    document.getElementById("addcontactMobile").classList.remove("d-none-mobile");
 }
 
 function showContactHtml(contact, i) {
     return `
 <div class="contactarea-body-name">
-    <div id="initialsBody${i}"  style="background-color:${
-        contact.color
-    }" class="initials-contact-body">
+    <div id="initialsBody${i}"  style="background-color:${contact.color}" class="initials-contact-body">
         
     </div>
     <div class="container-name">
@@ -156,9 +191,9 @@ function showContactHtml(contact, i) {
 </div>
 <div class="contactarea-body-info">
     <h5>Email</h5>
-    <span class="text-lightblue">${contact.email}</span>
+    <span style="cursor:pointer;" href="mailto:${contact.email}" class="text-lightblue">${contact.email}</span>
     <h5>Phone</h5>
-    <span>${contact.phone}</span>
+    <span style="cursor:pointer;" href="tel:${contact.phone}">${contact.phone}</span>
 </div>
 `;
 }
@@ -172,9 +207,8 @@ function openEditContact(i) {
     document.getElementById("editContact").innerHTML = "";
     let contact = contacts[i];
     let splittedName = contact.name.split(" ");
-    document.getElementById("editContact").innerHTML = 
-    editContactHtml(contact, i);
-    document.getElementById(`initialsedit${i}`).innerHTML = '';
+    document.getElementById("editContact").innerHTML = editContactHtml(contact, i);
+    document.getElementById(`initialsedit${i}`).innerHTML = "";
     for (let k = 0; k < splittedName.length; k++) {
         const initials = splittedName[k];
         document.getElementById(`initialsedit${i}`).innerHTML += `
@@ -182,7 +216,7 @@ function openEditContact(i) {
     }
 }
 
-function editContactHtml(contact, i){
+function editContactHtml(contact, i) {
     return `
     <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
@@ -194,9 +228,7 @@ function editContactHtml(contact, i){
                 </div>
                 
             <div class="add-contact-second-part">
-                <div id="initialsedit${i}"  style="background-color:${
-                    contact.color
-                }" class="initials-contact-body">
+                <div id="initialsedit${i}"  style="background-color:${contact.color}" class="initials-contact-body">
                 </div>
             </div>
             <div class="add-contact-third-part">
