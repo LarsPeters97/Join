@@ -247,9 +247,9 @@ function assignContact(name, icon, color) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssign(contact);
     if (checkOnAssign(contact) == true) {
-        assignetcontacts.splice(index, 1);
+        assignedpeople.splice(index, 1);
     } else {
-        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
+        assignedpeople.push({ 'name': name, 'icon': icon, 'iconcolor': color });
     }
     loadAssignedPeople();
 }

@@ -68,14 +68,26 @@ async function createContact() {
     let email = document.getElementById("input_email");
     let phone = document.getElementById("input_phone");
     let color = randomColor();
+    let icon = getIcon(name.value)
     contacts.push({
         name: name.value,
         email: email.value,
         phone: phone.value,
-        color: color,
+        'iconcolor': color,
+        'icon': icon,
     });
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";
+}
+
+function getIcon(name) {
+    let splittedName = name.split(" ");
+    let initialforicon = [];
+    for (let i = 0; i < 2; i++) {
+        let name = splittedName[i];
+        initialforicon += name.slice(0, 1);
+    }
+    return initialforicon;
 }
 
 function showContacts(letter) {
@@ -133,7 +145,7 @@ function showContactsHtml(contact, splittedName, i) {
     return `
     <div onclick="showContact(${i})" class="contact-card">
         <div class="initials"> 
-            <div  id="initial${i}" style="background-color:${contact.color}" class="initials-contact">
+            <div  id="initial${i}" style="background-color:${contact.iconcolor}" class="initials-contact">
             </div>
         </div>
      <div class="contact-card-text"> 
@@ -175,7 +187,7 @@ function showContactHtml(contact, i) {
     return `
     <div class="contactarea-body-name">
         <div class="initials_B"> 
-        <div id="initialsBody${i}"  style="background-color:${contact.color}" class="initials-contact-body">
+        <div id="initialsBody${i}"  style="background-color:${contact.iconcolor}" class="initials-contact-body">
     </div>
         
     </div>
@@ -235,7 +247,7 @@ function editContactHtml(contact, i) {
             <div class="add-contact-second-part">
                 <div class="initials_B"> 
                         <div id="initialsedit${i}"  style="background-color:${
-                         contact.color
+                         contact.iconcolor
                          }" class="initials-contact-body">
                         </div>
                 </div>
