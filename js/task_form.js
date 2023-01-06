@@ -368,7 +368,7 @@ async function editTask(id) {
     tasklist[id]['duedate'] = parseInt(newDuedate);
     tasklist[id]['priority'] = selectedPrio;
     tasklist[id]['assignedTo']['user'] = assignetcontacts;
-    await saveBoard()
-    initBoard();
+    await saveBoard();
+    setTimeout(await initBoard, 100);
     closeBoardPopup();
 }

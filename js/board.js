@@ -34,7 +34,7 @@ function saveBoard() {
 async function loadTasklist() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
-    tasklist = await JSON.parse(backend.getItem("tasklist")) || [];
+    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
 
 function loadTodos() {
@@ -206,11 +206,10 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function drop(destination) {
+async function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
-    saveBoard();
-    loadAll();
-    renderBoard();
+    await saveBoard();
+    setTimeout(await initBoard, 50);
 }
 
 function highlight(id) {
