@@ -209,7 +209,7 @@ function allowDrop(ev) {
 async function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
     await saveBoard();
-    setTimeout(await initBoard, 50);
+    setTimeout(await initBoard, 100);
 }
 
 function highlight(id) {

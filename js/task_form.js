@@ -30,6 +30,7 @@ function renderAssignedTo(assignedTo) {
 }
 
 function renderSubTasks(id) {
+    document.getElementById('subtasks').innerHTML = ``;
     for (let i = 0; i < tasklist[id]['subtasks']['tasks'].length; i++) {
         let subtask = tasklist[id]['subtasks']['tasks'][i];
         if (subtask['completed'] == false) {
@@ -180,15 +181,15 @@ function cancelSubEdit(index, id) {
     `
 }
 
-function taskStatusChange(task, id) {
+async function taskStatusChange(task, id) {
     if (tasklist[id]['subtasks']['tasks'][task]['completed'] == true) {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = false;
     } else {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = true;
     }
-    saveBoard();
-    loadAll();
-    renderBoard();
+    await saveBoard();
+    renderSubTasks(id);
+    setTimeout(await initBoard, 50);
 }
 
 function selectPrio(prio) {
