@@ -199,6 +199,16 @@
 .subtask_input {
     font-size: 20px;
     font-weight: 400;
+    width: 400px;
+    display: flex;
+    align-items: center !important;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.subtask_inputarea {
+    font-size: 20px;
+    font-weight: 400;
     padding: 12px 20px;
     width: 400px;
     margin-bottom: 10px;
@@ -241,7 +251,7 @@
     justify-content: flex-end;
 }
 
-.category {
+.selectet_category {
     color: black;
     font-size: 20px;
     font-weight: 400;
@@ -250,11 +260,64 @@
     cursor: pointer;
 }
 
-.selectet_category {
-    color: black;
-    font-size: 20px;
-    font-weight: 400;
-    align-items: center;
-    padding: 12px 20px;
+.exit {
+    position: absolute !important;
+    top: 41px !important;
+    right: 41px !important;
     cursor: pointer;
+    font-size: 30px;
+}
+
+.create_task {
+    position: absolute !important;
+    bottom: 30px !important;
+    right: 41px !important;
+    width: 160px;
+    height: 60px;
+    background: #2A3647;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.create_task img {
+    filter: contrast(0) brightness(100);
+}
+
+.create_task:hover {
+    background: cyan !important;
+}
+
+.cancel {
+    position: absolute !important;
+    bottom: 29px !important;
+    right: 220px !important;
+    width: 130px;
+    height: 58px;
+    background: white;
+    color: #2A3647;
+    border: 2px solid #2A3647;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.cancel:hover {
+    border-color: cyan;
+    color: cyan;
+}
+
+.cancel:hover img {
+    filter: brightness(2);
+}
+
+.cancelimg {
+    filter: brightness(0);
 }

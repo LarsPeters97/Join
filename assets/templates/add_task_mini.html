@@ -35,7 +35,7 @@
                 </div>
             </div>
             <p class="subtask_label">Subtasks</p>
-            <div id="subtaskinput" class="subtask_input">
+            <div id="subtaskinput" class="subtask_inputarea">
                 <div onclick="addInput()" class="subtask_input">
                     <span class="subtaskplaceholder">Add new subtask</span>
                     <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
@@ -44,7 +44,7 @@
             <div class="addedsubtasks" id="subtasks"></div>
         </div>
     </div>
-    <div class="exit"></div>
-    <div class="cancel"></div>
-    <div class="create_task"></div>
+    <div class="exit" onclick="closePopup()">x</div>
+    <div class="cancel" onclick="closePopup()">Cancel <img src="./assets/img/x-lightblue.png" class="cancelimg"></div>
+    <div class="create_task" onclick="createTask()">Create Task <img src="./assets/img/checkmark.png" class="checkmark"></div>
 </div>
