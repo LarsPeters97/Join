@@ -258,6 +258,9 @@
     align-items: center;
     padding: 12px 20px;
     cursor: pointer;
+    display: flex;
+    flex-direction: row !important;
+    width: 90%;
 }
 
 .exit {
@@ -320,4 +323,24 @@
 
 .cancelimg {
     filter: brightness(0);
+}
+
+.contact {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    width: 90%;
+    height: 25px;
+    padding: 8px 20px;
+}
+
+.category_option {
+    font-size: 20px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
 }
