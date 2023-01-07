@@ -14,6 +14,7 @@
     <script src="./mini_backend.js"></script>
     <script defer src="./script.js"></script>
     <script defer src="./js/add_task.js"></script>
+    <script defer src="./js/add_task_template.js"></script>
     <script src="./js/desktop_template.js"></script>
     <script src="./js/mobile_template.js"></script>
     <title>Add Task</title>
@@ -23,8 +24,10 @@
     <div w3-include-html="/assets/templates/desktop_template.html"></div>
     <div w3-include-html="/assets/templates/mobile_template.html"></div>
     <div class="add-taskt-whole-side">
+
         <form onsubmit="createNewTask(); return false;" class="form-add-task">
-            <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="convertDate()">Create Task 
+
+            <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="convertDate()">Create Task
                 <img src="./assets/img/create-check.svg" id="create-responsive"></button>
             <h1 class="headline-task">Add Task</h1>
             <div class="flex change-direction">
@@ -88,32 +91,8 @@
                         <div class="flex prio-buttons-section width-f" id="prio-buttons-section">
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <div class="flex column margin-for-fields">
                         <span class="header-for-fields">Subtasks</span>
-
-
-
-
-
-
-
-
                         <div id="subtasks-section" class="width-f">
                             <div class="input-text-type subtask" id="subtask-before"
                                 onclick="changeSubtaskInputField()">
@@ -134,64 +113,22 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="subtask-to-short" class="mistake-category-fields"></div>
                         <div id="subtask-list" class="flex column">
-
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <div class="task-btns">
-                <button type="reset" class="clear-btn btns-clear-and-create" onmouseover="showClearImgLightBlue()"
-                    onclick="clearTask()" onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg"
-                        id="clear-img" id="clear-img"></button>
-                <button class="create-btn btns-clear-and-create" onclick="convertDate()">Create Task <img
-                        src="./assets/img/create-check.svg" id="create-img"></button>
+                <button type="reset" class="clear-btn btns-clear-and-create desktop-clear-btn"
+                    onmouseover="showClearImgLightBlue()" onclick="clearTask()"
+                    onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
+                        id="clear-img"></button>
+                <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="convertDate()">Create Task
+                    <img src="./assets/img/create-check.svg" id="create-img"></button>
         </form>
-
-
-
     </div>
-
-
     </div>
-
-
-
-
 </body>
 
 </html>

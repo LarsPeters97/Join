@@ -1,4 +1,4 @@
-let tasks = [];
+let subtasksForCurrenttask = [];
 let taskid;
 let date;
 let priorityNameForTask;
@@ -62,7 +62,17 @@ let contactExample = [
         'icon': 'TJ',
         'iconcolor': '#000075'
     }];
+/**
+ * This function displays the initials of a contact below the contacts dropdown when the contact is selected
+ * Or it removes the initials from being displayed if the selection of the contact is removed
+ * 
+ * @param {Array} iconArray - the array in which the indexes of the selected users/contacts are save (can either be contacts or usersContact)
+ * @param {int} i - index of the clicked contact 
+ */
 
+/**
+ * This function fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
+ */
 
 function addTask() {
     let taskInputTitle = document.getElementById('input-title').value;
@@ -78,7 +88,7 @@ function addTask() {
         'title': taskInputTitle,
         'description': description,
         'subtasks': {
-            'tasks': tasks
+            'tasks': subtasksForCurrenttask
         },
         'assignedTo': {
             'user': contactsForCurrentTask
@@ -88,42 +98,39 @@ function addTask() {
     tasklist.push(currentTask);
 }
 
+/**
+ * This function saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
+ * assigned to the selectedTaskValues Array.
+ */
 
-function initialize() {
+async function initialize() {
     let categoriesasString = JSON.stringify(categories);
     localStorage.setItem('task-category', categoriesasString);
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
     renderPrioButtonsSection();
+    category = await JSON.parse(backend.getItem('category')) || [];
 }
 
+/**
+ * This function changes the image from the clear Button, so it will be displayed in light blue whe the user hovers over the button.
+ */
 
 function showClearImgLightBlue() {
     document.getElementById('clear-img').src = './assets/img/clear-x-light-blue.svg';
 }
 
+/**
+ * This Function is called with the event-handler onmouseout, so it will displayed a dark blue, if the user no longer hovers over the button.
+ */
 
 function showClearImgDarkBlue() {
     document.getElementById('clear-img').src = './assets/img/clear-x.svg';
 }
 
-
-function openNewCategoryAndExistingCategories() {
-    let existingCategories = document.getElementById('existing-categories');
-    existingCategories.innerHTML = '';
-    for (let i = 0; i < selectedTaskValues.length; i++) {
-        let category = selectedTaskValues[i];
-        existingCategories.innerHTML += templateExistingCategories(i, category);
-    }
-    document.getElementById('category-container').style.borderRadius = '9px 9px 0px 0px';
-    document.getElementById('new-category').classList.remove('d-none');
-    document.getElementById('existing-categories').classList.remove('d-none');
-}
-
-
-function closeNewCategoryAndExistingCategories() {
-    document.getElementById('existing-categories').classList.add('d-none');
-    document.getElementById('new-category').classList.add('d-none');
-}
+/**
+ * This function cheks if the category-container is open or not. It is checked with the classList.contains method. When it is open
+ * and the user clicks, the if statement notes that the class List ist not been added, through wich the else state is executed.
+ */
 
 function checkIfCategoryContainerOpen() {
     let newCategory = document.getElementById('new-category');
@@ -132,28 +139,47 @@ function checkIfCategoryContainerOpen() {
     }
     else {
         closeNewCategoryAndExistingCategories();
-        document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
     }
 }
 
+/**
+ * This function renders the already existing categories from the Array selectedTaskValues, wich is saved in the local storage.
+ */
 
-function templateExistingCategories(i, category) {
-    return /*html*/`
-    <div class="dropdown-category-existing select-bg-color" onclick="selectedCategory(${i})">
-        <span class="flex">${category['name']}<span class="dot margin-color" style="background-color: ${category['color']}"></span></span>        
-    </div>`;
+function openNewCategoryAndExistingCategories() {
+    let existingCategories = document.getElementById('existing-categories');
+    existingCategories.innerHTML = '';
+    for (let i = 0; i < selectedTaskValues.length; i++) {
+        let category = selectedTaskValues[i];
+        existingCategories.innerHTML += templateExistingCategories(i, category);
+    }
+    removeClassDnone('new-category');
+    removeClassDnone('existing-categories');
+}
+
+/**
+ * This function closes the categories by adding the class d-none (display: none).
+ * The function is used in the function checkIfCategoryContainerOpen.
+ */
+
+function closeNewCategoryAndExistingCategories() {
+    addClassDnone('existing-categories');
+    addClassDnone('new-category');
 }
 
 
 function selectedCategory(i) {
-    newCategoryName = selectedTaskValues[i]['name'];
-    selectedCategoryColor = selectedTaskValues[i]['color'];
-    document.getElementById('new-category').classList.add('d-none');
-    document.getElementById('category-container').style.borderRadius = '9px';
-    let existingCategories = document.getElementById('existing-categories');
-    existingCategories.innerHTML = '';
+    selectedCategoryVariables(i);
+    addClassDnone('new-category');
+    document.getElementById('existing-categories').innerHTML = '';
     let categoryContainer = document.getElementById('category-container');
     categoryContainer.innerHTML = templateSelectedCategory();
+}
+
+
+function selectedCategoryVariables(i) {
+    newCategoryName = selectedTaskValues[i]['name'];
+    selectedCategoryColor = selectedTaskValues[i]['color'];
 }
 
 
@@ -506,7 +532,7 @@ function checkSubtaskInputValue() {
 }
 
 function addSubtask(inputSubtask) {
-    tasks.push({ task: inputSubtask, completed: false });
+    subtasksForCurrenttask.push({ task: inputSubtask, completed: false });
     renderSubtasks();
 }
 
@@ -514,8 +540,8 @@ function addSubtask(inputSubtask) {
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML = '';
-    for (let i = 0; i < tasks.length; i++) {
-        let taskElement = tasks[i];
+    for (let i = 0; i < subtasksForCurrenttask.length; i++) {
+        let taskElement = subtasksForCurrenttask[i];
         checkCompletedStatus(i);
         if (checkCompletedStatus(i) == false) {
             subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
@@ -551,7 +577,7 @@ function templateRenderSubtasksWichAreCompleted(taskElement, i) {
 
 
 function checkCompletedStatus(i) {
-    if (!tasks[i].completed) {
+    if (!subtasksForCurrenttask[i].completed) {
         return false;
     }
     else {
@@ -563,10 +589,10 @@ function checkCompletedStatus(i) {
 function changeCurrentCompleteStatus(i) {
     let currentCheckbox = document.getElementById(`checkbox-${i}`);
     if (currentCheckbox.checked) {
-        tasks[i].completed = true;
+        subtasksForCurrenttask[i].completed = true;
     }
     else {
-        tasks[i].completed = false;
+        subtasksForCurrenttask[i].completed = false;
     }
 }
 
@@ -579,7 +605,7 @@ function clearTask() {
     renderAssignedToIconsSection();
     renderPrioButtonsSection();
     closeSubtaskInputField();
-    tasks = [];
+    subtasksForCurrenttask = [];
     renderSubtasks();
     focusOnField('input-title');
 }
@@ -592,6 +618,7 @@ function deleteInputandTextareaValues() {
     document.getElementById('input-subtask-area').value = '';
 }
 
+
 async function createNewTask() {
     await loadTasklistForId();
     assignedToContactsForCurrentTask();
@@ -599,6 +626,7 @@ async function createNewTask() {
     addTask();
     saveCurrentTask();
     clearTask();
+    redirectToBoardPage();
 }
 
 
@@ -621,11 +649,26 @@ function saveCurrentTask() {
 }
 
 
-// let pages = ['add_task.html'];
+function redirectToBoardPage() {
+    window.location.pathname = "./board.html";
+}
 
-// window.addEventListener('resize', function () {
-//     if (window.innerWidth < 800) {
-//         document.getElementById('profile-img').style.display = 'none';
-//     }
-// });
+/**
+ * This function removes the class d-none, so the Element is there.
+ * @param {string} idElement is the id of the HTML-Element
+ */
+
+function removeClassDnone(idElement) {
+    document.getElementById(idElement).classList.remove('d-none');
+}
+
+/**
+ This function adds the class d-none, so the Element is not there.
+ * @param {string} idElement is the id of the HTML-Element
+ */
+
+function addClassDnone(idElement) {
+    document.getElementById(idElement).classList.add('d-none');
+}
+
 

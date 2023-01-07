@@ -347,6 +347,10 @@ body {
     .margin-for-fields:nth-child(4) {
         margin-bottom: 32px;
     }
+
+    .task-btns {
+        justify-content: center;
+    }
 }
 
 @media(max-width: 700px) {
@@ -376,8 +380,15 @@ body {
     .profile-img {
         display: none;
     }
-}
 
+    .desktop-create-btn {
+        display: none;
+    }
+
+    .desktop-clear-btn {
+        display: none;
+    }
+}
 
 @media(max-width: 475px) {
     .prio-btns {
@@ -399,5 +410,9 @@ body {
     .input-category {
         font-size: 17px;
         width: 72%;
+    }
+
+    .create-btn {
+        width: 140px;
     }
   }
