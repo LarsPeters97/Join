@@ -70,7 +70,17 @@ function closeCategorySelection() {
 }
 
 function createNewCategory() {
-    document.getElementById('category_selection').innerHTML = `
+    document.getElementById('category_selection').innerHTML = templateCreateNewCategoryInput();
+    for (let i = 0; i < categoryColors.length; i++) {
+        let color = categoryColors[i];
+        document.getElementById('category_colors').innerHTML += `
+        <span class="all-colors" style="background-color: ${color}" 
+        id="selected-color-${i}" onclick="newCategoryColor('${color}', ${i})"></span>`;
+    }
+}
+
+function templateCreateNewCategoryInput() {
+    return `
     <div class="category-input">
     <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
     <span class="all-colors" id="selected-color"></span>
@@ -78,12 +88,6 @@ function createNewCategory() {
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
     </div></div>`;
-    for (let i = 0; i < categoryColors.length; i++) {
-        let color = categoryColors[i];
-        document.getElementById('category_colors').innerHTML += `
-        <span class="all-colors" style="background-color: ${color}" 
-        id="selected-color-${i}" onclick="newCategoryColor('${color}', ${i})"></span>`;
-    }
 }
 
 function newCategoryColor(color, i) {
@@ -110,29 +114,19 @@ function addNewCategory() {
             'color': category_color
         });
         tempcategorys.push(category)
-        document.getElementById('category_selection').innerHTML = `
-        <span class="selectet_category" onclick="openCategorySelection()">${category['name']}
-        <span class="all-colors" id="selected-color" style="background-color: ${category['color']}"></span></span>`;
+        document.getElementById('category_selection').innerHTML = templateNewCategory(category['name'], category['color'])
         document.getElementById('category_colors').innerHTML = ``;
-    }
-    else if (newCategoryName) {
+    } else if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
-    }
-    else {
+    } else {
         document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name.';
     }
 }
 
-function reopenExistigCategorys() {
-    document.getElementById('category_selection').innerHTML = ` <div class="flex input-section" id="input-section">
-    <span class="flex" id="dropdown-category">Select task category</span>
-    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-</div>`;
-    existingCategories.innerHTML = '';
-    for (let i = 0; i < selectedTaskValues.length; i++) {
-        let category = selectedTaskValues[i];
-        existingCategories.innerHTML += templateExistingCategories(i, category);
-    }
+function templateNewCategory(name, color) {
+    return `
+        <span class="selectet_category" onclick="openCategorySelection()">${name}
+        <span class="all-colors" id="selected-color" style="background-color: ${color}"></span></span>`;
 }
 
 function closePopup() {
@@ -147,39 +141,52 @@ function closePopup() {
     closeBoardPopup();
 }
 
-function openAssignToSelection() {
-    document.getElementById('assign-container').innerHTML = `
+function templateOpenAssignToSelection() {
+    return `
     <div class="selection" onclick="closeAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
     </div>`;
+}
+
+function templateAssignedContactSelection(i, name, icon, iconcolor){
+    return `
+        <div class="contact_selection">
+            <label for="contact${i}">${name}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignContact('${name}', '${icon}', '${iconcolor}')" checked>
+        </div>`;
+}
+
+function templateNotAssignedContactSelection(i, name, icon, iconcolor){
+    return `
+        <div class="contact_selection">
+            <label for="contact${i}">${name}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignContact('${name}', '${icon}', '${iconcolor}')">
+        </div>`;
+}
+
+function openAssignToSelection() {
+    document.getElementById('assign-container').innerHTML = ``;
     for (let i = 0; i < contactlist.length; i++) {
         let contact = contactlist[i];
         if (checkOnAssigned(contact['icon']) == true) {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact_selection">
-            <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
-        </div>`;
+            document.getElementById('assign-container').innerHTML += templateAssignedContactSelection(i, contact['name'], contact['icon'], contact['iconcolor']);
         } else {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact_selection">
-            <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')">
-        </div>`;
+            document.getElementById('assign-container').innerHTML += templateNotAssignedContactSelection(i, contact['name'], contact['icon'], contact['iconcolor']);
         }
     }
     for (let j = 0; j < assignedpeople.length; j++) {
         let contact = assignedpeople[j];
         if (checkOnContacts(contact['icon']) == false) {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact_selection">
-            <label for="contact${j + contacts.length}">${contact['name']}</label>
-            <input type="checkbox" id="contact${j + contacts.length}" onchange="assignContact('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}')" checked>
-        </div>`;
+            let index = j + contacts.length
+            document.getElementById('assign-container').innerHTML += templateAssignedContactSelection(index, contact['name'], contact['icon'], contact['iconcolor']);
         }
     }
-    document.getElementById('assign-container').innerHTML += `
+    document.getElementById('assign-container').innerHTML += templateInvitePerson();
+}
+
+function templateInvitePerson() {
+    return `
     <div class="contact_selection" onclick="assignNewPerson()">
         <span>Invite new contact</span>
         <img src="./assets/img/contact-icon.png">
@@ -225,14 +232,16 @@ function addNewPerson() {
     let icon = email.slice(0, 2);
     let color = getRandomColor();
     assignedpeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    /**email needs to be send to new contact*/
-    document.getElementById('assign-container').innerHTML = `
+    document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
+    loadAssignedPeople();
+}
+
+function templateOfClosedDropdownAssignToSelection() {
+    return `
     <div class="selection" onclick="openAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
-    </div>
-    `;
-    loadAssignedPeople();
+    </div>`;
 }
 
 function loadAssignedPeople() {
@@ -411,7 +420,7 @@ async function createTask() {
             'assignedTo': {
                 'user': assignedpeople,
             },
-                'priority': newselectedPrio,
+            'priority': newselectedPrio,
         },);
         for (let i = 0; i < subtasks.length; i++) {
             let subtask = subtasks[i];
@@ -428,7 +437,7 @@ async function createTask() {
 async function checkCategoryNew() {
     for (let i = 0; i < categorys.length; i++) {
         let category1 = categorys[i];
-        if (category1['name'] == category['name']){
+        if (category1['name'] == category['name']) {
             return false
         }
     }

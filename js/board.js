@@ -54,16 +54,16 @@ function loadDoneTasks() {
 }
 
 function renderBoard() {
-    renderTodos()
-    renderInProgress()
-    renderAwaitFeedback()
-    renderDoneTasks()
+    renderTodos('toDos', 'todo', todos);
+    renderTodos('inProgress', 'inprogresss', inProgress);
+    renderTodos('awaitingFeedback', 'awaitfeedback', awaitFeedback);
+    renderTodos('doneTasks', 'donetask', doneTasks);
 }
 
-function renderTodos() {
-    document.getElementById('toDos').innerHTML = ``;
-    for (let i = 0; i < todos.length; i++) {
-        let toDo = todos[i];
+function renderTodos(boxid, progression, array) {
+    document.getElementById(`${boxid}`).innerHTML = ``;
+    for (let i = 0; i < array.length; i++) {
+        let toDo = array[i];
         let id = toDo['id'];
         let color = toDo['category']['color'];
         let category = toDo['category']['categoryName'];
@@ -79,81 +79,9 @@ function renderTodos() {
         }
         let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
-        document.getElementById('toDos').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
+        document.getElementById(`${boxid}`).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
     }
-    document.getElementById('toDos').innerHTML += addDragarea('todo');
-}
-
-function renderInProgress() {
-    document.getElementById('inProgress').innerHTML = ``;
-    for (let i = 0; i < inProgress.length; i++) {
-        let toDo = inProgress[i];
-        let id = toDo['id'];
-        let color = toDo['category']['color'];
-        let category = toDo['category']['categoryName'];
-        let title = toDo['title'];
-        let description = toDo['description'];
-        let subtasks = toDo['subtasks']['tasks'].length;
-        let completedtasks = 0;
-        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
-            let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']) {
-                completedtasks++
-            }
-        }
-        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
-        let priority = toDo['priority'];
-        document.getElementById('inProgress').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
-    }
-    document.getElementById('inProgress').innerHTML += addDragarea('inprogresss');
-}
-
-function renderAwaitFeedback() {
-    document.getElementById('awaitingFeedback').innerHTML = ``;
-    for (let i = 0; i < awaitFeedback.length; i++) {
-        let toDo = awaitFeedback[i];
-        let id = toDo['id'];
-        let color = toDo['category']['color'];
-        let category = toDo['category']['categoryName'];
-        let title = toDo['title'];
-        let description = toDo['description'];
-        let subtasks = toDo['subtasks']['tasks'].length;
-        let completedtasks = 0;
-        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
-            let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']) {
-                completedtasks++
-            }
-        }
-        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
-        let priority = toDo['priority'];
-        document.getElementById('awaitingFeedback').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
-    }
-    document.getElementById('awaitingFeedback').innerHTML += addDragarea('awaitfeedback');
-}
-
-function renderDoneTasks() {
-    document.getElementById('doneTasks').innerHTML = ``;
-    for (let i = 0; i < doneTasks.length; i++) {
-        let toDo = doneTasks[i];
-        let id = toDo['id'];
-        let color = toDo['category']['color'];
-        let category = toDo['category']['categoryName'];
-        let title = toDo['title'];
-        let description = toDo['description'];
-        let subtasks = toDo['subtasks']['tasks'].length;
-        let completedtasks = 0;
-        for (let j = 0; j < toDo['subtasks']['tasks'].length; j++) {
-            let task = toDo['subtasks']['tasks'][j];
-            if (task['completed']) {
-                completedtasks++
-            }
-        }
-        let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
-        let priority = toDo['priority'];
-        document.getElementById('doneTasks').innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
-    }
-    document.getElementById('doneTasks').innerHTML += addDragarea('donetask');
+    document.getElementById(`${boxid}`).innerHTML += addDragarea(progression);
 }
 
 function assignedTo(assignedTo) {

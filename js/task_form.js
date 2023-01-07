@@ -110,16 +110,30 @@ function loadSubtasks(subtasks, id) {
     document.getElementById('subtasks').innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
         let subtask = subtasks[i];
-        document.getElementById('subtasks').innerHTML += `
+        document.getElementById('subtasks').innerHTML += templateEditabelSubtask(subtask['task'], i, id);
+    }
+}
+
+function templateEditabelSubtask(task, i, task_id) {
+    return `
         <div class="subtask" id="subtask${i}">
-            <div><p>${subtask['task']}</p></div>
+            <div><p>${task}</p></div>
             <div>
-                <button onclick="deleteSubtask(${i}, ${id})">Delete</button>
-                <button onclick="editSubtask(${i}, ${id})">Edit</button>
+                <button onclick="deleteSubtask(${i}, ${task_id})">Delete</button>
+                <button onclick="editSubtask(${i}, ${task_id})">Edit</button>
             </div>
         </div>
-        `
-    }
+        `;
+}
+
+function templateEditabelSubtaskInput(task, index, task_id) {
+    return `
+    <textarea id="subedit${index}" cols="30" rows="10" minlength="2" maxlength="200">${task}</textarea>
+    <div>
+        <button onclick="saveSubEdit(${index}, ${task_id})">Save</button>
+        <button onclick="cancelSubEdit(${index}, ${task_id})">Cancel</button>
+    </div>
+    `;
 }
 
 function addNewSubask(id) {
@@ -146,13 +160,7 @@ function deleteSubtask(index, id) {
 function editSubtask(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     let subtask = task[0]['subtasks']['tasks'][index];
-    document.getElementById(`subtask${index}`).innerHTML = `
-    <textarea id="subedit${index}" cols="30" rows="10" minlength="2" maxlength="200">${subtask['task']}</textarea>
-    <div>
-        <button onclick="saveSubEdit(${index}, ${id})">Save</button>
-        <button onclick="cancelSubEdit(${index}, ${id})">Cancel</button>
-    </div>
-    `
+    document.getElementById(`subtask${index}`).innerHTML = templateEditabelSubtaskInput(subtask['task'], index, id);
 }
 
 function saveSubEdit(index, id) {
@@ -221,38 +229,51 @@ function loadAssignetPersons(id) {
 
 function openDropdownAssignTo(id) {
     task = tasklist.filter(t => t['id'] == id);
-    document.getElementById('assign-container').innerHTML = `
-    <div onclick="closeDropdownAssignTo(${id})">
-        <span class="flex">Select contacts to assign</span>
-        <img src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
+    document.getElementById('assign-container').innerHTML = templateOfOpenDropdownAssignTo(id)
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         if (checkOnAssigned(contact) != false) {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
-            <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})" checked>
-        </div>`;
+            document.getElementById('assign-container').innerHTML += templateAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
         } else {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
-            <label for="contact${i}">${contact['name']}</label>
-            <input type="checkbox" id="contact${i}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})">
-        </div>`;
+            document.getElementById('assign-container').innerHTML += templateNotAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
         }
     }
     for (let j = 0; j < assignetcontacts.length; j++) {
         let contact = assignetcontacts[j];
         if (checkOnContact(contact) == false) {
-            document.getElementById('assign-container').innerHTML += `
-        <div class="contact">
-            <label for="contact${j+contacts.length}">${contact['name']}</label>
-            <input type="checkbox" id="contact${j+contacts.length}" onchange="assignChange('${contact['name']}', '${contact['icon']}', '${contact['iconcolor']}', ${id})" checked>
-        </div>`;
+            let index = j + contacts.length
+            document.getElementById('assign-container').innerHTML += templateAssignedContact(index, contact['name'], contact['icon'], contact['iconcolor'], id);
         }
     }
-    document.getElementById('assign-container').innerHTML += `
+    document.getElementById('assign-container').innerHTML += templateInviteContact(id);
+}
+
+function templateAssignedContact(i, name, icon, iconcolor, id) {
+    return `
+        <div class="contact">
+            <label for="contact${i}">${name}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignChange('${name}', '${icon}', '${iconcolor}', ${id})" checked>
+        </div>`;
+}
+
+function templateNotAssignedContact(i, name, icon, iconcolor, id) {
+    return `
+        <div class="contact">
+            <label for="contact${i}">${name}</label>
+            <input type="checkbox" id="contact${i}" onchange="assignChange('${name}', '${icon}', '${iconcolor}', ${id})">
+        </div>`;
+}
+
+function templateOfOpenDropdownAssignTo(id) {
+    return `
+    <div onclick="closeDropdownAssignTo(${id})">
+        <span class="flex">Select contacts to assign</span>
+        <img src="./assets/img/vector-2.png" alt="klick">
+    </div>`;
+}
+
+function templateInviteContact(id) {
+    return `
     <div class="contact" onclick="assignNewContact(${id})">
         <span>Invite new contact</span>
         <img src="./assets/img/contact-icon.png">
@@ -300,14 +321,16 @@ function addNewContact(id) {
     let icon = email.slice(0, 2);
     let color = getRandomColor();
     assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color,});
-    /**email needs to be send to new contact*/
-    document.getElementById('assign-container').innerHTML = `
+    document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
+    loadAssignetPersons(id);
+}
+
+function templateOfClosedDropdownAssignTo(id) {
+    return `
     <div onclick="openDropdownAssignTo(${id})">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
-    </div>
-    `;
-    loadAssignetPersons(id);
+    </div>`;
 }
 
 function getRandomColor() {
