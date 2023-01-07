@@ -619,3 +619,13 @@ function saveCurrentTask() {
     let tasklistAsString = JSON.stringify(tasklist);
     backend.setItem("tasklist", tasklistAsString);
 }
+
+
+// let pages = ['add_task.html'];
+
+// window.addEventListener('resize', function () {
+//     if (window.innerWidth < 800) {
+//         document.getElementById('profile-img').style.display = 'none';
+//     }
+// });
+

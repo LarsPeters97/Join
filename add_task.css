@@ -326,6 +326,10 @@ body {
     margin-right: 16px;
 }
 
+.create-btn-responsive {
+    display: none;
+}
+
 @media(max-width: 1400px) {
     .change-direction {
         flex-direction: column;
@@ -361,7 +365,19 @@ body {
         max-width: none;
     }
 
+    .create-btn-responsive {
+        display: flex;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 999;
+    }
+
+    .profile-img {
+        display: none;
+    }
 }
+
 
 @media(max-width: 475px) {
     .prio-btns {
@@ -384,4 +400,4 @@ body {
         font-size: 17px;
         width: 72%;
     }
-}
+  }
