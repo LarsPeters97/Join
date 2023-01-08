@@ -202,7 +202,7 @@ function templateOpenAssignToSelection() {
     <div class="selection" onclick="closeAssignToSelection()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
+    </div>`
 }
 
 function templateAssignedContactSelection(i, name, icon, iconcolor){
@@ -222,7 +222,7 @@ function templateNotAssignedContactSelection(i, name, icon, iconcolor){
 }
 
 function openAssignToSelection() {
-    document.getElementById('assign-container').innerHTML = ``;
+    document.getElementById('assign-container').innerHTML = templateOpenAssignToSelection();
     for (let i = 0; i < contactlist.length; i++) {
         let contact = contactlist[i];
         if (checkOnAssigned(contact['icon']) == true) {
