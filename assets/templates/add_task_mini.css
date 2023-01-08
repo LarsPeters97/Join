@@ -1,14 +1,18 @@
+.container-addtask {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .add_task_popup {
     position: relative;
-    top: -100px;
     display: flex;
     flex-direction: column;
-    align-self: center !important;
-    justify-self: center !important;
     background-color: white;
     z-index: 1000;
     border-radius: 20px;
     width: fit-content;
+    margin-top: -100px;
 }
 
 .add_task_headline {
