@@ -540,3 +540,54 @@
         bottom: 120px !important;
     }
 }
+
+@media (max-width: 500px) {
+    .add_task_box_left {
+        max-width: 90vw;
+        margin: 0;
+    }
+
+    .add_task_box_right {
+        max-width: 90vw;
+        margin: 0;
+        padding: 0;
+    }
+
+    .title_input {
+        max-width: 70vw;
+    }
+
+    .description_input {
+        max-width: 70vw;
+    }
+
+    .assign_selection {
+        max-width: 70vw;
+        overflow-x: hidden;
+    }
+
+    .category_selection {
+        max-width: 70vw;
+        overflow-x: hidden;
+    }
+
+    .duedate_input {
+        max-width: 70vw;
+    }
+
+    .subtask_inputarea {
+        max-width: 70vw;
+    }
+
+    .cancel {
+        display: none;
+    }
+
+    .create_task {
+        bottom: 20px !important;
+    }
+
+    .prioselect {
+        flex-direction: column !important;
+    }
+}
