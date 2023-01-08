@@ -55,7 +55,7 @@ async function loadCategorys() {
  * sets "taskid" as running number
  */
 function getIdFromTasklist() {
-    taskid = tasklist.length;
+    taskid = temptasklist.length;
 }
 
 /**
