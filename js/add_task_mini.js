@@ -13,24 +13,37 @@ let categorys = [];
 let tempcategorys = [];
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
 
+
+/**
+ * Initilasing the add Task Popup-menu
+ */
 async function initAddTaskPopup() {
     await loadTasklistForId();
     await loadContacts();
     await loadCategorys();
 }
 
+/**
+ * Gets "tasklist" from the server
+ */
 async function loadTasklistForId() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     temptasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
 
+/**
+ * Gets "contacts" from the server
+ */
 async function loadContacts() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     contactlist = JSON.parse(backend.getItem("contacts")) || [];
 }
 
+/**
+ * Gets "categorys" from the server
+ */
 async function loadCategorys() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
@@ -38,37 +51,69 @@ async function loadCategorys() {
     tempcategorys = JSON.parse(backend.getItem("categorys")) || [{ 'name': 'General Topics', 'color': '#FC71FF' }];
 }
 
+/**
+ * sets "taskid" as running number
+ */
 function getIdFromTasklist() {
     taskid = tasklist.length;
 }
 
+/**
+ * fills "category_selection" with an open category-dropdown
+ */
 function openCategorySelection() {
-    document.getElementById('category_selection').innerHTML = `
-    <div class="selection" onclick="closeCategorySelection()">
-        <span>Select task category</span>
-        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
-    document.getElementById('category_selection').innerHTML += `
-    <div class="category_option" onclick="createNewCategory()">
-        <span>New category</span>
-    </div>`;
+    document.getElementById('category_selection').innerHTML = templateOpenCategorySelection();
     for (let i = 0; i < tempcategorys.length; i++) {
         let category_select = categorys[i];
-        document.getElementById('category_selection').innerHTML += `
-        <div class="category_option" onclick="selectCategory(${i})">
-        <span>${category_select['name']}<span class="all-colors" style="background-color: ${category_select['color']}"></span></span>
-        </div>`
+        document.getElementById('category_selection').innerHTML += templateCategoryOption(i, category_select['name'], category_select['color']);
     }
 }
 
+/**
+ * creates a category option
+ * 
+ * @param {integer} i index of the option
+ * @param {string} name name of the option
+ * @param {string} color affiliated color of the option
+ * @returns template
+ */
+function templateCategoryOption(i, name, color) {
+    return `
+        <div class="category_option" onclick="selectCategory(${i})">
+        <span>${name}<span class="all-colors" style="background-color: ${color}"></span></span>
+        </div>`
+}
+
+/**
+ * template for open category dropdown
+ * 
+ * @returns template
+ */
+function templateOpenCategorySelection() {
+    return `
+    <div class="selection" onclick="closeCategorySelection()">
+        <span>Select task category</span>
+        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+    </div>
+    <div class="category_option" onclick="createNewCategory()">
+        <span>New category</span>
+    </div>`
+}
+
+/**
+ * closes dropdown of the category selection
+ */
 function closeCategorySelection() {
     document.getElementById('category_selection').innerHTML = `
     <div class="selection" onclick="openCategorySelection()">
         <span>Select task category</span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
+    </div>`
 }
 
+/**
+ * loads the create-input of a new category with the color-selection
+ */
 function createNewCategory() {
     document.getElementById('category_selection').innerHTML = templateCreateNewCategoryInput();
     for (let i = 0; i < categoryColors.length; i++) {
@@ -79,6 +124,11 @@ function createNewCategory() {
     }
 }
 
+/**
+ * template of the category inputfield
+ * 
+ * @returns template
+ */
 function templateCreateNewCategoryInput() {
     return `
     <div class="category-input">
@@ -87,9 +137,15 @@ function templateCreateNewCategoryInput() {
     <div class="category-icons">
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
-    </div></div>`;
+    </div></div>`
 }
 
+/**
+ * selects category color
+ * 
+ * @param {string} color selected color
+ * @param {integer} i index of selected color
+ */
 function newCategoryColor(color, i) {
     category_color = color
     for (let j = 0; j < categoryColors.length; j++) {
