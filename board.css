@@ -443,11 +443,25 @@ body {
 .subtask {
     display: flex;
     flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
     font-weight: 400;
     font-size: 18px;
     border: 2px solid rgba(0, 0, 0, 0.2);
     margin: 5px;
     border-radius: 8px;
+    width: 90%;
+}
+
+.subtask button {
+    background-color: #2A3647;
+    border-color: #000009;
+    color: #fff;
+    margin: 2px;
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: 2px 1px lightgrey;
+    cursor: pointer;
 }
 
 .prio {
@@ -851,7 +865,6 @@ body {
         border-radius: 0;
         left: 0;
         right: 0;
-        z-index: 1;
         padding-left: 10px;
     }
 

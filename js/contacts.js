@@ -1,4 +1,7 @@
 let contacts = [];
+/**
+ * array for contact book
+ */
 let letters = [
     "A",
     "B",
@@ -28,9 +31,14 @@ let letters = [
     "Z",
 ];
 let currentcolor = 0;
-
+/**
+ * url for backend
+ */
 setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
 
+/**
+ * loading contacts from backend
+ */
 async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
@@ -49,6 +57,10 @@ function notClose(event) {
     event.stopPropagation();
 }
 
+
+/**
+ * delete input value after closing or submitting addcontact
+ */
 function clearInput() {
     document.getElementById("input_name").value = "";
     document.getElementById("input_email").value = "";
@@ -56,6 +68,9 @@ function clearInput() {
     closeAddcontact();
 }
 
+/**
+ * generating random bg-color 
+ */
 function randomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -64,6 +79,10 @@ function randomColor() {
     return `rgb(${r} ,${g} , ${b})`;
 }
 
+
+/**
+ * creating contact
+ */
 async function createContact() {
     let name = document.getElementById("input_name");
     let email = document.getElementById("input_email");
@@ -80,6 +99,9 @@ async function createContact() {
     await save();
 }
 
+/**
+ * get icon for task board
+ */
 function getIcon(name) {
     let splittedName = name.split(" ");
     let initialforicon = [];
@@ -91,6 +113,9 @@ function getIcon(name) {
     return icon;
 }
 
+/**
+ * showing filtered contacts in contactbook
+ */
 function showContacts(letter) {
     sortContacts(contacts);
     document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML = "";
@@ -108,6 +133,9 @@ function showContacts(letter) {
     }
 }
 
+/**
+ * get the initials from name
+ */
 function renderInitials(splittedName, i) {
     document.getElementById(`initial${i}`).innerHTML = "";
     for (let k = 0; k < splittedName.length; k++) {
@@ -117,6 +145,9 @@ function renderInitials(splittedName, i) {
     }
 }
 
+/**
+ * rendering letters for contact book
+ */
 function renderLetters() {
     document.getElementById("contactsContainer").innerHTML = "";
     for (let j = 0; j < letters.length; j++) {
@@ -134,6 +165,9 @@ function renderLettersHtml(letter, j) {
     </div>`;
 }
 
+/**
+ * sort contacts from a-z
+ */
 function sortContacts(contacts) {
     contacts = contacts.sort((a, b) => {
         let a1 = a.name.toLowerCase();
@@ -156,6 +190,9 @@ function showContactsHtml(contact, splittedName, i) {
     </div>`;
 }
 
+/**
+ * showing choosen contact
+ */
 function showContact(i) {
     showContactMobile();
     document.getElementById("contactAreaBody").innerHTML = "";
@@ -170,6 +207,9 @@ function showContact(i) {
     }
 }
 
+/**
+ * showing contacts responsive
+ */
 function showContactMobile() {
     if (window.innerWidth < 801) {
         document.getElementById("contact").classList.remove("d-none-mobile");
@@ -178,6 +218,9 @@ function showContactMobile() {
     }
 }
 
+/**
+ * close contact viewer
+ */
 function closeContact() {
     document.getElementById("contact").classList.add("d-none-mobile");
     document.getElementById("contactsContainer").classList.remove("d-none-mobile");
@@ -216,10 +259,16 @@ function showContactHtml(contact, i) {
 `;
 }
 
+/**
+ * close popup edit contact
+ */
 function closeEditContact() {
     document.getElementById("editContact").classList.add("d-none");
 }
 
+/**
+ * open edit contact
+ */
 function openEditContact(i) {
     document.getElementById("editContact").classList.remove("d-none");
     document.getElementById("editContact").innerHTML = "";
@@ -282,6 +331,9 @@ function editContactHtml(contact, i) {
     </div>`;
 }
 
+/**
+ * update contact
+ */
 async function saveChanges(contact, i) {
     let new_name = document.getElementById("input_name_edit");
     let new_email = document.getElementById("input_email_edit");
@@ -292,6 +344,9 @@ async function saveChanges(contact, i) {
     await save();
 }
 
+/**
+ * saving to backend
+ */
 async function save(){
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";

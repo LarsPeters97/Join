@@ -2,12 +2,16 @@
 let users = [];
 
 setURL('https://gruppe-397.developerakademie.net/smallest_backend_ever');
-
+/**
+ * Downloading users json from server
+ */
 async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem("users")) || [];
 }
-
+/**
+ * Adding user to backend
+ */
 async function addUser(){
     let email = document.getElementById('Email_signup');
     let name = document.getElementById('Name_signup');

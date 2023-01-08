@@ -33,6 +33,9 @@ function includeHTML() {
 
 let pwState = 0;
 
+/**
+ * loading login form
+ */
 function loadHtml() {
     let loginForm = document.getElementById("form");
     document.getElementById("header_left").classList.remove("d-none");
@@ -64,7 +67,10 @@ function htmlLogin() {
             </form>
   `;
 }
-
+/**
+ * checking if user is already signed in
+ * login
+ */
 function login() {
     let email = document.getElementById("Email_login");
     let password = document.getElementById("password_input");
@@ -80,7 +86,9 @@ function login() {
     }
 }
 
-
+/**
+ * toggle password input
+ */
 function changeVisibility(){
     if(pwState === 0){
         document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
@@ -94,6 +102,9 @@ function changeVisibility(){
     }
 }
 
+/**
+ * loading sig up form
+ */
 function loadSignUpForm() {
     let signUpForm = document.getElementById("form");
     document.getElementById("header_left").classList.add("d-none");
@@ -119,6 +130,9 @@ function htmlSignup() {
 `;
 }
 
+/**
+ * loading forgot password form
+ */
 function loadForgotPassword() {
     let signUpForm = document.getElementById("form");
     document.getElementById("header_left").classList.add("d-none");
@@ -140,16 +154,4 @@ function htmlForgotPassword() {
    `;
 }
 
-/*function changeVisibilitySignup(){
-    if(pwState === 0){
-        document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
-        document.getElementById("password_signup").type = "password";
-        pwState = 1;
-    }
-    else{
-        document.getElementById("login-password-image").src="./assets/img/visibility.png";
-        document.getElementById("password_signup").type = "text";
-        pwState = 0;
-    }
-}*/
 

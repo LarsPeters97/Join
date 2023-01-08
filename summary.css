@@ -378,7 +378,109 @@ body {
     .summary-greet-container {
         display: none;
     }
+
+    .content {
+        z-index: -1;
+        position: relative;
+    }
+
+    .summary-greet-container-mobil {
+        text-align: center;
+        font-size: 6rem;
+        font-weight: bolder;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 90px;
+        height: calc(100% - 180px);
+        width: 100vw;
+        background-color: rgba(255, 255, 255, 1);
+        z-index: -10;
+        color: rgba(0, 0, 0, 0);
+        animation: animation-greet-container-mobil 5s;
+        opacity: 0;
+    }
+
+    @keyframes animation-greet-container-mobil {
+        0% {
+            background-color: rgba(255, 255, 255, 1);
+            z-index: 3;
+            opacity: 1;
+            width: 100vw;
+        }
+
+
+        60% {
+            background-color: rgba(255, 255, 255, 1);
+            z-index: 3;
+            opacity: 1;
+        }
+
+        100% {
+            background-color: rgba(255, 255, 255, 0);
+            z-index: 0;
+            opacity: 1;
+            
+        }
+    }
+
+    .summary-greet-top-mobil {
+        z-index: -10;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bolder;
+        color: rgba(41, 171, 226, 0);
+        animation: animation-summary-greet-top-mobil 2s;
+        opacity: 0;
+    }
+
+    @keyframes animation-summary-greet-top-mobil {
+        0% {
+            color: black;
+            opacity: 1;
+        }
+
+        60% {
+            color: black;
+            opacity: 1;
+        }
+
+        100% {
+            color: black;
+            opacity: 1;
+        }
+    }
+
+    .summary-greet-bottom-mobil {
+        text-align: center;
+        font-size: 47px;
+        font-weight: bolder;
+        color: rgb(41, 171, 226);
+        opacity: 0;
+        animation: summary-greet-bottom-mobil 3s;
+        
+    }
+
+    @keyframes summary-greet-bottom-mobil {
+        0% {
+            color: rgba(41, 171, 226, 1);
+            opacity: 1;
+        }
+
+        50% {
+            color: rgba(41, 171, 226, 1);
+            opacity: 1;
+        }
+
+        100% {
+            color: rgba(41, 171, 226, 0);
+           opacity: 1;
+        }
+    }
 }
+
 
 @media (max-width:1050px) {
     .summary-headline-container {
@@ -419,6 +521,10 @@ body {
         font-size: 47px;
     
        }
+
+       .summary-tasks-container {
+        width: 0px;
+    }
     
        .summary-tasks-text {
         font-size: 14px;
@@ -496,9 +602,9 @@ body {
         gap: 24px;
         position: absolute;
         width: 363px;
-        height: 378px;
         left: 33px;
-        top: 364px;
+        top: 364px; 
+        padding-bottom: 100px;
      }
 
     .summary-headline-container {
@@ -664,108 +770,6 @@ body {
         background-image: url(assets/img/mobile_right.png);
         background-position: center;
        }
-
-       
-
-
-
-    .summary-greet-container-mobil {
-        text-align: center;
-        font-size: 6rem;
-        font-weight: bolder;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 90px;
-        left: 0;
-        right: 0;
-        bottom: 90px;
-        width: 100vw;
-        background-color: rgba(255, 255, 255, 1);
-        z-index: -10;
-        color: rgba(0, 0, 0, 0);
-        animation: animation-greet-container-mobil 5s;
-        opacity: 0;
-    }
-
-    @keyframes animation-greet-container-mobil {
-        0% {
-            background-color: rgba(255, 255, 255, 1);
-            z-index: 3;
-            opacity: 1;
-            width: 100vw;
-        }
-
-
-        60% {
-            background-color: rgba(255, 255, 255, 1);
-            z-index: 3;
-            opacity: 1;
-        }
-
-        100% {
-            background-color: rgba(255, 255, 255, 0);
-            z-index: 0;
-            opacity: 1;
-            
-        }
-    }
-
-    .summary-greet-top-mobil {
-        z-index: -10;
-        text-align: center;
-        font-size: 47px;
-        font-weight: bolder;
-        color: rgba(41, 171, 226, 0);
-        animation: animation-summary-greet-top-mobil 2s;
-        opacity: 0;
-    }
-
-    @keyframes animation-summary-greet-top-mobil {
-        0% {
-            color: black;
-            opacity: 1;
-        }
-
-        60% {
-            color: black;
-            opacity: 1;
-        }
-
-        100% {
-            color: black;
-            opacity: 1;
-        }
-    }
-
-    .summary-greet-bottom-mobil {
-        text-align: center;
-        font-size: 6rem;
-        font-weight: bolder;
-        color: rgb(41, 171, 226);
-        opacity: 0;
-        animation: summary-greet-bottom-mobil 3s;
-        
-    }
-
-    @keyframes summary-greet-bottom-mobil {
-        0% {
-            color: rgba(41, 171, 226, 1);
-            opacity: 1;
-        }
-
-        50% {
-            color: rgba(41, 171, 226, 1);
-            opacity: 1;
-        }
-
-        100% {
-            color: rgba(41, 171, 226, 0);
-           opacity: 1;
-        }
-    }
 }
 
 @media(max-width: 450px) {
