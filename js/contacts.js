@@ -53,6 +53,7 @@ function clearInput() {
     document.getElementById("input_name").value = "";
     document.getElementById("input_email").value = "";
     document.getElementById("input_phone").value = "";
+    closeAddcontact();
 }
 
 function randomColor() {
@@ -302,4 +303,5 @@ function closeBoardPopup() {
 
 function openBoardPopup() {
     document.getElementById('Boardpopup').classList.remove('d-none');
+    initAddTaskPopup();
 }
