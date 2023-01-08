@@ -41,7 +41,7 @@ let priorities = [
     }
 ]
 
-let contactExample = [
+let contacts = [
     {
         'name': 'me',
         'icon': 'ME',
@@ -63,15 +63,15 @@ let contactExample = [
         'iconcolor': '#000075'
     }];
 /**
- * This function displays the initials of a contact below the contacts dropdown when the contact is selected
+ * Displays the initials of a contact below the contacts dropdown when the contact is selected
  * Or it removes the initials from being displayed if the selection of the contact is removed
  * 
  * @param {Array} iconArray - the array in which the indexes of the selected users/contacts are save (can either be contacts or usersContact)
- * @param {int} i - index of the clicked contact 
+ * @param {number} i - index of the clicked contact 
  */
 
 /**
- * This function fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
+ * Fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
  */
 
 function addTask() {
@@ -99,7 +99,7 @@ function addTask() {
 }
 
 /**
- * This function saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
+ * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
  * assigned to the selectedTaskValues Array.
  */
 
@@ -112,7 +112,7 @@ async function initialize() {
 }
 
 /**
- * This function changes the image from the clear Button, so it will be displayed in light blue whe the user hovers over the button.
+ * Changes the image from the clear Button, so it will be displayed in light blue whe the user hovers over the button.
  */
 
 function showClearImgLightBlue() {
@@ -120,7 +120,7 @@ function showClearImgLightBlue() {
 }
 
 /**
- * This Function is called with the event-handler onmouseout, so it will displayed a dark blue, if the user no longer hovers over the button.
+ * Is called with the event-handler onmouseout, so it will displayed a dark blue, if the user no longer hovers over the button.
  */
 
 function showClearImgDarkBlue() {
@@ -128,7 +128,7 @@ function showClearImgDarkBlue() {
 }
 
 /**
- * This function cheks if the category-container is open or not. It is checked with the classList.contains method. When it is open
+ * Checks if the category-container is open or not. It is checked with the classList.contains method. When it is open
  * and the user clicks, the if statement notes that the class List ist not been added, through wich the else state is executed.
  */
 
@@ -143,7 +143,7 @@ function checkIfCategoryContainerOpen() {
 }
 
 /**
- * This function renders the already existing categories from the Array selectedTaskValues, wich is saved in the local storage.
+ * Renders the already existing categories from the Array selectedTaskValues, wich is saved in the local storage.
  */
 
 function openNewCategoryAndExistingCategories() {
@@ -158,7 +158,7 @@ function openNewCategoryAndExistingCategories() {
 }
 
 /**
- * This function closes the categories by adding the class d-none (display: none).
+ * Closes the categories by adding the class d-none (display: none).
  * The function is used in the function checkIfCategoryContainerOpen.
  */
 
@@ -167,6 +167,10 @@ function closeNewCategoryAndExistingCategories() {
     addClassDnone('new-category');
 }
 
+/**
+ * When on category is clicked, the clicked function is displayed in the category-field.
+ * @param {number} i is the chosen category form the Array categories
+ */
 
 function selectedCategory(i) {
     selectedCategoryVariables(i);
@@ -176,58 +180,46 @@ function selectedCategory(i) {
     categoryContainer.innerHTML = templateSelectedCategory();
 }
 
+/**
+ * Declares the global variables with newCategoryName and selectedCategoryColor with the selected category values.
+ * @param {number} i is the chosen category form the Array categories
+ */
 
 function selectedCategoryVariables(i) {
     newCategoryName = selectedTaskValues[i]['name'];
     selectedCategoryColor = selectedTaskValues[i]['color'];
 }
 
-
-function templateSelectedCategory() {
-    return /*html*/`
-    <div class="flex input-section" onclick="reopenExistigCategorys()">
-        <span class="flex" id="dropdown-category">${newCategoryName} 
-        <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
-        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
-}
-
+/**
+ * Sets the category input field ready to create a new category and declares the global variables with newCategoryName 
+ * and selectedCategoryColor as undefined so that the variables can be new declared for the new category.
+ */
 
 function createNewCategory() {
-    document.getElementById('new-category').classList.add('d-none');
-    document.getElementById('existing-categories').classList.add('d-none');
-    document.getElementById('category-container').style.borderRadius = '9px';
+    addClassDnone('new-category');
+    addClassDnone('existing-categories');
     newCategoryName = undefined;
     selectedCategoryColor = undefined;
     colorsForNewCategory();
-
     let categoryContainer = document.getElementById('category-container');
     categoryContainer.innerHTML = templateCreateNewCategory();
 }
 
-
-function templateCreateNewCategory() {
-    return /*html*/`
-    <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
-    <div class="flex category-icons">
-        <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
-        <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
-    </div>`;
-}
-
+/**
+ * if the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field 
+ * to its original version.
+ */
 
 function removeCategoryInput() {
     document.getElementById('categories-for-colors').classList.remove('colors');
-    document.getElementById('category-container').style.borderRadius = '9px 9px 9px 9px';
     document.getElementById('mistake-category-fields').innerHTML = '';
     document.getElementById('categories-for-colors').innerHTML = '';
-    document.getElementById('category-container').innerHTML = `
-    <div class="flex input-section" id="input-section" onclick="checkIfCategoryContainerOpen()">
-    <span class="flex" id="dropdown-category">Select task category</span>
-    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
+    document.getElementById('category-container').innerHTML = templateOriginalCategoryField();
 }
 
+/**
+ * renders the colors from the Array categoryColors 
+ */
 
 function colorsForNewCategory() {
     let categoriesForColors = document.getElementById('categories-for-colors');
@@ -238,13 +230,11 @@ function colorsForNewCategory() {
     }
 }
 
-
-function templateColorsForNewCategory(colorIndex, categoryColor) {
-    return /*html*/`
-    <span class="all-colors" style="background-color: ${categoryColor}" 
-    id="selected-color-${colorIndex}" onclick="addNewCategoryColor('${categoryColor}', ${colorIndex})"></span>`;
-}
-
+/**
+ * the global variable selectedCategoryColor gets the selected category color value and if not you get a request to select a color
+ * @param {*} categoryColor is the string of the hex color code on the current iteration
+ * @param {*} colorIndex is the selected Color Number frm the Array categoryColors
+ */
 
 function addNewCategoryColor(categoryColor, colorIndex) {
     if (document.getElementById('new-category-name').value) {
@@ -257,24 +247,43 @@ function addNewCategoryColor(categoryColor, colorIndex) {
     }
 }
 
+/**
+ * When selectedCategoryColor and newCategoryName are filled a new Category will be created. If not, 
+ * the user gets explains wich data is missing.
+ */
 
 function addNewCategory() {
     newCategoryName = document.getElementById('new-category-name').value;
     if (selectedCategoryColor && newCategoryName) {
+        whenCategoryNameAndColorAreSelected();
+    }
+    else {
+        whenCategoryNameOrColorMissing();
+    }
+}
+
+/**
+ * a new category is pushed in the array selectedTaskValues and the just now created category gets filled in the Category field.
+ */
+
+function whenCategoryNameAndColorAreSelected() {
         selectedTaskValues.push({
             'name': newCategoryName,
             'color': selectedCategoryColor
         });
         let TaskValuesAsString = JSON.stringify(selectedTaskValues);
         localStorage.setItem('task-category', TaskValuesAsString);
-        document.getElementById('category-container').innerHTML = `
-        <div class="flex input-section" onclick="reopenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
-        <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
-        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
+        document.getElementById('category-container').innerHTML = templateNewSelectedCategory();
         document.getElementById('categories-for-colors').innerHTML = '';
         document.getElementById('categories-for-colors').classList.remove('colors');
-    }
-    else if (newCategoryName) {
+}
+
+/**
+ * if one of the variables are undefinded, respectively when color or name isnt filled yet
+ */
+
+function whenCategoryNameOrColorMissing() {
+    if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
     }
     else {
@@ -282,14 +291,14 @@ function addNewCategory() {
     }
 }
 
+/**
+ * 
+ */
 
 function reopenExistigCategorys() {
-    document.getElementById('new-category').classList.remove('d-none');
-    document.getElementById('existing-categories').classList.remove('d-none');
-    document.getElementById('category-container').innerHTML = ` <div class="flex input-section" id="input-section">
-    <span class="flex" id="dropdown-category">Select task category</span>
-    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-</div>`;
+    removeClassDnone('new-category');
+    removeClassDnone('existing-categories');
+    document.getElementById('category-container').innerHTML = templateSelectTaskCategory();
     let existingCategories = document.getElementById('existing-categories');
     existingCategories.innerHTML = '';
     for (let i = 0; i < selectedTaskValues.length; i++) {
@@ -297,6 +306,16 @@ function reopenExistigCategorys() {
         existingCategories.innerHTML += templateExistingCategories(i, category);
     }
 }
+
+function openEx() {
+let existingCategories = document.getElementById('existing-categories');
+existingCategories.innerHTML = '';
+for (let i = 0; i < selectedTaskValues.length; i++) {
+    let category = selectedTaskValues[i];
+    existingCategories.innerHTML += templateExistingCategories(i, category);
+}
+}
+
 
 
 function closeDropdownCategory() {
@@ -324,8 +343,8 @@ function openExistingContacts() {
     let existingContacts = document.getElementById('existing-contacts');
     existingContacts.innerHTML = '';
 
-    for (let i = 0; i < contactExample.length; i++) {
-        let contact = contactExample[i];
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
         let findIndex = assignedToContacts.indexOf(i);
         if (assignedToContactIsInArray(findIndex)) {
             existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
@@ -396,7 +415,7 @@ function addAssignedToIcon(i) {
 function assignedToContactsForCurrentTask() {
     for (let i = 0; i < assignedToContacts.length; i++) {
         let contactNumber = assignedToContacts[i];
-        contactsForCurrentTask.push(contactExample[contactNumber]);
+        contactsForCurrentTask.push(contacts[contactNumber]);
     }
 }
 
@@ -413,8 +432,8 @@ function renderAssignedToIconsSection() {
 
 function templateAssignedToContactIcons(assignedToIndex) {
     return /*html*/`
-    <div class="name icons-add-task" style="background-color: ${contactExample[assignedToIndex]['iconcolor']}">
-    ${contactExample[assignedToIndex]['icon']}</div>`;
+    <div class="name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
+    ${contacts[assignedToIndex]['icon']}</div>`;
 }
 
 
@@ -670,5 +689,3 @@ function removeClassDnone(idElement) {
 function addClassDnone(idElement) {
     document.getElementById(idElement).classList.add('d-none');
 }
-
-
