@@ -586,7 +586,7 @@
     }
 
     .input_name {
-        margin-top: 25px;
+        margin-top: 2px;
         margin-bottom: 8px;
         width: 290px;
         height: 32px;
@@ -741,7 +741,7 @@
     }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 600px) {
     .button-create {
         margin-top: 10px;
     }
