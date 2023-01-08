@@ -53,6 +53,7 @@ function clearInput() {
     document.getElementById("input_name").value = "";
     document.getElementById("input_email").value = "";
     document.getElementById("input_phone").value = "";
+    closeAddcontact();
 }
 
 function randomColor() {
@@ -195,7 +196,7 @@ function showContactHtml(contact, i) {
         <h3>${contact.name} </h3>
         <div class="add-task-link">
             <img src="./assets/img/plus-lightblue.png" />
-            <span>Add Task</span>
+            <span onclick="openBoardPopup()">Add Task</span>
         </div>
     </div>
 </div>    
@@ -294,4 +295,13 @@ async function saveChanges(contact, i) {
 async function save(){
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";
+}
+
+function closeBoardPopup() {
+    document.getElementById('Boardpopup').classList.add('d-none');
+}
+
+function openBoardPopup() {
+    document.getElementById('Boardpopup').classList.remove('d-none');
+    initAddTaskPopup();
 }
