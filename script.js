@@ -44,7 +44,6 @@ function htmlLogin() {
             <form onsubmit="login(); return false;">
                 <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
                 <input type="password" placeholder="Password" id="password_login"class="input_password" required>
-
                 <div class="login_form_part3">
                     <div style="display:flex;">
                         <input type="checkbox" id="remember_me">
@@ -86,7 +85,7 @@ function htmlSignup() {
   <form onsubmit="addUser(); return false">
        <input class="input_name" type="text" placeholder="Name" id="Name_signup" required>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
-       <input type="password" placeholder="Password" id="password_signup"class="input_password" required>
+       <input  type="password" placeholder="Password" id="password_signup"class="input_password" required>
        <div class="loginform_buttonarea">
        <button class="login_button" type="submit">Sign up</button>
        </div>
@@ -114,3 +113,4 @@ function htmlForgotPassword() {
    </form>
    `;
 }
+
