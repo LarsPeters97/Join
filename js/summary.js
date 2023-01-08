@@ -36,7 +36,7 @@ async function loadTasklistForSummary() {
 
 
 /**
- * showing greeting slogan and username
+ * showing greeting slogan 
  */
 function showGreeting() {
     let dateNow = new Date();
@@ -67,7 +67,7 @@ function returnGreetingSlogan(hours) {
     return greetingSlogan;
 }
 /**
- * function for filtering the array, for the value todo
+ * filtering the array for the value todo
  */
 function loadTodos() {
     todos = tasklist.filter(t => t['progress'] == 'todo');
@@ -75,7 +75,7 @@ function loadTodos() {
 }
 
 /**
- * function for filtering the array, for the value inProgress
+ * filtering the array for the value inProgress
  */
 function loadInProgress() {
     inProgress = tasklist.filter(t => t['progress'] == 'inProgresss');
@@ -83,7 +83,7 @@ function loadInProgress() {
 }
 
 /**
- * function for filtering the array, for the value awaitFeedback
+ * filtering the array for the value awaitFeedback
  */
 function loadAwaitFeedback() {
     awaitFeedback = tasklist.filter(t => t['progress'] == 'awaitfeedback');
@@ -91,14 +91,14 @@ function loadAwaitFeedback() {
 }
 
 /**
- * function for filtering the array, for the value doneTasks
+ * filtering the array for the value doneTasks
  */
 function loadDoneTasks() {
     doneTasks = tasklist.filter(t => t['progress'] == 'donetask');
     document.getElementById('amount-done').innerHTML = `<b>${doneTasks.length}</b>`;
 }
 /**
- * function for filtering the array, for the value urgent and sort the date 
+ * filtering the array of the value urgent and sort the date 
  */
 function loadurgentTasks() {
     urgentTasks = tasklist.filter(t => t['progress'] != 'donetask');
@@ -118,13 +118,19 @@ function loadurgentTasks() {
         let duedate = day + '.' + month + '.' + year;
         document.getElementById('upcoming-date').innerHTML = `<b>${duedate}</b>`;
     }
-    else {document.getElementById('amount-urgent').innerHTML = "0"};
+    else { document.getElementById('amount-urgent').innerHTML = "0" };
 }
 
+/**
+ * filtering the array for the value amount-total
+ */
 function loadTotalamount() {
     document.getElementById('amount-total').innerHTML = `<b>${tasklist.length}</b>`;
 }
 
+/**
+ * filtering the array, for the value urgent Tasks
+ */
 function urgentImage() {
     urgentTasks = tasklist.filter(t => t['progress'] != 'donetask');
     urgentTasks = urgentTasks.filter(t => t['priority'] == 'urgent');
@@ -134,6 +140,9 @@ function urgentImage() {
 
 }
 
+/**
+ * remove the classlist d-none from urgent-img
+ */
 function changeImage() {
     document.getElementById('urgent-img').classList.remove('d-none');
 }
