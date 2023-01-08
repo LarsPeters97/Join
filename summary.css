@@ -429,7 +429,7 @@ body {
     .summary-greet-top-mobil {
         z-index: -10;
         text-align: center;
-        font-size: 47px;
+        font-size: 36px;
         font-weight: bolder;
         color: rgba(41, 171, 226, 0);
         animation: animation-summary-greet-top-mobil 2s;
@@ -455,7 +455,7 @@ body {
 
     .summary-greet-bottom-mobil {
         text-align: center;
-        font-size: 6rem;
+        font-size: 47px;
         font-weight: bolder;
         color: rgb(41, 171, 226);
         opacity: 0;
@@ -523,7 +523,7 @@ body {
        }
 
        .summary-tasks-container {
-        width: 350px;
+        width: 0px;
     }
     
        .summary-tasks-text {
@@ -602,11 +602,10 @@ body {
         gap: 24px;
         position: absolute;
         width: 363px;
-        height: 378px;
+        height: 0px;
         left: 33px;
-        top: 364px;
-       
-        
+        top: 364px; 
+        padding-bottom: 100px;
      }
 
     .summary-headline-container {
