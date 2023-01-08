@@ -100,7 +100,7 @@ function addTask() {
 
 /**
  * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
- * assigned to the selectedTaskValues Array.
+ * assigned to the selectedTaskValues array.
  */
 
 async function initialize() {
@@ -129,7 +129,7 @@ function showClearImgDarkBlue() {
 
 /**
  * Checks if the category-container is open or not. It is checked with the classList.contains method. When it is open
- * and the user clicks, the if statement notes that the class List ist not been added, through wich the else state is executed.
+ * and the user clicks, the if statement notes that the class List ist not been added, through which the else state is executed.
  */
 
 function checkIfCategoryContainerOpen() {
@@ -143,7 +143,7 @@ function checkIfCategoryContainerOpen() {
 }
 
 /**
- * Renders the already existing categories from the Array selectedTaskValues, wich is saved in the local storage.
+ * Renders the already existing categories from the array selectedTaskValues, which is saved in the local storage.
  */
 
 function openNewCategoryAndExistingCategories() {
@@ -169,7 +169,7 @@ function closeNewCategoryAndExistingCategories() {
 
 /**
  * When on category is clicked, the clicked function is displayed in the category-field.
- * @param {number} i is the chosen category form the Array categories
+ * @param {number} i is the chosen category form the array categories
  */
 
 function selectedCategory(i) {
@@ -182,7 +182,7 @@ function selectedCategory(i) {
 
 /**
  * Declares the global variables with newCategoryName and selectedCategoryColor with the selected category values.
- * @param {number} i is the chosen category form the Array categories
+ * @param {number} i is the chosen category form the array categories
  */
 
 function selectedCategoryVariables(i) {
@@ -206,7 +206,7 @@ function createNewCategory() {
 }
 
 /**
- * if the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field 
+ * If the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field 
  * to its original version.
  */
 
@@ -218,7 +218,7 @@ function removeCategoryInput() {
 }
 
 /**
- * renders the colors from the Array categoryColors 
+ * Renders the colors from the array categoryColors.
  */
 
 function colorsForNewCategory() {
@@ -231,9 +231,9 @@ function colorsForNewCategory() {
 }
 
 /**
- * the global variable selectedCategoryColor gets the selected category color value and if not you get a request to select a color
+ * The global variable selectedCategoryColor gets the selected category color value and if not you get a request to select a color.
  * @param {*} categoryColor is the string of the hex color code on the current iteration
- * @param {*} colorIndex is the selected Color Number frm the Array categoryColors
+ * @param {*} colorIndex is the selected Color Number frm the array categoryColors
  */
 
 function addNewCategoryColor(categoryColor, colorIndex) {
@@ -249,7 +249,7 @@ function addNewCategoryColor(categoryColor, colorIndex) {
 
 /**
  * When selectedCategoryColor and newCategoryName are filled a new Category will be created. If not, 
- * the user gets explains wich data is missing.
+ * the user gets explains which data is missing.
  */
 
 function addNewCategory() {
@@ -263,23 +263,23 @@ function addNewCategory() {
 }
 
 /**
- * a new category is pushed in the array selectedTaskValues and the just now created category gets filled in the Category field.
+ * A new category is pushed in the array selectedTaskValues and the just now created category gets filled in the Category field.
  */
 
 function whenCategoryNameAndColorAreSelected() {
-        selectedTaskValues.push({
-            'name': newCategoryName,
-            'color': selectedCategoryColor
-        });
-        let TaskValuesAsString = JSON.stringify(selectedTaskValues);
-        localStorage.setItem('task-category', TaskValuesAsString);
-        document.getElementById('category-container').innerHTML = templateNewSelectedCategory();
-        document.getElementById('categories-for-colors').innerHTML = '';
-        document.getElementById('categories-for-colors').classList.remove('colors');
+    selectedTaskValues.push({
+        'name': newCategoryName,
+        'color': selectedCategoryColor
+    });
+    let TaskValuesAsString = JSON.stringify(selectedTaskValues);
+    localStorage.setItem('task-category', TaskValuesAsString);
+    document.getElementById('category-container').innerHTML = templateNewSelectedCategory();
+    document.getElementById('categories-for-colors').innerHTML = '';
+    document.getElementById('categories-for-colors').classList.remove('colors');
 }
 
 /**
- * if one of the variables are undefinded, respectively when color or name isnt filled yet
+ * If one of the variables are undefinded, respectively when color or name isnt filled yet.
  */
 
 function whenCategoryNameOrColorMissing() {
@@ -292,40 +292,18 @@ function whenCategoryNameOrColorMissing() {
 }
 
 /**
- * 
+ * Reopens the original Select task category field and the existing categories.
  */
 
-function reopenExistigCategorys() {
-    removeClassDnone('new-category');
-    removeClassDnone('existing-categories');
-    document.getElementById('category-container').innerHTML = templateSelectTaskCategory();
-    let existingCategories = document.getElementById('existing-categories');
-    existingCategories.innerHTML = '';
-    for (let i = 0; i < selectedTaskValues.length; i++) {
-        let category = selectedTaskValues[i];
-        existingCategories.innerHTML += templateExistingCategories(i, category);
-    }
-}
-
-function openEx() {
-let existingCategories = document.getElementById('existing-categories');
-existingCategories.innerHTML = '';
-for (let i = 0; i < selectedTaskValues.length; i++) {
-    let category = selectedTaskValues[i];
-    existingCategories.innerHTML += templateExistingCategories(i, category);
-}
+function reOpenExistigCategorys() {
+    document.getElementById('category-container').innerHTML = templateOriginalCategoryField();
+    openNewCategoryAndExistingCategories();
 }
 
 
-
-function closeDropdownCategory() {
-    document.getElementById('new-category').classList.add('d-none');
-    document.getElementById('existing-categories').classList.add('d-none');
-    document.getElementById('category-container').innerHTML = `<span class="flex" id="dropdown-category">${newCategoryName} 
-    <span class="all-colors" style="background-color: ${selectedCategoryColor}"></span></span>
-    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick" onclick="reopenExistigCategorys()">`;
-}
-
+/**
+ * Checks if contacts for Assignment are visible by using the classList.contains method.
+ */
 
 function checkIfAssignedToIsOpen() {
     let existingContacts = document.getElementById('existing-contacts');
@@ -333,13 +311,18 @@ function checkIfAssignedToIsOpen() {
         openExistingContacts();
     }
     else {
-        closeExistingContacts();
+        addClassDnone('existing-contacts');
     }
 }
 
+/**
+ * Renders the contacts from the array contacts and seperates them into the ones who are in the array assignedToContacts and who are not
+ * this array. It is done to divide them, into the checked contacts, which the user has clicked on, and the contacts who aren´t checed.
+ */
+
 
 function openExistingContacts() {
-    document.getElementById('existing-contacts').classList.remove('d-none');
+    removeClassDnone('existing-contacts');
     let existingContacts = document.getElementById('existing-contacts');
     existingContacts.innerHTML = '';
 
@@ -355,35 +338,21 @@ function openExistingContacts() {
     }
 }
 
+/**
+ * 
+ * @param {number} findIndex is the result of the indexOf mehthod used for the array assignedToContacts.
+ * @returns -1 if the number of the contact i isn´t in the array assignedToContacts. 
+ * And if it is, it returns the place, where the i is in the array.
+ */
 
-function templateExistingContactsChecked(i, contact) {
-    return /*html*/`
-
-        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
-                    <span>${contact['name']}</span>
-                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
-                    onclick="checkAssignedToIcons(${i})">
-            </label>      
-   `;
+function assignedToContactIsInArray(findIndex) {
+    return findIndex > -1;
 }
 
-
-function templateExistingContacts(i, contact) {
-    return /*html*/`
-
-        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
-                    <span>${contact['name']}</span>
-                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox"
-                    onclick="checkAssignedToIcons(${i})">
-            </label>      
-   `;
-}
-
-
-function closeExistingContacts() {
-    document.getElementById('existing-contacts').classList.add('d-none');
-}
-
+/**
+ * checks if the contact is already in the array assignedToContacts or not. After that the selected Contacts gets rendered.
+ * @param {number} i is the number in which position the clicked contact i the array is.
+ */
 
 function checkAssignedToIcons(i) {
     let findIndex = assignedToContacts.indexOf(i);
@@ -396,16 +365,19 @@ function checkAssignedToIcons(i) {
     renderAssignedToIconsSection();
 }
 
-
-function assignedToContactIsInArray(findIndex) {
-    return findIndex > -1;
-}
-
+/**
+ * Deletes the i from the array assignedToContacts on the position of findIndex.
+ * @param {number} findIndex is the result of the indexOf method used for the array assignedToContacts.
+ */
 
 function removeAssignedToIcon(findIndex) {
     assignedToContacts.splice(findIndex, 1);
 }
 
+/**
+ * I from the array contacts is pushed in the array assignedToContacts.
+ * @param {number} i is the number in which position the clicked contact i the array is.
+ */
 
 function addAssignedToIcon(i) {
     assignedToContacts.push(i);
@@ -566,7 +538,7 @@ function renderSubtasks() {
             subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
         }
         else {
-            subtaskList.innerHTML += templateRenderSubtasksWichAreCompleted(taskElement, i);
+            subtaskList.innerHTML += templateRenderSubtasksWhichAreCompleted(taskElement, i);
         }
     }
 }
@@ -584,7 +556,7 @@ function templateRenderSubtasksNotCompleted(taskElement, i) {
 }
 
 
-function templateRenderSubtasksWichAreCompleted(taskElement, i) {
+function templateRenderSubtasksWhichAreCompleted(taskElement, i) {
     return /*html*/`
     <div class="flex"> 
             <label for="checkbox-${i}" class="flex margin-checkbox">
@@ -620,7 +592,7 @@ function clearTask() {
     deleteInputandTextareaValues();
     removeCategoryInput();
     assignedToContacts = [];
-    closeExistingContacts();
+    addClassDnone('existing-contacts');
     renderAssignedToIconsSection();
     renderPrioButtonsSection();
     closeSubtaskInputField();

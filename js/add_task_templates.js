@@ -17,7 +17,7 @@ function templateExistingCategories(i, category) {
 
 function templateSelectedCategory() {
     return /*html*/`
-    <div class="flex input-section" onclick="reopenExistigCategorys()">
+    <div class="flex input-section" onclick="reOpenExistigCategorys()">
         <span class="flex" id="dropdown-category">${newCategoryName} 
         <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
@@ -69,19 +69,41 @@ function templateColorsForNewCategory(colorIndex, categoryColor) {
 
 function templateNewSelectedCategory() {
     return /*html*/`
-    <div class="flex input-section" onclick="reopenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
+    <div class="flex input-section" onclick="reOpenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
         <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
 }
 
 /**
- * @returns the category field with the text Select task category
+ * @param {number} i is the number of the position of the contact in the array.
+ * @param {string} contact is the contact JSON object for the current iteration.
+ * @returns a contact field for the checked contacts.
  */
 
-function templateSelectTaskCategory() {
-    return /*html*/` 
-    <div class="flex input-section" id="input-section" onclick="checkIfCategoryContainerOpen()">
-        <span class="flex" id="dropdown-category">Select task category</span>
-        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
+function templateExistingContactsChecked(i, contact) {
+    return /*html*/`
+
+        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
+                    <span>${contact['name']}</span>
+                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
+                    onclick="checkAssignedToIcons(${i})">
+            </label>      
+   `;
+}
+
+/**
+ * @param {number} i is the number of the position of the contact in the array.
+ * @param {string} contact is the contact JSON object for the current iteration.
+ * @returns a contact field for the unchecked contacts.
+ */
+
+function templateExistingContacts(i, contact) {
+    return /*html*/`
+
+        <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
+                    <span>${contact['name']}</span>
+                    <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox"
+                    onclick="checkAssignedToIcons(${i})">
+            </label>      
+   `;
 }
