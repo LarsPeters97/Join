@@ -25,6 +25,7 @@ async function summaryInit() {
     loadurgentTasks();
     loadTotalamount();
     urgentImage();
+    showGreeting();
 }
 
 async function loadTasklistForSummary() {
@@ -42,7 +43,6 @@ function showGreeting() {
     let hours = dateNow.getHours();
     let greetingSlogan = returnGreetingSlogan(hours);
     document.getElementById('greeting-slogan').innerHTML = greetingSlogan;
-    document.getElementById('greeting-name').innerHTML = userAccounts[activeUser].userName;
 }
 
 /**
