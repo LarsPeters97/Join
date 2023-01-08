@@ -16,6 +16,12 @@ body {
     flex-direction: column;
 }
 
+.wrong-password{
+    color: red;
+    margin: -10px 0px;
+    font-size: 12px;
+}
+
 .logo_login_page {
     animation: myAnim 1s linear 225ms 1 normal both;
     z-index: 2;
@@ -23,6 +29,13 @@ body {
     top: 40px;
     left: 70px;
     height: 80px;
+}
+
+.img-password{
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    cursor: pointer;
 }
 
 .white {
@@ -104,11 +117,11 @@ body {
 
 .login_form h2 {
     font-size: 61px;
-    line-height: 73px;
     border-bottom: 3px solid #29abe2;
     margin-top: 0px;
     margin-bottom: 20px;
     padding-bottom: 10px;
+    text-align: center;
 }
 
 .input_mail {
@@ -154,7 +167,7 @@ body {
     background: #ffffff;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    background-image: url("./assets/img/password_icon.png");
+   /* background-image: url("./assets/img/password_icon.png");*/
     background-repeat: no-repeat;
     background-position: 390px 16px;
     margin-bottom: 15px;
@@ -300,6 +313,10 @@ body {
         margin-bottom: 40px;
     }
 
+    .img-password{
+        top: 8px;
+    }
+
     .input_mail {
         width: 300px;
         height: 40px;
@@ -371,4 +388,10 @@ body {
     }
     
 
+}
+
+@media (max-width:390px){
+    .header-reset{
+        font-size: 50px !important;
+    }
 }

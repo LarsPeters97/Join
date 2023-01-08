@@ -31,6 +31,8 @@ function includeHTML() {
     }
 }
 
+let pwState = 0;
+
 function loadHtml() {
     let loginForm = document.getElementById("form");
     document.getElementById("header_left").classList.remove("d-none");
@@ -43,7 +45,11 @@ function htmlLogin() {
   <h2>Log in</h2>
             <form onsubmit="login(); return false;">
                 <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
-                <input type="password" placeholder="Password" id="password_login"class="input_password" required>
+                <div style=position:relative;>
+                <input type="password" placeholder="Password" id="password_input"class="input_password" required>
+                <img onclick="changeVisibility()" id="login-password-image" class="img-password" src="./assets/img/password_icon.png">
+                </div>
+                <div id="wrongPassword" class="wrong-password d-none">Wrong Email/Password!</div>
                 <div class="login_form_part3">
                     <div style="display:flex;">
                         <input type="checkbox" id="remember_me">
@@ -61,13 +67,30 @@ function htmlLogin() {
 
 function login() {
     let email = document.getElementById("Email_login");
-    let password = document.getElementById("password_login");
+    let password = document.getElementById("password_input");
     let user = users.find((u) => u.email == email.value && u.password == password.value);
 
     if (user) {
         window.location.href = "./summary.html";
     } else {
-        alert("Please Sign up befor login!");
+        event.preventDefault();
+        document.getElementById('wrongPassword').classList.remove('d-none');
+        email.value = '';
+        password.value = '';
+    }
+}
+
+
+function changeVisibility(){
+    if(pwState === 0){
+        document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
+        document.getElementById("password_input").type = "password";
+        pwState = 1;
+    }
+    else{
+        document.getElementById("login-password-image").src="./assets/img/visibility.png";
+        document.getElementById("password_input").type = "text";
+        pwState = 0;
     }
 }
 
@@ -85,7 +108,10 @@ function htmlSignup() {
   <form onsubmit="addUser(); return false">
        <input class="input_name" type="text" placeholder="Name" id="Name_signup" required>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
-       <input  type="password" placeholder="Password" id="password_signup"class="input_password" required>
+       <div style=position:relative;>
+                <input type="password" placeholder="Password" id="password_input"class="input_password" required>
+                <img onclick="changeVisibility()" id="login-password-image" class="img-password" src="./assets/img/password_icon.png">
+        </div>
        <div class="loginform_buttonarea">
        <button class="login_button" type="submit">Sign up</button>
        </div>
@@ -113,4 +139,17 @@ function htmlForgotPassword() {
    </form>
    `;
 }
+
+/*function changeVisibilitySignup(){
+    if(pwState === 0){
+        document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
+        document.getElementById("password_signup").type = "password";
+        pwState = 1;
+    }
+    else{
+        document.getElementById("login-password-image").src="./assets/img/visibility.png";
+        document.getElementById("password_signup").type = "text";
+        pwState = 0;
+    }
+}*/
 
