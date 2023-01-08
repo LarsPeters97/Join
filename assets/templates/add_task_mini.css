@@ -514,7 +514,7 @@
 @media (max-width: 1050px){
     .add_task_popup {
         height: fit-content;
-        z-index: 99;
+        z-index: 101;
         margin-top: 89px;
         padding-bottom: 100px;
     }
@@ -529,7 +529,7 @@
     }
     
     .background {
-        z-index: 98;
+        z-index: 100;
     }
 
     .cancel {
