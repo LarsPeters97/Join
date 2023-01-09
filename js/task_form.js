@@ -232,7 +232,7 @@ function openDropdownAssignTo(id) {
     document.getElementById('assign-container').innerHTML = templateOfOpenDropdownAssignTo(id)
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        if (checkOnAssigned(contact) != false) {
+        if (checkOnAssignedContacts(contact) != false) {
             document.getElementById('assign-container').innerHTML += templateAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
         } else {
             document.getElementById('assign-container').innerHTML += templateNotAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
@@ -284,7 +284,7 @@ function templateInviteContact(id) {
 function assignChange(name, icon, color, id) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssigned(contact);
-    if (checkOnAssigned(contact['icon']) == true) {
+    if (checkOnAssignedContacts(contact['icon']) == true) {
         assignetcontacts.splice(index, 1);
     } else {
         assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
@@ -362,10 +362,10 @@ function checkOn(icon) {
     return false;
 }
 
-function checkOnAssigned(contact) {
+function checkOnAssignedContacts(contact) {
     for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['icon'];
-        if (name == contact) {
+        let check = assignetcontacts[i]['icon'];
+        if (check == contact) {
             return true;
         }
     }
@@ -401,7 +401,9 @@ async function editTask(id) {
     tasklist[id]['description'] = newDescription;
     tasklist[id]['duedate'] = parseInt(newDuedate);
     tasklist[id]['priority'] = selectedPrio;
-    tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    if (assignetcontacts){
+        tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    }
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();
