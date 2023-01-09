@@ -49,7 +49,7 @@ function resetPassword(){
 }
 
 async function save() {
-    await backend.setItem("users", JSON.stringify(contacts));
+    await backend.setItem("users", JSON.stringify(users));
     window.location.href = "./index.html";
 }
 
