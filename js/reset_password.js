@@ -42,9 +42,15 @@ function resetPassword(){
     let newPassword = document.getElementById('password_input');
         user.password = newPassword.value;
         alert('Password is reseted!')
+        save();
     } else{
         alert('Passwords do not match!')
     }
+}
+
+async function save() {
+    await backend.setItem("users", JSON.stringify(contacts));
+    window.location.href = "./index.html";
 }
 
 /**
