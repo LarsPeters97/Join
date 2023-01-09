@@ -57,7 +57,6 @@ function notClose(event) {
     event.stopPropagation();
 }
 
-
 /**
  * delete input value after closing or submitting addcontact
  */
@@ -69,7 +68,7 @@ function clearInput() {
 }
 
 /**
- * generating random bg-color 
+ * generating random bg-color
  */
 function randomColor() {
     let r = Math.floor(Math.random() * 256);
@@ -79,7 +78,6 @@ function randomColor() {
     return `rgb(${r} ,${g} , ${b})`;
 }
 
-
 /**
  * creating contact
  */
@@ -88,13 +86,13 @@ async function createContact() {
     let email = document.getElementById("input_email");
     let phone = document.getElementById("input_phone");
     let color = randomColor();
-    let icon = getIcon(name.value)
+    let icon = getIcon(name.value);
     contacts.push({
         name: name.value,
         email: email.value,
         phone: phone.value,
-        'iconcolor': color,
-        'icon': icon,
+        "iconcolor": color,
+        "icon": icon,
     });
     await save();
 }
@@ -178,16 +176,36 @@ function sortContacts(contacts) {
 
 function showContactsHtml(contact, splittedName, i) {
     return `
-    <div onclick="showContact(${i})" class="contact-card">
+    <div class="contact-card">
+        <img onclick="openPopUp()" class="contact-card-menu" src="./assets/img/ellipsis.png">
+        <div onclick="closePopUp()" id="popupContact" class="wrapper-popup-menu d-none">   
+         <div onclick="notClose(event)" class="contact-card-menu-popup">
+            <span onclick="openEditContact(${i})"> Edit </span>
+            <span onclick="deleteContact(${i})">Delete</span>
+         </div>
+        </div>
         <div class="initials"> 
             <div  id="initial${i}" style="background-color:${contact.iconcolor}" class="initials-contact">
             </div>
         </div>
-     <div class="contact-card-text"> 
+     <div onclick="showContact(${i})" class="contact-card-text"> 
          <p> ${contact.name} </p>
          <span> ${contact.email} </span>
      </div>
     </div>`;
+}
+
+function deleteContact(i) {
+    contacts.splice(i, 1);
+    save();
+}
+
+function openPopUp(){
+    document.getElementById('popupContact').classList.remove('d-none');
+}
+
+function closePopUp() {
+    document.getElementById('popupContact').classList.add('d-none');
 }
 
 /**
@@ -252,9 +270,9 @@ function showContactHtml(contact, i) {
 </div>
 <div class="contactarea-body-info">
     <h5>Email</h5>
-    <span style="cursor:pointer;" href="mailto:${contact.email}" class="text-lightblue">${contact.email}</span>
+    <a style="cursor:pointer; text-decoration:unset;" href="mailto:${contact.email}" class="text-lightblue">${contact.email}</a>
     <h5>Phone</h5>
-    <span style="cursor:pointer;" href="tel:${contact.phone}">${contact.phone}</span>
+    <a style="cursor:pointer;  text-decoration:unset;" class="text-lightblue" href="tel:${contact.phone}">${contact.phone}</a>
 </div>
 `;
 }
@@ -287,6 +305,7 @@ function editContactHtml(contact, i) {
     return `
     <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
+                <img onclick="closeEditContact()" class="close-addcontact-mobile" src="./assets/img/x-white.png" alt="">
                     <div class="container-logo-addcontact">
                         <img src="./assets/img/Logo.png" alt="" />
                         <h2>Edit contact</h2>
@@ -294,11 +313,11 @@ function editContactHtml(contact, i) {
                     </div>
                 </div>
                 
-            <div class="add-contact-second-part">
+            <div class="add-contact-second-part position-initials">
                 <div class="initials_B"> 
                         <div id="initialsedit${i}"  style="background-color:${
-                         contact.iconcolor
-                         }" class="initials-contact-body">
+        contact.iconcolor
+    }" class="initials-contact-body">
                         </div>
                 </div>
             </div>
@@ -347,16 +366,16 @@ async function saveChanges(contact, i) {
 /**
  * saving to backend
  */
-async function save(){
+async function save() {
     await backend.setItem("contacts", JSON.stringify(contacts));
     window.location.href = "./contact.html";
 }
 
 function closeBoardPopup() {
-    document.getElementById('Boardpopup').classList.add('d-none');
+    document.getElementById("Boardpopup").classList.add("d-none");
 }
 
 function openBoardPopup() {
-    document.getElementById('Boardpopup').classList.remove('d-none');
+    document.getElementById("Boardpopup").classList.remove("d-none");
     initAddTaskPopup();
 }
