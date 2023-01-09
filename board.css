@@ -873,10 +873,48 @@ body {
     }
 
     .edittaskform {
-        margin-top: 179px !important;
+        margin-top: 500px !important;
     }
 
     .taskbar {
         width: auto;
+    }
+
+    .dropdown-assign {
+        max-height: 400px;
+    }
+
+    #assignedto {
+        max-height: 400px !important;
+    }
+
+    .contact label{
+        max-width: 38vw;
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 500px) {
+    .subtask {
+        width: 70vw;
+        justify-content: flex-start;
+    }
+
+    .taskform h2 {
+        width: 80vw;
+        font-size: 30px;
+    }
+
+    .taskform p {
+        width: 80vw;
+    }
+
+    .taskform{
+        min-width: 200px;
+        padding-right: 10px;
+        z-index: 100;
+    }
+    .subtasktext {
+        width: 70vw !important;
     }
 }

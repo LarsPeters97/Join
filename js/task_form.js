@@ -117,7 +117,7 @@ function loadSubtasks(subtasks, id) {
 function templateEditabelSubtask(task, i, task_id) {
     return `
         <div class="subtask" id="subtask${i}">
-            <div><p>${task}</p></div>
+            <div><p class="subtasktext">${task}</p></div>
             <div>
                 <button onclick="deleteSubtask(${i}, ${task_id})">Delete</button>
                 <button onclick="editSubtask(${i}, ${task_id})">Edit</button>
@@ -282,12 +282,12 @@ function templateInviteContact(id) {
 }
 
 function assignChange(name, icon, color, id) {
-    let contact = {'name': name, 'icon': icon, 'iconcolor': color}
+    let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssigned(contact);
-    if (checkOnAssigned(contact) == true){
+    if (checkOnAssigned(contact['icon']) == true) {
         assignetcontacts.splice(index, 1);
     } else {
-        assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color});
+        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
     }
     loadAssignetPersons(id);
 }
@@ -320,7 +320,7 @@ function addNewContact(id) {
     let name = email.split('@');
     let icon = email.slice(0, 2);
     let color = getRandomColor();
-    assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color,});
+    assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
     loadAssignetPersons(id);
 }
@@ -337,7 +337,7 @@ function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+        color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
 }
@@ -345,7 +345,17 @@ function getRandomColor() {
 function checkOnContact(contact) {
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i]['name'];
-        if (name == contact['name']) {
+        if (name == contact) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkOn(icon) {
+    for (let i = 0; i < assignetcontacts.length; i++) {
+        let name = assignetcontacts[i]['icon'];
+        if (name == icon) {
             return true;
         }
     }
@@ -354,18 +364,18 @@ function checkOnContact(contact) {
 
 function checkOnAssigned(contact) {
     for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['name'];
-        if (name == contact['name']) {
+        let name = assignetcontacts[i]['icon'];
+        if (name == contact) {
             return true;
         }
     }
     return false;
 }
 
-function indexOfAssigned(contact) {
+function indexOfAssigned(icon) {
     for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['name'];
-        if (name == contact['name']) {
+        let name = assignetcontacts[i]['icon'];
+        if (name == icon) {
             return i;
         }
     }
