@@ -38,12 +38,12 @@ function resetPassword(){
     let password = document.getElementById('password');
     let confirmedPassword = document.getElementById('password_input');
     let user = users.find((u) => u.email == email);
-
     if (password.value == confirmedPassword.value && user) {
     let newPassword = document.getElementById('password_input');
-    
-        users[user].password = newPassword.value;
-        console.log(newPassword.value);
+        user.password = newPassword.value;
+        alert('Password is reseted!')
+    } else{
+        alert('Passwords do not match!')
     }
 }
 
