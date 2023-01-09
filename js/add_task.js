@@ -2,7 +2,6 @@ let subtasksForCurrenttask = [];
 let taskid;
 let date;
 let priorityNameForTask;
-let contactsForCurrentTask = [];
 let tasklist = [];
 let selectedCategoryColor;
 let selectedTaskValues = [];
@@ -20,21 +19,18 @@ let categories = [{
 let priorities = [
     {
         'name': 'urgent',
-        'index': 0,
         'image': './assets/img/urgent.svg',
         'selected-image': './assets/img/urgent-white.svg',
         'color': '#FF3D00'
     },
     {
         'name': 'medium',
-        'index': 1,
         'image': './assets/img/medium.svg',
         'selected-image': './assets/img/medium-white.svg',
         'color': '#FFA800'
     },
     {
         'name': 'low',
-        'index': 2,
         'image': './assets/img/low.svg',
         'selected-image': './assets/img/low-white.svg',
         'color': '#7AE229'
@@ -91,7 +87,7 @@ function addTask() {
             'tasks': subtasksForCurrenttask
         },
         'assignedTo': {
-            'user': contactsForCurrentTask
+            'user': assignedToContacts
         },
         'priority': priorityNameForTask,
     };
@@ -383,6 +379,10 @@ function addAssignedToIcon(i) {
     assignedToContacts.push(i);
 }
 
+/**
+ * When the current task is created, the selected numbers from the assignedToContacts Array are used to get the whole contact Object from
+ * the JSON contacts array and they are pushed in the array contactsForCurrentTask.
+ */
 
 function assignedToContactsForCurrentTask() {
     for (let i = 0; i < assignedToContacts.length; i++) {
@@ -391,6 +391,9 @@ function assignedToContactsForCurrentTask() {
     }
 }
 
+/**
+ * Renders the Icons from the assignedToContacts Array.
+ */
 
 function renderAssignedToIconsSection() {
     let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
@@ -401,13 +404,9 @@ function renderAssignedToIconsSection() {
     }
 }
 
-
-function templateAssignedToContactIcons(assignedToIndex) {
-    return /*html*/`
-    <div class="name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
-    ${contacts[assignedToIndex]['icon']}</div>`;
-}
-
+/**
+ * Converts the date to a string with the year first, the month second, and the days third.
+ */
 
 function convertDate() {
     let dueDate = document.getElementById('due-date').value;
@@ -417,6 +416,9 @@ function convertDate() {
     date = year + month + day;
 }
 
+/**
+ * Renders the priority buttons from the array priorities.
+ */
 
 function renderPrioButtonsSection() {
     let prioButtonsSection = document.getElementById('prio-buttons-section');
@@ -426,19 +428,20 @@ function renderPrioButtonsSection() {
     }
 }
 
-
-function templatePrioButtonsSection(i) {
-    return /*html*/`
-     <button id="${priorities[i]['name']}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
-     <img src="${priorities[i]['image']}" id="img-${i}"></button>`;
-}
-
+/**
+ * Selected pririty button gets highlighted and if another button was clicked before, the button returns to his original design.
+ * @param {number} i is the selected position from the array priorities
+ */
 
 function selectedPriority(i) {
     changeStyleOfSelectedButton(i);
     resetOtherPriorityButtons(i);
 }
 
+/**
+ * Changes background color and font color from the selected priority button or removes the style when selected buttn gets clicked again.
+ * @param {number} i is the selected position from the array priorities
+ */
 
 function changeStyleOfSelectedButton(i) {
     let id = priorities[i]['name'];
@@ -451,6 +454,11 @@ function changeStyleOfSelectedButton(i) {
     }
 }
 
+/**
+ * Styles the clicked button with a new background color and the font color white.
+ * @param {string} button is the id name of the clicked element, e.g.urgent 
+ * @param {number} i is the position of the clicked button in the array priorities
+ */
 
 function addSelectedButtonStyle(button, i) {
     button.style.backgroundColor = `${priorities[i]['color']}`;
@@ -458,6 +466,10 @@ function addSelectedButtonStyle(button, i) {
     document.getElementById(`img-${i}`).src = `${priorities[i]['selected-image']}`;
 }
 
+/**
+ * Checks if a button was clicked before another button has been clicked.
+ * @param {number} i is the position of the unclicked button in the array priorities.
+ */
 
 function resetOtherPriorityButtons(i) {
     for (let p = 0; p < priorities.length; p++) {
@@ -469,13 +481,22 @@ function resetOtherPriorityButtons(i) {
     }
 }
 
+/**  
+ * Removes the style of the unclicked button to his original style.
+ * @param {string} button is the id name of the unclicked element, e.g.urgent.
+ * @param {number} p is the position of the unclicked button in the array priorities
+ */
 
-function removeStyleOfUnclickedButton(button, j) {
-    document.getElementById(`img-${j}`).src = `${priorities[j]['image']}`;
+function removeStyleOfUnclickedButton(button, p) {
+    document.getElementById(`img-${p}`).src = `${priorities[p]['image']}`;
     button.style.backgroundColor = 'white';
     button.classList.remove('white');
 }
 
+/**
+ * When the task gets created, the current clicked priority button which is stored in the variable priorityId is assigned to the 
+ * global variable priorityNameForTask.
+ */
 
 function priorityForCurrentTask() {
     for (let i = 0; i < priorities.length; i++) {
@@ -487,26 +508,39 @@ function priorityForCurrentTask() {
     }
 }
 
+/**
+ * Changes the input field to the actual input field, where the subtask can be entered or removed.
+ */
+
 function changeSubtaskInputField() {
-    document.getElementById('subtask-before').classList.add('d-none');
-    document.getElementById('subtask-after').classList.remove('d-none');
+    addClassDnone('subtask-before');
+    removeClassDnone('subtask-after');
     focusOnField('input-subtask-area');
 }
 
+/**
+ * Focus on the input field is highlighted.
+ * @param {string} idElement gets the id of a Document Object Model Element.
+ */
 
 function focusOnField(idElement) {
     document.getElementById(idElement).focus();
 }
 
+/**
+ * Closes the SubtaskInput Field by showing the original div with the id 'subtask-before'.
+ */
 
-function closeSubtaskInputField() {
-    document.getElementById('subtask-before').classList.remove('d-none');
-    document.getElementById('subtask-after').classList.add('d-none');
+function closeSubtaskInputField() { 
+    removeClassDnone('subtask-before');
+    addClassDnone('subtask-after');
+    document.getElementById('subtask-to-short').innerHTML = '';
 }
 
-
-
-
+/**
+ * If the value of the subtask input is bigger than 3, the subtask will be added with the function addSubtask. If not, an 
+ * error message is displayed.
+ */
 
 function checkSubtaskInputValue() {
     let inputSubtask = document.getElementById('input-subtask-area');
@@ -522,18 +556,27 @@ function checkSubtaskInputValue() {
     }
 }
 
+/**
+ * Pushes the input of the subtask in the array subtasksForCurrenttask. Since the task is not yet processed the completeted variable is
+ * is set to false.
+ * @param {string} inputSubtask is the value of the input subtask field which the user has entered.
+ */
+
 function addSubtask(inputSubtask) {
     subtasksForCurrenttask.push({ task: inputSubtask, completed: false });
     renderSubtasks();
 }
 
+/**
+ * Renders the elements depending on the completet status. If the completed status is false the function templateRenderSubtasksNotCompleted
+ * is executed. And if the completed status is true the function templateRenderSubtasksWhichAreCompleted is executed.
+ */
 
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML = '';
     for (let i = 0; i < subtasksForCurrenttask.length; i++) {
         let taskElement = subtasksForCurrenttask[i];
-        checkCompletedStatus(i);
         if (checkCompletedStatus(i) == false) {
             subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
         }
@@ -543,29 +586,10 @@ function renderSubtasks() {
     }
 }
 
-
-function templateRenderSubtasksNotCompleted(taskElement, i) {
-    return /*html*/`
-        <div class="flex"> 
-            <label for="checkbox-${i}" class="flex margin-checkbox">
-                <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="changeCurrentCompleteStatus(${i})">
-            </label>
-            <div>${taskElement.task}</div>
-        </div>
-        `;
-}
-
-
-function templateRenderSubtasksWhichAreCompleted(taskElement, i) {
-    return /*html*/`
-    <div class="flex"> 
-            <label for="checkbox-${i}" class="flex margin-checkbox">
-                <input onclick="changeCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>
-            </label>
-            <div>${taskElement.task}</div>
-        </div>`;
-}
-
+/**
+ * @param {number} i is the position of the selected subtask in the array subtasksForCurrenttask.
+ * @returns the Boolean value of completed in the array subtasksForCurrenttask at the position i.
+ */
 
 function checkCompletedStatus(i) {
     if (!subtasksForCurrenttask[i].completed) {
@@ -576,6 +600,11 @@ function checkCompletedStatus(i) {
     }
 }
 
+/**
+ * The completed boolean value gets changed in dependence of the currentCheckbox status at the position if, when the input checkbox
+ * gets clicked.
+ * @param {number*} i is the position of the selected subtask in the array subtasksForCurrenttask.
+ */
 
 function changeCurrentCompleteStatus(i) {
     let currentCheckbox = document.getElementById(`checkbox-${i}`);
@@ -587,6 +616,9 @@ function changeCurrentCompleteStatus(i) {
     }
 }
 
+/**
+ * Clears the Fields that are already filled and the arrays for the currentTask gets cleared too.
+ */
 
 function clearTask() {
     deleteInputandTextareaValues();
@@ -601,6 +633,9 @@ function clearTask() {
     focusOnField('input-title');
 }
 
+/**
+ * Clears the input fields values.
+ */
 
 function deleteInputandTextareaValues() {
     document.getElementById('input-title').value = '';
@@ -609,6 +644,9 @@ function deleteInputandTextareaValues() {
     document.getElementById('input-subtask-area').value = '';
 }
 
+/**
+ * Creates and saves the just created task and clears the task fields again. At the end it will be redirected to the page board.html .
+ */
 
 async function createNewTask() {
     await loadTasklistForId();
@@ -620,11 +658,17 @@ async function createNewTask() {
     redirectToBoardPage();
 }
 
+/**
+ * Taskid gets the number from the tasklist.length. This will be the identification number for the current task.
+ */
 
 function getIdFromTasklist() {
     taskid = tasklist.length
 }
 
+/**
+ * All tasks already created are loaded from the server to get the id number for the currentTask with the function getIdFromTasklist.
+ */
 
 async function loadTasklistForId() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
@@ -633,12 +677,18 @@ async function loadTasklistForId() {
     getIdFromTasklist();
 }
 
+/**
+ * Saves all tasks in the backend with the key "tasklist". 
+ */
 
 function saveCurrentTask() {
     let tasklistAsString = JSON.stringify(tasklist);
     backend.setItem("tasklist", tasklistAsString);
 }
 
+/**
+ * User is redirected to board.html.
+ */
 
 function redirectToBoardPage() {
     window.location.pathname = "./board.html";
