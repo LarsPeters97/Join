@@ -80,23 +80,22 @@ function login() {
         window.location.href = "./summary.html";
     } else {
         event.preventDefault();
-        document.getElementById('wrongPassword').classList.remove('d-none');
-        email.value = '';
-        password.value = '';
+        document.getElementById("wrongPassword").classList.remove("d-none");
+        email.value = "";
+        password.value = "";
     }
 }
 
 /**
  * toggle password input
  */
-function changeVisibility(){
-    if(pwState === 0){
+function changeVisibility() {
+    if (pwState === 0) {
         document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
         document.getElementById("password_input").type = "password";
         pwState = 1;
-    }
-    else{
-        document.getElementById("login-password-image").src="./assets/img/visibility.png";
+    } else {
+        document.getElementById("login-password-image").src = "./assets/img/visibility.png";
         document.getElementById("password_input").type = "text";
         pwState = 0;
     }
@@ -140,18 +139,44 @@ function loadForgotPassword() {
     signUpForm.innerHTML = htmlForgotPassword();
 }
 
+/**send automatic mail */
+async function onSubmit(event) {
+    event.preventDefault(); // prevent default form action
+    let formData = new FormData(event.target); // create a formdata based on our form element in HTML
+    let response = await action(formData);
+    if (response.ok) {
+        alert("Email was send!"); // Feedback für enduser
+        document.getElementById("email_signup").value = "";
+    } else {
+        alert("Email not send!");
+    }
+}
+/**sending mail and giving back true or false */
+function action(formData) {
+    let email = document.getElementById("email_signup");
+    let user = users.find((u) => u.email == email.value);
+    if (user) {
+        const input = "https://gruppe-397.developerakademie.net/send_mail_join/send_mail.php";
+        const requestInit = {
+            method: "post",
+            body: formData,
+        };
+        return fetch(input, requestInit);
+    } else {
+        alert("Email is not assigned!");
+    }
+}
+
 function htmlForgotPassword() {
     return `
   <h2 class="text-size">I forgot my <br> Password</h2>
   <img onclick="loadHtml()" class="arrow" src="./assets/img/arrow-left.png">
   <p style="margin-top:-10px; margin-bottom:40px; text-align:center;">Don´t worry! We will send an email with the instructions to <br> reset your password.</p>
-  <form>
-       <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
+  <form onsubmit="onSubmit(event)">
+       <input class="input_mail" type="email"  name="email" placeholder="Email" id="email_signup" required>
        <div class="loginform_buttonarea">
        <button class="login_button" style="margin-top:20px;" type="submit">Send me the email</button>
        </div>
    </form>
    `;
 }
-
-

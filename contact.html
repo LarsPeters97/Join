@@ -13,15 +13,15 @@
         <link rel="stylesheet" href="./contact.css" />
         <script src="./js/contacts.js"></script>
         <script src="./js/desktop_template.js"></script>
-        <link rel="stylesheet" href="/assets/templates/mobile_template.css" />
-        <script src="/js/mobile_template.js"></script>
+        <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
+        <script src="./js/mobile_template.js"></script>
         <link rel="stylesheet" href="./assets/templates/add_task_mini.css">
         <script src="./js/add_task_mini.js"></script>
         <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon">
     </head>
     <body onload="init(), includeHTML()">
-        <div w3-include-html="/assets/templates/desktop_template.html"></div>
-        <div w3-include-html="/assets/templates/mobile_template.html"></div>
+        <div w3-include-html="./assets/templates/desktop_template.html"></div>
+        <div w3-include-html="./assets/templates/mobile_template.html"></div>
 
         <div class="wrapper">
             <div id="contactsContainer" class="container-contacts"></div>
@@ -51,9 +51,11 @@
         <div onclick="closeAddcontact()" id="addcontact" class="container-addcontact d-none">
             <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
+                    <img onclick="closeAddcontact()" class="close-addcontact-mobile" src="./assets/img/x-white.png" alt="">
                     <div class="container-logo-addcontact">
                         <img src="./assets/img/Logo.png" alt="" />
                         <div>
+                            
                             <h2>Add contact</h2>
                             <p>Tasks are better with a team!</p>
 

@@ -13,13 +13,29 @@
     <script src="script.js"></script>
     <script src="./js/desktop_template.js"></script>
     <script src="js/info.js"></script>
+    <link rel="stylesheet" href="assets/templates/mobile_template.css">
+    <script src="js/mobile_template.js"></script>
+    <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon">
 </head>
 
 <body onload="infoInit()">
 
-    <div w3-include-html="/assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
 
     <div class="info-content">
+
+        <div class="mobile-top">
+            <div class="mobile-headline">
+                Kanban Project Managment Tool
+            </div>
+            <div class="back1-btn">
+                <a href="summary.html">
+                    <img src="/assets/img/arrow_left.png" alt="">
+                </a>
+            </div>
+        </div>
+        
         <div class="top">
             <h1>Info</h1>
             <div class="back-btn">
