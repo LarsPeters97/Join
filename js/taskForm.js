@@ -1,3 +1,9 @@
+async function loadContactsforTasks() {
+    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem("contacts")) || [];
+}
+
 function taskformTemplate(category, color, title, description, duedate, priority, id) {
     return `
 <div class="background" onclick="closeBoardPopup()">
@@ -64,6 +70,7 @@ function renderEditTask(id) {
     loadSubtasks(subtasks, id);
     selectPrio(priority);
     loadAssignetPersons(id);
+    loadContactsforTasks();
 }
 
 function editTaskTemplate(id) {
