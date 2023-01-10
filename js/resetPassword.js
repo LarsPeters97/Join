@@ -6,45 +6,48 @@ let users;
  */
 setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
 
-function onPageLoad(){
+function onPageLoad() {
     email = getEmailUrlParameter();
     users = getUsers();
 }
+
 /**
- * Get mail adresse from url 
+ * Get mail adresse from url
  * @returns email as string
  */
-function getEmailUrlParameter(){
+function getEmailUrlParameter() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const email = urlParams.get('email');
+    const email = urlParams.get("email");
     return email;
 }
 
-function onSubmit(event){
+function onSubmit(event) {
     event.preventDefault();
 }
+
 /**
  * load users from backend
  */
-async function getUsers(){
+async function getUsers() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem("users")) || [];
 }
+
 /**
  * reset password
  */
-function resetPassword(){
-    let password = document.getElementById('password');
-    let confirmedPassword = document.getElementById('password_input');
+function resetPassword() {
+    let password = document.getElementById("password");
+    let confirmedPassword = document.getElementById("password_input");
     let user = users.find((u) => u.email == email);
     if (password.value == confirmedPassword.value && user) {
-    let newPassword = document.getElementById('password_input');
+        let newPassword = document.getElementById("password_input");
         user.password = newPassword.value;
-        alert('Password is reseted!')
+        alert("Password is reseted!");
         save();
-    } else{
-        alert('Passwords do not match!')
+    } else {
+        alert("Passwords do not match!");
     }
 }
 
@@ -56,15 +59,14 @@ async function save() {
 /**
  * toggle password input
  */
-function changeVisibilityResetPassword(){
-    if(pwState === 0){
+function changeVisibilityResetPassword() {
+    if (passwordState === 0) {
         document.getElementById("login-password-image").src = "./assets/img/visibility-off.png";
         document.getElementById("password").type = "password";
-        pwState = 1;
-    }
-    else{
-        document.getElementById("login-password-image").src="./assets/img/visibility.png";
+        passwordState = 1;
+    } else {
+        document.getElementById("login-password-image").src = "./assets/img/visibility.png";
         document.getElementById("password").type = "text";
-        pwState = 0;
+        passwordState = 0;
     }
 }
