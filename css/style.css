@@ -135,7 +135,7 @@ body {
     background: #ffffff;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    background-image: url("./assets/img/Mail_icon.png");
+    background-image: url("../assets/img/Mail_icon.png");
     background-repeat: no-repeat;
     background-position: 390px 16px;
     margin-bottom: 15px;
