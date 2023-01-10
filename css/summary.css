@@ -309,12 +309,12 @@ body {
 }
 
 .summary-to-do-frame:hover .summary-pen-image {
-    background-image: url(./assets/img/white-pen-icon.png);
+    background-image: url(../assets/img/white-pen-icon.png);
     border-radius: 50%;
 }
 
 .summary-to-do-frame:hover .summary-done-image {
-    background-image: url(./assets/img/white-check-icon.png);
+    background-image: url(../assets/img/white-check-icon.png);
     border-radius: 50%;
 }
 
@@ -379,7 +379,6 @@ body {
     }
 
     .content {
-        z-index: -1;
         position: relative;
     }
 
