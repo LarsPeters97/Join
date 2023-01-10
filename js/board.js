@@ -1,5 +1,5 @@
 
-let contacts = [];
+ let contacts = [];
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];
@@ -150,7 +150,7 @@ function removeHighlight(id) {
 
 function taskPopup() {
     document.getElementById('Boardpopup').innerHTML = `
-    <div w3-include-html="/assets/templates/add_task_mini.html"></div>
+    <div w3-include-html="./assets/templates/add_task_mini.html"></div>
     `;
     includeHTML();
     initAddTaskPopup();
