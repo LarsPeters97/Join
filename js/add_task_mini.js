@@ -459,7 +459,7 @@ async function createTask() {
     description = document.getElementById('description_input').value;
     duedate = transformDuedate();
     getIdFromTasklist()
-    if (title && description && category && assignedpeople && duedate && newselectedPrio) {
+    if (title && description && category && assignedpeople.length > 0 && duedate && newselectedPrio) {
         temptasklist.push({
             'progress': 'todo',
             'id': taskid,

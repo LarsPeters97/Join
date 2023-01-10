@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="add_task.css">
-    <link rel="stylesheet" href="board.css">
     <link rel="stylesheet" href="/assets/templates/mobile_template.css">
     <script src="./mini_backend.js"></script>
     <script defer src="./script.js"></script>
@@ -17,12 +16,13 @@
     <script defer src="./js/add_task_templates.js"></script>
     <script src="./js/desktop_template.js"></script>
     <script src="./js/mobile_template.js"></script>
+    <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon">
     <title>Add Task</title>
 </head>
 
 <body onload="includeHTML(); initialize();">
-    <div w3-include-html="/assets/templates/desktop_template.html"></div>
-    <div w3-include-html="/assets/templates/mobile_template.html"></div>
+    <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
     <div class="add-taskt-whole-side">
 
         <form onsubmit="createNewTask(); return false;" class="form-add-task">

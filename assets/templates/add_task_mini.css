@@ -270,8 +270,8 @@
 
 .exit {
     position: absolute !important;
-    top: 41px !important;
-    right: 41px !important;
+    top: 12px !important;
+    right: 18px !important;
     cursor: pointer;
     font-size: 30px;
 }

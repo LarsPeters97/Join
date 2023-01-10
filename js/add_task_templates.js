@@ -107,3 +107,61 @@ function templateExistingContacts(i, contact) {
             </label>      
    `;
 }
+
+/**
+ * 
+ * @param {number} assignedToIndex is the number of the position in the contact array
+ * @returns the icons that are in the array assignedToContacts.
+ */
+
+function templateAssignedToContactIcons(assignedToIndex) {
+    return /*html*/`
+    <div class="name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
+    ${contacts[assignedToIndex]['icon']}</div>`;
+}
+
+/**
+ * 
+ * @param {number} i is the current iteration of the array priorities 
+ * @returns the priority buttons.
+ */
+
+function templatePrioButtonsSection(i) {
+    return /*html*/`
+     <button id="${priorities[i]['name']}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
+     <img src="${priorities[i]['image']}" id="img-${i}"></button>`;
+}
+
+/**
+ * @param {object} taskElement is in the array subtasksForCurrenttask on at the position i.
+ * @param {number} i is the position in the array subtasksForCurrenttask for the current iteration.
+ * @returns the unchecked subtasks.
+ */
+
+function templateRenderSubtasksNotCompleted(taskElement, i) {
+    return /*html*/`
+        <div class="flex"> 
+            <label for="checkbox-${i}" class="flex margin-checkbox">
+                <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="changeCurrentCompleteStatus(${i})">
+            </label>
+            <div>${taskElement.task}</div>
+        </div>
+        `;
+}
+
+/**
+ * 
+ * @param {object} taskElement is in the array subtasksForCurrenttask on at the position i.
+ * @param {number} i is the position in the array subtasksForCurrenttask for the current iteration.
+ * @returns the checked subtasks.
+ */
+
+function templateRenderSubtasksWhichAreCompleted(taskElement, i) {
+    return /*html*/`
+    <div class="flex"> 
+            <label for="checkbox-${i}" class="flex margin-checkbox">
+                <input onclick="changeCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>
+            </label>
+            <div>${taskElement.task}</div>
+        </div>`;
+}

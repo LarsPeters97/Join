@@ -117,7 +117,7 @@ function loadSubtasks(subtasks, id) {
 function templateEditabelSubtask(task, i, task_id) {
     return `
         <div class="subtask" id="subtask${i}">
-            <div><p>${task}</p></div>
+            <div><p class="subtasktext">${task}</p></div>
             <div>
                 <button onclick="deleteSubtask(${i}, ${task_id})">Delete</button>
                 <button onclick="editSubtask(${i}, ${task_id})">Edit</button>
@@ -232,7 +232,7 @@ function openDropdownAssignTo(id) {
     document.getElementById('assign-container').innerHTML = templateOfOpenDropdownAssignTo(id)
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-        if (checkOnAssigned(contact) != false) {
+        if (checkOnAssignedContacts(contact) != false) {
             document.getElementById('assign-container').innerHTML += templateAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
         } else {
             document.getElementById('assign-container').innerHTML += templateNotAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
@@ -282,12 +282,12 @@ function templateInviteContact(id) {
 }
 
 function assignChange(name, icon, color, id) {
-    let contact = {'name': name, 'icon': icon, 'iconcolor': color}
+    let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssigned(contact);
-    if (checkOnAssigned(contact) == true){
+    if (checkOnAssignedContacts(contact['icon']) == true) {
         assignetcontacts.splice(index, 1);
     } else {
-        assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color});
+        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
     }
     loadAssignetPersons(id);
 }
@@ -320,7 +320,7 @@ function addNewContact(id) {
     let name = email.split('@');
     let icon = email.slice(0, 2);
     let color = getRandomColor();
-    assignetcontacts.push({'name': name, 'icon': icon, 'iconcolor': color,});
+    assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
     loadAssignetPersons(id);
 }
@@ -337,7 +337,7 @@ function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+        color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
 }
@@ -345,27 +345,37 @@ function getRandomColor() {
 function checkOnContact(contact) {
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i]['name'];
-        if (name == contact['name']) {
+        if (name == contact) {
             return true;
         }
     }
     return false;
 }
 
-function checkOnAssigned(contact) {
+function checkOn(icon) {
     for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['name'];
-        if (name == contact['name']) {
+        let name = assignetcontacts[i]['icon'];
+        if (name == icon) {
             return true;
         }
     }
     return false;
 }
 
-function indexOfAssigned(contact) {
+function checkOnAssignedContacts(contact) {
     for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['name'];
-        if (name == contact['name']) {
+        let check = assignetcontacts[i]['icon'];
+        if (check == contact) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function indexOfAssigned(icon) {
+    for (let i = 0; i < assignetcontacts.length; i++) {
+        let name = assignetcontacts[i]['icon'];
+        if (name == icon) {
             return i;
         }
     }
@@ -391,7 +401,9 @@ async function editTask(id) {
     tasklist[id]['description'] = newDescription;
     tasklist[id]['duedate'] = parseInt(newDuedate);
     tasklist[id]['priority'] = selectedPrio;
-    tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    if (assignetcontacts){
+        tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    }
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();
