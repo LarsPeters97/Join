@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background: #F5F5F5;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -58,7 +58,6 @@ body {
 
 .summary-greet-top {
     color: #2A3647;
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 47px;
@@ -67,7 +66,6 @@ body {
 .summary-greet-bottom {
     color: #29ABE2;
     width: 385px;
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
     font-size: 64px;
@@ -139,7 +137,6 @@ body {
 .summary-tasks-amount {
     width: 41px;
     height: 77px;
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
     font-size: 64px;
@@ -152,7 +149,6 @@ body {
     height: 50px;
     text-align: center;
     color: #2A3647;
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
@@ -270,7 +266,6 @@ body {
 .summary-deadline-bottom {
     font-weight: 400;
     font-size: 16px;
-    font-family: 'Inter';
     font-style: normal;
     color: #2A3647;
 }
@@ -349,13 +344,13 @@ body {
 .summary-pen-image {
     width: 70px;
     height: 70px;
-    background-image: url(./assets/img/3.png);
+    background-image: url(../assets/img/3.png);
 }
 
 .summary-done-image {
     width: 70px;
     height: 70px;
-    background-image: url(./assets/img/2.png);
+    background-image: url(../assets/img/2.png);
 }
 
 .responsive-container {
