@@ -535,6 +535,7 @@ function closeSubtaskInputField() {
     removeClassDnone('subtask-before');
     addClassDnone('subtask-after');
     document.getElementById('subtask-to-short').innerHTML = '';
+    document.getElementById('input-subtask-area').value = '';
 }
 
 /**
