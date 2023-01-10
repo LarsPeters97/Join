@@ -157,7 +157,7 @@ function renderLetters() {
 
 function renderLettersHtml(letter, j) {
     return `
-    <div class="container-filtered-contacts">
+    <div id= "letter-container${letter.charAt(0)}" class="container-filtered-contacts">
         <span class="letters">${letter}</span>
         <div id="containerContact${letter.charAt(0)}"></div>
     </div>`;
