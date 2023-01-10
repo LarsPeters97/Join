@@ -7,6 +7,7 @@ let selectedCategoryColor;
 let selectedTaskValues = [];
 let selectedCategoryValues = [];
 let assignedToContacts = [];
+let contactsForCurrentTask = [];
 let newCategoryName;
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
 let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '##ffe119', '#9A6324', '#469990'];
@@ -87,7 +88,7 @@ function addTask() {
             'tasks': subtasksForCurrenttask
         },
         'assignedTo': {
-            'user': assignedToContacts
+            'user': contactsForCurrentTask
         },
         'priority': priorityNameForTask,
     };
@@ -625,6 +626,7 @@ function clearTask() {
     deleteInputandTextareaValues();
     removeCategoryInput();
     assignedToContacts = [];
+    contactsForCurrentTask = [];
     addClassDnone('existing-contacts');
     renderAssignedToIconsSection();
     renderPrioButtonsSection();
