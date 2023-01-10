@@ -116,7 +116,7 @@ function templateExistingContacts(i, contact) {
 
 function templateAssignedToContactIcons(assignedToIndex) {
     return /*html*/`
-    <div class="name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
+    <div class="round-icon-name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
     ${contacts[assignedToIndex]['icon']}</div>`;
 }
 

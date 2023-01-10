@@ -307,6 +307,16 @@ body {
     justify-content: space-between;
 }
 
+.round-icon-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+}
+
 .icons-add-task {
     margin-right: 14px !important;
     margin-top: 20px;
@@ -414,4 +424,4 @@ body {
     .create-btn {
         width: 140px;
     }
-  }
+}
