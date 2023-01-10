@@ -379,10 +379,20 @@ body {
         display: none;
     }
 
+    body {
+        overflow-x: hidden;
+    }
+
     .content {
         z-index: -1;
         position: relative;
     }
+
+    
+}
+
+
+@media (max-width:1050px) {
 
     .summary-greet-container-mobil {
         text-align: center;
@@ -395,7 +405,7 @@ body {
         position: absolute;
         top: 90px;
         height: calc(100% - 180px);
-        width: 100vw;
+        width: 96vw;
         background-color: rgba(255, 255, 255, 1);
         z-index: -10;
         color: rgba(0, 0, 0, 0);
@@ -479,10 +489,6 @@ body {
            opacity: 1;
         }
     }
-}
-
-
-@media (max-width:1050px) {
     .summary-headline-container {
         padding-left: 0px !important;
         display: flex;
@@ -493,6 +499,7 @@ body {
         padding-left: 0px !important;
         align-items: center;
     }
+    
 }
 
 @media (max-width:800px) {

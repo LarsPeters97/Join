@@ -6,10 +6,6 @@ let inProgress = [];
 let awaitFeedback = [];
 let doneTasks = [];
 let urgentTasks = [];
-
-/**
- * Array
- */
 let tasklist = [];
 
 /**
@@ -22,7 +18,7 @@ async function summaryInit() {
     loadInProgress();
     loadAwaitFeedback();
     loadDoneTasks();
-    loadurgentTasks();
+    loadUrgentTasks();
     loadTotalamount();
     urgentImage();
     showGreeting();
@@ -100,7 +96,7 @@ function loadDoneTasks() {
 /**
  * filtering the array of the value urgent and sort the date 
  */
-function loadurgentTasks() {
+function loadUrgentTasks() {
     urgentTasks = tasklist.filter(t => t['progress'] != 'donetask');
     urgentTasks = urgentTasks.filter(t => t['priority'] == 'urgent');
     if (urgentTasks.length > 0) {
