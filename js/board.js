@@ -1,4 +1,3 @@
-
 let contacts = [];
 let todos = [];
 let inProgress = [];
@@ -13,11 +12,17 @@ let searchAwaitFeedback = [];
 let searchDoneTasks = [];
 
 
+/**
+ * Initialazing of the board
+ */
 async function initBoard() {
     await loadAll();
     renderBoard();
 }
 
+/**
+ * Loads Tasklist and sorts on progress
+ */
 async function loadAll() {
     await loadTasklist()
     loadTodos();
@@ -26,11 +31,17 @@ async function loadAll() {
     loadDoneTasks();
 }
 
+/**
+ * Saves changes to backend
+ */
 function saveBoard() {
     let tasklistAsString = JSON.stringify(tasklist);
     backend.setItem("tasklist", tasklistAsString);
 }
 
+/**
+ * 
+ */
 async function loadTasklist() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
@@ -150,7 +161,7 @@ function removeHighlight(id) {
 
 function taskPopup() {
     document.getElementById('Boardpopup').innerHTML = `
-    <div w3-include-html="/assets/templates/add_task_mini.html"></div>
+    <div w3-include-html="./assets/templates/add_task_popup.html"></div>
     `;
     includeHTML();
     initAddTaskPopup();
