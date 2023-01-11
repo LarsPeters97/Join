@@ -1,7 +1,7 @@
 let passwordState = 0;
 
 /**
- * loading login form
+ * Loading login form
  */
 function loadHtml() {
     let loginForm = document.getElementById("form");
@@ -36,8 +36,8 @@ function htmlLogin() {
 }
 
 /**
- * checking if user is already signed in
- * login
+ * Checking if user is already signed in
+ * Login
  */
 function login() {
     let email = document.getElementById("Email_login");
@@ -55,7 +55,7 @@ function login() {
 }
 
 /**
- * toggle password input
+ * Toggle password input
  */
 function changeVisibility() {
     if (passwordState === 0) {
@@ -70,7 +70,7 @@ function changeVisibility() {
 }
 
 /**
- * loading sig up form
+ * Loading sig up form
  */
 function loadSignUpForm() {
     let signUpForm = document.getElementById("form");
@@ -98,7 +98,7 @@ function htmlSignup() {
 }
 
 /**
- * loading forgot password form
+ * Loading forgot password form
  */
 function loadForgotPassword() {
     let signUpForm = document.getElementById("form");
@@ -108,7 +108,7 @@ function loadForgotPassword() {
 }
 
 /**
- * send automatic mail
+ * Send automatic mail
  */
 async function onSubmit(event) {
     event.preventDefault(); // prevent default form action
@@ -123,7 +123,7 @@ async function onSubmit(event) {
 }
 
 /**
- * sending mail and giving back true or false 
+ * Sending mail and giving back true or false 
  */
 function action(formData) {
     let email = document.getElementById("email_signup");

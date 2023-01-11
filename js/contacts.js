@@ -1,7 +1,5 @@
 let contacts = [];
-/**
- * array for contact book
- */
+
 let letters = [
     "A",
     "B",
@@ -31,13 +29,14 @@ let letters = [
     "Z",
 ];
 let currentcolor = 0;
+let findContact = false;
 /**
- * url for backend
+ * Url for backend
  */
 setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
 
 /**
- * loading contacts from backend
+ * Loading contacts from backend
  */
 async function init() {
     await downloadFromServer();
@@ -58,7 +57,7 @@ function notClose(event) {
 }
 
 /**
- * delete input value after closing or submitting addcontact
+ * Delete input value after closing or submitting addcontact
  */
 function clearInput() {
     document.getElementById("input_name").value = "";
@@ -68,7 +67,7 @@ function clearInput() {
 }
 
 /**
- * generating random bg-color
+ * Generating random bg-color
  */
 function randomColor() {
     let r = Math.floor(Math.random() * 256);
@@ -79,7 +78,7 @@ function randomColor() {
 }
 
 /**
- * creating contact
+ * Creating contact
  */
 async function createContact() {
     let name = document.getElementById("input_name");
@@ -98,7 +97,7 @@ async function createContact() {
 }
 
 /**
- * get icon for task board
+ * Get icon for task board
  */
 function getIcon(name) {
     let splittedName = name.split(" ");
@@ -112,9 +111,9 @@ function getIcon(name) {
 }
 
 /**
- * showing filtered contacts in contactbook
+ * Showing filtered contacts in contactbook
  */
-function showContacts(letter) {
+function showContacts(letter, i) {
     sortContacts(contacts);
     document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
@@ -127,12 +126,16 @@ function showContacts(letter) {
                 i
             );
             renderInitials(splittedName, i);
+            findContact = true;
         }
+    }
+             if (!findContact) {
+            document.getElementById(`letter-container${letter.charAt(0)}`).classList.add("d-none");
     }
 }
 
 /**
- * get the initials from name
+ * Get the initials from name
  */
 function renderInitials(splittedName, i) {
     document.getElementById(`initial${i}`).innerHTML = "";
@@ -144,12 +147,13 @@ function renderInitials(splittedName, i) {
 }
 
 /**
- * rendering letters for contact book
+ * Rendering letters for contact book
  */
 function renderLetters() {
     document.getElementById("contactsContainer").innerHTML = "";
     for (let j = 0; j < letters.length; j++) {
         const letter = letters[j];
+        findContact = false;
         document.getElementById("contactsContainer").innerHTML += renderLettersHtml(letter, j);
         showContacts(letter);
     }
@@ -164,7 +168,7 @@ function renderLettersHtml(letter, j) {
 }
 
 /**
- * sort contacts from a-z
+ * Sort contacts from a-z
  */
 function sortContacts(contacts) {
     contacts = contacts.sort((a, b) => {
@@ -200,16 +204,16 @@ function deleteContact(i) {
     save();
 }
 
-function openPopUp(){
-    document.getElementById('popupContact').classList.remove('d-none');
+function openPopUp() {
+    document.getElementById("popupContact").classList.remove("d-none");
 }
 
 function closePopUp() {
-    document.getElementById('popupContact').classList.add('d-none');
+    document.getElementById("popupContact").classList.add("d-none");
 }
 
 /**
- * showing choosen contact
+ * Showing choosen contact
  */
 function showContact(i) {
     showContactMobile();
@@ -226,7 +230,7 @@ function showContact(i) {
 }
 
 /**
- * showing contacts responsive
+ * Showing contacts responsive
  */
 function showContactMobile() {
     if (window.innerWidth < 801) {
@@ -237,7 +241,7 @@ function showContactMobile() {
 }
 
 /**
- * close contact viewer
+ * Close contact viewer
  */
 function closeContact() {
     document.getElementById("contact").classList.add("d-none-mobile");
@@ -278,14 +282,14 @@ function showContactHtml(contact, i) {
 }
 
 /**
- * close popup edit contact
+ * Close popup edit contact
  */
 function closeEditContact() {
     document.getElementById("editContact").classList.add("d-none");
 }
 
 /**
- * open edit contact
+ * Open edit contact
  */
 function openEditContact(i) {
     document.getElementById("editContact").classList.remove("d-none");
@@ -351,7 +355,7 @@ function editContactHtml(contact, i) {
 }
 
 /**
- * update contact
+ * Update contact
  */
 async function saveChanges(contact, i) {
     let new_name = document.getElementById("input_name_edit");
@@ -364,7 +368,7 @@ async function saveChanges(contact, i) {
 }
 
 /**
- * saving to backend
+ * Saving to backend
  */
 async function save() {
     await backend.setItem("contacts", JSON.stringify(contacts));
