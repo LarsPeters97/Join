@@ -40,7 +40,7 @@ function saveBoard() {
 }
 
 /**
- * 
+ * Gets tasklist from server
  */
 async function loadTasklist() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
@@ -48,22 +48,37 @@ async function loadTasklist() {
     tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
 
+/**
+ * Filters for progress "todo"
+ */
 function loadTodos() {
     todos = tasklist.filter(t => t['progress'] == 'todo');
 }
 
+/**
+ * Filters for progress "in progress"
+ */
 function loadInProgress() {
     inProgress = tasklist.filter(t => t['progress'] == 'inprogresss');
 }
 
+/**
+ * Filters for progress "awaiting feedback"
+ */
 function loadAwaitFeedback() {
     awaitFeedback = tasklist.filter(t => t['progress'] == 'awaitfeedback');
 }
 
+/**
+ * Filters for progress "done task"
+ */
 function loadDoneTasks() {
     doneTasks = tasklist.filter(t => t['progress'] == 'donetask');
 }
 
+/**
+ * Loads the render funktions
+ */
 function renderBoard() {
     renderTodos('toDos', 'todo', todos);
     renderTodos('inProgress', 'inprogresss', inProgress);
@@ -71,6 +86,12 @@ function renderBoard() {
     renderTodos('doneTasks', 'donetask', doneTasks);
 }
 
+/**
+ * Renders the Bord
+ * @param {string} boxid Id of the div container
+ * @param {string} progression Name of the progression
+ * @param {array} array Array of the progression
+ */
 function renderTodos(boxid, progression, array) {
     document.getElementById(`${boxid}`).innerHTML = ``;
     for (let i = 0; i < array.length; i++) {
@@ -95,6 +116,11 @@ function renderTodos(boxid, progression, array) {
     document.getElementById(`${boxid}`).innerHTML += addDragarea(progression);
 }
 
+/**
+ * Shortening and returning the template of assigned users
+ * @param {array} assignedTo Array of assigned users
+ * @returns Shortent template of assignet users
+ */
 function assignedTo(assignedTo) {
     if (assignedTo.length == 1) {
         return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div>`
@@ -159,6 +185,9 @@ function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragarea-highlight');
 }
 
+/**
+ * Opens the add task Popup
+ */
 function taskPopup() {
     document.getElementById('Boardpopup').innerHTML = `
     <div w3-include-html="./assets/templates/add_task_popup.html"></div>
@@ -167,6 +196,10 @@ function taskPopup() {
     initAddTaskPopup();
 }
 
+/**
+ * Opens the detail-view of selected task
+ * @param {integer} id Id of the task
+ */
 function openTask(id) {
     task = tasklist.filter(t => t['id'] == id);
     let category = task[0]['category']['categoryName'];
@@ -185,10 +218,17 @@ function openTask(id) {
     renderSubTasks(id);
 }
 
+/**
+ * Closes any popup
+ */
 function closeBoardPopup() {
     document.getElementById('Boardpopup').innerHTML = '';
 }
 
+/**
+ * Opens the filter and render funktions of the search
+ * @param {integer} id Id of the task
+ */
 function findTask(id) {
     let search = document.getElementById(id).value;
     searchInTodos(search);
@@ -201,6 +241,10 @@ function findTask(id) {
     rendersearchedTodos(searchDoneTasks, 'doneTasks', 'donetask');
 }
 
+/**
+ * Search funktion
+ * @param {string} search Input of the searchbar
+ */
 function searchInTodos(search) {
     searchTodos = [];
     for (let i = 0; i < todos.length; i++) {
@@ -213,6 +257,10 @@ function searchInTodos(search) {
     }
 }
 
+/**
+ * Search funktion
+ * @param {string} search Input of the searchbar
+ */
 function searchInInProgress(search) {
     searchInProgress = [];
     for (let i = 0; i < inProgress.length; i++) {
@@ -225,6 +273,10 @@ function searchInInProgress(search) {
     }
 }
 
+/**
+ * Search funktion
+ * @param {string} search Input of the searchbar
+ */
 function searchInAwaitFeedback(search) {
     searchAwaitFeedback = [];
     for (let i = 0; i < awaitFeedback.length; i++) {
@@ -237,6 +289,10 @@ function searchInAwaitFeedback(search) {
     }
 }
 
+/**
+ * Search funktion
+ * @param {string} search Input of the searchbar
+ */
 function searchInDoneTasks(search) {
     searchDoneTasks = [];
     for (let i = 0; i < doneTasks.length; i++) {
@@ -249,6 +305,12 @@ function searchInDoneTasks(search) {
     }
 }
 
+/**
+ * Renders the found tasks
+ * @param {array} array Searched progress array
+ * @param {string} id1 Id of searched progress
+ * @param {string} id2 Id of dragarea progress
+ */
 function rendersearchedTodos(array, id1, id2) {
     document.getElementById(id1).innerHTML = ``;
     for (let i = 0; i < array.length; i++) {
