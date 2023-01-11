@@ -38,7 +38,10 @@ function showGreeting() {
     let dateNow = new Date();
     let hours = dateNow.getHours();
     let greetingSlogan = returnGreetingSlogan(hours);
+    currentUser = localStorage.getItem("currentUser");
     document.getElementById('greeting-slogan').innerHTML = greetingSlogan;
+
+    document.getElementById('greet').innerHTML = currentUser;
 }
 
 /**

@@ -303,7 +303,7 @@
     border-radius: 10px;
     display: flex;
     flex-direction: row;
-    animation: flyin 1s linear;
+    animation: flyin 225ms linear;
 }
 
 @keyframes flyin {

@@ -1,4 +1,5 @@
 let passwordState = 0;
+let currentUser ='';
 
 /**
  * Loading login form
@@ -43,8 +44,9 @@ function login() {
     let email = document.getElementById("Email_login");
     let password = document.getElementById("password_input");
     let user = users.find((u) => u.email == email.value && u.password == password.value);
-
     if (user) {
+        currentUser = user.name;
+        localStorage.setItem("currentUser", currentUser);
         window.location.href = "./summary.html";
     } else {
         event.preventDefault();
