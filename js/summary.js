@@ -7,12 +7,15 @@ let awaitFeedback = [];
 let doneTasks = [];
 let urgentTasks = [];
 let tasklist = [];
+let user = [];
 
 /**
  * init function when body is loading
  */
 async function summaryInit() {
     includeHTML();
+    loadCurrentUser();
+    showGreeting();
     await loadTasklistForSummary()
     loadTodos();
     loadInProgress();
@@ -21,7 +24,6 @@ async function summaryInit() {
     loadUrgentTasks();
     loadTotalamount();
     urgentImage();
-    showGreeting();
 }
 
 async function loadTasklistForSummary() {
@@ -30,6 +32,9 @@ async function loadTasklistForSummary() {
     tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
 
+function loadCurrentUser() {
+    user = localStorage.getItem("currentUser");
+}
 
 /**
  * showing greeting slogan 
@@ -40,8 +45,9 @@ function showGreeting() {
     let greetingSlogan = returnGreetingSlogan(hours);
     currentUser = localStorage.getItem("currentUser");
     document.getElementById('greeting-slogan').innerHTML = greetingSlogan;
-
+    document.getElementById('greeting-slogan-mobile').innerHTML = greetingSlogan;
     document.getElementById('greet').innerHTML = currentUser;
+    document.getElementById('greeting-name').innerHTML = currentUser;
 }
 
 /**
