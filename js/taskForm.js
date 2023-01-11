@@ -171,6 +171,7 @@ function addNewSubask(id) {
     let newtask = document.getElementById('newsubtask').value;
     tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
     document.getElementById('newsubtask').value = '';
+    saveBoard();
     loadAll();
     renderBoard();
     task = tasklist.filter(t => t['id'] == id);
@@ -212,6 +213,7 @@ function editSubtask(index, id) {
 function saveSubEdit(index, id) {
     newsubtask = document.getElementById(`subedit${index}`).value;
     tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
+    saveBoard();
     loadAll();
     renderBoard();
     document.getElementById(`subtask${index}`).innerHTML = `
