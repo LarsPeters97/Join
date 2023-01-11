@@ -380,6 +380,7 @@ body {
 
     .content {
         position: relative;
+        z-index: -1;
     }
 
     
@@ -621,7 +622,6 @@ body {
         width: 237px;
         height: 101px;
         left: 33px;
-        top: 160px;
     }
 
     .mobile-headline {
