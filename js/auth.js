@@ -30,7 +30,7 @@ function htmlLogin() {
                 </div>
                 <div class="loginform_buttonarea">
                     <button class="login_button" type="submit">Log in</button>
-                    <a href="./summary.html" class="guest_button" formnovalidate >Guest Log in</a>
+                    <a onclick="loginGuest()" class="guest_button" formnovalidate >Guest Log in</a>
                 </div>
             </form>
   `;
@@ -54,6 +54,11 @@ function login() {
         email.value = "";
         password.value = "";
     }
+}
+
+function loginGuest() {
+    localStorage.setItem("currentUser", 'Guest');
+    window.location.href = "./summary.html";
 }
 
 /**
