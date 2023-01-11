@@ -1,3 +1,6 @@
+/**
+ * Gets contacts for further rendering
+ */
 async function loadContactsforTasks() {
     setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
@@ -26,6 +29,10 @@ function taskformTemplate(category, color, title, description, duedate, priority
     </div>`;
 }
 
+/**
+ * Renders the assigned users
+ * @param {array} assignedTo Array of assigned persons
+ */
 function renderAssignedTo(assignedTo) {
     for (let i = 0; i < assignedTo['user'].length; i++) {
         let user = assignedTo['user'][i];
@@ -35,6 +42,10 @@ function renderAssignedTo(assignedTo) {
     };
 }
 
+/**
+ * Renders subtasks to detail-view
+ * @param {integer} id Id of selected task
+ */
 function renderSubTasks(id) {
     document.getElementById('subtasks').innerHTML = ``;
     for (let i = 0; i < tasklist[id]['subtasks']['tasks'].length; i++) {
@@ -51,6 +62,10 @@ function renderSubTasks(id) {
     }
 }
 
+/**
+ * Renders the editable-view of the selected task
+ * @param {integer} id Id of selected task
+ */
 function renderEditTask(id) {
     task = tasklist.filter(t => t['id'] == id);
     assignetcontacts = task[0]['assignedTo']['user'];
@@ -113,6 +128,11 @@ function editTaskTemplate(id) {
     `;
 }
 
+/**
+ * Renders subtasks with edit buttons
+ * @param {array} subtasks Array of added subtasks
+ * @param {integer} id Id of selected task
+ */
 function loadSubtasks(subtasks, id) {
     document.getElementById('subtasks').innerHTML = '';
     for (let i = 0; i < subtasks.length; i++) {
@@ -143,6 +163,10 @@ function templateEditabelSubtaskInput(task, index, task_id) {
     `;
 }
 
+/**
+ * Adds new subtask to selected task
+ * @param {integer} id Id of selected task
+ */
 function addNewSubask(id) {
     let newtask = document.getElementById('newsubtask').value;
     tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
@@ -154,6 +178,11 @@ function addNewSubask(id) {
     loadSubtasks(subtasks, id);
 }
 
+/**
+ * Deletes subtask from selected task
+ * @param {integer} index Index of selected subtask
+ * @param {integer} id Id of selected task
+ */
 function deleteSubtask(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     task[0]['subtasks']['tasks'].splice(index, 1);
@@ -164,12 +193,22 @@ function deleteSubtask(index, id) {
     loadSubtasks(subtasks, id);
 }
 
+/**
+ * Adds inputfield for selected subtask for editing
+ * @param {integer} index Index of selected subtask
+ * @param {integer} id Id of selected task
+ */
 function editSubtask(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     let subtask = task[0]['subtasks']['tasks'][index];
     document.getElementById(`subtask${index}`).innerHTML = templateEditabelSubtaskInput(subtask['task'], index, id);
 }
 
+/**
+ * Saves the changes of the selected subtask to the selected task
+ * @param {integer} index Index of selected subtask
+ * @param {integer} id Id of selected task
+ */
 function saveSubEdit(index, id) {
     newsubtask = document.getElementById(`subedit${index}`).value;
     tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
@@ -184,6 +223,11 @@ function saveSubEdit(index, id) {
     `
 }
 
+/**
+ * Cancels the editing of selected subtask
+ * @param {integer} index Index of selected subtask
+ * @param {integer} id Id of selected task
+ */
 function cancelSubEdit(index, id) {
     task = tasklist.filter(t => t['id'] == id);
     let subtask = task[0]['subtasks']['tasks'][index];
@@ -196,6 +240,11 @@ function cancelSubEdit(index, id) {
     `
 }
 
+/**
+ * Changes the completed status of selected subtask
+ * @param {integer} task Index of selected subtask
+ * @param {integer} id Id of selected task
+ */
 async function taskStatusChange(task, id) {
     if (tasklist[id]['subtasks']['tasks'][task]['completed'] == true) {
         tasklist[id]['subtasks']['tasks'][task]['completed'] = false;
@@ -207,6 +256,10 @@ async function taskStatusChange(task, id) {
     setTimeout(await initBoard, 50);
 }
 
+/**
+ * Changes priority to selected priority
+ * @param {string} prio Name of selectet priority
+ */
 function selectPrio(prio) {
     if (prio == 'urgent') {
         document.getElementById('urgent').classList.add('urgent');
@@ -226,6 +279,10 @@ function selectPrio(prio) {
     selectedPrio = prio;
 }
 
+/**
+ * Renders the assigned persons of the task
+ * @param {integer} id Id of selected task
+ */
 function loadAssignetPersons(id) {
     document.getElementById('assignedpersons').innerHTML = ``;
     for (let i = 0; i < assignetcontacts.length; i++) {
@@ -234,6 +291,10 @@ function loadAssignetPersons(id) {
     }
 }
 
+/**
+ * Renders the open dropdown-menu for assigning contacts
+ * @param {integer} id Id of selected task
+ */
 function openDropdownAssignTo(id) {
     task = tasklist.filter(t => t['id'] == id);
     document.getElementById('assign-container').innerHTML = templateOfOpenDropdownAssignTo(id)
@@ -288,6 +349,13 @@ function templateInviteContact(id) {
     `;
 }
 
+/**
+ * Changes the assign-status of selected contact
+ * @param {string} name Name of selectet contact
+ * @param {string} icon Icon of selected contact
+ * @param {string} color Iconcolor of selected contact
+ * @param {integer} id Id of selected task
+ */
 function assignChange(name, icon, color, id) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssigned(contact);
@@ -322,6 +390,10 @@ function exitNewContact(id) {
     `;
 }
 
+/**
+ * Creates new contact based on the email
+ * @param {integer} id Id of selected task
+ */
 function addNewContact(id) {
     let email = document.getElementById('email').value;
     let name = email.split('@');
@@ -340,6 +412,10 @@ function templateOfClosedDropdownAssignTo(id) {
     </div>`;
 }
 
+/**
+ * Creates a random colorcode
+ * @returns Random generated color
+ */
 function getRandomColor() {
     var letters = '0123456789ABCDEF';
     var color = '#';
@@ -349,6 +425,11 @@ function getRandomColor() {
     return color;
 }
 
+/**
+ * Checks array for containing a spesific contact
+ * @param {string} contact Name of contact
+ * @returns status of containing the contact
+ */
 function checkOnContact(contact) {
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i]['name'];
@@ -359,6 +440,11 @@ function checkOnContact(contact) {
     return false;
 }
 
+/**
+ * Checks array for containing a spesific contact
+ * @param {string} icon Icon of contact
+ * @returns status of containing the contact
+ */
 function checkOn(icon) {
     for (let i = 0; i < assignetcontacts.length; i++) {
         let name = assignetcontacts[i]['icon'];
@@ -369,6 +455,11 @@ function checkOn(icon) {
     return false;
 }
 
+/**
+ * Checks array for containing a spesific contact
+ * @param {string} contact Name of contact
+ * @returns status of containing the contact
+ */
 function checkOnAssignedContacts(contact) {
     for (let i = 0; i < assignetcontacts.length; i++) {
         let check = assignetcontacts[i]['icon'];
@@ -379,6 +470,11 @@ function checkOnAssignedContacts(contact) {
     return false;
 }
 
+/**
+ * Checks position in array of a spesific contact
+ * @param {string} icon Icon of contact
+ * @returns position in array of contact
+ */
 function indexOfAssigned(icon) {
     for (let i = 0; i < assignetcontacts.length; i++) {
         let name = assignetcontacts[i]['icon'];
@@ -396,6 +492,10 @@ function closeDropdownAssignTo(id) {
     </div>`
 }
 
+/**
+ * Saves changes of selected task
+ * @param {integer} id Id of selected task 
+ */
 async function editTask(id) {
     let newTitle = document.getElementById('titleinput').value;
     let newDescription = document.getElementById('descriptioninput').value;
