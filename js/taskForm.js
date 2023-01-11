@@ -25,7 +25,7 @@ function taskformTemplate(category, color, title, description, duedate, priority
             </div>
         </div>
             <div class="close" onclick="closeBoardPopup()">x</div>
-            <div class="edit" onclick="renderEditTask(${id})"><img src="../assets/img/edit-button.png" alt="edit"></div>
+            <div class="edit" onclick="renderEditTask(${id})"><img src="./assets/img/edit-button.png" alt="edit"></div>
     </div>`;
 }
 
@@ -123,7 +123,7 @@ function editTaskTemplate(id) {
             </div>
         </div>
         <div class="close" onclick="closeBoardPopup()">x</div>
-        <div class="editTask" onclick="editTask(${id})"><img src="../assets/img/check-button.png" alt="Ok"></div>
+        <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
     </div>
     `;
 }
