@@ -694,7 +694,7 @@ function saveCurrentTask() {
  */
 
 function redirectToBoardPage() {
-    window.location.pathname = "./board.html";
+    window.location.href = "./board.html";
 }
 
 /**

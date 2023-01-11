@@ -380,7 +380,6 @@ body {
 
     .content {
         position: relative;
-        z-index: -1;
     }
 
     
@@ -776,6 +775,10 @@ body {
 }
 
 @media(max-width: 450px) {
+    .content{
+        z-index: -1;
+    }
+
     .summary-tasks-btn {
         width: 90px;
         height: 90px;
