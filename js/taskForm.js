@@ -167,12 +167,12 @@ function templateEditabelSubtaskInput(task, index, task_id) {
  * Adds new subtask to selected task
  * @param {integer} id Id of selected task
  */
-function addNewSubask(id) {
+async function addNewSubask(id) {
     let newtask = document.getElementById('newsubtask').value;
     tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
     document.getElementById('newsubtask').value = '';
-    saveBoard();
-    loadAll();
+    await saveBoard();
+    await loadAll();
     renderBoard();
     task = tasklist.filter(t => t['id'] == id);
     let subtasks = task[0]['subtasks']['tasks'];
@@ -210,11 +210,11 @@ function editSubtask(index, id) {
  * @param {integer} index Index of selected subtask
  * @param {integer} id Id of selected task
  */
-function saveSubEdit(index, id) {
+async function saveSubEdit(index, id) {
     newsubtask = document.getElementById(`subedit${index}`).value;
     tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
-    saveBoard();
-    loadAll();
+    await saveBoard();
+    await loadAll();
     renderBoard();
     document.getElementById(`subtask${index}`).innerHTML = `
     <div><p>${newsubtask}</p></div>
