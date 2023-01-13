@@ -1,5 +1,6 @@
 let passwordState = 0;
-let currentUser ='';
+let currentUser = "";
+let rememberMe = false;
 
 /**
  * Loading login form
@@ -13,26 +14,28 @@ function loadHtml() {
 
 function htmlLogin() {
     return `
-  <h2>Log in</h2>
-            <form onsubmit="login(); return false;">
-                <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
-                <div style=position:relative;>
-                <input type="password" placeholder="Password" id="password_input"class="input_password" required>
-                <img onclick="changeVisibility()" id="login-password-image" class="img-password" src="./assets/img/password_icon.png">
-                </div>
-                <div id="wrongPassword" class="wrong-password d-none">Wrong Email/Password!</div>
-                <div class="login_form_part3">
-                    <div style="display:flex;">
-                        <input type="checkbox" id="remember_me">
-                        <p>Remember me</p>
-                    </div>
-                    <p onclick="loadForgotPassword()" class="forgot_password">Forgot my password</p>
-                </div>
+<div class="login_form">
+    <h2>Log in</h2>
+    <form onsubmit="login(); return false;">
+        <input class="input_mail" type="email" placeholder="Email" id="Email_login" required>
+        <div style=position:relative;>
+            <input type="password" placeholder="Password" id="password_input"class="input_password" required>
+            <img onclick="changeVisibility()" id="login-password-image" class="img-password" src="./assets/img/password_icon.png">
+        </div>
+            <div id="wrongPassword" class="wrong-password d-none">Wrong Email/Password!</div>
+            <div class="login_form_part3">
+             <div style="display:flex;">
+             <input type="checkbox" id="remember_me">
+             <p>Remember me</p>
+            </div>
+             <p onclick="loadForgotPassword()" class="forgot_password">Forgot my password</p>
+            </div>
                 <div class="loginform_buttonarea">
                     <button class="login_button" type="submit">Log in</button>
                     <a onclick="loginGuest()" class="guest_button" formnovalidate >Guest Log in</a>
-                </div>
-            </form>
+        </div>
+    </form>
+</div>
   `;
 }
 
@@ -57,7 +60,7 @@ function login() {
 }
 
 function loginGuest() {
-    localStorage.setItem("currentUser", 'Guest');
+    localStorage.setItem("currentUser", "Guest");
     window.location.href = "./summary.html";
 }
 
@@ -88,6 +91,8 @@ function loadSignUpForm() {
 
 function htmlSignup() {
     return `
+
+ <div class="login_form">
   <h2>Sign up</h2>
   <img onclick="loadHtml()" class="arrow" src="./assets/img/arrow-left.png">
   <form onsubmit="addUser(); return false">
@@ -101,6 +106,8 @@ function htmlSignup() {
        <button class="login_button" type="submit">Sign up</button>
        </div>
    </form>
+ </div>
+
 `;
 }
 
@@ -130,7 +137,7 @@ async function onSubmit(event) {
 }
 
 /**
- * Sending mail and giving back true or false 
+ * Sending mail and giving back true or false
  */
 function action(formData) {
     let email = document.getElementById("email_signup");
@@ -149,6 +156,7 @@ function action(formData) {
 
 function htmlForgotPassword() {
     return `
+<div class="login_form">
   <h2 class="text-size">I forgot my <br> Password</h2>
   <img onclick="loadHtml()" class="arrow" src="./assets/img/arrow-left.png">
   <p style="margin-top:-10px; margin-bottom:40px; text-align:center;">Don´t worry! We will send an email with the instructions to <br> reset your password.</p>
@@ -158,5 +166,6 @@ function htmlForgotPassword() {
        <button class="login_button" style="margin-top:20px;" type="submit">Send me the email</button>
        </div>
    </form>
+</div>
    `;
 }
