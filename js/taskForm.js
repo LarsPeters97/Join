@@ -37,7 +37,7 @@ function renderAssignedTo(assignedTo) {
     for (let i = 0; i < assignedTo['user'].length; i++) {
         let user = assignedTo['user'][i];
         document.getElementById('assignedto').innerHTML += `
-        <div class="user"><div class="name" style="background-color: ${user['iconcolor']}">${user['icon']}</div>${user['name']}</div>
+        <div class="user"><div class="name" style="background-color: ${user['iconcolor']}">${user['icon']}</div><div>${user['name']}</div></div>
         `;
     };
 }
