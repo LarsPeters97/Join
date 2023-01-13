@@ -94,6 +94,7 @@ async function createContact() {
         "icon": icon,
     });
     await save();
+    closeAddcontact();
 }
 
 /**
@@ -365,6 +366,7 @@ async function saveChanges(contact, i) {
     contacts[contact].email = new_email.value;
     contacts[contact].phone = new_phone.value;
     await save();
+    closeEditContact();
 }
 
 /**
@@ -372,7 +374,8 @@ async function saveChanges(contact, i) {
  */
 async function save() {
     await backend.setItem("contacts", JSON.stringify(contacts));
-    window.location.href = "./contact.html";
+    //window.location.href = "./contact.html";
+    renderLetters();
 }
 
 function closeBoardPopup() {
