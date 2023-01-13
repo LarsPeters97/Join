@@ -38,6 +38,10 @@
   height: 49px;
 }
 
+.header_left_side a{
+  text-decoration: unset;
+}
+
 .help-icon {
   width: 31px;
   height: 31px;
@@ -51,6 +55,7 @@
   border: 3px solid #2a3647;
   border-radius: 180px;
   cursor: pointer;
+  background-color: #e4e6e7;
 }
 
 .wrapper-logout{
