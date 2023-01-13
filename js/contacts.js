@@ -359,12 +359,12 @@ function editContactHtml(contact, i) {
  * Update contact
  */
 async function saveChanges(contact, i) {
-    let new_name = document.getElementById("input_name_edit");
-    let new_email = document.getElementById("input_email_edit");
-    let new_phone = document.getElementById("input_phone_edit");
-    contacts[contact].name = new_name.value;
-    contacts[contact].email = new_email.value;
-    contacts[contact].phone = new_phone.value;
+    let newName = document.getElementById("input_name_edit");
+    let newEmail = document.getElementById("input_email_edit");
+    let newPhone = document.getElementById("input_phone_edit");
+    contacts[contact].name = newName.value;
+    contacts[contact].email = newEmail.value;
+    contacts[contact].phone = newPhone.value;
     await save();
     closeEditContact();
 }
