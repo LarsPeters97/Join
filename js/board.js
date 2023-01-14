@@ -4,7 +4,7 @@ let inProgress = [];
 let awaitFeedback = [];
 let doneTasks = [];
 let currentDraggedElement;
-let assignetcontacts = [];
+let assignetContacts = [];
 let selectedPrio = [];
 let searchTodos = [];
 let searchInProgress = [];
@@ -230,7 +230,6 @@ function closeBoardPopup() {
  * @param {integer} id Id of the task
  */
 function findTask(id) {
-    setTimeout(100);
     let search = document.getElementById(id).value;
     searchInTodos(search);
     searchInInProgress(search);
