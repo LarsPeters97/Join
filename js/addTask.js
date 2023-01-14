@@ -10,7 +10,7 @@ let assignedToContacts = [];
 let contactsForCurrentTask = [];
 let newCategoryName;
 let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
-let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '##ffe119', '#9A6324', '#469990'];
+let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '#ffe119', '#9A6324', '#469990'];
 
 let categories = [{
     'name': 'General topics',
@@ -314,7 +314,7 @@ function checkIfAssignedToIsOpen() {
 
 /**
  * Renders the contacts from the array contacts and seperates them into the ones who are in the array assignedToContacts and who are not
- * this array. It is done to divide them, into the checked contacts, which the user has clicked on, and the contacts who aren´t checed.
+ * this array. It is done to divide them, into the checked contacts, which the user has clicked on, and the contacts who aren´t checked.
  */
 
 
@@ -322,7 +322,6 @@ function openExistingContacts() {
     removeClassDnone('existing-contacts');
     let existingContacts = document.getElementById('existing-contacts');
     existingContacts.innerHTML = '';
-
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let findIndex = assignedToContacts.indexOf(i);
@@ -333,6 +332,43 @@ function openExistingContacts() {
             existingContacts.innerHTML += templateExistingContacts(i, contact);
         }
     }
+    existingContacts.innerHTML += templateInvitePerson();
+}
+
+/**
+ * To add a new Person to the current Task, the existing contacts gets closed 
+ * and the input field is opened in the div with the id existing-contacts.
+ */
+
+function assignNewPerson() {
+    addClassDnone('existing-contacts');
+    document.getElementById('contact-container').innerHTML = templateInputNewPerson();
+}
+
+/**
+ * New Person gets pushed in the array contacts. The index postition of the new Person is found out with the length method - 1.
+ * This is important to push the index postition in the array assignedToContacts and for every element in this array an icon gets created 
+ * with the function renderAssignedToIconsSection.
+ */
+
+function addNewPerson() {
+    let email = document.getElementById('email').value;
+    let name = email.split('@');
+    let icon = email.slice(0, 2);
+    let color = randomColorForUserIcon();
+    contacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
+    let currentPushedContactIndex = contacts.length - 1;
+    addAssignedToIcon(currentPushedContactIndex);
+    renderAssignedToIconsSection();
+    templateExitNewPerson();
+}
+
+
+/**
+ * @returns a random color from the array userIconColors.
+ */
+function randomColorForUserIcon() {
+    return userIconColors[Math.floor(Math.random()*userIconColors.length)];
 }
 
 /**
@@ -532,7 +568,7 @@ function focusOnField(idElement) {
  * Closes the SubtaskInput Field by showing the original div with the id 'subtask-before'.
  */
 
-function closeSubtaskInputField() { 
+function closeSubtaskInputField() {
     removeClassDnone('subtask-before');
     addClassDnone('subtask-after');
     document.getElementById('subtask-to-short').innerHTML = '';

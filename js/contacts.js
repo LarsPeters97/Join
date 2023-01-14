@@ -131,7 +131,7 @@ function showContacts(letter, i) {
         }
     }
              if (!findContact) {
-            document.getElementById(`letter-container${letter.charAt(0)}`).classList.add("d-none");
+            document.getElementById(`letterContainer${letter.charAt(0)}`).classList.add("d-none");
     }
 }
 
@@ -162,7 +162,7 @@ function renderLetters() {
 
 function renderLettersHtml(letter, j) {
     return `
-    <div id= "letter-container${letter.charAt(0)}" class="container-filtered-contacts">
+    <div id= "letterContainer${letter.charAt(0)}" class="container-filtered-contacts">
         <span class="letters">${letter}</span>
         <div id="containerContact${letter.charAt(0)}"></div>
     </div>`;
@@ -182,8 +182,8 @@ function sortContacts(contacts) {
 function showContactsHtml(contact, splittedName, i) {
     return `
     <div class="contact-card">
-        <img onclick="openPopUp()" class="contact-card-menu" src="./assets/img/ellipsis.png">
-        <div onclick="closePopUp()" id="popupContact" class="wrapper-popup-menu d-none">   
+        <img onclick="openPopUp(${i})" class="contact-card-menu" src="./assets/img/ellipsis.png">
+        <div onclick="closePopUp(${i})" id="popupContact${i}" class="wrapper-popup-menu d-none">   
          <div onclick="notClose(event)" class="contact-card-menu-popup">
             <span onclick="openEditContact(${i})"> Edit </span>
             <span onclick="deleteContact(${i})">Delete</span>
@@ -205,12 +205,12 @@ function deleteContact(i) {
     save();
 }
 
-function openPopUp() {
-    document.getElementById("popupContact").classList.remove("d-none");
+function openPopUp(i) {
+    document.getElementById(`popupContact${i}`).classList.remove("d-none");
 }
 
-function closePopUp() {
-    document.getElementById("popupContact").classList.add("d-none");
+function closePopUp(i) {
+    document.getElementById(`popupContact${i}`).classList.add("d-none");
 }
 
 /**

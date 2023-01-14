@@ -133,6 +133,12 @@ body {
     border-radius: 9px 9px 9px 9px;
 }
 
+.newcontact {
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .due-date input {
     height: 51px;
     border-radius: 10px;
@@ -245,7 +251,7 @@ body {
     border-radius: 50%;
 }
 
-.input-category {
+.input-category-contact {
     width: 80%;
     height: 100%;
     font-size: 21px;
@@ -253,7 +259,7 @@ body {
     outline: none;
 }
 
-.category-icons {
+.delete-and-create-icons-section {
     align-items: center;
     width: 20%;
     justify-content: flex-end;
