@@ -70,13 +70,16 @@
                     <div class="flex column margin-for-fields">
                         <span class="header-for-fields">Assigned to</span>
                         <div class="dropdown-category-container width-f" id="assigned-container">
-                            <div class="dropdown-category border-radius-fields" onclick="checkIfAssignedToIsOpen()">
-                                <span class="flex">Select contacts to assign</span>
-                                <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                            <div class="dropdown-category border-radius-fields" id="contact-container">
+                                <div class="flex input-section" onclick="checkIfAssignedToIsOpen()"
+                                    id="assigned-contacts">
+                                    <span class="flex">Select contacts to assign</span>
+                                    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                                </div>
                             </div>
                             <div id="existing-contacts" class="d-none max-height-and-scroll"></div>
                         </div>
-                        <div id="assigned-to-icons-section" class="flex"></div>
+                        <div id="assigned-to-icons-section" class="flex width-f"></div>
                     </div>
                 </div>
 

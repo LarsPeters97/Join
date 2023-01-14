@@ -245,7 +245,7 @@ function templateInvitePerson() {
     return `
     <div class="contact_selection" onclick="assignNewPerson()">
         <span>Invite new contact</span>
-        <img src="./assets/img/contact-icon.png">
+        <img src="./assets/img/invite-contact.png">
     </div>
     `;
 }

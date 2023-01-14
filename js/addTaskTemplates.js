@@ -31,8 +31,8 @@ function templateSelectedCategory() {
 
 function templateCreateNewCategory() {
     return /*html*/`
-    <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
-    <div class="flex category-icons">
+    <input class="input-category-contact" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
+    <div class="flex delete-and-create-icons-section">
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
     </div>`;
@@ -107,6 +107,51 @@ function templateExistingContacts(i, contact) {
             </label>      
    `;
 }
+
+/**
+ * 
+ * @returns the new contact field.
+ */
+
+function templateInvitePerson() {
+    return /*html*/`
+    <div class="flex checkbox-style dropdown-category-existing select-bg-color flex" onclick="assignNewPerson()">
+        <span>Invite new contact</span>
+        <img src="./assets/img/invite-contact.png">
+    </div>
+    `;
+}
+
+/**
+ * @returns the input field to assign a new Person with click on the checkmark  or remove the input with the x.
+ */
+
+function templateInputNewPerson() {
+    return /*html*/`
+    <div class="newcontact flex">
+        <input class="input-category-contact" type="email" placeholder="Contact email" id="email">
+        <div class="flex delete-and-create-icons-section">
+            <img src="./assets/img/false-x.png" class="false-x" onclick="templateExitNewPerson()">
+            |
+            <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewPerson()">
+        </div>
+    </div>
+    `
+}
+
+/**
+ * Reset to original content. Dropdown assign contacts can be opened again.
+ */
+
+function templateExitNewPerson() {
+    document.getElementById('contact-container').innerHTML = 
+    /*html*/`
+    <div class="flex input-section" onclick="checkIfAssignedToIsOpen()" id="assigned-contacts">
+        <span class="flex">Select contacts to assign</span>
+        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+    </div>`;
+}
+
 
 /**
  * 
