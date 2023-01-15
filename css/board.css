@@ -279,7 +279,6 @@ body {
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 50px;
-    margin-top: -300px;
     z-index: 1009;
     position: relative;
 }
@@ -407,7 +406,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 98vh;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
 }
 
 .subtasks {
