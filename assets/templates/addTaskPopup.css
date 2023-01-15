@@ -498,6 +498,36 @@
     left: 0;
 }
 
+.title_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.description_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.category_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.assign_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.duedate_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.prio_alert {
+    color: red;
+    font-weight: 500;
+}
+
 @media (max-width: 1200px) {
     .add_task_popup {
         position: absolute;

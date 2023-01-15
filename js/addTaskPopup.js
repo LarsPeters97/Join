@@ -494,26 +494,41 @@ function checkMissingInfo(title, description) {
 
 function missingTitleAlert() {
     document.getElementById('title_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);    
+}
+
+function hideAlert() {
+    document.getElementById('description_alert').classList.add('d-none');
+    document.getElementById('title_alert').classList.add('d-none');
+    document.getElementById('category_alert').classList.add('d-none');
+    document.getElementById('assign_alert').classList.add('d-none');
+    document.getElementById('duedate_alert').classList.add('d-none');
+    document.getElementById('prio_alert').classList.add('d-none');
 }
 
 function missingDescriptionAlert() {
     document.getElementById('description_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);
 }
 
 function missingCategoryAlert() {
     document.getElementById('category_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);
 }
 
 function missingAssignsAlert() {
     document.getElementById('assign_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);
 }
 
 function missingDueDateAlert() {
     document.getElementById('duedate_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);
 }
 
 function missingPrioAlert() {
     document.getElementById('prio_alert').classList.remove('d-none');
+    setTimeout(hideAlert, 5000);
 }
 
 function pushTasklist(category_color, category_name, duedate, title, description) {
