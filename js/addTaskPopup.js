@@ -284,12 +284,18 @@ function exitNewPerson() {
 
 function addNewPerson() {
     let email = document.getElementById('email').value;
-    let name = email.split('@');
-    let icon = email.slice(0, 2);
-    let color = getRandomColor();
-    assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
-    loadAssignedPeople();
+        let icon = email.slice(0, 2);
+        let color = getRandomColor();
+    if (email.includes('@')) {
+        let tempName = email.split('@');
+        let name = tempName[0]
+        assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    } else {
+        let name = email;
+        assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    }
+        document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
+        loadAssignedPeople();
 }
 
 function templateOfClosedDropdownAssignToSelection() {
@@ -494,7 +500,7 @@ function checkMissingInfo(title, description) {
 
 function missingTitleAlert() {
     document.getElementById('title_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);    
+    setTimeout(hideAlert, 5000);
 }
 
 function hideAlert() {
