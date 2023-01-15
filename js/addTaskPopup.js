@@ -64,7 +64,7 @@ function getIdFromTasklist() {
 function openCategorySelection() {
     document.getElementById('category_selection').innerHTML = templateOpenCategorySelection();
     for (let i = 0; i < tempCategorys.length; i++) {
-        let categorySelect = categorys[i];
+        let categorySelect = tempCategorys[i];
         document.getElementById('category_selection').innerHTML += templateCategoryOption(i, categorySelect['name'], categorySelect['color']);
     }
 }
@@ -156,10 +156,10 @@ function newCategoryColor(color, i) {
 }
 
 function selectCategory(index) {
-    category = categorys[index];
+    category = tempCategorys[index];
     document.getElementById('category_selection').innerHTML = `
-    <span class="selectet_category" onclick="openCategorySelection()">${categorys[index]['name']}
-    <span class="all-colors" id="selected-color" style="background-color: ${categorys[index]['color']}"></span></span>`
+    <span class="selectet_category" onclick="openCategorySelection()">${category['name']}
+    <span class="all-colors" id="selected-color" style="background-color: ${category['color']}"></span></span>`
 }
 
 function addNewCategory() {

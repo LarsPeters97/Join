@@ -842,10 +842,6 @@ body {
         width: 85%;
     }
 
-    .background {
-        z-index: 1;
-    }
-
     .taskform p {
         width: 400px;
     }
@@ -884,7 +880,7 @@ body {
     }
 
     .taskform {
-        position: absolute;
+        position: fixed;
         width: auto;
         margin-right: 0 !important;
         border-radius: 0;
@@ -894,6 +890,13 @@ body {
         min-width: 200px;
         padding-right: 10px;
         z-index: 102;
+        max-height: 70%;
+        overflow-y: scroll;
+    }
+
+    .edittaskform {
+        position: absolute;
+        max-height: fit-content;
     }
 
     .subtasktext {

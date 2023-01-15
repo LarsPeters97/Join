@@ -85,6 +85,7 @@
     width: 90%;
     height: 25px;
     padding: 12px 20px;
+    cursor: pointer;
 }
 
 .category_select {
@@ -351,6 +352,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 90%;
+    cursor: pointer;
 }
 
 .newcontact {
@@ -488,7 +490,7 @@
     margin-left: 5px;
 }
 
-.background {
+.background-popup {
     width: 100%;
     height: 100%;
     z-index: 1000;
@@ -543,7 +545,7 @@
 @media (max-width: 1050px){
     .add_task_popup {
         height: fit-content;
-        z-index: 101;
+        z-index: 102;
         margin-top: 89px;
         padding-bottom: 100px;
     }
@@ -557,7 +559,7 @@
         border: none;
     }
     
-    .background {
+    .background-popup {
         z-index: 100;
     }
 
