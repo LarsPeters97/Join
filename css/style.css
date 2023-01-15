@@ -282,6 +282,10 @@ body {
     outline: none;
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
 .arrow {
     position: absolute;
     top: 30px;

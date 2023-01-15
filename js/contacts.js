@@ -86,15 +86,16 @@ async function createContact() {
     let phone = document.getElementById("input_phone");
     let color = randomColor();
     let icon = getIcon(name.value);
+   if(name.value){
     contacts.push({
-        name: name.value,
-        email: email.value,
-        phone: phone.value,
-        "iconcolor": color,
-        "icon": icon,
+        name: name.value, email: email.value, phone: phone.value, "iconcolor": color, "icon": icon,
     });
     await save();
-    closeAddcontact();
+    clearInput();
+    closeAddcontact();}
+    else{
+        alert('Name is required!')
+    }
 }
 
 /**
