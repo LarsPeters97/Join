@@ -775,10 +775,6 @@ body {
         max-width: 95vw;
     }
 
-    .taskform {
-        margin-top: 100px;
-    }
-
     .taskbar {
         width: 95vw;
     }
@@ -791,6 +787,10 @@ body {
     .taskbar_2 {
         width: 100%;
         justify-content: space-evenly;
+    }
+
+    .background {
+        z-index: 102 !important;
     }
 }
 
@@ -846,23 +846,8 @@ body {
         z-index: 1;
     }
 
-    .taskform {
-        position: absolute;
-        width: auto;
-        margin-top: 42px;
-        margin-right: 0 !important;
-        border-radius: 0;
-        left: 0;
-        right: 0;
-        padding-left: 10px;
-    }
-
     .taskform p {
         width: 400px;
-    }
-
-    .edittaskform {
-        margin-top: 500px !important;
     }
 
     .taskbar {
@@ -898,11 +883,19 @@ body {
         width: 80vw;
     }
 
-    .taskform{
+    .taskform {
+        position: absolute;
+        width: auto;
+        margin-right: 0 !important;
+        border-radius: 0;
+        left: 0;
+        right: 0;
+        padding-left: 10px;
         min-width: 200px;
         padding-right: 10px;
-        z-index: 100;
+        z-index: 102;
     }
+
     .subtasktext {
         width: 70vw !important;
     }
