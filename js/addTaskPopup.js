@@ -55,7 +55,7 @@ async function loadCategorys() {
  * sets "taskid" as running number
  */
 function getIdFromTasklist() {
-    taskid = tempTasklist.length;
+    taskId = tempTasklist.length;
 }
 
 /**
@@ -458,14 +458,28 @@ async function createTask() {
     title = document.getElementById('title_input').value;
     description = document.getElementById('description_input').value;
     duedate = transformDuedate();
-    getIdFromTasklist()
+    getIdFromTasklist();
     if (title && description && category && assignedPeople.length > 0 && duedate && newSelectedPrio) {
-        temptasklist.push({
+        pushTasklist(category['color'], category['name'], duedate, title, description)
+        for (let i = 0; i < subtasks.length; i++) {
+            let subtask = subtasks[i];
+            tempTasklist[taskId]['subtasks']['tasks'].push(subtask);
+        }
+        let tasksAsString = JSON.stringify(tempTasklist);
+        await backend.setItem('tasklist', tasksAsString);
+        await checkCategoryNew();
+        closePopup();
+        initBoard();
+    }
+}
+
+function pushTasklist(category_color, category_name, duedate, title, description) {
+    tempTasklist.push({
             'progress': 'todo',
-            'id': taskid,
+            'id': taskId,
             'category': {
-                'color': category['color'],
-                'categoryName': category['name'],
+                'color': category_color,
+                'categoryName': category_name,
             },
             'duedate': duedate,
             'title': title,
@@ -478,16 +492,6 @@ async function createTask() {
             },
             'priority': newSelectedPrio,
         },);
-        for (let i = 0; i < subtasks.length; i++) {
-            let subtask = subtasks[i];
-            tempTasklist[taskid]['subtasks']['tasks'].push(subtask);
-        }
-        let tasksAsString = JSON.stringify(tempTasklist);
-        await backend.setItem('tasklist', tasksAsString);
-        await checkCategoryNew();
-        closePopup();
-        initBoard();
-    }
 }
 
 async function checkCategoryNew() {
