@@ -1,7 +1,6 @@
 <div class="background" onclick="closePopup()"></div>
 <div class="add_task_popup">
     <div class="add_task_headline">Add Task</div>
-    <form>
         <div class="add_task_box">
             <div class="add_task_box_left">
                 <label class="title_label" for="title_input">Title</label>
@@ -54,7 +53,6 @@
         <div class="exit" onclick="closePopup()">x</div>
         <div class="cancel" onclick="closePopup()">Cancel <img src="./assets/img/x-lightblue.png" class="cancelimg">
         </div>
-        <button class="create_task" type="submit">Create Task <img src="./assets/img/checkmark.png"
-                class="checkmark"></button>
-    </form>
+        <div class="create_task" onclick="createTask()">Create Task <img src="./assets/img/checkmark.png"
+                class="checkmark"></div>
 </div>

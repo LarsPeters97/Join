@@ -205,7 +205,7 @@ function templateOpenAssignToSelection() {
     </div>`
 }
 
-function templateAssignedContactSelection(i, name, icon, iconcolor){
+function templateAssignedContactSelection(i, name, icon, iconcolor) {
     return `
         <div class="contact_selection">
             <label for="contact${i}">${name}</label>
@@ -213,7 +213,7 @@ function templateAssignedContactSelection(i, name, icon, iconcolor){
         </div>`;
 }
 
-function templateNotAssignedContactSelection(i, name, icon, iconcolor){
+function templateNotAssignedContactSelection(i, name, icon, iconcolor) {
     return `
         <div class="contact_selection">
             <label for="contact${i}">${name}</label>
@@ -458,6 +458,7 @@ async function createTask() {
     title = document.getElementById('title_input').value;
     description = document.getElementById('description_input').value;
     duedate = transformDuedate();
+    checkMissingInfo(title, description, duedate);
     getIdFromTasklist();
     if (title && description && category && assignedPeople.length > 0 && duedate && newSelectedPrio) {
         pushTasklist(category['color'], category['name'], duedate, title, description)
@@ -473,25 +474,67 @@ async function createTask() {
     }
 }
 
+function checkMissingInfo(title, description) {
+    if (title == false) {
+        missingTitleAlert();
+    } else if (description == false) {
+        missingDescriptionAlert();
+    } else if (category == false) {
+        missingCategoryAlert();
+    } else if (assignedPeople == false) {
+        missingAssignsAlert();
+    } else if (duedate == false) {
+        missingDueDateAlert();
+    } else if (newSelectedPrio == false) {
+        missingPrioAlert();
+    } else {
+        return;
+    }
+}
+
+function missingTitleAlert() {
+    document.getElementById('title_alert').classList.remove('d-none');
+}
+
+function missingDescriptionAlert() {
+    document.getElementById('description_alert').classList.remove('d-none');
+}
+
+function missingCategoryAlert() {
+    document.getElementById('category_alert').classList.remove('d-none');
+}
+
+function missingAssignsAlert() {
+    document.getElementById('assign_alert').classList.remove('d-none');
+}
+
+function missingDueDateAlert() {
+    document.getElementById('duedate_alert').classList.remove('d-none');
+}
+
+function missingPrioAlert() {
+    document.getElementById('prio_alert').classList.remove('d-none');
+}
+
 function pushTasklist(category_color, category_name, duedate, title, description) {
     tempTasklist.push({
-            'progress': 'todo',
-            'id': taskId,
-            'category': {
-                'color': category_color,
-                'categoryName': category_name,
-            },
-            'duedate': duedate,
-            'title': title,
-            'description': description,
-            'subtasks': {
-                'tasks': [],
-            },
-            'assignedTo': {
-                'user': assignedPeople,
-            },
-            'priority': newSelectedPrio,
-        },);
+        'progress': 'todo',
+        'id': taskId,
+        'category': {
+            'color': category_color,
+            'categoryName': category_name,
+        },
+        'duedate': duedate,
+        'title': title,
+        'description': description,
+        'subtasks': {
+            'tasks': [],
+        },
+        'assignedTo': {
+            'user': assignedPeople,
+        },
+        'priority': newSelectedPrio,
+    },);
 }
 
 async function checkCategoryNew() {
