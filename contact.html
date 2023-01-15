@@ -77,22 +77,24 @@
                         class="close-addcontact"
                         src="./assets/img/x-blue.png"
                         alt="" />
+                        <form onsubmit="createContact(); return false">
                         <div>
-                            <input id="input_name" class="input_name" type="text" placeholder="Name"/>
+                            <input id="input_name" class="input_name" type="text" required placeholder="Name"/>
                         </div>
                         <div>
-                            <input id="input_email" class="input_email" type="email" placeholder="Email"/>
+                            <input id="input_email" class="input_email" type="email" required placeholder="Email"/>
                         </div>
                         <div>
-                            <input id="input_phone" class="input_phone" type="number" placeholder="Phone"/>
+                            <input id="input_phone" class="input_phone" type="number" required placeholder="Phone"/>
                         </div>
                     
                     <div class="container-button">
-                        <button onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
-                        <button onclick="createContact()" class="button-create">
+                        <button type="button" onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
+                        <button class="button-create">
                             Create contact
                             <img src="./assets/img/check-white.png" alt="" />
                         </button>
+                    </form>
                     </div>
                 </div>
             </div>

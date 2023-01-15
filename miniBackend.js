@@ -24,7 +24,6 @@ window.onload = async function() {
 async function downloadFromServer() {
     let result = await loadJSONFromServer();
     jsonFromServer = JSON.parse(result);
-    console.log('Loaded', result);
 }
 
 function setURL(url) {
@@ -103,7 +102,7 @@ function saveJSONToServer() {
 function determineProxySettings() {
     return '';
 
-    if (window.location.href.indexOf('.developerakademie.com') > -1) {
+    if (window.location.href.indexOf('.developerakademie.net') > -1) {
         return '';
     } else {
         return 'https://cors-anywhere.herokuapp.com/';
