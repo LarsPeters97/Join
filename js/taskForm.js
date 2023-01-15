@@ -398,10 +398,16 @@ function exitNewContact(id) {
  */
 function addNewContact(id) {
     let email = document.getElementById('email').value;
-    let name = email.split('@');
     let icon = email.slice(0, 2);
     let color = getRandomColor();
-    assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    if (email.includes('@')){
+        let tempName = email.split('@');
+        let name = tempName[0];
+        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    } else {
+        let name = email;
+        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    }
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
     loadAssignetPersons(id);
 }
