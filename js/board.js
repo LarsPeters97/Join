@@ -193,6 +193,7 @@ function taskPopup() {
     <div w3-include-html="./assets/templates/add_task_popup.html"></div>
     `;
     includeHTML();
+    document.getElementById('Boardpopup').classList.remove('d-none');
     initAddTaskPopup();
 }
 
@@ -201,6 +202,7 @@ function taskPopup() {
  * @param {integer} id Id of the task
  */
 function openTask(id) {
+    document.getElementById('Boardpopup').classList.remove('d-none');
     task = tasklist.filter(t => t['id'] == id);
     let category = task[0]['category']['categoryName'];
     let color = task[0]['category']['color'];
@@ -223,6 +225,7 @@ function openTask(id) {
  */
 function closeBoardPopup() {
     document.getElementById('Boardpopup').innerHTML = '';
+    document.getElementById('Boardpopup').classList.add('d-none');
 }
 
 /**
