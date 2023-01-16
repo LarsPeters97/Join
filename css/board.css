@@ -373,7 +373,7 @@ body {
     display: flex;
     flex-direction: row !important;
     align-items: center;
-    justify-content: space-between;
+    gap: 15px;
     margin-top: 15px;
     font-weight: 400;
     font-size: 18px;
@@ -907,4 +907,8 @@ body {
     .subtasktext {
         width: 70vw !important;
     }
+}
+
+.d-none {
+    display: none;
 }
