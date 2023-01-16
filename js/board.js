@@ -80,10 +80,10 @@ function loadDoneTasks() {
  * Loads the render funktions
  */
 function renderBoard() {
-    renderTodos('toDos', 'todo', todos);
-    renderTodos('inProgress', 'inprogresss', inProgress);
-    renderTodos('awaitingFeedback', 'awaitfeedback', awaitFeedback);
-    renderTodos('doneTasks', 'donetask', doneTasks);
+    renderTodos('toDos', 'todo', todos, 'inprogresss', 'todo');
+    renderTodos('inProgress', 'inprogresss', inProgress, 'awaitfeedback', 'todo');
+    renderTodos('awaitingFeedback', 'awaitfeedback', awaitFeedback, 'donetask', 'inprogresss');
+    renderTodos('doneTasks', 'donetask', doneTasks, 'donetask', 'awaitfeedback');
 }
 
 /**
@@ -92,7 +92,7 @@ function renderBoard() {
  * @param {string} progression Name of the progression
  * @param {array} array Array of the progression
  */
-function renderTodos(boxid, progression, array) {
+function renderTodos(boxid, progression, array, next, previus) {
     document.getElementById(`${boxid}`).innerHTML = ``;
     for (let i = 0; i < array.length; i++) {
         let toDo = array[i];
@@ -111,7 +111,7 @@ function renderTodos(boxid, progression, array) {
         }
         let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
-        document.getElementById(`${boxid}`).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
+        document.getElementById(`${boxid}`).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus);
     }
     document.getElementById(`${boxid}`).innerHTML += addDragarea(progression);
 }
@@ -136,7 +136,7 @@ function assignedTo(assignedTo) {
     }
 }
 
-function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority) {
+function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus) {
     let width = completedtasks / subtasks * 100
     return `
     <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
@@ -154,7 +154,17 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
             </div>
             <img src="assets/img/${priority}.png" alt="${priority}">
         </div>
-    </div>`
+    </div>
+        <div class="mobile-buttons">
+            <button class="up" onclick="moveTask(${id}, '${previus}')">previus</button>
+            <button class="down" onclick="moveTask(${id}, '${next}')">next</button>
+        </div>`
+}
+
+async function moveTask(id, destination) {
+    tasklist[id]['progress'] = destination;
+    await saveBoard();
+    setTimeout(await initBoard, 100);
 }
 
 function addDragarea(id) {
@@ -238,10 +248,10 @@ function findTask(id) {
     searchInInProgress(search);
     searchInAwaitFeedback(search);
     searchInDoneTasks(search);
-    rendersearchedTodos(searchTodos, 'toDos', 'todo');
-    rendersearchedTodos(searchInProgress, 'inProgress', 'inprogresss');
-    rendersearchedTodos(searchAwaitFeedback, 'awaitingFeedback', 'awaitfeedback');
-    rendersearchedTodos(searchDoneTasks, 'doneTasks', 'donetask');
+    rendersearchedTodos(searchTodos, 'toDos', 'todo', 'inprogresss', 'todo');
+    rendersearchedTodos(searchInProgress, 'inProgress', 'inprogresss', 'awaitfeedback', 'todo');
+    rendersearchedTodos(searchAwaitFeedback, 'awaitingFeedback', 'awaitfeedback', 'donetask', 'inprogresss');
+    rendersearchedTodos(searchDoneTasks, 'doneTasks', 'donetask', 'donetask', 'awaitfeedback');
 }
 
 /**
@@ -314,7 +324,7 @@ function searchInDoneTasks(search) {
  * @param {string} id1 Id of searched progress
  * @param {string} id2 Id of dragarea progress
  */
-function rendersearchedTodos(array, id1, id2) {
+function rendersearchedTodos(array, id1, id2, next, previus) {
     document.getElementById(id1).innerHTML = ``;
     for (let i = 0; i < array.length; i++) {
         let toDo = array[i];
@@ -333,7 +343,7 @@ function rendersearchedTodos(array, id1, id2) {
         }
         let assignedIconToThree = assignedTo(toDo['assignedTo']['user']);
         let priority = toDo['priority'];
-        document.getElementById(id1).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority)
+        document.getElementById(id1).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus)
     }
     document.getElementById(id1).innerHTML += addDragarea(id2);
 }
