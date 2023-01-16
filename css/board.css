@@ -3,10 +3,6 @@ body {
     background-color: #F5F5F5;
 }
 
-.d-none {
-    display: none;
-}
-
 .content {
     position: absolute;
     left: 232px;
@@ -902,4 +898,8 @@ body {
     .subtasktext {
         width: 70vw !important;
     }
+}
+
+.d-none {
+    display: none;
 }
