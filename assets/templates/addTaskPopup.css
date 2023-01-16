@@ -12,6 +12,7 @@
     z-index: 1000;
     border-radius: 20px;
     width: fit-content;
+    animation: flyin 225ms linear;
 }
 
 .add_task_headline {
@@ -528,6 +529,15 @@
 .prio_alert {
     color: red;
     font-weight: 500;
+}
+
+@keyframes flyIn {
+    0% {
+        left: 800px;
+    }
+    100% {
+        left: 0px;
+    }
 }
 
 @media (max-width: 1200px) {

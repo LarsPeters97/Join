@@ -30,6 +30,7 @@ body {
     border-radius: 10px;
     border: none;
     padding: 8px 16px;
+    cursor: pointer;
 }
 
 .down {
@@ -42,6 +43,7 @@ body {
     border-radius: 10px;
     border: none;
     padding: 8px 16px;
+    cursor: pointer;
 }
 
 .content {
