@@ -41,7 +41,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .margin-for-fields {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .margin-for-fields:nth-child(4) {
@@ -316,6 +316,7 @@ body::-webkit-scrollbar-thumb {
 .mistake-category-fields {
     color: red;
     font-size: 14px;
+    margin-top: 8px;
 }
 
 .checkbox-style {

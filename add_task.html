@@ -26,9 +26,9 @@
     <div w3-include-html="./assets/templates/mobile_template.html"></div>
     <div class="add-taskt-whole-side">
 
-        <form onsubmit="createNewTask(); return false;" class="form-add-task">
+        <div class="form-add-task">
 
-            <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="convertDate()">Create Task
+            <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create Task
                 <img src="./assets/img/create-check.svg" id="create-responsive"></button>
             <h1 class="headline-task">Add Task</h1>
             <div class="flex change-direction">
@@ -36,14 +36,17 @@
 
                     <div class="title flex column margin-for-fields">
                         <span class="header-for-fields">Title</span>
-                        <input class="input-text-type width-f" type="text" min="2" max="40" required
-                            placeholder="Enter a title" id="input-title">
+                        <input class="input-text-type width-f" type="text" min="2" max="40" placeholder="Enter a title"
+                            id="input-title" oninput="deleteMistakeMessage('title-required')">
+                        <span id="title-required" class="mistake-category-fields"></span>
                     </div>
 
                     <div class="description flex column margin-for-fields">
                         <span class="header-for-fields">Description</span>
-                        <textarea class="width-f" required name="description" id="description" maxlength="500"
-                            placeholder="Enter a Description"></textarea>
+                        <textarea class="width-f" name="description" id="description" maxlength="500"
+                            placeholder="Enter a Description"
+                            oninput="deleteMistakeMessage('description-required')"></textarea>
+                        <span id="description-required" class="mistake-category-fields"></span>
                     </div>
 
                     <div class="flex column margin-for-fields">
@@ -80,20 +83,23 @@
                             <div id="existing-contacts" class="d-none max-height-and-scroll"></div>
                         </div>
                         <div id="assigned-to-icons-section" class="flex width-f"></div>
+                        <span id="assigned-to-contacts-required" class="mistake-category-fields"></span>
                     </div>
                 </div>
 
                 <div class="right-side flex column">
                     <div class="due-date flex column margin-for-fields">
                         <span class="header-for-fields">Due date</span>
-                        <input type="date" required placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31"
-                            id="due-date" onblur="convertDate()" class="width-f">
+                        <input type="date" placeholder="dd/mm/yyyy" min="2022-12-01" max="2023-12-31" id="due-date"
+                            class="width-f" oninput="deleteMistakeMessage('date-required')">
+                        <span id="date-required" class="mistake-category-fields"></span>
                     </div>
 
                     <div class="flex column margin-for-fields">
                         <span class="header-for-fields">Prio</span>
                         <div class="flex prio-buttons-section width-f" id="prio-buttons-section">
                         </div>
+                        <span id="priority-required" class="mistake-category-fields"></span>
                     </div>
                     <div class="flex column margin-for-fields">
                         <span class="header-for-fields">Subtasks</span>
@@ -128,10 +134,11 @@
                     onmouseover="showClearImgLightBlue()" onclick="clearTask()"
                     onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
                         id="clear-img"></button>
-                <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="convertDate()">Create Task
+                <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create
+                    Task
                     <img src="./assets/img/create-check.svg" id="create-img"></button>
-        </form>
-    </div>
+            </div>
+        </div>
     </div>
 </body>
 
