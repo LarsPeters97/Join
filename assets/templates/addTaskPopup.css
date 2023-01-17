@@ -1,3 +1,23 @@
+html {
+    overflow:   scroll;
+  }
+  
+  ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+      background: transparent; /* make scrollbar transparent */
+  }
+
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color:lightgrey;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    background-color: #2A3647;
+}
 .container-addtask {
     display: flex;
     align-items: center;
@@ -12,7 +32,7 @@
     z-index: 1000;
     border-radius: 20px;
     width: fit-content;
-    margin-top: -100px;
+    animation: flyin 225ms linear;
 }
 
 .add_task_headline {
@@ -86,6 +106,7 @@
     width: 90%;
     height: 25px;
     padding: 12px 20px;
+    cursor: pointer;
 }
 
 .category_select {
@@ -352,6 +373,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 90%;
+    cursor: pointer;
 }
 
 .newcontact {
@@ -372,8 +394,8 @@
 .prio {
     font-weight: 400;
     font-size: 21px;
-    margin: 10px;
-    width: 85%;
+    margin: 10px 0px;
+    width: 100%;
 }
 
 .prio-urgent {
@@ -457,6 +479,7 @@
 .prioselect {
     display: flex;
     flex-direction: row !important;
+    justify-content: space-between;
 }
 
 .prioselect img {
@@ -488,14 +511,53 @@
     margin-left: 5px;
 }
 
-.background {
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
+.background-popup {
+    width: 100%;
+    height: 100%;
+    z-index: 102;
     background-color: rgba(0, 0, 0, 0.2);
-    position: fixed;
     top: 0;
     left: 0;
+    position: fixed;
+}
+
+.title_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.description_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.category_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.assign_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.duedate_alert {
+    color: red;
+    font-weight: 500;
+}
+
+.prio_alert {
+    color: red;
+    font-weight: 500;
+}
+
+@keyframes flyIn {
+    0% {
+        left: 800px;
+    }
+    100% {
+        left: 0px;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -514,8 +576,7 @@
 @media (max-width: 1050px){
     .add_task_popup {
         height: fit-content;
-        z-index: 101;
-        margin-top: 89px;
+        z-index: 102;
         padding-bottom: 100px;
     }
 
@@ -528,7 +589,7 @@
         border: none;
     }
     
-    .background {
+    .background-popup {
         z-index: 100;
     }
 
@@ -587,7 +648,15 @@
         bottom: 20px !important;
     }
 
-    .prioselect {
-        flex-direction: column !important;
+    .prio-urgent{
+        width: 90px;
+    }
+
+    .prio-medium{
+        width: 90px;
+    }
+
+    .prio-low{
+        width: 90px;
     }
 }

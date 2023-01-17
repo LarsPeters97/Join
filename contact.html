@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>contacts</title>
+        <title>Join - Contacts</title>
         <script src="./miniBackend.js"></script>
         <link rel="stylesheet" href="./css/style.css" />
         <script src="./script.js"></script>
@@ -14,9 +14,10 @@
         <script src="./js/desktopTemplate.js"></script>
         <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
         <script src="./js/mobileTemplate.js"></script>
-        <link rel="stylesheet" href="./assets/templates/addTaskPopup.css">
+        <link rel="stylesheet" href="./assets/templates/addTaskPopup.css" />
         <script src="./js/addTaskPopup.js"></script>
-        <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon">
+        <script src="./js/addTaskPopupTemplate.js"></script>
+        <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon" />
     </head>
     <body onload="init(), includeHTML()">
         <div w3-include-html="./assets/templates/desktop_template.html"></div>
@@ -43,18 +44,21 @@
                     <p>New contact</p>
                     <img src="./assets/img/logo-addcontact.png" alt="" />
                 </button>
-                <img onclick="closeContact()" class="close-contact-mobile" src="./assets/img/arrow_left.png">
+                <img onclick="closeContact()" class="close-contact-mobile" src="./assets/img/arrow_left.png" />
             </div>
         </div>
 
         <div onclick="closeAddcontact()" id="addcontact" class="container-addcontact d-none">
             <div onclick="notClose(event)" class="add-contact">
                 <div class="add-contact-first-part">
-                    <img onclick="closeAddcontact()" class="close-addcontact-mobile" src="./assets/img/x-white.png" alt="">
+                    <img
+                        onclick="closeAddcontact()"
+                        class="close-addcontact-mobile"
+                        src="./assets/img/x-white.png"
+                        alt="" />
                     <div class="container-logo-addcontact">
                         <img src="./assets/img/Logo.png" alt="" />
                         <div>
-                            
                             <h2>Add contact</h2>
                             <p>Tasks are better with a team!</p>
 
@@ -74,21 +78,24 @@
                         class="close-addcontact"
                         src="./assets/img/x-blue.png"
                         alt="" />
-                    <div>
-                        <input id="input_name" class="input_name" type="text" placeholder="Name" />
-                    </div>
-                    <div>
-                        <input id="input_email" class="input_email" type="text" placeholder="Email" />
-                    </div>
-                    <div>
-                        <input id="input_phone" class="input_phone" type="text" placeholder="Phone" />
-                    </div>
+                        <form onsubmit="createContact(); return false">
+                        <div>
+                            <input id="input_name" class="input_name" type="text" required placeholder="Name"/>
+                        </div>
+                        <div>
+                            <input id="input_email" class="input_email" type="email" required placeholder="Email"/>
+                        </div>
+                        <div>
+                            <input id="input_phone" class="input_phone" type="number" required placeholder="Phone"/>
+                        </div>
+                    
                     <div class="container-button">
-                        <button onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
-                        <button onclick="createContact()" class="button-create">
+                        <button type="button" onclick="clearInput()" class="button-cancel"><p>Cancel</p></button>
+                        <button class="button-create">
                             Create contact
                             <img src="./assets/img/check-white.png" alt="" />
                         </button>
+                    </form>
                     </div>
                 </div>
             </div>

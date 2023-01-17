@@ -1,3 +1,13 @@
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color:lightgrey;
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
+    background-color: #2A3647;
+}
 .container-contacts {
     height: 100%;
     width: 280px;
@@ -11,13 +21,13 @@
     padding-right: 32px;
     overflow-y: scroll;
 }
-.initials{
+.initials {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 50px;
 }
-.initials_B{
+.initials_B {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -158,21 +168,23 @@
 }
 
 .contact-card-text span {
-    color: #29abe2; 
+    color: #29abe2;
     margin: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.contact-card-menu{
+.contact-card-menu {
     height: 16px;
     position: absolute;
     top: 1px;
     right: 0px;
     z-index: 9999;
     cursor: pointer;
- 
 }
 
-.wrapper-popup-menu{
+.wrapper-popup-menu {
     position: absolute;
     top: 0;
     left: 0;
@@ -183,8 +195,8 @@
     border-radius: 10px;
 }
 
-.contact-card-menu-popup{
-    background-color:#f6f7f8;
+.contact-card-menu-popup {
+    background-color: #091931;
     position: absolute;
     top: 4px;
     right: 10px;
@@ -194,22 +206,24 @@
     justify-content: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
 }
 
-.contact-card-menu-popup span{
+.contact-card-menu-popup span {
     cursor: pointer;
     margin: 4px 8px;
-    border: solid 1px #2a3647;
     padding: 2px 8px;
     border-radius: 10px;
     width: 60px;
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
+    font-size: 400;
+    cursor: pointer;
 }
 
-.contact-card-menu-popup span:hover{
+.contact-card-menu-popup span:hover {
     color: white;
-    background-color: #2a3647;
+    scale: 1.1;
 }
 
 .wrapper {
@@ -401,7 +415,7 @@
 .input_name::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #d1d1d1;
-    font-size: 21px;
+    font-size: 20px;
     display: flex;
     align-items: center;
 }
@@ -409,8 +423,9 @@
 .input_name:focus {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    font-size: 21px;
+    font-size: 20px;
     outline: none;
+    background-image: none;
 }
 
 .input_email {
@@ -436,7 +451,7 @@
 .input_email::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #d1d1d1;
-    font-size: 21px;
+    font-size: 20px;
     display: flex;
     align-items: center;
 }
@@ -444,8 +459,9 @@
 .input_email:focus {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    font-size: 21px;
+    font-size: 20px;
     outline: none;
+    background-image: none;
 }
 
 .input_phone {
@@ -471,7 +487,7 @@
 .input_phone::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #d1d1d1;
-    font-size: 21px;
+    font-size: 20px;
     display: flex;
     align-items: center;
 }
@@ -479,8 +495,16 @@
 .input_phone:focus {
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-    font-size: 21px;
+    font-size: 20px;
     outline: none;
+    background-image: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .button-cancel {
@@ -565,7 +589,7 @@
     left: 0;
 }
 
-.position-initials{
+.position-initials {
     top: 240px !important;
 }
 
@@ -581,7 +605,7 @@
     display: none;
 }
 
-.close-addcontact-mobile{
+.close-addcontact-mobile {
     display: none;
 }
 
@@ -691,7 +715,7 @@
         display: none;
     }
 
-    .close-addcontact-mobile{
+    .close-addcontact-mobile {
         display: flex;
         position: absolute;
         top: 10px;
