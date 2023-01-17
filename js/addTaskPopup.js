@@ -158,8 +158,8 @@ function checkOnAssignedpeople(contact) {
 
 function addNewPerson() {
     let email = document.getElementById('email').value;
-        let icon = email.slice(0, 2);
-        let color = getRandomColor();
+    let icon = email.slice(0, 2);
+    let color = getRandomColor();
     if (email.includes('@')) {
         let tempName = email.split('@');
         let name = tempName[0];
@@ -168,8 +168,8 @@ function addNewPerson() {
         let name = email;
         assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     }
-        document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
-        loadAssignedPeople();
+    document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
+    loadAssignedPeople();
 }
 
 function loadAssignedPeople() {
@@ -311,37 +311,44 @@ async function createTask() {
     title = document.getElementById('title_input').value;
     description = document.getElementById('description_input').value;
     duedate = transformDuedate();
-    checkMissingInfo(title, description, duedate);
-    getIdFromTasklist();
-    if (title && description && category && assignedPeople.length > 0 && duedate && newSelectedPrio) {
-        pushTasklist(category['color'], category['name'], duedate, title, description)
-        for (let i = 0; i < subtasks.length; i++) {
-            let subtask = subtasks[i];
-            tempTasklist[taskId]['subtasks']['tasks'].push(subtask);
+    if (checkMissingInfo(title, description, duedate) == true) {
+        getIdFromTasklist();
+        if (title && description && category && assignedPeople.length > 0 && duedate && newSelectedPrio) {
+            pushTasklist(category['color'], category['name'], duedate, title, description)
+            for (let i = 0; i < subtasks.length; i++) {
+                let subtask = subtasks[i];
+                tempTasklist[taskId]['subtasks']['tasks'].push(subtask);
+            }
+            let tasksAsString = JSON.stringify(tempTasklist);
+            await backend.setItem('tasklist', tasksAsString);
+            await checkCategoryNew();
+            closePopup();
+            initBoard();
         }
-        let tasksAsString = JSON.stringify(tempTasklist);
-        await backend.setItem('tasklist', tasksAsString);
-        await checkCategoryNew();
-        closePopup();
-        initBoard();
     }
 }
 
 function checkMissingInfo(title, description) {
     if (title == false) {
         missingTitleAlert();
+        return false;
     } else if (description == false) {
         missingDescriptionAlert();
+        return false;
     } else if (category == false) {
         missingCategoryAlert();
+        return false;
     } else if (assignedPeople == false) {
         missingAssignsAlert();
-    } else if (duedate == false) {
+        return false;
+    } else if (Number.isInteger(duedate) == false) {
         missingDueDateAlert();
+        return false;
     } else if (newSelectedPrio == false) {
         missingPrioAlert();
+        return false;
     } else {
-        return;
+        return true;
     }
 }
 

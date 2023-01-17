@@ -5,6 +5,7 @@ let awaitFeedback = [];
 let doneTasks = [];
 let currentDraggedElement;
 let assignetContacts = [];
+let assignetContactsTemp = [];
 let selectedPrio = [];
 let searchTodos = [];
 let searchInProgress = [];
@@ -122,6 +123,9 @@ function renderTodos(boxid, progression, array, next, previus) {
  * @returns Shortent template of assignet users
  */
 function assignedTo(assignedTo) {
+    if (assignedTo.length == 0) {
+        return `<div class="number">N/A</div>`
+    }
     if (assignedTo.length == 1) {
         return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div>`
     }

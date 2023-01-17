@@ -46,7 +46,8 @@ function renderSubTasks(id) {
  */
 function renderEditTask(id) {
     task = tasklist.filter(t => t['id'] == id);
-    assignetcontacts = task[0]['assignedTo']['user'];
+    assignetContacts = task[0]['assignedTo']['user'];
+    assignetContactsTemp = assignetContacts;
     let title = task[0]['title'];
     let description = task[0]['description'];
     let duedateunformated = JSON.stringify(task[0]['duedate']);
@@ -203,8 +204,8 @@ function selectPrio(prio) {
  */
 function loadAssignetPersons(id) {
     document.getElementById('assignedpersons').innerHTML = ``;
-    for (let i = 0; i < assignetcontacts.length; i++) {
-        let assignetperson = assignetcontacts[i];
+    for (let i = 0; i < assignetContactsTemp.length; i++) {
+        let assignetperson = assignetContactsTemp[i];
         document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
 }
@@ -224,8 +225,8 @@ function openDropdownAssignTo(id) {
             document.getElementById('assign-container').innerHTML += templateNotAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
         }
     }
-    for (let j = 0; j < assignetcontacts.length; j++) {
-        let contact = assignetcontacts[j];
+    for (let j = 0; j < assignetContacts.length; j++) {
+        let contact = assignetContacts[j];
         if (checkOnContact(contact) == false) {
             let index = j + contacts.length
             document.getElementById('assign-container').innerHTML += templateAssignedContact(index, contact['name'], contact['icon'], contact['iconcolor'], id);
@@ -245,9 +246,9 @@ function assignChange(name, icon, color, id) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssigned(contact);
     if (checkOnAssignedContacts(contact['icon']) == true) {
-        assignetcontacts.splice(index, 1);
+        assignetContactsTemp.splice(index, 1);
     } else {
-        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
+        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color });
     }
     loadAssignetPersons(id);
 }
@@ -260,13 +261,13 @@ function addNewContact(id) {
     let email = document.getElementById('email').value;
     let icon = email.slice(0, 2);
     let color = getRandomColor();
-    if (email.includes('@')){
+    if (email.includes('@')) {
         let tempName = email.split('@');
         let name = tempName[0];
-        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     } else {
         let name = email;
-        assignetcontacts.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
     }
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
     loadAssignetPersons(id);
@@ -302,27 +303,12 @@ function checkOnContact(contact) {
 
 /**
  * Checks array for containing a spesific contact
- * @param {string} icon Icon of contact
- * @returns status of containing the contact
- */
-function checkOn(icon) {
-    for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['icon'];
-        if (name == icon) {
-            return true;
-        }
-    }
-    return false;
-}
-
-/**
- * Checks array for containing a spesific contact
  * @param {string} contact Name of contact
  * @returns status of containing the contact
  */
 function checkOnAssignedContacts(contact) {
-    for (let i = 0; i < assignetcontacts.length; i++) {
-        let check = assignetcontacts[i]['icon'];
+    for (let i = 0; i < assignetContactsTemp.length; i++) {
+        let check = assignetContactsTemp[i]['icon'];
         if (check == contact) {
             return true;
         }
@@ -336,8 +322,8 @@ function checkOnAssignedContacts(contact) {
  * @returns position in array of contact
  */
 function indexOfAssigned(icon) {
-    for (let i = 0; i < assignetcontacts.length; i++) {
-        let name = assignetcontacts[i]['icon'];
+    for (let i = 0; i < assignetContactsTemp.length; i++) {
+        let name = assignetContactsTemp[i]['icon'];
         if (name == icon) {
             return i;
         }
@@ -351,17 +337,22 @@ function indexOfAssigned(icon) {
 async function editTask(id) {
     let newTitle = document.getElementById('titleinput').value;
     let newDescription = document.getElementById('descriptioninput').value;
-    let mynewDate = document.getElementById('duedate').value;
-    let year = mynewDate.slice(0, 4);
-    let month = mynewDate.slice(5, 7);
-    let day = mynewDate.slice(8);
-    let newDuedate = year + month + day;
-    tasklist[id]['title'] = newTitle;
-    tasklist[id]['description'] = newDescription;
-    tasklist[id]['duedate'] = parseInt(newDuedate);
-    tasklist[id]['priority'] = selectedPrio;
-    if (assignetcontacts){
-        tasklist[id]['assignedTo']['user'] = assignetcontacts;
+    let newDuedate = transformDuedate();
+    if (newTitle.length > 2) {
+        tasklist[id]['title'] = newTitle;
+    }
+    if (newDescription.length > 2) {
+        tasklist[id]['description'] = newDescription;
+    }
+    if (assignetContactsTemp.length > 1) {
+        console.log(assignetContactsTemp);
+        tasklist[id]['assignedTo']['user'] = assignetContacts;
+    }
+    if (Number.isInteger(newDuedate)) {
+        tasklist[id]['duedate'] = newDuedate;
+    }
+    if (selectPrio) {
+        tasklist[id]['priority'] = selectedPrio;
     }
     await saveBoard();
     setTimeout(await initBoard, 100);
