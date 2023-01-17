@@ -18,12 +18,10 @@ async function initialize() {
 
 function checkIfCategoryContainerOpen() {
     let newCategory = document.getElementById('new-category');
-    if (newCategory.classList.contains('d-none')) {
+    if (newCategory.classList.contains('d-none'))
         openNewCategoryAndExistingCategories();
-    }
-    else {
+    else
         closeNewCategoryAndExistingCategories();
-    }
 }
 
 /**
@@ -106,9 +104,8 @@ function addNewCategoryColor(categoryColor, colorIndex) {
         document.getElementById(`selected-color-${colorIndex}`).style.backgroundColor = `${categoryColor}`;
         document.getElementById('mistake-category-fields').innerHTML = '';
     }
-    else {
+    else
         document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
-    }
 }
 
 /**
@@ -118,12 +115,10 @@ function addNewCategoryColor(categoryColor, colorIndex) {
 
 function addNewCategory() {
     newCategoryName = document.getElementById('new-category-name').value;
-    if (selectedCategoryColor && newCategoryName) {
+    if (selectedCategoryColor && newCategoryName)
         whenCategoryNameAndColorAreSelected();
-    }
-    else {
+    else
         whenCategoryNameOrColorMissing();
-    }
 }
 
 /**
@@ -147,12 +142,10 @@ function whenCategoryNameAndColorAreSelected() {
  */
 
 function whenCategoryNameOrColorMissing() {
-    if (newCategoryName) {
+    if (newCategoryName)
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
-    }
-    else {
+    else
         document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
-    }
 }
 
 /**
@@ -170,12 +163,10 @@ function reOpenExistigCategorys() {
 
 function checkIfAssignedToIsOpen() {
     let existingContacts = document.getElementById('existing-contacts');
-    if (existingContacts.classList.contains('d-none')) {
+    if (existingContacts.classList.contains('d-none'))
         openExistingContacts();
-    }
-    else {
+    else
         addClassDnone('existing-contacts');
-    }
 }
 
 /**
@@ -191,14 +182,13 @@ function openExistingContacts() {
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let findIndex = assignedToContacts.indexOf(i);
-        if (assignedToContactIsInArray(findIndex)) {
+        if (assignedToContactIsInArray(findIndex))
             existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
-        }
-        else {
+        else
             existingContacts.innerHTML += templateExistingContacts(i, contact);
-        }
-    }
+
     existingContacts.innerHTML += templateInvitePerson();
+}
 }
 
 /**
@@ -352,9 +342,8 @@ function changeStyleOfSelectedButton(i) {
     if (!button.classList.contains('white')) {
         addSelectedButtonStyle(button, i);
     }
-    else {
+    else 
         removeStyleOfUnclickedButton(button, i);
-    }
 }
 
 /**
@@ -378,9 +367,8 @@ function resetOtherPriorityButtons(i) {
     for (let p = 0; p < priorities.length; p++) {
         let priorityId = priorities[p]['name'];
         let button = document.getElementById(priorityId);
-        if (p != i && button.classList.contains('white')) {
+        if (p != i && button.classList.contains('white'))
             removeStyleOfUnclickedButton(button, p);
-        }
     }
 }
 
@@ -405,9 +393,8 @@ function priorityForCurrentTask() {
     for (let i = 0; i < priorities.length; i++) {
         let priorityId = priorities[i]['name'];
         let button = document.getElementById(priorityId);
-        if (button.classList.contains('white')) {
+        if (button.classList.contains('white')) 
             priorityNameForTask = priorityId;
-        }
     }
 }
 
@@ -466,12 +453,10 @@ function renderSubtasks() {
  */
 
 function checkCompletedStatus(i) {
-    if (!subtasksForCurrenttask[i].completed) {
+    if (!subtasksForCurrenttask[i].completed)
         return false;
-    }
-    else {
+    else
         return true;
-    }
 }
 
 /**
@@ -482,10 +467,8 @@ function checkCompletedStatus(i) {
 
 function changeCurrentCompleteStatus(i) {
     let currentCheckbox = document.getElementById(`checkbox-${i}`);
-    if (currentCheckbox.checked) {
+    if (currentCheckbox.checked)
         subtasksForCurrenttask[i].completed = true;
-    }
-    else {
+    else
         subtasksForCurrenttask[i].completed = false;
-    }
 }
