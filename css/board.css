@@ -927,7 +927,6 @@ body::-webkit-scrollbar-thumb {
 @media (max-width:510px){
     .taskform {
         width: 100%;
-        border-radius: 0px;
     }
 }
 
