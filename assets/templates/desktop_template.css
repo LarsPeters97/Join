@@ -82,7 +82,7 @@
 
 .logout-popup a{
   text-decoration: none;
-  margin: 16px 32px ;
+  padding: 16px 32px ;
   color: white;
   cursor: pointer;
 }
