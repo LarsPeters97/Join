@@ -204,6 +204,7 @@ function taskPopup() {
     `;
     includeHTML();
     document.getElementById('Boardpopup').classList.remove('d-none');
+    document.getElementById('Boardpopup').style.overflow = 'scroll';
     initAddTaskPopup();
 }
 
@@ -236,6 +237,7 @@ function openTask(id) {
 function closeBoardPopup() {
     document.getElementById('Boardpopup').innerHTML = '';
     document.getElementById('Boardpopup').classList.add('d-none');
+    document.getElementById('Boardpopup').style.overflow = 'unset';
 }
 
 /**
