@@ -57,7 +57,7 @@ function editTaskTemplate(id) {
     return `
     <div class="background" onclick="closeBoardPopup()"></div>
     <div class="taskform edittaskform">
-        <div>
+        <div style="height: fit-content; position: relative; width:100%;">
             <div class="edittitle">Title <input type="text" required placeholder="Enter a Title" id="titleinput"></div>
             <div class="editdescription">Description <textarea id="descriptioninput" placeholder="Enter a Description" required></textarea></div>
             <div class="duedate">Due Date <input type="date" id="duedate" placeholder="dd/mm/yyyy" required></div>
@@ -86,9 +86,10 @@ function editTaskTemplate(id) {
             </div>
             <div class="assignedpersons" id="assignedpersons"></div>
             </div>
+            <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
         </div>
         <div class="close" onclick="closeBoardPopup()">x</div>
-        <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
+        
     </div>
     `;
 }

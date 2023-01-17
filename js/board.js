@@ -156,7 +156,7 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
         </div>
     </div>
         <div class="mobile-buttons">
-            <button class="up" onclick="moveTask(${id}, '${previus}')">previus</button>
+            <button class="up" onclick="moveTask(${id}, '${previus}')">previous</button>
             <button class="down" onclick="moveTask(${id}, '${next}')">next</button>
         </div>`
 }
