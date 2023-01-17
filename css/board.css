@@ -497,6 +497,8 @@ body::-webkit-scrollbar-thumb {
     margin: 5px 0px;
     border-radius: 8px;
     width: 97%;
+    padding: 0px 10px;
+    box-sizing: border-box;
 }
 
 .subtask button {
@@ -659,8 +661,8 @@ body::-webkit-scrollbar-thumb {
 
 .editTask {
     position: absolute !important;
-    bottom: 10px !important;
-    right: 10px !important;
+    bottom: 0px !important;
+    right: 0px !important;
     width: 83px;
     height: 57px;
     background: #2A3647;
@@ -903,20 +905,12 @@ body::-webkit-scrollbar-thumb {
         width: 85%;
     }
 
-    .taskform p {
-        width: 400px;
-    }
-
     .taskbar {
         width: auto;
     }
 
     .dropdown-assign {
         max-height: 400px;
-    }
-
-    #assignedto {
-        max-height: 400px !important;
     }
 
     .contact label{
@@ -929,46 +923,18 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 500px) {
-    .subtask {
-        width: 70vw;
-        justify-content: flex-start;
-    }
+@media (max-width:510px){
 
-    .taskform h2 {
-        width: 80vw;
-        font-size: 30px;
-    }
+}
 
-    .taskform p {
-        width: 80vw;
-    }
-
-    .taskform {
-        position: fixed;
-        width: auto;
-        margin-right: 0 !important;
-        border-radius: 0;
-        left: 0;
-        right: 0;
-        padding-left: 10px;
-        min-width: 200px;
-        padding-right: 10px;
-        z-index: 102;
-        max-height: 70%;
-        overflow-y: scroll;
-    }
-
-    .edittaskform {
-        position: absolute;
-        max-height: fit-content;
-    }
-
-    .subtasktext {
-        width: 70vw !important;
+@media (max-width:400px){
+    .taskform{
+        padding: 40px 10px;
     }
 }
+
 
 .d-none {
     display: none;
 }
+

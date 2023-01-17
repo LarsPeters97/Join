@@ -639,7 +639,15 @@ body::-webkit-scrollbar-thumb {
         bottom: 20px !important;
     }
 
-    .prioselect {
-        flex-direction: column !important;
+    .prio-urgent{
+        width: 90px;
+    }
+
+    .prio-medium{
+        width: 90px;
+    }
+
+    .prio-low{
+        width: 90px;
     }
 }
