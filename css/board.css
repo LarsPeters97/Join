@@ -354,6 +354,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 18px;
     margin-top: 15px;
     margin-bottom: 15px;
+    max-width: 400px;
 }
 
 .duedate {
@@ -924,7 +925,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 @media (max-width:510px){
-
+    .taskform {
+        width: 100%;
+        border-radius: 0px;
+    }
 }
 
 @media (max-width:400px){
