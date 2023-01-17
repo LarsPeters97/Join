@@ -1,219 +1,3 @@
-let subtasksForCurrenttask = [];
-let taskid;
-let date;
-let priorityNameForTask;
-let formValidation = true;
-let tasklist = [];
-let selectedCategoryColor;
-let selectedTaskValues = [];
-let selectedCategoryValues = [];
-let assignedToContacts = [];
-let contactsForCurrentTask = [];
-let newCategoryName;
-let categoryColors = ['#FC71FF', '#1FD7C1', '#8AA4FF', '#FF0000', '#2AD300', '#FF8A00', '#E200BE', '#0038FF'];
-let userIconColors = ['#800000', '#3cb44b', '#000075', '#f58231', '#911eb4', '#000000', '#ffe119', '#9A6324', '#469990'];
-
-let categories = [{
-    'name': 'General topics',
-    'color': '#FC71FF'
-}];
-
-let priorities = [
-    {
-        'name': 'urgent',
-        'image': './assets/img/urgent.svg',
-        'selected-image': './assets/img/urgent-white.svg',
-        'color': '#FF3D00'
-    },
-    {
-        'name': 'medium',
-        'image': './assets/img/medium.svg',
-        'selected-image': './assets/img/medium-white.svg',
-        'color': '#FFA800'
-    },
-    {
-        'name': 'low',
-        'image': './assets/img/low.svg',
-        'selected-image': './assets/img/low-white.svg',
-        'color': '#7AE229'
-    }
-]
-
-let contacts = [
-    {
-        'name': 'me',
-        'icon': 'ME',
-        'iconcolor': '#800000'
-    },
-    {
-        'name': 'Marcel Küpper',
-        'icon': 'MK',
-        'iconcolor': '#3cb44b'
-    },
-    {
-        'name': 'Toni Jacobs',
-        'icon': 'TJ',
-        'iconcolor': '#000075'
-    }];
-/**
- * Displays the initials of a contact below the contacts dropdown when the contact is selected
- * Or it removes the initials from being displayed if the selection of the contact is removed
- * 
- * @param {Array} iconArray - the array in which the indexes of the selected users/contacts are save (can either be contacts or usersContact)
- * @param {number} i - index of the clicked contact 
- */
-
-/**
- * Fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
- */
-
-function addTask() {
-    formValidation = true;
-    let taskInputTitle = document.getElementById('input-title').value;
-    let description = document.getElementById('description').value;
-    convertDate();
-    checkInput('title', taskInputTitle);
-    checkInput('description', description);
-    checkCategory();
-    checkAssigned();
-    checkDueDate();
-    checkPriority();
-    if (formValidation) {
-        let currentTask = currentTaskValues(taskInputTitle, description);
-        tasklist.push(currentTask);
-        saveCurrentTask();
-        clearTask();
-        redirectToBoardPage();
-    }
-    }
-
-
-/**
- * @returns the values of the fields for the current task to the variable currentTask.
- */
-
-function currentTaskValues(taskInputTitle, description) {
-    return {
-        'progress': 'todo',
-        'id': taskid,
-        'category': {
-            'color': selectedCategoryColor,
-            'categoryName': newCategoryName,
-        },
-        'duedate': parseInt(date),
-        'title': taskInputTitle,
-        'description': description,
-        'subtasks': {
-            'tasks': subtasksForCurrenttask
-        },
-        'assignedTo': {
-            'user': contactsForCurrentTask
-        },
-        'priority': priorityNameForTask,
-    }
-}
-
-/**
- * Checks if the value of the input field is equal to zero. If so, the global variable formValidation is set to false and a message is displayed
- * under the input field.
- * @param {string} mistakeField is the first part of the id of the html-element, where the errors are displayed.
- * @param {string} inputValue is the value of the input field.
- */
-
-function checkInput(mistakeField, inputValue) {
-    let mandatoryFieldMessage = document.getElementById(`${mistakeField}-required`);
-    if (inputValue.length == 0) {
-        formValidation = false;
-        mandatoryFieldMessage.innerHTML = 'This field is required.';
-    }
-}
-
-/**
- * Checks if the category is currently selected or not. And when newCategoryName is undefined, 
- * the global variable formValidation is set to false and a message is displayed.
- */
-
-function checkCategory() {
-    let mandatoryFieldCategory = document.getElementById('mistake-category-fields');
-    if (!newCategoryName) {
-        formValidation = false;
-        mandatoryFieldCategory.innerHTML = 'Please select a category.';
-    }
-}
-
-/**
- * Checks if the array assignedToContacts is empty. If so, the global variable formValidation is set to false and a message is displayed.
- */
-
-function checkAssigned() {
-    let mandatoryFieldAssignedTo = document.getElementById('assigned-to-contacts-required');
-    if (assignedToContacts.length == 0) {
-        formValidation = false;
-        mandatoryFieldAssignedTo.innerHTML = 'Please assign at least one contact.';
-    }
-}
-
-/**
- * Checks if the global variable date isn't declared or when the global variable date is declared, if the date is smaller than 
- * the variable today. If so, the global variable formValidation is set to false and a message is displayed. 
- */
-
-function checkDueDate() {
-    let mandatoryFieldDate = document.getElementById('date-required');
-    let today = dateTodayAsNumber();
-    if (!date || date < today) {
-        formValidation = false;
-        mandatoryFieldDate.innerHTML = 'Invalid date. Select today or a future date.';
-    }
-}
-
-/**
- * @returns @param {number} todayAsNumber which shows the date by year, months and days as a number.
- */
-
-function dateTodayAsNumber() {
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth() + 1;
-    let day = today.getDate();
-    let todayAsNumber = (year * 10000) + (month * 100) + day;
-    return todayAsNumber;
-}
-
-/**
- * Checks if the global variable priorityNameForTask is undefined. 
- * If so, the global variable formValidation is set to false and a message is displayed. 
- */
-
-function checkPriority() {
-    let mandantoryFieldPriority = document.getElementById('priority-required');
-    if (!priorityNameForTask) {
-        formValidation = false;
-        mandantoryFieldPriority.innerHTML = 'Please select a priority.';
-    }
-}
-
-/**
- * Deletes the Mistake Message. For this, the function is called with the corresponding id.
- * @param {string} mistakeField will get the id of the html-element, which displays the mistakes. 
- */
-
-function deleteMistakeMessage(mistakeField) {
-    document.getElementById(`${mistakeField}`).innerHTML = '';
-}
-
-/**
- * The variable is declared with all the elements with the class mistake-category-fields. 
- * A for loop iterates through the individual elements and removes the contents of the innerHTML. 
- */
-
-function clearMistakeCategoryFields() {
-    let mistakefields = document.getElementsByClassName('mistake-category-fields');
-    for (let i = 0; i < mistakefields.length; i++) {
-        mistakefields[i].innerHTML = '';
-    }
-}
-
 /**
  * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
  * assigned to the selectedTaskValues array.
@@ -225,22 +9,6 @@ async function initialize() {
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
-}
-
-/**
- * Changes the image from the clear Button, so it will be displayed in light blue whe the user hovers over the button.
- */
-
-function showClearImgLightBlue() {
-    document.getElementById('clear-img').src = './assets/img/clear-x-light-blue.svg';
-}
-
-/**
- * Is called with the event-handler onmouseout, so it will displayed a dark blue, if the user no longer hovers over the button.
- */
-
-function showClearImgDarkBlue() {
-    document.getElementById('clear-img').src = './assets/img/clear-x.svg';
 }
 
 /**
@@ -271,16 +39,6 @@ function openNewCategoryAndExistingCategories() {
     }
     removeClassDnone('new-category');
     removeClassDnone('existing-categories');
-}
-
-/**
- * Closes the categories by adding the class d-none (display: none).
- * The function is used in the function checkIfCategoryContainerOpen.
- */
-
-function closeNewCategoryAndExistingCategories() {
-    addClassDnone('existing-categories');
-    addClassDnone('new-category');
 }
 
 /**
@@ -321,18 +79,6 @@ function createNewCategory() {
     colorsForNewCategory();
     let categoryContainer = document.getElementById('category-container');
     categoryContainer.innerHTML = templateCreateNewCategory();
-}
-
-/**
- * If the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field 
- * to its original version.
- */
-
-function removeCategoryInput() {
-    document.getElementById('categories-for-colors').classList.remove('colors');
-    document.getElementById('mistake-category-fields').innerHTML = '';
-    document.getElementById('categories-for-colors').innerHTML = '';
-    document.getElementById('category-container').innerHTML = templateOriginalCategoryField();
 }
 
 /**
@@ -418,7 +164,6 @@ function reOpenExistigCategorys() {
     openNewCategoryAndExistingCategories();
 }
 
-
 /**
  * Checks if contacts for Assignment are visible by using the classList.contains method.
  */
@@ -437,7 +182,6 @@ function checkIfAssignedToIsOpen() {
  * Renders the contacts from the array contacts and seperates them into the ones who are in the array assignedToContacts and who are not
  * this array. It is done to divide them, into the checked contacts, which the user has clicked on, and the contacts who aren´t checked.
  */
-
 
 function openExistingContacts() {
     deleteMistakeMessage('assigned-to-contacts-required');
@@ -484,7 +228,6 @@ function addNewPerson() {
     renderAssignedToIconsSection();
     templateExitNewPerson();
 }
-
 
 /**
  * @returns a random color from the array userIconColors.
@@ -669,36 +412,6 @@ function priorityForCurrentTask() {
 }
 
 /**
- * Changes the input field to the actual input field, where the subtask can be entered or removed.
- */
-
-function changeSubtaskInputField() {
-    addClassDnone('subtask-before');
-    removeClassDnone('subtask-after');
-    focusOnField('input-subtask-area');
-}
-
-/**
- * Focus on the input field is highlighted.
- * @param {string} idElement gets the id of a Document Object Model Element.
- */
-
-function focusOnField(idElement) {
-    document.getElementById(idElement).focus();
-}
-
-/**
- * Closes the SubtaskInput Field by showing the original div with the id 'subtask-before'.
- */
-
-function closeSubtaskInputField() {
-    removeClassDnone('subtask-before');
-    addClassDnone('subtask-after');
-    document.getElementById('subtask-to-short').innerHTML = '';
-    document.getElementById('input-subtask-area').value = '';
-}
-
-/**
  * If the value of the subtask input is bigger than 3, the subtask will be added with the function addSubtask. If not, an 
  * error message is displayed.
  */
@@ -764,7 +477,7 @@ function checkCompletedStatus(i) {
 /**
  * The completed boolean value gets changed in dependence of the currentCheckbox status at the position if, when the input checkbox
  * gets clicked.
- * @param {number*} i is the position of the selected subtask in the array subtasksForCurrenttask.
+ * @param {number} i is the position of the selected subtask in the array subtasksForCurrenttask.
  */
 
 function changeCurrentCompleteStatus(i) {
@@ -775,101 +488,4 @@ function changeCurrentCompleteStatus(i) {
     else {
         subtasksForCurrenttask[i].completed = false;
     }
-}
-
-/**
- * Clears the Fields that are already filled and the arrays for the currentTask gets cleared too.
- */
-
-function clearTask() {
-    deleteInputandTextareaValues();
-    removeCategoryInput();
-    assignedToContacts = [];
-    contactsForCurrentTask = [];
-    newCategoryName = undefined;
-    selectedCategoryColor = undefined;
-    addClassDnone('existing-contacts');
-    renderAssignedToIconsSection();
-    renderPrioButtonsSection();
-    closeSubtaskInputField();
-    subtasksForCurrenttask = [];
-    renderSubtasks();
-    focusOnField('input-title');
-    clearMistakeCategoryFields();
-}
-
-/**
- * Clears the input fields values.
- */
-
-function deleteInputandTextareaValues() {
-    document.getElementById('input-title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('due-date').value = '';
-    document.getElementById('input-subtask-area').value = '';
-}
-
-/**
- * Creates and saves the just created task and clears the task fields again. At the end it will be redirected to the page board.html .
- */
-
-async function createNewTask() {
-    await loadTasklistForId();
-    assignedToContactsForCurrentTask();
-    priorityForCurrentTask();
-    addTask();
-}
-
-/**
- * Taskid gets the number from the tasklist.length. This will be the identification number for the current task.
- */
-
-function getIdFromTasklist() {
-    taskid = tasklist.length
-}
-
-/**
- * All tasks already created are loaded from the server to get the id number for the currentTask with the function getIdFromTasklist.
- */
-
-async function loadTasklistForId() {
-    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
-    getIdFromTasklist();
-}
-
-/**
- * Saves all tasks in the backend with the key "tasklist". 
- */
-
-function saveCurrentTask() {
-    let tasklistAsString = JSON.stringify(tasklist);
-    backend.setItem("tasklist", tasklistAsString);
-}
-
-/**
- * User is redirected to board.html.
- */
-
-function redirectToBoardPage() {
-    window.location.href = "./board.html";
-}
-
-/**
- * This function removes the class d-none, so the Element is there.
- * @param {string} idElement is the id of the HTML-Element
- */
-
-function removeClassDnone(idElement) {
-    document.getElementById(idElement).classList.remove('d-none');
-}
-
-/**
- This function adds the class d-none, so the Element is not there.
- * @param {string} idElement is the id of the HTML-Element
- */
-
-function addClassDnone(idElement) {
-    document.getElementById(idElement).classList.add('d-none');
 }
