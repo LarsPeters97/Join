@@ -118,16 +118,11 @@ function showContacts(letter, i) {
         const contact = contacts[i];
         splittedName = contact.name.split(" ");
         if (contact.name.charAt(0).toUpperCase() == letter.charAt(0).toUpperCase()) {
-            document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML += showContactsHtml(
-                contact,
-                splittedName,
-                i
-            );
+            document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML += showContactsHtml(contact, splittedName, i);
             renderInitials(splittedName, i);
             findContact = true;
         }
-    }
-             if (!findContact) {
+    }   if (!findContact) {
             document.getElementById(`letterContainer${letter.charAt(0)}`).classList.add("d-none");
     }
 }
