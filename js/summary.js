@@ -25,6 +25,8 @@ async function summaryInit() {
     loadTotalamount();
     urgentImage();
     document.getElementById('sidebar_summary_mobile').classList.add('background-color');
+    document.getElementById('sidebar_summary').classList.add('background-color');
+
 }
 
 async function loadTasklistForSummary() {

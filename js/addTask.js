@@ -10,6 +10,7 @@ async function initialize() {
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
     document.getElementById('sidebar_addtask_mobile').classList.add('background-color');
+    document.getElementById('sidebar_addtask').classList.add('background-color');
 }
 
 /**

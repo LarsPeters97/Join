@@ -1,3 +1,4 @@
 function init(){
-    document.getElementById('sidebar_legal_mobile').classList.add('background-color');
+    document.getElementById('sidebar_legal').classList.add('background-color');
+
 }
