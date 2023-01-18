@@ -354,3 +354,4 @@ function changeCompleteStatus(i) {
         subtasks[i]['completed'] = true;
     }
 }
+
