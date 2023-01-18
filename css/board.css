@@ -14,6 +14,10 @@ body::-webkit-scrollbar-thumb {
     background-color: #2A3647;
 }
 
+textarea {
+    font-family: 'Inter', sans-serif;
+}
+
 .d-none {
     display: none !important;
 }

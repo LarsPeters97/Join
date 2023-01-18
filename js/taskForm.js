@@ -131,7 +131,7 @@ async function saveSubEdit(index, id) {
     newsubtask = document.getElementById(`subedit${index}`).value;
     tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
     await saveBoard();
-    await loadAll();
+    setTimeout(loadAll, 100);
     renderBoard();
     document.getElementById(`subtask${index}`).innerHTML = `
     <div><p>${newsubtask}</p></div>
