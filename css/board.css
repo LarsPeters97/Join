@@ -511,6 +511,14 @@ textarea {
     box-sizing: border-box;
 }
 
+.subtask input {
+    cursor: pointer;
+}
+
+.subtask label {
+    cursor: pointer;
+}
+
 .subtask button {
     background-color: #2A3647;
     border-color: #000009;
@@ -747,6 +755,7 @@ textarea {
     width: 100%;
     padding: 12px 18px;
     align-items: center;
+    cursor: pointer;
 }
 
 .dropdown-assign img {
