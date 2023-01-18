@@ -128,6 +128,13 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
 }
 
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .letters {
     font-size: 21px;
     border-bottom: solid 2px rgba(0, 0, 0, 0.5);
