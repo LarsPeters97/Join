@@ -250,9 +250,9 @@ function searchInTodos(search) {
     searchTodos = [];
     for (let i = 0; i < todos.length; i++) {
         let todo = todos[i];
-        if (todo['title'].includes(search)) {
+        if (todo['title'].toLowerCase().includes(search)) {
             searchTodos.push(todo)
-        } else if (todo['description'].includes(search)) {
+        } else if (todo['description'].toLowerCase().includes(search)) {
             searchTodos.push(todo)
         }
     }
@@ -266,9 +266,9 @@ function searchInInProgress(search) {
     searchInProgress = [];
     for (let i = 0; i < inProgress.length; i++) {
         let todo = inProgress[i];
-        if (todo['title'].includes(search)) {
+        if (todo['title'].toLowerCase().includes(search)) {
             searchInProgress.push(todo)
-        } else if (todo['description'].includes(search)) {
+        } else if (todo['description'].toLowerCase().includes(search)) {
             searchInProgress.push(todo)
         }
     }
@@ -282,9 +282,9 @@ function searchInAwaitFeedback(search) {
     searchAwaitFeedback = [];
     for (let i = 0; i < awaitFeedback.length; i++) {
         let todo = awaitFeedback[i];
-        if (todo['title'].includes(search)) {
+        if (todo['title'].toLowerCase().includes(search)) {
             searchAwaitFeedback.push(todo)
-        } else if (todo['description'].includes(search)) {
+        } else if (todo['description'].toLowerCase().includes(search)) {
             searchAwaitFeedback.push(todo)
         }
     }
@@ -298,9 +298,9 @@ function searchInDoneTasks(search) {
     searchDoneTasks = [];
     for (let i = 0; i < doneTasks.length; i++) {
         let todo = doneTasks[i];
-        if (todo['title'].includes(search)) {
+        if (todo['title'].toLowerCase().includes(search)) {
             searchDoneTasks.push(todo)
-        } else if (todo['description'].includes(search)) {
+        } else if (todo['description'].toLowerCase().includes(search)) {
             searchDoneTasks.push(todo)
         }
     }
