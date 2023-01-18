@@ -99,7 +99,7 @@ function htmlSignup() {
        <input class="input_name" type="text" placeholder="Name" id="Name_signup" required>
        <input class="input_mail" type="email" placeholder="Email" id="Email_signup" required>
        <div style=position:relative;>
-                <input type="password" placeholder="Password" id="password_input"class="input_password" required>
+                <input type="password" placeholder="Password" id="password_input"class="input_password"  minlength="8" required>
                 <img onclick="changeVisibility()" id="login-password-image" class="img-password" src="./assets/img/password_icon.png">
         </div>
        <div class="loginform_buttonarea">
