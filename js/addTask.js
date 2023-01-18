@@ -10,7 +10,17 @@ async function initialize() {
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
     setTimeout(currentPage, 100);
-    getMinDate()
+    getMinDate();
+    loadContacts();
+}
+
+/**
+ * Gets "contacts" from the server
+ */
+async function loadContacts() {
+    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    await downloadFromServer();
+    contacts = JSON.parse(backend.getItem("contacts")) || [];
 }
 
 function currentPage() {

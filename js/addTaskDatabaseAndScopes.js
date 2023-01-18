@@ -39,14 +39,4 @@ let priorities = [
     }
 ]
 
-let contacts = [
-    {
-        'name': 'Marcel Küpper',
-        'icon': 'MK',
-        'iconcolor': '#3cb44b'
-    },
-    {
-        'name': 'Toni Jacobs',
-        'icon': 'TJ',
-        'iconcolor': '#000075'
-    }];
+let contacts = [];
