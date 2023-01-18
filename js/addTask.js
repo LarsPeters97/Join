@@ -186,9 +186,8 @@ function openExistingContacts() {
             existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
         else
             existingContacts.innerHTML += templateExistingContacts(i, contact);
-
+    }
     existingContacts.innerHTML += templateInvitePerson();
-}
 }
 
 /**
@@ -342,7 +341,7 @@ function changeStyleOfSelectedButton(i) {
     if (!button.classList.contains('white')) {
         addSelectedButtonStyle(button, i);
     }
-    else 
+    else
         removeStyleOfUnclickedButton(button, i);
 }
 
@@ -393,7 +392,7 @@ function priorityForCurrentTask() {
     for (let i = 0; i < priorities.length; i++) {
         let priorityId = priorities[i]['name'];
         let button = document.getElementById(priorityId);
-        if (button.classList.contains('white')) 
+        if (button.classList.contains('white'))
             priorityNameForTask = priorityId;
     }
 }
