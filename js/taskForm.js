@@ -65,6 +65,7 @@ function renderEditTask(id) {
     selectPrio(priority);
     loadAssignetPersons(id);
     loadContactsforTasks();
+    getMinDate();
 }
 
 /**

@@ -21,6 +21,7 @@ async function initAddTaskPopup() {
     await loadTasklistForId();
     await loadContacts();
     await loadCategorys();
+    getMinDate();
 }
 
 /**
@@ -56,6 +57,10 @@ async function loadCategorys() {
  */
 function getIdFromTasklist() {
     taskId = tempTasklist.length;
+}
+
+function getMinDate() {
+    document.getElementById('duedate').min = new Date().toISOString().split("T")[0];
 }
 
 /**

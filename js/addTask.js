@@ -10,6 +10,7 @@ async function initialize() {
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
     setTimeout(currentPage, 100);
+    getMinDate()
 }
 
 function currentPage() {
@@ -17,6 +18,9 @@ function currentPage() {
     document.getElementById('sidebar_addtask').classList.add('background-color');
 }
 
+function getMinDate() {
+    document.getElementById('due-date').min = new Date().toISOString().split("T")[0];
+}
 /**
  * Checks if the category-container is open or not. It is checked with the classList.contains method. When it is open
  * and the user clicks, the if statement notes that the class List ist not been added, through which the else state is executed.
