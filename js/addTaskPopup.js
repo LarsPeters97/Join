@@ -97,6 +97,9 @@ function newCategoryColor(color, i) {
     document.getElementById('selected-color').style.backgroundColor = color;
 }
 
+/**
+ * A new category gets created and pushed in the tempCategorys array
+ */
 function addNewCategory() {
     newCategoryName = document.getElementById('new-category-name').value;
     if (categoryColor && newCategoryName) {
@@ -114,6 +117,9 @@ function addNewCategory() {
     }
 }
 
+/**
+ * closes the popup and clears the arrays
+ */
 function closePopup() {
     category = [];
     categoryColor = [];
@@ -126,6 +132,9 @@ function closePopup() {
     closeBoardPopup();
 }
 
+/**
+ * Opens the assign to Dropdown
+ */
 function openAssignToSelection() {
     document.getElementById('assign-container').innerHTML = templateOpenAssignToSelection();
     for (let i = 0; i < contactList.length; i++) {
@@ -146,6 +155,11 @@ function openAssignToSelection() {
     document.getElementById('assign-container').innerHTML += templateInvitePerson();
 }
 
+/**
+ * Checks if contact is assigned
+ * @param {array} contact Informations of the contact
+ * @returns If contact is assigned
+ */
 function checkOnAssignedpeople(contact) {
     for (let i = 0; i < assignedPeople.length; i++) {
         let name = assignedPeople[i]['name'];
@@ -156,22 +170,36 @@ function checkOnAssignedpeople(contact) {
     return false;
 }
 
+/**
+ * Adds new person to assignedPersons
+ */
 function addNewPerson() {
     let email = document.getElementById('email').value;
     let icon = email.slice(0, 2);
     let color = getRandomColor();
     if (email.includes('@')) {
-        let tempName = email.split('@');
-        let name = tempName[0];
-        assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+        newPersonIsEmail(email, icon, color);
     } else {
-        let name = email;
-        assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+        newPersonIsName(email, icon, color);
     }
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignToSelection();
     loadAssignedPeople();
 }
 
+function newPersonIsEmail(email, icon, color) {
+    let tempName = email.split('@');
+    let name = tempName[0];
+    assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+}
+
+function newPersonIsName(email, icon, color) {
+    let name = email;
+    assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+}
+
+/**
+ * Renders the assigned people
+ */
 function loadAssignedPeople() {
     document.getElementById('assignedpersons').innerHTML = ``;
     for (let i = 0; i < assignedPeople.length; i++) {
@@ -180,10 +208,16 @@ function loadAssignedPeople() {
     }
 }
 
+/**
+ * Assignes a contact to task
+ * @param {string} name Name of contact
+ * @param {string} icon Icon of contact
+ * @param {string} color Colorcode of contact
+ */
 function assignContact(name, icon, color) {
     let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
     let index = indexOfAssign(contact);
-    if (checkOnAssign(contact['icon']) == true) {
+    if (checkOnAssigned(contact['icon']) == true) {
         assignedPeople.splice(index, 1);
     } else {
         assignedPeople.push({ 'name': name, 'icon': icon, 'iconcolor': color });
@@ -198,16 +232,6 @@ function indexOfAssign(contact) {
             return i;
         }
     }
-}
-
-function checkOnAssign(contact) {
-    for (let i = 0; i < assignedPeople.length; i++) {
-        let name = assignedPeople[i]['icon'];
-        if (name == contact) {
-            return true;
-        }
-    }
-    return false;
 }
 
 function checkOnAssigned(contact) {
@@ -230,29 +254,60 @@ function checkOnContacts(contact) {
     return false;
 }
 
+/**
+ * Changes priority to selected priority
+ * @param {string} prio Name of selectet priority
+ */
 function selectPriority(prio) {
     if (prio == 'urgent') {
-        document.getElementById('urgent').classList.add('urgent');
-        document.getElementById('medium').classList.remove('medium');
-        document.getElementById('low').classList.remove('low');
+        setPrioUrgent();
     }
     if (prio == 'medium') {
-        document.getElementById('urgent').classList.remove('urgent');
-        document.getElementById('medium').classList.add('medium');
-        document.getElementById('low').classList.remove('low');
+        setPrioMedium();
     }
     if (prio == 'low') {
-        document.getElementById('urgent').classList.remove('urgent');
-        document.getElementById('medium').classList.remove('medium');
-        document.getElementById('low').classList.add('low');
+        setPrioLow();
     }
     newSelectedPrio = prio;
 }
 
+/**
+ * Changes priority to urgent
+ */
+function setPrioUrgent() {
+    document.getElementById('urgent').classList.add('urgent');
+    document.getElementById('medium').classList.remove('medium');
+    document.getElementById('low').classList.remove('low');
+}
+
+/**
+ * Changes priority to medium
+ */
+function setPrioMedium() {
+    document.getElementById('urgent').classList.remove('urgent');
+    document.getElementById('medium').classList.add('medium');
+    document.getElementById('low').classList.remove('low');
+}
+
+/**
+ * Changes priority to low
+ */
+function setPrioLow() {
+    document.getElementById('urgent').classList.remove('urgent');
+    document.getElementById('medium').classList.remove('medium');
+    document.getElementById('low').classList.add('low');
+}
+
+/**
+ * Emptys the subtask input
+ */
 function clearSubtaskInput() {
     document.getElementById('input-subtask').value = ``;
 }
 
+/**
+ * Checks if the subtask inputlength is long enough
+ */
 function checkSubtaskInput() {
     let inputSubtask = document.getElementById('input-subtask');
     if (inputSubtask.value.length > 3) {
@@ -261,11 +316,18 @@ function checkSubtaskInput() {
     }
 }
 
+/**
+ * Creates new subtask
+ * @param {string} inputSubtask Text from inputfield
+ */
 function addSubtask(inputSubtask) {
     subtasks.push({ 'task': inputSubtask, 'completed': false });
     renderSubtasks();
 }
 
+/**
+ * Renders the created subtasks
+ */
 function renderSubtasks() {
     let subtaskList = document.getElementById('subtasks');
     subtaskList.innerHTML = '';
@@ -280,24 +342,10 @@ function renderSubtasks() {
     }
 }
 
-function templateSubtasks(taskElement, i) {
-    return /*html*/`
-        <div class="subtask_checkbox"> 
-            <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})">
-            <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
-        </div>
-        `;
-}
-
-function templateSubtasksCompleted(taskElement, i) {
-    return /*html*/`
-        <div class="subtask_checkbox"> 
-            <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})" checked>
-            <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
-        </div>
-        `;
-}
-
+/**
+ * Changes the completed status of a subtask
+ * @param {integer} i Index of selected subtask
+ */
 function changeCompleteStatus(i) {
     if (subtasks[i]['completed']) {
         subtasks[i]['completed'] = false;
@@ -305,133 +353,4 @@ function changeCompleteStatus(i) {
     else {
         subtasks[i]['completed'] = true;
     }
-}
-
-async function createTask() {
-    title = document.getElementById('title_input').value;
-    description = document.getElementById('description_input').value;
-    duedate = transformDuedate();
-    if (checkMissingInfo(title, description, duedate) == true) {
-        getIdFromTasklist();
-        if (title && description && category && assignedPeople.length > 0 && duedate && newSelectedPrio) {
-            pushTasklist(category['color'], category['name'], duedate, title, description)
-            for (let i = 0; i < subtasks.length; i++) {
-                let subtask = subtasks[i];
-                tempTasklist[taskId]['subtasks']['tasks'].push(subtask);
-            }
-            let tasksAsString = JSON.stringify(tempTasklist);
-            await backend.setItem('tasklist', tasksAsString);
-            await checkCategoryNew();
-            closePopup();
-            initBoard();
-        }
-    }
-}
-
-function checkMissingInfo(title, description) {
-    if (title == false) {
-        missingTitleAlert();
-        return false;
-    } else if (description == false) {
-        missingDescriptionAlert();
-        return false;
-    } else if (category == false) {
-        missingCategoryAlert();
-        return false;
-    } else if (assignedPeople == false) {
-        missingAssignsAlert();
-        return false;
-    } else if (Number.isInteger(duedate) == false) {
-        missingDueDateAlert();
-        return false;
-    } else if (newSelectedPrio == false) {
-        missingPrioAlert();
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function missingTitleAlert() {
-    document.getElementById('title_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function hideAlert() {
-    document.getElementById('description_alert').classList.add('d-none');
-    document.getElementById('title_alert').classList.add('d-none');
-    document.getElementById('category_alert').classList.add('d-none');
-    document.getElementById('assign_alert').classList.add('d-none');
-    document.getElementById('duedate_alert').classList.add('d-none');
-    document.getElementById('prio_alert').classList.add('d-none');
-}
-
-function missingDescriptionAlert() {
-    document.getElementById('description_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function missingCategoryAlert() {
-    document.getElementById('category_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function missingAssignsAlert() {
-    document.getElementById('assign_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function missingDueDateAlert() {
-    document.getElementById('duedate_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function missingPrioAlert() {
-    document.getElementById('prio_alert').classList.remove('d-none');
-    setTimeout(hideAlert, 5000);
-}
-
-function pushTasklist(category_color, category_name, duedate, title, description) {
-    tempTasklist.push({
-        'progress': 'todo',
-        'id': taskId,
-        'category': {
-            'color': category_color,
-            'categoryName': category_name,
-        },
-        'duedate': duedate,
-        'title': title,
-        'description': description,
-        'subtasks': {
-            'tasks': [],
-        },
-        'assignedTo': {
-            'user': assignedPeople,
-        },
-        'priority': newSelectedPrio,
-    },);
-}
-
-async function checkCategoryNew() {
-    for (let i = 0; i < categorys.length; i++) {
-        let category1 = categorys[i];
-        if (category1['name'] == category['name']) {
-            return false
-        }
-    }
-    categorys.push({
-        'color': category['color'],
-        'name': category['name'],
-    },);
-    categoryAsString = JSON.stringify(categorys);
-    await backend.setItem('categorys', categoryAsString);
-}
-
-function transformDuedate() {
-    let mynewDate = document.getElementById('duedate').value
-    let year = mynewDate.slice(0, 4);
-    let month = mynewDate.slice(5, 7);
-    let day = mynewDate.slice(8);
-    let newDuedate = year + month + day;
-    return parseInt(newDuedate)
 }

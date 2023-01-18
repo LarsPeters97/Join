@@ -335,6 +335,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     box-sizing: border-box;
     overflow-y: auto;
+    animation: flyin 225ms linear;
 }
 
 .taskform div {
@@ -827,6 +828,24 @@ body::-webkit-scrollbar-thumb {
     margin: 0;
     width: 20px;
     height: 20px;
+}
+
+@keyframes flyIn {
+    0% {
+        left: 800px;
+    }
+    100% {
+        left: 0px;
+    }
+}
+
+@keyframes flyin {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 1050px) {

@@ -124,57 +124,31 @@ function renderTodos(boxid, progression, array, next, previus) {
  */
 function assignedTo(assignedTo) {
     if (assignedTo.length == 0) {
-        return `<div class="number">N/A</div>`
+        return noAssignedPersonsTemplate();
     }
     if (assignedTo.length == 1) {
-        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div>`
+        return oneAssignedPersonsTemplate(assignedTo);
     }
     if (assignedTo.length == 2) {
-        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div>`
+        return twoAssignedPersonsTemplate(assignedTo);
     }
     if (assignedTo.length == 3) {
-        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="name" style="background-color: ${assignedTo[2]['iconcolor']}">${assignedTo[2]['icon']}</div>`
-    } else {
-        let number = assignedTo.length - 2
-        return `<div class="name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="number">+${number}</div>`
+        return threeAssignedPersonsTemplate(assignedTo);
+    }
+    else {
+        return moreAssignedPersonsTemplate(assignedTo);
     }
 }
 
-function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus) {
-    let width = completedtasks / subtasks * 100
-    return `
-    <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
-        <div class="category" style="background-color: ${color}">${category}</div>
-        <div class="title">${title}</div>
-        <div class="description">${description.slice(0, 50)}</div>
-        <div class="subtaskbar">
-            <div class="progress">
-                <div class="progress-bar" style="width: ${width}%">
-                </div>
-            </div>${completedtasks}/${subtasks} Done
-        </div>
-        <div class="todofooter">
-            <div class="assigned">${assignedIconToThree}
-            </div>
-            <img src="assets/img/${priority}.png" alt="${priority}">
-        </div>
-    </div>
-        <div class="mobile-buttons">
-            <button class="up" onclick="moveTask(${id}, '${previus}')">previous</button>
-            <button class="down" onclick="moveTask(${id}, '${next}')">next</button>
-        </div>`
-}
-
+/**
+ * Moves a task to a progress destination
+ * @param {integer} id Id from selected task
+ * @param {string} destination Name of the progress destination
+ */
 async function moveTask(id, destination) {
     tasklist[id]['progress'] = destination;
     await saveBoard();
     setTimeout(await initBoard, 100);
-}
-
-function addDragarea(id) {
-    return `
-    <div id="${id}" class="dragarea" ondrop="drop('${id}')" ondragover="allowDrop(event); highlight('${id}')" ondragleave="removeHighlight('${id}')"></div>
-    `
 }
 
 function startDragging(id) {
@@ -185,12 +159,20 @@ function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * Moves a task to a progress destination via drag and drop
+ * @param {string} destination Name of the progress destination
+ */
 async function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
     await saveBoard();
     setTimeout(await initBoard, 100);
 }
 
+/**
+ * Highlights the droparea when hovering over it
+ * @param {string} id Id of the dragarea
+ */
 function highlight(id) {
     document.getElementById(id).classList.add('dragarea-highlight');
 }
@@ -268,9 +250,9 @@ function searchInTodos(search) {
     searchTodos = [];
     for (let i = 0; i < todos.length; i++) {
         let todo = todos[i];
-        if (todo['title'].includes(search)){
+        if (todo['title'].includes(search)) {
             searchTodos.push(todo)
-        }else if (todo['description'].includes(search)){
+        } else if (todo['description'].includes(search)) {
             searchTodos.push(todo)
         }
     }
@@ -284,9 +266,9 @@ function searchInInProgress(search) {
     searchInProgress = [];
     for (let i = 0; i < inProgress.length; i++) {
         let todo = inProgress[i];
-        if (todo['title'].includes(search)){
+        if (todo['title'].includes(search)) {
             searchInProgress.push(todo)
-        }else if (todo['description'].includes(search)){
+        } else if (todo['description'].includes(search)) {
             searchInProgress.push(todo)
         }
     }
@@ -300,9 +282,9 @@ function searchInAwaitFeedback(search) {
     searchAwaitFeedback = [];
     for (let i = 0; i < awaitFeedback.length; i++) {
         let todo = awaitFeedback[i];
-        if (todo['title'].includes(search)){
+        if (todo['title'].includes(search)) {
             searchAwaitFeedback.push(todo)
-        }else if (todo['description'].includes(search)){
+        } else if (todo['description'].includes(search)) {
             searchAwaitFeedback.push(todo)
         }
     }
@@ -316,9 +298,9 @@ function searchInDoneTasks(search) {
     searchDoneTasks = [];
     for (let i = 0; i < doneTasks.length; i++) {
         let todo = doneTasks[i];
-        if (todo['title'].includes(search)){
+        if (todo['title'].includes(search)) {
             searchDoneTasks.push(todo)
-        }else if (todo['description'].includes(search)){
+        } else if (todo['description'].includes(search)) {
             searchDoneTasks.push(todo)
         }
     }

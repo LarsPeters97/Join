@@ -181,19 +181,13 @@ async function taskStatusChange(task, id) {
  */
 function selectPrio(prio) {
     if (prio == 'urgent') {
-        document.getElementById('urgent').classList.add('urgent');
-        document.getElementById('medium').classList.remove('medium');
-        document.getElementById('low').classList.remove('low');
+        setPrioUrgent();
     }
     if (prio == 'medium') {
-        document.getElementById('urgent').classList.remove('urgent');
-        document.getElementById('medium').classList.add('medium');
-        document.getElementById('low').classList.remove('low');
+        setPrioMedium();
     }
     if (prio == 'low') {
-        document.getElementById('urgent').classList.remove('urgent');
-        document.getElementById('medium').classList.remove('medium');
-        document.getElementById('low').classList.add('low');
+        setPrioLow();
     }
     selectedPrio = prio;
 }
@@ -344,16 +338,11 @@ async function editTask(id) {
     if (newDescription.length > 2) {
         tasklist[id]['description'] = newDescription;
     }
-    if (assignetContactsTemp.length > 1) {
-        console.log(assignetContactsTemp);
-        tasklist[id]['assignedTo']['user'] = assignetContacts;
-    }
+    tasklist[id]['assignedTo']['user'] = assignetContacts;
     if (Number.isInteger(newDuedate)) {
         tasklist[id]['duedate'] = newDuedate;
     }
-    if (selectPrio) {
-        tasklist[id]['priority'] = selectedPrio;
-    }
+    tasklist[id]['priority'] = selectedPrio;
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();

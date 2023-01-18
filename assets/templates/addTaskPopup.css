@@ -559,6 +559,14 @@ body::-webkit-scrollbar-thumb {
         left: 0px;
     }
 }
+@keyframes flyin {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
 
 @media (max-width: 1200px) {
     .add_task_popup {
