@@ -19,6 +19,7 @@ let searchDoneTasks = [];
 async function initBoard() {
     await loadAll();
     renderBoard();
+    document.getElementById('sidebar_board_mobile').classList.add('background-color');
 }
 
 /**

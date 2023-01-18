@@ -651,6 +651,7 @@ body::-webkit-scrollbar-thumb {
     margin: 10px 0px;
     display: flex;
     flex-direction: column !important;
+
 }
 
 .duedate input {
@@ -659,6 +660,7 @@ body::-webkit-scrollbar-thumb {
     padding: 13px 21px;
     border: 1px solid #D1D1D1;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .editTask {

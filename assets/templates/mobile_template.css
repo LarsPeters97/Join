@@ -94,6 +94,11 @@
         color: #cdcdcd;
         text-decoration: none;
     }
+
+    .sidebar_menu_mobile a:focus{
+        background: #091931;
+    }
+
     .sidebar_menu_mobile:hover {
         background: #091931;
     }
@@ -102,4 +107,8 @@
         width: 30px;
         height: 30px;
     }
+}
+
+.background-color{
+    background: #091931;
 }

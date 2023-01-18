@@ -153,7 +153,7 @@ function addInput() {
 
 function templateSubtasks(taskElement, i) {
     return `
-        <div class="subtask_checkbox"> 
+        <div class="subtask_checkbox ">   
             <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})">
             <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
         </div>
@@ -162,7 +162,7 @@ function templateSubtasks(taskElement, i) {
 
 function templateSubtasksCompleted(taskElement, i) {
     return `
-        <div class="subtask_checkbox"> 
+        <div class="subtask_checkbox flex-start">  
             <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})" checked>
             <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
         </div>

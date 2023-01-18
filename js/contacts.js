@@ -42,6 +42,7 @@ async function init() {
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
     renderLetters();
+    document.getElementById('sidebar_contact_mobile').classList.add('background-color');
 }
 
 function showAddcontact() {

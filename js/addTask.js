@@ -9,6 +9,7 @@ async function initialize() {
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
+    document.getElementById('sidebar_addtask_mobile').classList.add('background-color');
 }
 
 /**
