@@ -732,7 +732,7 @@ textarea {
 .dropdown-assign {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 280px;
     border: 1px solid #000009;
     border-radius: 10px;
     max-height: 160px;
