@@ -86,7 +86,7 @@ function loadTodos() {
  * filtering the array for the value inProgress
  */
 function loadInProgress() {
-    inProgress = tasklist.filter(t => t['progress'] == 'inProgresss');
+    inProgress = tasklist.filter(t => t['progress'] == 'inprogresss');
     document.getElementById('amount-progress').innerHTML = `<b>${inProgress.length}</b>`;
 }
 
