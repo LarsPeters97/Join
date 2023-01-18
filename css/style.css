@@ -165,6 +165,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     font-size: 21px;
     outline: none;
+    background-image: none;
 }
 
 .input_password {
@@ -196,6 +197,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     font-size: 21px;
     outline: none;
+    background-image: none;
 }
 
 .login_form_part3 {
@@ -291,6 +293,7 @@ body::-webkit-scrollbar-thumb {
     border-radius: 10px;
     font-size: 21px;
     outline: none;
+    background-image: none;
 }
 
 input[type="checkbox"] {

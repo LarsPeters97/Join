@@ -131,6 +131,7 @@ async function onSubmit(event) {
     if (response.ok) {
         alert("Email was send!"); // Feedback für enduser
         document.getElementById("email_signup").value = "";
+        window.location.href = "./index.html";
     } else {
         alert("Email not send!");
     }
