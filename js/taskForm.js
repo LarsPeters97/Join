@@ -89,7 +89,7 @@ async function addNewSubask(id) {
     tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
     document.getElementById('newsubtask').value = '';
     await saveBoard();
-    await loadAll();
+    await setTimeout(loadAll, 100);
     renderBoard();
     task = tasklist.filter(t => t['id'] == id);
     let subtasks = task[0]['subtasks']['tasks'];

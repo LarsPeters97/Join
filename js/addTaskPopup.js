@@ -102,7 +102,7 @@ function newCategoryColor(color, i) {
  */
 function addNewCategory() {
     newCategoryName = document.getElementById('new-category-name').value;
-    if (categoryColor && newCategoryName) {
+    if (categoryColor.length == 7 && newCategoryName) {
         category = ({
             'name': newCategoryName,
             'color': categoryColor
@@ -112,9 +112,15 @@ function addNewCategory() {
         document.getElementById('category_colors').innerHTML = ``;
     } else if (newCategoryName) {
         document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
+        setTimeout(removeAlert, 5000);
     } else {
         document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name.';
+        setTimeout(removeAlert, 5000);
     }
+}
+
+function removeAlert() {
+    document.getElementById('mistake-category-fields').innerHTML = ``;
 }
 
 /**

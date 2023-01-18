@@ -328,10 +328,9 @@ textarea {
 .taskform {
     background-color: white;
     display: flex;
-    width: 25%;
+    width: 30%;
     min-width: fit-content;
     min-height: fit-content;
-    max-height: 597px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 40px;
@@ -340,6 +339,10 @@ textarea {
     box-sizing: border-box;
     overflow-y: auto;
     animation: flyin 225ms linear;
+}
+
+.edittaskform {
+    max-height: 600px;
 }
 
 .taskform div {
@@ -486,6 +489,7 @@ textarea {
 .subtaskwindow {
     margin-bottom: 15px;
     width: 280px;
+    height: fit-content;
     max-height: 150px !important;
     overflow-x: hidden;
     overflow-y: auto;
@@ -650,6 +654,12 @@ textarea {
     max-height: 200px;
 }
 
+.editsubtask {
+    overflow-y: hidden;
+    font-size: 18px;
+    font-weight: 400;
+}
+
 .duedate {
     max-width: 80%;
     margin: 10px 0px;
@@ -702,10 +712,9 @@ textarea {
 
 #subtasks {
     max-width: 400px;
-    max-height: 200px;
-    overflow-y: auto;
-    overflow-x: hide;
+    max-height: 180px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 .assignedpersons {
