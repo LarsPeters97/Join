@@ -498,7 +498,7 @@ body::-webkit-scrollbar-thumb {
     border: 2px solid rgba(0, 0, 0, 0.2);
     margin: 5px 0px;
     border-radius: 8px;
-    width: 350px;
+    width: 280px;
     padding: 0px 10px;
     box-sizing: border-box;
 }
@@ -680,7 +680,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     padding: 10px 21px;
     border: 1px solid #D1D1D1;
-    width: 350px;
+    width: 280px;
     border-radius: 8px;
     box-sizing: border-box;
 }
