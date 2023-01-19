@@ -1,7 +1,7 @@
 
 let users = [];
 
-setURL('https://gruppe-397.developerakademie.net/smallest_backend_ever');
+setURL('https://alexandrevermeersch.com/smallest_backend_ever');
 /**
  * Downloading users json from server
  */

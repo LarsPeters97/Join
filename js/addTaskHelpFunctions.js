@@ -90,7 +90,7 @@ function getIdFromTasklist() {
  */
 
 async function loadTasklistForId() {
-    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
     await downloadFromServer();
     tasklist = JSON.parse(backend.getItem("tasklist")) || [];
     getIdFromTasklist();

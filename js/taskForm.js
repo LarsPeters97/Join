@@ -2,7 +2,7 @@
  * Gets contacts for further rendering
  */
 async function loadContactsforTasks() {
-    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
 }

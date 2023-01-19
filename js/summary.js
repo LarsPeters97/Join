@@ -30,7 +30,7 @@ async function summaryInit() {
 }
 
 async function loadTasklistForSummary() {
-    setURL("https://gruppe-397.developerakademie.net/smallest_backend_ever");
+    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
     await downloadFromServer();
     tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
@@ -86,7 +86,7 @@ function loadTodos() {
  * filtering the array for the value inProgress
  */
 function loadInProgress() {
-    inProgress = tasklist.filter(t => t['progress'] == 'inProgresss');
+    inProgress = tasklist.filter(t => t['progress'] == 'inprogresss');
     document.getElementById('amount-progress').innerHTML = `<b>${inProgress.length}</b>`;
 }
 
