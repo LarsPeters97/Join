@@ -33,7 +33,7 @@ let findContact = false;
 /**
  * Url for backend
  */
-setURL("https://alexandrevermeersch.com/smallest_backend_ever");
+setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
 
 /**
  * Loading contacts from backend

@@ -129,7 +129,7 @@ function templateInvitePerson() {
 function templateInputNewPerson() {
     return /*html*/`
     <div class="newcontact flex">
-        <input class="input-category-contact" type="email" placeholder="Contact email" id="email">
+        <input class="input-category-contact" type="email" placeholder="Contact email" id="email" required>
         <div class="flex delete-and-create-icons-section">
             <img src="./assets/img/false-x.png" class="false-x" onclick="templateExitNewPerson()">
             |

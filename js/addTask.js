@@ -9,7 +9,7 @@ async function initialize() {
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
-    setTimeout(currentPage, 100);
+    setTimeout(currentPage, 500);
     getMinDate();
     loadContacts();
 }
@@ -18,7 +18,7 @@ async function initialize() {
  * Gets "contacts" from the server
  */
 async function loadContacts() {
-    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
+    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     contacts = JSON.parse(backend.getItem("contacts")) || [];
 }

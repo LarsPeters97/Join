@@ -28,7 +28,7 @@ async function initAddTaskPopup() {
  * Gets "tasklist" from the server
  */
 async function loadTasklistForId() {
-    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
+    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     tempTasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }

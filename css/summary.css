@@ -388,12 +388,10 @@ body::-webkit-scrollbar-thumb {
     body {
         overflow-x: hidden;
     }
-
-    .content {
-        position: relative;
-    }
-
     
+    .summary-details-container {
+        padding-bottom: 150px;
+    }
 }
 
 
@@ -620,7 +618,6 @@ body::-webkit-scrollbar-thumb {
         width: 363px;
         left: 33px;
         top: 310px; 
-        padding-bottom: 150px;
      }
 
     .summary-headline-container {

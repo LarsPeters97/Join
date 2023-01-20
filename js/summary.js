@@ -30,7 +30,7 @@ async function summaryInit() {
 }
 
 async function loadTasklistForSummary() {
-    setURL("https://alexandrevermeersch.com/smallest_backend_ever");
+    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
     await downloadFromServer();
     tasklist = JSON.parse(backend.getItem("tasklist")) || [];
 }
