@@ -1,11 +1,14 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body::-webkit-scrollbar {
     width: 10px;
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -62,19 +65,12 @@ textarea {
     cursor: pointer;
 }
 
-.content {
-    position: absolute;
-    left: 232px;
-    top: 89px;
-    margin-left: 16px;
-    max-width: 90vw;
-}
-
 .headline {
     display: flex;
     font-size: 21px;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .headline h1 {
@@ -647,7 +643,7 @@ textarea {
 }
 
 .editdescription textarea {
-    font-family: 'Inter', !important;
+    font-family: 'Inter',  !important;
     font-weight: 400;
     font-size: 18px;
     border: 1px solid #D1D1D1;
@@ -855,10 +851,15 @@ textarea {
     height: 20px;
 }
 
+.wrapper_mobile_menu {
+    display: none;
+}
+
 @keyframes flyIn {
     0% {
         left: 800px;
     }
+
     100% {
         left: 0px;
     }
@@ -868,15 +869,46 @@ textarea {
     from {
         transform: scale(0);
     }
+
     to {
         transform: scale(1);
     }
 }
 
+@media (max-width:1650px) {
+    #whole-side {
+        align-items: flex-end;
+        margin-right: 80px;
+    }
+}
+
+@media(max-width: 1400px) {
+    .whole-side {
+        margin-right: 24px;
+    }
+}
+
+@media(max-width: 1350px) {
+    .taskbar {
+        flex-direction: column;
+    }
+
+    /* .whole-side {
+        align-items: center !important;
+        margin-right: 0px !important;
+    } */
+}
+
+@media (max-width:1250px) {
+    .wrapper_mobile_menu {
+        display: flex;
+    }
+}
+
 @media (max-width: 1050px) {
-    .content {
-        left: 0;
-        max-width: 95vw;
+
+    .wrapper_mobile_menu {
+        display: flex;
     }
 
     .taskbar {
@@ -958,37 +990,36 @@ textarea {
         max-height: 400px;
     }
 
-    .contact label{
+    .contact label {
         max-width: 38vw;
         overflow-x: hidden;
     }
 
-    .mobile-buttons{
+    .mobile-buttons {
         width: 80vw;
     }
 }
 
-@media (max-width:510px){
+@media (max-width:510px) {
     .taskform {
         width: 100%;
     }
 }
 
-@media (max-width:400px){
-    .taskform{
+@media (max-width:400px) {
+    .taskform {
         padding: 40px 10px;
     }
-    .subtask{
+
+    .subtask {
         width: 250px;
     }
 
-    .subtaskedit{
+    .subtaskedit {
         width: 250px;
     }
 }
-
 
 .d-none {
     display: none;
 }
-

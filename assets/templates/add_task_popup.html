@@ -1,62 +1,115 @@
 <div class="background-popup" onclick="closePopup()"></div>
 <div class="add_task_popup">
-    <div class="add_task_headline">Add Task</div>
-        <div class="add_task_box">
-            <div class="add_task_box_left">
-                <label class="title_label" for="title_input">Title</label>
-                <input class="title_input" type="text" placeholder="Enter a Title" id="title_input" required>
-                <div class="title_alert d-none" id="title_alert">Please enter a title!</div>
-                <label class="description_label" for="description_input">Description</label>
-                <textarea class="description_input" id="description_input" required></textarea>
-                <div class="description_alert d-none" id="description_alert">Please enter a description!</div>
-                <p class="category_label">Category</p>
-                <div class="category_selection" id="category_selection">
-                    <div class="selection" onclick="openCategorySelection()">
-                        <span>Select task category</span>
-                        <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
-                    </div>
+    <div class="form-add-task">
+
+        <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create Task
+            <img src="./assets/img/create-check.svg" id="create-responsive"></button>
+        <h1 class="headline-task">Add Task</h1>
+        <div class="flex change-direction">
+            <div class="left-side flex column">
+
+                <div class="title flex column margin-for-fields">
+                    <span class="header-for-fields">Title</span>
+                    <input class="input-text-type width-f" type="text" min="2" max="40" placeholder="Enter a title"
+                        id="input-title" oninput="deleteMistakeMessage('title-required')">
+                    <span id="title-required" class="mistake-category-fields"></span>
                 </div>
-                <div class="category_colors" id="category_colors"></div>
-                <div class="category_alert d-none" id="category_alert">Please select a category!</div>
-                <div id="mistake-category-fields" class="mistake-category-fields"></div>
-                <p class="assign_label">Assigned to</p>
-                <div class="assign_selection" id="assign-container">
-                    <div class="selection" onclick="openAssignToSelection()">
-                        <span class="flex">Select contacts to assign</span>
-                        <img src="./assets/img/vector-2.png" alt="klick">
-                    </div>
+
+                <div class="description flex column margin-for-fields">
+                    <span class="header-for-fields">Description</span>
+                    <textarea class="width-f" name="description" id="description" maxlength="500"
+                        placeholder="Enter a Description"
+                        oninput="deleteMistakeMessage('description-required')"></textarea>
+                    <span id="description-required" class="mistake-category-fields"></span>
                 </div>
-                <div class="assign_alert d-none" id="assign_alert">Please assign a person to the task!</div>
-                <div class="assignedpersons" id="assignedpersons"></div>
+
+                <div class="flex column margin-for-fields">
+                    <span class="header-for-fields">Category</span>
+                    <div class="dropdown-category-container width-f" id="dropdown-category-container">
+                        <div class="dropdown-category border-radius-fields" id="category-container">
+                            <div class="flex input-section" onclick="checkIfCategoryContainerOpen()"
+                                id="input-section">
+                                <span class="flex" id="dropdown-category">Select task category</span>
+                                <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                            </div>
+                        </div>
+                        <div class="dropdown-category select-bg-color d-none" id="new-category"
+                            onclick="createNewCategory()">
+                            <span class="flex">New Category</span><img src="./assets/img/plus-subtask.png">
+                        </div>
+                        <div id="existing-categories" class="max-height-and-scroll"></div>
+                    </div>
+                    <div id="categories-for-colors" class="flex"></div>
+                    <div id="mistake-category-fields" class="mistake-category-fields"></div>
+                </div>
+
+
+                <div class="flex column margin-for-fields">
+                    <span class="header-for-fields">Assigned to</span>
+                    <div class="dropdown-category-container width-f" id="assigned-container">
+                        <div class="dropdown-category border-radius-fields" id="contact-container">
+                            <div class="flex input-section" onclick="checkIfAssignedToIsOpen()"
+                                id="assigned-contacts">
+                                <span class="flex">Select contacts to assign</span>
+                                <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                            </div>
+                        </div>
+                        <div id="existing-contacts" class="d-none max-height-and-scroll"></div>
+                    </div>
+                    <div id="assigned-to-icons-section" class="flex width-f"></div>
+                    <span id="assigned-to-contacts-required" class="mistake-category-fields"></span>
+                </div>
             </div>
-            <div class="add_task_box_right">
-                <label class="duedate_label" for="duedate">Due date</label>
-                <input class="duedate_input" type="date" id="duedate" required placeholder="dd/mm/yyyy">
-                <div class="duedate_alert d-none" id="duedate_alert">Please select a due date!</div>
-                <div class="prio">Prio
-                    <div class="prioselect">
-                        <div class="prio-urgent" id="urgent" onclick="selectPriority('urgent')">Urgent <img
-                                src="assets/img/urgent.svg"></div>
-                        <div class="prio-medium" id="medium" onclick="selectPriority('medium')">Medium <img
-                                src="assets/img/medium.svg"></div>
-                        <div class="prio-low" id="low" onclick="selectPriority('low')">Low <img
-                                src="assets/img/low.svg"></div>
-                    </div>
-                    <div class="prio_alert d-none" id="prio_alert">Please select a priority!</div>
+
+            <div class="right-side flex column">
+                <div class="due-date flex column margin-for-fields">
+                    <span class="header-for-fields">Due date</span>
+                    <input type="date" placeholder="dd/mm/yyyy" id="due-date"
+                        class="width-f" oninput="deleteMistakeMessage('date-required')">
+                    <span id="date-required" class="mistake-category-fields"></span>
                 </div>
-                <p class="subtask_label">Subtasks</p>
-                <div id="subtaskinput" class="subtask_inputarea">
-                    <div onclick="addInput()" class="subtask_input">
-                        <span class="subtaskplaceholder">Add new subtask</span>
-                        <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+
+                <div class="flex column margin-for-fields">
+                    <span class="header-for-fields">Prio</span>
+                    <div class="flex prio-buttons-section width-f" id="prio-buttons-section"></div>
+                    <span id="priority-required" class="mistake-category-fields"></span>
+                </div>
+                <div class="flex column margin-for-fields">
+                    <span class="header-for-fields">Subtasks</span>
+                    <div id="subtasks-section" class="width-f">
+                        <div class="input-text-type subtask" id="subtask-before"
+                            onclick="changeSubtaskInputField()">
+                            <input class="input-subtask" type="text" min="2" max="100"
+                                placeholder="Add new subtask">
+                            <div id="subtask-icons">
+                                <img src="./assets/img/plus-subtask.png" alt="Add" id="subtask-plus">
+                            </div>
+                        </div>
+                        <div class="input-text-type subtask d-none" id="subtask-after">
+                            <input class="input-subtask" type="text" minlength="2" maxlength="100"
+                                id="input-subtask-area" name="input-subtask">
+                            <div id="subtask-icons" class="flex">
+                                <img src="./assets/img/false-x.png" class="false-x"
+                                    onclick="closeSubtaskInputField()"> |
+                                <img src="./assets/img/checkmark.png" class="checkmark"
+                                    onclick="checkSubtaskInputValue()">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="subtask-to-short" class="mistake-category-fields"></div>
+                    <div id="subtask-list" class="flex column">
                     </div>
                 </div>
-                <div class="addedsubtasks" id="subtasks"></div>
             </div>
         </div>
-        <div class="exit" onclick="closePopup()">x</div>
-        <div class="cancel" onclick="closePopup()">Cancel <img src="./assets/img/x-lightblue.png" class="cancelimg">
+        <div class="task-btns">
+            <button type="reset" class="clear-btn btns-clear-and-create desktop-clear-btn"
+                onmouseover="showClearImgLightBlue()" onclick="clearTask()"
+                onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
+                    id="clear-img"></button>
+            <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create
+                Task
+                <img src="./assets/img/create-check.svg" id="create-img"></button>
         </div>
-        <div class="create_task" onclick="createTask()">Create Task <img src="./assets/img/checkmark.png"
-                class="checkmark"></div>
+    </div>
 </div>

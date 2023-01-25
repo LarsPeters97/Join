@@ -1,4 +1,4 @@
-let contacts = [];
+// let contacts = [];
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];
@@ -150,7 +150,7 @@ function assignedTo(assignedTo) {
 async function moveTask(id, destination) {
     tasklist[id]['progress'] = destination;
     await saveBoard();
-    setTimeout(await initBoard, 100);
+    setTimeout(await initBoard, 200);
 }
 
 function startDragging(id) {
@@ -168,7 +168,7 @@ function allowDrop(ev) {
 async function drop(destination) {
     tasklist[currentDraggedElement]['progress'] = destination;
     await saveBoard();
-    setTimeout(await initBoard, 100);
+    setTimeout(await initBoard, 200);
 }
 
 /**
@@ -187,13 +187,11 @@ function removeHighlight(id) {
  * Opens the add task Popup
  */
 function taskPopup() {
-    document.getElementById('Boardpopup').innerHTML = `
-    <div w3-include-html="./assets/templates/add_task_popup.html"></div>
-    `;
+    document.getElementById('Boardpopup').innerHTML = addTaskPopupTemplate();
     includeHTML();
     document.getElementById('Boardpopup').classList.remove('d-none');
     document.getElementById('Boardpopup').style.overflow = 'scroll';
-    initAddTaskPopup();
+    initialize();
 }
 
 /**

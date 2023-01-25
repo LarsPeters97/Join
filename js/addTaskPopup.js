@@ -128,20 +128,6 @@ function removeAlert() {
     document.getElementById('mistake-category-fields').innerHTML = ``;
 }
 
-/**
- * closes the popup and clears the arrays
- */
-function closePopup() {
-    category = [];
-    categoryColor = [];
-    description = [];
-    title = [];
-    assignedPeople = [];
-    duedate = [];
-    newSelectedPrio = [];
-    subtasks = [];
-    closeBoardPopup();
-}
 
 /**
  * Opens the assign to Dropdown
