@@ -65,6 +65,15 @@ textarea {
     cursor: pointer;
 }
 
+.board-side {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 60px;
+    padding-left: 350px;
+}
+
 .headline {
     display: flex;
     font-size: 21px;
@@ -120,19 +129,24 @@ textarea {
 .taskHeader {
     display: flex;
     min-width: 155px;
-    width: 15vw;
-    max-width: 40vw;
+    width: 210px;
+    max-width: 240px;
     height: 30px;
     justify-content: space-between;
     align-items: center;
     padding: 18px;
     font-size: 21px;
     cursor: pointer;
+    margin-bottom: 24px;
 }
 
 .taskHeader p {
-    font-weight: 700;
-    font-size: 21px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.taskHeader div p {
+    margin-right: 12px;
 }
 
 .addtask {
@@ -875,34 +889,12 @@ textarea {
     }
 }
 
-@media (max-width:1650px) {
-    #whole-side {
-        align-items: flex-end;
-        margin-right: 80px;
-    }
-}
-
-@media(max-width: 1400px) {
-    .whole-side {
-        margin-right: 24px;
-    }
-}
 
 @media(max-width: 1350px) {
     .taskbar {
         flex-direction: column;
     }
 
-    /* .whole-side {
-        align-items: center !important;
-        margin-right: 0px !important;
-    } */
-}
-
-@media (max-width:1250px) {
-    .wrapper_mobile_menu {
-        display: flex;
-    }
 }
 
 @media (max-width: 1050px) {
@@ -931,6 +923,16 @@ textarea {
 
     .mobile-buttons {
         display: flex;
+    }
+
+    .board-distances {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .board-side {
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }
 
@@ -998,11 +1000,20 @@ textarea {
     .mobile-buttons {
         width: 80vw;
     }
+
+    .searchbar {
+        margin-bottom: 24px;
+    }
 }
 
 @media (max-width:510px) {
     .taskform {
         width: 100%;
+    }
+
+    .board-side {
+        padding-left: 24px;
+        padding-right: 24px;
     }
 }
 
