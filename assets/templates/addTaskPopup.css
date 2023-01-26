@@ -25,24 +25,18 @@ body::-webkit-scrollbar-thumb {
 }
 
 .add_task_popup {
-    position: relative;
     display: flex;
     flex-direction: column;
     background-color: white;
     z-index: 1000;
     border-radius: 20px;
-    width: fit-content;
     animation: flyin 225ms linear;
+    width: fit-content;
+    height: fit-content;
+    padding: 0px 75px 50px 75px;
 }
 
-.mistake-category-fields {
-    color: red;
-    font-size: 14px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-.add_task_headline {
+/* .add_task_headline {
     font-size: 60px;
     font-weight: 700;
     margin-left: 70px;
@@ -556,7 +550,7 @@ body::-webkit-scrollbar-thumb {
 .prio_alert {
     color: red;
     font-weight: 500;
-}
+} */
 
 @keyframes flyIn {
     0% {

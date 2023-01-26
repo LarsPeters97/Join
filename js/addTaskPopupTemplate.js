@@ -173,7 +173,6 @@ function addTaskPopupTemplate() {
     return /*html*/`
     <div class="background-popup" onclick="closePopup()"></div>
 <div class="add_task_popup">
-    <div class="form-add-task">
 
         <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create Task
             <img src="./assets/img/create-check.svg" id="create-responsive"></button>
@@ -272,18 +271,18 @@ function addTaskPopupTemplate() {
                     <div id="subtask-to-short" class="mistake-category-fields"></div>
                     <div id="subtask-list" class="flex column">
                     </div>
+                    <div class="task-btns">
+                        <button type="reset" class="clear-btn btns-clear-and-create desktop-clear-btn"
+                        onmouseover="showClearImgLightBlue()" onclick="clearTask()"
+                        onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
+                    id="clear-img"></button>
+                        <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create
+                Task
+                <img src="./assets/img/create-check.svg" id="create-img"></button>
+    </div>
                 </div>
             </div>
         </div>
-        <div class="task-btns">
-            <button type="reset" class="clear-btn btns-clear-and-create desktop-clear-btn"
-                onmouseover="showClearImgLightBlue()" onclick="clearTask()"
-                onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
-                    id="clear-img"></button>
-            <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create
-                Task
-                <img src="./assets/img/create-check.svg" id="create-img"></button>
-        </div>
-    </div>
+
 </div>`;
 }
