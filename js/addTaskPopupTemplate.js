@@ -171,12 +171,15 @@
 
 function addTaskPopupTemplate() {
     return /*html*/`
-    <div class="background-popup" onclick="closePopup()"></div>
+    <div class="background-popup" onclick="checkIfPopupShouldBeClosed()"></div>
 <div class="add_task_popup">
 
         <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create Task
             <img src="./assets/img/create-check.svg" id="create-responsive"></button>
-        <h1 class="headline-task">Add Task</h1>
+        <div class="headline-and-close">
+            <h1 class="headline-task">Add Task</h1>
+            <img src="./assets/img/false-x.png" alt="Close" onclick="closePopup()">
+        </div>
         <div class="flex change-direction">
             <div class="left-side flex column">
 

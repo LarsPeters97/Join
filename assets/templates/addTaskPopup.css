@@ -33,7 +33,23 @@ body::-webkit-scrollbar-thumb {
     animation: flyin 225ms linear;
     width: fit-content;
     height: fit-content;
-    padding: 0px 75px 50px 75px;
+    padding: 0px 75px 50px 75px;   
+    position: fixed;
+    overflow-y: scroll;
+    height: 800px;
+}
+
+.headline-and-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headline-and-close img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    cursor: pointer;
 }
 
 /* .add_task_headline {
@@ -569,22 +585,23 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 1200px) {
+@media(max-width: 1400px) {
     .add_task_popup {
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        margin: 0;
+        height: 800px;
+        width: 650px;
+    }
+
+    .width-f {
+        width: 100%;
+    }
+
+    .description textarea {
+        max-width: none;
     }
 }
 
 @media (max-width: 1050px){
     .add_task_popup {
-        height: fit-content;
         z-index: 102;
         padding-bottom: 100px;
     }
@@ -608,6 +625,25 @@ body::-webkit-scrollbar-thumb {
 
     .create_task {
         bottom: 120px !important;
+    }
+}
+
+@media (max-width: 750px) {
+    .add_task_popup {
+        width: 100%;
+        border-radius: 0;
+}
+}
+
+@media(max-width: 700px) {
+    .add_task_popup {
+        padding-bottom: 0px;
+        background-color: #F6F7F8;
+        padding: 0px 24px 50px 24px;
+    }
+
+    #Boardpopup {
+        background-color: transparent;
     }
 }
 
@@ -667,5 +703,9 @@ body::-webkit-scrollbar-thumb {
 
     .prio-low{
         width: 90px;
+    }
+
+    .add_task_popup {
+        padding: 0px 12px 50px 12px;
     }
 }
