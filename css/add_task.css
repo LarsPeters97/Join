@@ -334,6 +334,7 @@ body::-webkit-scrollbar-thumb {
     height: 40px;
     border-radius: 50%;
     color: white;
+    margin-bottom: 12px;
 }
 
 .icons-add-task {

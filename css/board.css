@@ -378,7 +378,6 @@ textarea {
 .duedate {
     display: flex;
     flex-direction: row !important;
-    width: 240px;
     justify-content: space-between;
     margin-bottom: 15px;
     font-size: 18px;
@@ -433,7 +432,7 @@ textarea {
 
 #assignedto {
     max-height: 250px !important;
-    width: 290px;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -527,6 +526,7 @@ textarea {
     width: 280px;
     padding: 0px 10px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .subtask input {
@@ -551,8 +551,7 @@ textarea {
 .prio {
     font-weight: 400;
     font-size: 21px;
-    margin: 10px;
-    width: 85%;
+    width: 100%;
 }
 
 .prio-urgent {
@@ -636,6 +635,8 @@ textarea {
 .prioselect {
     display: flex;
     flex-direction: row !important;
+    justify-content: space-between;
+    margin-top: 12px;
 }
 
 .prioselect img {
@@ -655,7 +656,8 @@ textarea {
     padding: 13px 21px;
     font-weight: 400;
     font-size: 18px;
-    width: 80%;
+    width: 100%;
+    margin-top: 12px;
 }
 
 .editdescription {
@@ -674,20 +676,22 @@ textarea {
     padding: 10px 21px;
     overflow-x: hidden;
     overflow-y: auto;
-    max-width: 80%;
+    max-width: 100%;
     resize: vertical;
     min-height: 100px;
     max-height: 200px;
+    margin-top: 12px;
 }
 
 .editsubtask {
     overflow-y: hidden;
     font-size: 18px;
     font-weight: 400;
+    margin-top: 12px;
 }
 
 .duedate {
-    max-width: 80%;
+    max-width: 100%;
     margin: 10px 0px;
     display: flex;
     flex-direction: column !important;
@@ -701,6 +705,7 @@ textarea {
     border: 1px solid #D1D1D1;
     font-size: 18px;
     cursor: pointer;
+    margin-top: 12px;
 }
 
 .editTask {
@@ -725,6 +730,8 @@ textarea {
     width: 280px;
     border-radius: 8px;
     box-sizing: border-box;
+    width: 100%;
+    margin-top: 12px;
 }
 
 .subtaskedit img {
@@ -739,7 +746,6 @@ textarea {
 }
 
 #subtasks {
-    max-width: 400px;
     max-height: 180px;
     border-radius: 10px;
     overflow-y: auto;
@@ -749,21 +755,25 @@ textarea {
     display: flex;
     flex-direction: row !important;
     padding-top: 10px;
+    width: 250px;
+    flex-wrap: wrap;
 }
 
 .assignedpersons div {
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
 .dropdown-assign {
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 100%;
     border: 1px solid #000009;
     border-radius: 10px;
     max-height: 160px;
     overflow-y: auto;
     overflow-x: hidden;
+    margin-bottom: 50px;
+    margin-top: 12px;
 }
 
 .dropdown-assign div {
@@ -1030,13 +1040,6 @@ textarea {
         padding: 40px 10px;
     }
 
-    .subtask {
-        width: 250px;
-    }
-
-    .subtaskedit {
-        width: 250px;
-    }
 }
 
 .d-none {
