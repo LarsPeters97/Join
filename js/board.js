@@ -1,4 +1,3 @@
-// let contacts = [];
 let todos = [];
 let inProgress = [];
 let awaitFeedback = [];
@@ -19,8 +18,13 @@ let searchDoneTasks = [];
 async function initBoard() {
     await loadAll();
     renderBoard();
+    setTimeout(boardPage, 500);
+}
+
+
+function boardPage() {
     document.getElementById('sidebar_board_mobile').classList.add('background-color');
-    document.getElementById('sidebar_board').classList.add('background-color');
+    document.getElementById('sidebar_board').classList.add('background-color'); 
 }
 
 /**

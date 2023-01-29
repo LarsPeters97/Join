@@ -15,7 +15,7 @@ function renderAssignedTo(assignedTo) {
     for (let i = 0; i < assignedTo['user'].length; i++) {
         let user = assignedTo['user'][i];
         document.getElementById('assignedto').innerHTML += `
-        <div class="user"><div class="name" style="background-color: ${user['iconcolor']}">${user['icon']}</div><div class="username">${user['name']}</div></div>
+        <div class="user"><div class="round-icon-name" style="background-color: ${user['iconcolor']}">${user['icon']}</div><div class="username">${user['name']}</div></div>
         `;
     };
 }
@@ -62,10 +62,14 @@ function renderEditTask(id) {
     document.getElementById('descriptioninput').value = description;
     document.getElementById('duedate').value = duedate;
     loadSubtasks(subtasks, id);
-    selectPrio(priority);
     loadAssignetPersons(id);
     loadContactsforTasks();
-    getMinDate();
+    getMinimumDate();
+    selectPrio(priority);
+}
+
+function getMinimumDate() {
+    document.getElementById('duedate').min = new Date().toISOString().split("T")[0];
 }
 
 /**
@@ -194,6 +198,33 @@ function selectPrio(prio) {
 }
 
 /**
+ * Changes priority to urgent
+ */
+function setPrioUrgent() {
+    document.getElementById('urgent').classList.add('urgent');
+    document.getElementById('medium').classList.remove('medium');
+    document.getElementById('low').classList.remove('low');
+}
+
+/**
+ * Changes priority to medium
+ */
+function setPrioMedium() {
+    document.getElementById('urgent').classList.remove('urgent');
+    document.getElementById('medium').classList.add('medium');
+    document.getElementById('low').classList.remove('low');
+}
+
+/**
+ * Changes priority to low
+ */
+function setPrioLow() {
+    document.getElementById('urgent').classList.remove('urgent');
+    document.getElementById('medium').classList.remove('medium');
+    document.getElementById('low').classList.add('low');
+}
+
+/**
  * Renders the assigned persons of the task
  * @param {integer} id Id of selected task
  */
@@ -201,7 +232,7 @@ function loadAssignetPersons(id) {
     document.getElementById('assignedpersons').innerHTML = ``;
     for (let i = 0; i < assignetContactsTemp.length; i++) {
         let assignetperson = assignetContactsTemp[i];
-        document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
+        document.getElementById('assignedpersons').innerHTML += `<div class="round-icon-name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
 }
 

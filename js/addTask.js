@@ -9,7 +9,7 @@ async function initialize() {
     selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
     renderPrioButtonsSection();
     category = await JSON.parse(backend.getItem('category')) || [];
-    setTimeout(currentPage, 500);
+    setTimeout(addTaskPage, 500);
     getMinDate();
     loadContacts();
 }
@@ -23,9 +23,19 @@ async function loadContacts() {
     contacts = JSON.parse(backend.getItem("contacts")) || [];
 }
 
-function currentPage() {
-    document.getElementById('sidebar_addtask_mobile').classList.add('background-color');
-    document.getElementById('sidebar_addtask').classList.add('background-color');
+ /**
+* If the board page has already been called, nothing happens, otherwise the Add Task in the sidebar is colored in dark blue. 
+*/
+
+function addTaskPage() {
+    let boardActive = document.getElementById('sidebar_board_mobile')
+    if(boardActive.classList.contains('background-color')) {
+        return;
+    }
+    else {
+        document.getElementById('sidebar_addtask_mobile').classList.add('background-color');
+        document.getElementById('sidebar_addtask').classList.add('background-color');
+    }
 }
 
 function getMinDate() {

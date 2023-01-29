@@ -59,10 +59,6 @@ function getIdFromTasklist() {
     taskId = tempTasklist.length;
 }
 
-function getMinDate() {
-    document.getElementById('duedate').min = new Date().toISOString().split("T")[0];
-}
-
 /**
  * fills "category_selection" with an open category-dropdown
  */
@@ -201,7 +197,7 @@ function loadAssignedPeople() {
     document.getElementById('assignedpersons').innerHTML = ``;
     for (let i = 0; i < assignedPeople.length; i++) {
         let assigned = assignedPeople[i];
-        document.getElementById('assignedpersons').innerHTML += `<div class="name" style="background-color: ${assigned['iconcolor']}">${assigned['icon']}</div>`
+        document.getElementById('assignedpersons').innerHTML += `<div class="round-icon-name" style="background-color: ${assigned['iconcolor']}">${assigned['icon']}</div>`
     }
 }
 
