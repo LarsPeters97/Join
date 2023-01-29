@@ -50,7 +50,7 @@ function renderEditTask(id) {
     assignetContactsTemp = assignetContacts;
     let title = task[0]['title'];
     let description = task[0]['description'];
-    let duedateunformated = JSON.stringify(task[0]['duedate']);
+    let duedateunformated = JSON.stringify(task[0]['due-date']);
     let year = duedateunformated.slice(0, 4);
     let month = duedateunformated.slice(4, 6);
     let day = duedateunformated.slice(6);
@@ -60,7 +60,7 @@ function renderEditTask(id) {
     document.getElementById('Boardpopup').innerHTML = editTaskTemplate(id);
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
-    document.getElementById('duedate').value = duedate;
+    document.getElementById('due-date').value = duedate;
     loadSubtasks(subtasks, id);
     loadAssignetPersons(id);
     loadContactsforTasks();
@@ -69,7 +69,7 @@ function renderEditTask(id) {
 }
 
 function getMinimumDate() {
-    document.getElementById('duedate').min = new Date().toISOString().split("T")[0];
+    document.getElementById('due-date').min = new Date().toISOString().split("T")[0];
 }
 
 /**
@@ -361,21 +361,21 @@ function indexOfAssigned(icon) {
  * @param {integer} id Id of selected task 
  */
 async function editTask(id) {
-    let newTitle = document.getElementById('titleinput').value;
-    let newDescription = document.getElementById('descriptioninput').value;
-    let newDuedate = transformDuedate();
-    if (newTitle.length > 2) {
-        tasklist[id]['title'] = newTitle;
-    }
-    if (newDescription.length > 2) {
-        tasklist[id]['description'] = newDescription;
-    }
+    formValidation = true;
+    let taskInputTitle = document.getElementById('titleinput').value;
+    let description = document.getElementById('descriptioninput').value;
+    convertDate();
+    checkInput('title', taskInputTitle);
+    checkInput('description', description);
+    checkDueDate();
+    if(formValidation) {
+        tasklist[id]['title'] = taskInputTitle;
+        tasklist[id]['description'] = description;
     tasklist[id]['assignedTo']['user'] = assignetContacts;
-    if (Number.isInteger(newDuedate)) {
-        tasklist[id]['duedate'] = newDuedate;
-    }
+        tasklist[id]['duedate'] = date;
     tasklist[id]['priority'] = selectedPrio;
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();
+}
 }

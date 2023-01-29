@@ -172,10 +172,13 @@
 function addTaskPopupTemplate() {
     return /*html*/`
     <div class="background-popup" onclick="checkIfPopupShouldBeClosed()"></div>
-<div class="add_task_popup">
-
-        <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create Task
-            <img src="./assets/img/create-check.svg" id="create-responsive"></button>
+    <div class="add_task_popup">
+            <div class="add-task-mobile-head">
+                <img class="logo-mobile" src="./assets/img/logo_blue.png" alt="" />
+                <button class="create-btn btns-clear-and-create create-btn-responsive" onclick="createNewTask()">Create
+                <img src="./assets/img/create-check.svg" id="create-responsive"></button>
+    </div>
+    <div class="pop-up-body">
         <div class="headline-and-close">
             <h1 class="headline-task">Add Task</h1>
             <img src="./assets/img/false-x.png" alt="Close" onclick="closePopup()">
@@ -278,14 +281,13 @@ function addTaskPopupTemplate() {
                         <button type="reset" class="clear-btn btns-clear-and-create desktop-clear-btn"
                         onmouseover="showClearImgLightBlue()" onclick="clearTask()"
                         onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
-                    id="clear-img"></button>
-                        <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create
-                Task
-                <img src="./assets/img/create-check.svg" id="create-img"></button>
-    </div>
+                            id="clear-img"></button>
+                        <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create Task
+                        <img src="./assets/img/create-check.svg" id="create-img"></button>
+                    </div>
                 </div>
             </div>
         </div>
-
+    </div>
 </div>`;
 }

@@ -54,13 +54,16 @@ function templateEditabelSubtaskInput(task, index, task_id) {
 }
 
 function editTaskTemplate(id) {
-    return `
+    return /*html*/`
     <div class="background" onclick="closeBoardPopup()"></div>
     <div class="taskform edittaskform">
         <div style="height: fit-content; position: relative; width:100%;">
             <div class="edittitle">Title <input type="text" required placeholder="Enter a Title" id="titleinput"></div>
+            <span id="title-required" class="mistake-category-fields"></span>
             <div class="editdescription">Description <textarea id="descriptioninput" placeholder="Enter a Description" required></textarea></div>
-            <div class="duedate">Due Date <input type="date" id="duedate" placeholder="dd/mm/yyyy" required></div>
+            <span id="description-required" class="mistake-category-fields"></span>
+            <div class="duedate">Due Date <input type="date" id="due-date" placeholder="dd/mm/yyyy" required></div>
+            <span id="date-required" class="mistake-category-fields"></span>
             <div class="prio">Prio 
                 <div class="prioselect">
                     <div class="prio-urgent" id="urgent" onclick="selectPrio('urgent')">Urgent <img src="assets/img/urgent.svg"></div>

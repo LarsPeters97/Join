@@ -1,16 +1,17 @@
 html {
-    overflow:   scroll;
-  }
-  
-  ::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-      background: transparent; /* make scrollbar transparent */
-  }
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+}
 
 body::-webkit-scrollbar {
     width: 10px;
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -18,6 +19,7 @@ body::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 30%);
     background-color: #2A3647;
 }
+
 .container-addtask {
     display: flex;
     align-items: center;
@@ -32,11 +34,24 @@ body::-webkit-scrollbar-thumb {
     border-radius: 20px;
     animation: flyin 225ms linear;
     width: fit-content;
-    height: fit-content;
-    padding: 0px 75px 50px 75px;   
     position: fixed;
+    height: 80%;
+}
+
+.add-task-mobile-head {
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    height: 200px;
+    align-items: center;
+    height: 20%;
+    display: none;
+}
+
+.pop-up-body {
+    padding: 0px 75px 50px 75px;
+    height: 95%;
     overflow-y: scroll;
-    height: 800px;
 }
 
 .headline-and-close {
@@ -572,14 +587,17 @@ body::-webkit-scrollbar-thumb {
     0% {
         left: 800px;
     }
+
     100% {
         left: 0px;
     }
 }
+
 @keyframes flyin {
     from {
         transform: scale(0);
     }
+
     to {
         transform: scale(1);
     }
@@ -587,7 +605,6 @@ body::-webkit-scrollbar-thumb {
 
 @media(max-width: 1400px) {
     .add_task_popup {
-        height: 800px;
         width: 650px;
     }
 
@@ -600,10 +617,9 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 1050px){
+@media (max-width: 1050px) {
     .add_task_popup {
         z-index: 102;
-        padding-bottom: 100px;
     }
 
     .add_task_box {
@@ -614,7 +630,7 @@ body::-webkit-scrollbar-thumb {
     .add_task_box_right {
         border: none;
     }
-    
+
     .background-popup {
         z-index: 100;
     }
@@ -628,17 +644,32 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 700px) {
     .add_task_popup {
         width: 100%;
         border-radius: 0;
-}
-}
+        bottom: 0%;
+        height: 100%;
+    }
 
-@media(max-width: 700px) {
+    .add-task-mobile-head {
+        display: flex;
+    }
+
+    .logo-mobile {
+        width: 32px;
+    }
+
+    .create-btn {
+        width: 100px;
+    }
+
     .add_task_popup {
         padding-bottom: 0px;
         background-color: #F6F7F8;
+    }
+
+    .pop-up-body {
         padding: 0px 24px 50px 24px;
     }
 
@@ -693,19 +724,15 @@ body::-webkit-scrollbar-thumb {
         bottom: 20px !important;
     }
 
-    .prio-urgent{
+    .prio-urgent {
         width: 90px;
     }
 
-    .prio-medium{
+    .prio-medium {
         width: 90px;
     }
 
-    .prio-low{
+    .prio-low {
         width: 90px;
-    }
-
-    .add_task_popup {
-        padding: 0px 12px 50px 12px;
     }
 }
