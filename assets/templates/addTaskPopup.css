@@ -44,7 +44,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     height: 200px;
     align-items: center;
-    height: 20%;
+    height: 10%;
     display: none;
 }
 
@@ -656,8 +656,14 @@ body::-webkit-scrollbar-thumb {
         display: flex;
     }
 
+    .create-btn-responsive {
+        top: initial;
+        right: 32px;
+    }
+
     .logo-mobile {
         width: 32px;
+        margin-left: 32px;
     }
 
     .create-btn {

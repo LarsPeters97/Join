@@ -48,6 +48,7 @@ async function init() {
 }
 
 function showAddcontact() {
+    document.getElementById('add-contact-section').innerHTML = templateShowAddcontact();
     document.getElementById("addcontact").classList.remove("d-none");
 }
 

@@ -38,5 +38,3 @@ let priorities = [
         'color': '#7AE229'
     }
 ]
-
-let contacts = [];
