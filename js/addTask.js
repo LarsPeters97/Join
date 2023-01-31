@@ -227,32 +227,18 @@ function openExistingContacts() {
 
 function assignNewPerson() {
     addClassDnone('existing-contacts');
-    document.getElementById('contact-container').innerHTML = templateInputNewPerson();
+    showAddcontact();
 }
 
 /**
- * New Person gets pushed in the array contacts. The index postition of the new Person is found out with the length method - 1.
- * This is important to push the index postition in the array assignedToContacts and for every element in this array an icon gets created 
- * with the function renderAssignedToIconsSection.
+ * From the just created contact, the location number of it in the contacts array is stored in the currentPushedContactIndex variable, 
+ * so that the icon can be displayed.
  */
 
-function addNewPerson() {
-    let email = document.getElementById('email').value;
-    let name = email.split('@');
-    let icon = email.slice(0, 2);
-    let color = randomColorForUserIcon();
-    contacts.push({ 'name': name, 'icon': icon, 'iconcolor': color });
+function renderAssignedToCurrentTaskIcons() {
     let currentPushedContactIndex = contacts.length - 1;
     addAssignedToIcon(currentPushedContactIndex);
     renderAssignedToIconsSection();
-    templateExitNewPerson();
-}
-
-/**
- * @returns a random color from the array userIconColors.
- */
-function randomColorForUserIcon() {
-    return userIconColors[Math.floor(Math.random() * userIconColors.length)];
 }
 
 /**

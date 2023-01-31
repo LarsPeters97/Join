@@ -95,8 +95,23 @@ async function createContact() {
     });
     await save();
     clearInput();
+    checkActionForBoardOrOtherPages();
     closeAddcontact();
 }
+
+/**
+ * When the contact.html page is open the letters will be rendered. 
+ * And when another page is open (Add Task(-Popup)) the icons of the current task will be rendered.
+ */
+
+function checkActionForBoardOrOtherPages() {
+    if (window.location.pathname === '/contact.html') {
+        renderLetters();
+    }
+    else {
+        renderAssignedToCurrentTaskIcons();
+    }
+  }
 
 /**
  * Get icon for task board
@@ -371,7 +386,6 @@ async function saveChanges(contact, i) {
 async function save() {
     await backend.setItem("contacts", JSON.stringify(contacts));
     //window.location.href = "./contact.html";
-    renderLetters();
 }
 
 function closeBoardPopup() {

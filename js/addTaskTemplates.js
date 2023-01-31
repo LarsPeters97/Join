@@ -123,23 +123,6 @@ function templateInvitePerson() {
 }
 
 /**
- * @returns the input field to assign a new Person with click on the checkmark  or remove the input with the x.
- */
-
-function templateInputNewPerson() {
-    return /*html*/`
-    <div class="newcontact flex">
-        <input class="input-category-contact" type="email" placeholder="Contact email" id="email" required>
-        <div class="flex delete-and-create-icons-section">
-            <img src="./assets/img/false-x.png" class="false-x" onclick="templateExitNewPerson()">
-            |
-            <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewPerson()">
-        </div>
-    </div>
-    `
-}
-
-/**
  * Reset to original content. Dropdown assign contacts can be opened again.
  */
 
