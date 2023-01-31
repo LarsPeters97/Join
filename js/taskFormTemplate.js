@@ -56,11 +56,12 @@ function templateEditabelSubtaskInput(task, index, task_id) {
 function editTaskTemplate(id) {
     return /*html*/`
     <div class="background" onclick="closeBoardPopup()"></div>
+    <div id="add-contact-section"></div>
     <div class="taskform edittaskform">
-        <div style="height: fit-content; position: relative; width:100%;">
+        <div class="flex column" style="height: fit-content; position: relative; width:100%;">
             <div class="edittitle">Title <input type="text" required placeholder="Enter a Title" id="titleinput"></div>
             <span id="title-required" class="mistake-category-fields"></span>
-            <div class="editdescription">Description <textarea id="descriptioninput" placeholder="Enter a Description" required></textarea></div>
+            <div class="editdescription flex column">Description <textarea id="descriptioninput" placeholder="Enter a Description" required></textarea></div>
             <span id="description-required" class="mistake-category-fields"></span>
             <div class="duedate">Due Date <input type="date" id="due-date" placeholder="dd/mm/yyyy" required></div>
             <span id="date-required" class="mistake-category-fields"></span>
@@ -80,15 +81,22 @@ function editTaskTemplate(id) {
                 </div>
                 <div id="subtasks"></div>
             </div>
-            <div class="assignedto" id="assignedto">Assigned to 
-            <div class="dropdown-assign" id="assign-container">
-                <div onclick="openDropdownAssignTo(${id})">
-                    <span class="flex">Select contacts to assign</span>
-                    <img src="./assets/img/vector-2.png" alt="klick">
+            <div class="flex column margin-for-fields">
+                        <span class="header-for-fields">Assigned to</span>
+                        <div class="dropdown-category-container width-f" id="assigned-container">
+                            <div class="dropdown-category border-radius-fields" id="contact-container">
+                                <div class="flex input-section" onclick="checkIfAssignedToIsOpen()"
+                                    id="assigned-contacts">
+                                    <span class="flex">Select contacts to assign</span>
+                                    <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
+                                </div>
+                            </div>
+                            <div id="existing-contacts" class="d-none max-height-and-scroll"></div>
+                        </div>
+                        <div id="assigned-to-icons-section" class="flex width-f"></div>
+                        <span id="assigned-to-contacts-required" class="mistake-category-fields"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="assignedpersons" id="assignedpersons"></div>
-            </div>
             <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
         </div>
         <div class="close" onclick="closeBoardPopup()">x</div>
@@ -126,7 +134,7 @@ function assignNewContact(id) {
         <div class="check">
             <img src="./assets/img/false-x.png" onclick="exitNewContact(${id})">
             |
-            <img src="./assets/img/checkmark.png" onclick="addNewContact(${id})">
+            <img src="./assets/img/checkmark.png" onclick="addNewContact()">
         </div>
     </div>
     `;

@@ -344,7 +344,7 @@ textarea {
     border-radius: 30px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     padding: 40px;
-    z-index: 1009;
+    z-index: 999;
     position: relative;
     box-sizing: border-box;
     overflow-y: auto;
@@ -353,11 +353,6 @@ textarea {
 
 .edittaskform {
     max-height: 600px;
-}
-
-.taskform div {
-    display: flex;
-    flex-direction: column;
 }
 
 .taskform h2 {

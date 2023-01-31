@@ -172,6 +172,7 @@
 function addTaskPopupTemplate() {
     return /*html*/`
     <div class="background-popup" onclick="checkIfPopupShouldBeClosed()"></div>
+    <div id="add-contact-section"></div>
     <div class="add_task_popup">
             <div class="add-task-mobile-head">
                 <img class="logo-mobile" src="./assets/img/logo_blue.png" alt="" />
@@ -237,6 +238,7 @@ function addTaskPopupTemplate() {
                     <div id="assigned-to-icons-section" class="flex width-f"></div>
                     <span id="assigned-to-contacts-required" class="mistake-category-fields"></span>
                 </div>
+            
             </div>
 
             <div class="right-side flex column">

@@ -38,14 +38,19 @@ function oneAssignedPersonsTemplate(assignedTo) {
 }
 
 function twoAssignedPersonsTemplate(assignedTo) {
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div>`;
+    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
+    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div>`;
 }
 
 function threeAssignedPersonsTemplate(assignedTo) {
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[2]['iconcolor']}">${assignedTo[2]['icon']}</div>`;
+    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
+    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">
+    ${assignedTo[1]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[2]['iconcolor']}">${assignedTo[2]['icon']}</div>`;
 }
 
 function moreAssignedPersonsTemplate(assignedTo) {
     let number = assignedTo.length - 2
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div><div class="number">+${number}</div>`;
+    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
+    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">
+    ${assignedTo[1]['icon']}</div><div class="number">+${number}</div>`;
 }

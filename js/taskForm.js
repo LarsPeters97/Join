@@ -46,11 +46,10 @@ function renderSubTasks(id) {
  */
 function renderEditTask(id) {
     task = tasklist.filter(t => t['id'] == id);
-    assignetContacts = task[0]['assignedTo']['user'];
-    assignetContactsTemp = assignetContacts;
+    contactsForCurrentTask = task[0]['assignedTo']['user'];
     let title = task[0]['title'];
     let description = task[0]['description'];
-    let duedateunformated = JSON.stringify(task[0]['due-date']);
+    let duedateunformated = JSON.stringify(task[0]['duedate']);
     let year = duedateunformated.slice(0, 4);
     let month = duedateunformated.slice(4, 6);
     let day = duedateunformated.slice(6);
@@ -62,7 +61,7 @@ function renderEditTask(id) {
     document.getElementById('descriptioninput').value = description;
     document.getElementById('due-date').value = duedate;
     loadSubtasks(subtasks, id);
-    loadAssignetPersons(id);
+    loadAssignetPersons();
     loadContactsforTasks();
     getMinimumDate();
     selectPrio(priority);
@@ -228,11 +227,12 @@ function setPrioLow() {
  * Renders the assigned persons of the task
  * @param {integer} id Id of selected task
  */
-function loadAssignetPersons(id) {
-    document.getElementById('assignedpersons').innerHTML = ``;
-    for (let i = 0; i < assignetContactsTemp.length; i++) {
-        let assignetperson = assignetContactsTemp[i];
-        document.getElementById('assignedpersons').innerHTML += `<div class="round-icon-name" style="background-color: ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
+function loadAssignetPersons() {
+    document.getElementById('assigned-to-icons-section').innerHTML = ``;
+    for (let i = 0; i < contactsForCurrentTask.length; i++) {
+        let assignetperson = contactsForCurrentTask[i];
+        document.getElementById('assigned-to-icons-section').innerHTML += `<div class="round-icon-name icons-add-task" style="background-color: 
+        ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
     }
 }
 
@@ -284,19 +284,24 @@ function assignChange(name, icon, color, id) {
  * @param {integer} id Id of selected task
  */
 function addNewContact(id) {
-    let email = document.getElementById('email').value;
-    let icon = email.slice(0, 2);
-    let color = getRandomColor();
-    if (email.includes('@')) {
-        let tempName = email.split('@');
-        let name = tempName[0];
-        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    } else {
-        let name = email;
-        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    }
+    assignNewPerson();
+    showAddcontact();
+
+
+
+    // let email = document.getElementById('email').value;
+    // let icon = email.slice(0, 2);
+    // let color = getRandomColor();
+    // if (email.includes('@')) {
+    //     let tempName = email.split('@');
+    //     let name = tempName[0];
+    //     assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    // } else {
+    //     let name = email;
+    //     assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
+    // }
     document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
-    loadAssignetPersons(id);
+    loadAssignetPersons();
 }
 
 /**
