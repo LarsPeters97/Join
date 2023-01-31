@@ -375,7 +375,7 @@ textarea {
     flex-direction: row !important;
     justify-content: space-between;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 21px;
 }
 
 .priority {
@@ -680,9 +680,10 @@ textarea {
 
 .editsubtask {
     overflow-y: hidden;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 400;
-    margin-top: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 .duedate {

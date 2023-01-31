@@ -60,9 +60,9 @@ function renderEditTask(id) {
     document.getElementById('titleinput').value = title;
     document.getElementById('descriptioninput').value = description;
     document.getElementById('due-date').value = duedate;
+    loadContactsforTasks();
     loadSubtasks(subtasks, id);
     loadAssignetPersons();
-    loadContactsforTasks();
     getMinimumDate();
     selectPrio(priority);
 }
