@@ -1,6 +1,6 @@
 function toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus) {
-    let width = completedtasks / subtasks * 100
-    return `
+  let width = (completedtasks / subtasks) * 100;
+  return `
     <div class="todo" draggable=true ondragstart="startDragging(${id})" onclick="openTask(${id})">
         <div class="category" style="background-color: ${color}">${category}</div>
         <div class="title">${title}</div>
@@ -20,37 +20,37 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
         <div class="mobile-buttons">
             <button class="up" onclick="moveTask(${id}, '${previus}')">previous</button>
             <button class="down" onclick="moveTask(${id}, '${next}')">next</button>
-        </div>`
+        </div>`;
 }
 
 function addDragarea(id) {
-    return `
+  return `
     <div id="${id}" class="dragarea" ondrop="drop('${id}')" ondragover="allowDrop(event); highlight('${id}')" ondragleave="removeHighlight('${id}')"></div>
-    `
+    `;
 }
 
-function noAssignedPersonsTeFmplate() {
-    return `<div class="number">N/A</div>`;
+function noAssignedPersonsTemplate() {
+  return `<div class="number">N/A</div>`;
 }
 
 function oneAssignedPersonsTemplate(assignedTo) {
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">${assignedTo[0]['icon']}</div>`;
+  return `<div class="round-icon-name" style="background-color: ${assignedTo[0]["iconcolor"]}">${assignedTo[0]["icon"]}</div>`;
 }
 
 function twoAssignedPersonsTemplate(assignedTo) {
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
-    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">${assignedTo[1]['icon']}</div>`;
+  return `<div class="round-icon-name" style="background-color: ${assignedTo[0]["iconcolor"]}">
+    ${assignedTo[0]["icon"]}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]["iconcolor"]}">${assignedTo[1]["icon"]}</div>`;
 }
 
 function threeAssignedPersonsTemplate(assignedTo) {
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
-    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">
-    ${assignedTo[1]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[2]['iconcolor']}">${assignedTo[2]['icon']}</div>`;
+  return `<div class="round-icon-name" style="background-color: ${assignedTo[0]["iconcolor"]}">
+    ${assignedTo[0]["icon"]}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]["iconcolor"]}">
+    ${assignedTo[1]["icon"]}</div><div class="round-icon-name" style="background-color: ${assignedTo[2]["iconcolor"]}">${assignedTo[2]["icon"]}</div>`;
 }
 
 function moreAssignedPersonsTemplate(assignedTo) {
-    let number = assignedTo.length - 2
-    return `<div class="round-icon-name" style="background-color: ${assignedTo[0]['iconcolor']}">
-    ${assignedTo[0]['icon']}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]['iconcolor']}">
-    ${assignedTo[1]['icon']}</div><div class="number">+${number}</div>`;
+  let number = assignedTo.length - 2;
+  return `<div class="round-icon-name" style="background-color: ${assignedTo[0]["iconcolor"]}">
+    ${assignedTo[0]["icon"]}</div><div class="round-icon-name" style="background-color: ${assignedTo[1]["iconcolor"]}">
+    ${assignedTo[1]["icon"]}</div><div class="number">+${number}</div>`;
 }

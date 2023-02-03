@@ -1,45 +1,44 @@
 /**
- * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are 
+ * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are
  * assigned to the selectedTaskValues array.
  */
 
 async function initialize() {
-    let categoriesasString = JSON.stringify(categories);
-    localStorage.setItem('task-category', categoriesasString);
-    selectedTaskValues = JSON.parse(localStorage.getItem('task-category'));
-    renderPrioButtonsSection();
-    category = await JSON.parse(backend.getItem('category')) || [];
-    setTimeout(addTaskPage, 500);
-    getMinDate();
-    loadContacts();
+  let categoriesasString = JSON.stringify(categories);
+  localStorage.setItem("task-category", categoriesasString);
+  selectedTaskValues = JSON.parse(localStorage.getItem("task-category"));
+  renderPrioButtonsSection();
+  category = (await JSON.parse(backend.getItem("category"))) || [];
+  setTimeout(addTaskPage, 500);
+  getMinDate();
+  loadContacts();
 }
 
 /**
  * Gets "contacts" from the server
  */
 async function loadContacts() {
-    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    contacts = JSON.parse(backend.getItem("contacts")) || [];
+  setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
+  await downloadFromServer();
+  contacts = JSON.parse(backend.getItem("contacts")) || [];
 }
 
- /**
-* If the board page has already been called, nothing happens, otherwise the Add Task in the sidebar is colored in dark blue. 
-*/
+/**
+ * If the board page has already been called, nothing happens, otherwise the Add Task in the sidebar is colored in dark blue.
+ */
 
 function addTaskPage() {
-    let boardActive = document.getElementById('sidebar_board_mobile')
-    if(boardActive.classList.contains('background-color')) {
-        return;
-    }
-    else {
-        document.getElementById('sidebar_addtask_mobile').classList.add('background-color');
-        document.getElementById('sidebar_addtask').classList.add('background-color');
-    }
+  let boardActive = document.getElementById("sidebar_board_mobile");
+  if (boardActive.classList.contains("background-color")) {
+    return;
+  } else {
+    document.getElementById("sidebar_addtask_mobile").classList.add("background-color");
+    document.getElementById("sidebar_addtask").classList.add("background-color");
+  }
 }
 
 function getMinDate() {
-    document.getElementById('due-date').min = new Date().toISOString().split("T")[0];
+  document.getElementById("due-date").min = new Date().toISOString().split("T")[0];
 }
 /**
  * Checks if the category-container is open or not. It is checked with the classList.contains method. When it is open
@@ -47,11 +46,9 @@ function getMinDate() {
  */
 
 function checkIfCategoryContainerOpen() {
-    let newCategory = document.getElementById('new-category');
-    if (newCategory.classList.contains('d-none'))
-        openNewCategoryAndExistingCategories();
-    else
-        closeNewCategoryAndExistingCategories();
+  let newCategory = document.getElementById("new-category");
+  if (newCategory.classList.contains("d-none")) openNewCategoryAndExistingCategories();
+  else closeNewCategoryAndExistingCategories();
 }
 
 /**
@@ -59,14 +56,14 @@ function checkIfCategoryContainerOpen() {
  */
 
 function openNewCategoryAndExistingCategories() {
-    let existingCategories = document.getElementById('existing-categories');
-    existingCategories.innerHTML = '';
-    for (let i = 0; i < selectedTaskValues.length; i++) {
-        let category = selectedTaskValues[i];
-        existingCategories.innerHTML += templateExistingCategories(i, category);
-    }
-    removeClassDnone('new-category');
-    removeClassDnone('existing-categories');
+  let existingCategories = document.getElementById("existing-categories");
+  existingCategories.innerHTML = "";
+  for (let i = 0; i < selectedTaskValues.length; i++) {
+    let category = selectedTaskValues[i];
+    existingCategories.innerHTML += templateExistingCategories(i, category);
+  }
+  removeClassDnone("new-category");
+  removeClassDnone("existing-categories");
 }
 
 /**
@@ -75,12 +72,12 @@ function openNewCategoryAndExistingCategories() {
  */
 
 function selectedCategory(i) {
-    selectedCategoryVariables(i);
-    addClassDnone('new-category');
-    deleteMistakeMessage('mistake-category-fields');
-    document.getElementById('existing-categories').innerHTML = '';
-    let categoryContainer = document.getElementById('category-container');
-    categoryContainer.innerHTML = templateSelectedCategory();
+  selectedCategoryVariables(i);
+  addClassDnone("new-category");
+  deleteMistakeMessage("mistake-category-fields");
+  document.getElementById("existing-categories").innerHTML = "";
+  let categoryContainer = document.getElementById("category-container");
+  categoryContainer.innerHTML = templateSelectedCategory();
 }
 
 /**
@@ -89,24 +86,24 @@ function selectedCategory(i) {
  */
 
 function selectedCategoryVariables(i) {
-    newCategoryName = selectedTaskValues[i]['name'];
-    selectedCategoryColor = selectedTaskValues[i]['color'];
+  newCategoryName = selectedTaskValues[i]["name"];
+  selectedCategoryColor = selectedTaskValues[i]["color"];
 }
 
 /**
- * Sets the category input field ready to create a new category and declares the global variables with newCategoryName 
+ * Sets the category input field ready to create a new category and declares the global variables with newCategoryName
  * and selectedCategoryColor as undefined so that the variables can be new declared for the new category.
  */
 
 function createNewCategory() {
-    addClassDnone('new-category');
-    addClassDnone('existing-categories');
-    deleteMistakeMessage('mistake-category-fields');
-    newCategoryName = undefined;
-    selectedCategoryColor = undefined;
-    colorsForNewCategory();
-    let categoryContainer = document.getElementById('category-container');
-    categoryContainer.innerHTML = templateCreateNewCategory();
+  addClassDnone("new-category");
+  addClassDnone("existing-categories");
+  deleteMistakeMessage("mistake-category-fields");
+  newCategoryName = undefined;
+  selectedCategoryColor = undefined;
+  colorsForNewCategory();
+  let categoryContainer = document.getElementById("category-container");
+  categoryContainer.innerHTML = templateCreateNewCategory();
 }
 
 /**
@@ -114,12 +111,12 @@ function createNewCategory() {
  */
 
 function colorsForNewCategory() {
-    let categoriesForColors = document.getElementById('categories-for-colors');
-    categoriesForColors.classList.add('colors');
-    for (let c = 0; c < categoryColors.length; c++) {
-        categoryColor = categoryColors[c];
-        categoriesForColors.innerHTML += templateColorsForNewCategory(c, categoryColor);
-    }
+  let categoriesForColors = document.getElementById("categories-for-colors");
+  categoriesForColors.classList.add("colors");
+  for (let c = 0; c < categoryColors.length; c++) {
+    categoryColor = categoryColors[c];
+    categoriesForColors.innerHTML += templateColorsForNewCategory(c, categoryColor);
+  }
 }
 
 /**
@@ -129,26 +126,22 @@ function colorsForNewCategory() {
  */
 
 function addNewCategoryColor(categoryColor, colorIndex) {
-    if (document.getElementById('new-category-name').value) {
-        selectedCategoryColor = categoryColor;
-        document.getElementById(`selected-color-${colorIndex}`).style.backgroundColor = `${categoryColor}`;
-        document.getElementById('mistake-category-fields').innerHTML = '';
-    }
-    else
-        document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
+  if (document.getElementById("new-category-name").value) {
+    selectedCategoryColor = categoryColor;
+    document.getElementById(`selected-color-${colorIndex}`).style.backgroundColor = `${categoryColor}`;
+    document.getElementById("mistake-category-fields").innerHTML = "";
+  } else document.getElementById("mistake-category-fields").innerHTML = "Please enter a new category name first.";
 }
 
 /**
- * When selectedCategoryColor and newCategoryName are filled a new Category will be created. If not, 
+ * When selectedCategoryColor and newCategoryName are filled a new Category will be created. If not,
  * the user gets explains which data is missing.
  */
 
 function addNewCategory() {
-    newCategoryName = document.getElementById('new-category-name').value;
-    if (selectedCategoryColor && newCategoryName)
-        whenCategoryNameAndColorAreSelected();
-    else
-        whenCategoryNameOrColorMissing();
+  newCategoryName = document.getElementById("new-category-name").value;
+  if (selectedCategoryColor && newCategoryName) whenCategoryNameAndColorAreSelected();
+  else whenCategoryNameOrColorMissing();
 }
 
 /**
@@ -156,15 +149,15 @@ function addNewCategory() {
  */
 
 function whenCategoryNameAndColorAreSelected() {
-    selectedTaskValues.push({
-        'name': newCategoryName,
-        'color': selectedCategoryColor
-    });
-    let TaskValuesAsString = JSON.stringify(selectedTaskValues);
-    localStorage.setItem('task-category', TaskValuesAsString);
-    document.getElementById('category-container').innerHTML = templateNewSelectedCategory();
-    document.getElementById('categories-for-colors').innerHTML = '';
-    document.getElementById('categories-for-colors').classList.remove('colors');
+  selectedTaskValues.push({
+    name: newCategoryName,
+    color: selectedCategoryColor,
+  });
+  let TaskValuesAsString = JSON.stringify(selectedTaskValues);
+  localStorage.setItem("task-category", TaskValuesAsString);
+  document.getElementById("category-container").innerHTML = templateNewSelectedCategory();
+  document.getElementById("categories-for-colors").innerHTML = "";
+  document.getElementById("categories-for-colors").classList.remove("colors");
 }
 
 /**
@@ -172,10 +165,8 @@ function whenCategoryNameAndColorAreSelected() {
  */
 
 function whenCategoryNameOrColorMissing() {
-    if (newCategoryName)
-        document.getElementById('mistake-category-fields').innerHTML = 'Please select the color for the new category.';
-    else
-        document.getElementById('mistake-category-fields').innerHTML = 'Please enter a new category name first.';
+  if (newCategoryName) document.getElementById("mistake-category-fields").innerHTML = "Please select the color for the new category.";
+  else document.getElementById("mistake-category-fields").innerHTML = "Please enter a new category name first.";
 }
 
 /**
@@ -183,8 +174,8 @@ function whenCategoryNameOrColorMissing() {
  */
 
 function reOpenExistigCategorys() {
-    document.getElementById('category-container').innerHTML = templateOriginalCategoryField();
-    openNewCategoryAndExistingCategories();
+  document.getElementById("category-container").innerHTML = templateOriginalCategoryField();
+  openNewCategoryAndExistingCategories();
 }
 
 /**
@@ -192,11 +183,9 @@ function reOpenExistigCategorys() {
  */
 
 function checkIfAssignedToIsOpen() {
-    let existingContacts = document.getElementById('existing-contacts');
-    if (existingContacts.classList.contains('d-none'))
-        openExistingContacts();
-    else
-        addClassDnone('existing-contacts');
+  let existingContacts = document.getElementById("existing-contacts");
+  if (existingContacts.classList.contains("d-none")) openExistingContacts();
+  else addClassDnone("existing-contacts");
 }
 
 /**
@@ -205,51 +194,49 @@ function checkIfAssignedToIsOpen() {
  */
 
 function openExistingContacts() {
-    deleteMistakeMessage('assigned-to-contacts-required');
-    removeClassDnone('existing-contacts');
-    let existingContacts = document.getElementById('existing-contacts');
-    existingContacts.innerHTML = '';
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let findIndex = assignedToContacts.indexOf(i);
-        if (assignedToContactIsInArray(findIndex))
-            existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
-        else
-            existingContacts.innerHTML += templateExistingContacts(i, contact);
-    }
-    existingContacts.innerHTML += templateInvitePerson();
+  deleteMistakeMessage("assigned-to-contacts-required");
+  removeClassDnone("existing-contacts");
+  let existingContacts = document.getElementById("existing-contacts");
+  existingContacts.innerHTML = "";
+  for (let i = 0; i < contacts.length; i++) {
+    let contact = contacts[i];
+    let findIndex = assignedToContacts.indexOf(i);
+    if (assignedToContactIsInArray(findIndex)) existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
+    else existingContacts.innerHTML += templateExistingContacts(i, contact);
+  }
+  existingContacts.innerHTML += templateInvitePerson();
 }
 
 /**
- * To add a new Person to the current Task, the existing contacts gets closed 
+ * To add a new Person to the current Task, the existing contacts gets closed
  * and the input field is opened in the div with the id existing-contacts.
  */
 
 function assignNewPerson() {
-    addClassDnone('existing-contacts');
-    showAddcontact();
+  addClassDnone("existing-contacts");
+  showAddcontact();
 }
 
 /**
- * From the just created contact, the location number of it in the contacts array is stored in the currentPushedContactIndex variable, 
+ * From the just created contact, the location number of it in the contacts array is stored in the currentPushedContactIndex variable,
  * so that the icon can be displayed.
  */
 
 function renderAssignedToCurrentTaskIcons() {
-    let currentPushedContactIndex = contacts.length - 1;
-    addAssignedToIcon(currentPushedContactIndex);
-    renderAssignedToIconsSection();
+  let currentPushedContactIndex = contacts.length - 1;
+  addAssignedToIcon(currentPushedContactIndex);
+  renderAssignedToIconsSection();
 }
 
 /**
- * 
+ *
  * @param {number} findIndex is the result of the indexOf mehthod used for the array assignedToContacts.
- * @returns -1 if the number of the contact i isn´t in the array assignedToContacts. 
+ * @returns -1 if the number of the contact i isn´t in the array assignedToContacts.
  * And if it is, it returns the place, where the i is in the array.
  */
 
 function assignedToContactIsInArray(findIndex) {
-    return findIndex > -1;
+  return findIndex > -1;
 }
 
 /**
@@ -258,14 +245,14 @@ function assignedToContactIsInArray(findIndex) {
  */
 
 function checkAssignedToIcons(i) {
-    let findIndex = assignedToContacts.indexOf(i);
-    if (assignedToContactIsInArray(findIndex)) {
-        removeAssignedToIcon(findIndex);
-    }
-    else {
-        addAssignedToIcon(i);
-    }
-    renderAssignedToIconsSection();
+  deleteMistakeMessage("assigned-to-contacts-required");
+  let findIndex = assignedToContacts.indexOf(i);
+  if (assignedToContactIsInArray(findIndex)) {
+    removeAssignedToIcon(findIndex);
+  } else {
+    addAssignedToIcon(i);
+  }
+  renderAssignedToIconsSection();
 }
 
 /**
@@ -274,7 +261,7 @@ function checkAssignedToIcons(i) {
  */
 
 function removeAssignedToIcon(findIndex) {
-    assignedToContacts.splice(findIndex, 1);
+  assignedToContacts.splice(findIndex, 1);
 }
 
 /**
@@ -283,7 +270,7 @@ function removeAssignedToIcon(findIndex) {
  */
 
 function addAssignedToIcon(i) {
-    assignedToContacts.push(i);
+  assignedToContacts.push(i);
 }
 
 /**
@@ -292,10 +279,10 @@ function addAssignedToIcon(i) {
  */
 
 function assignedToContactsForCurrentTask() {
-    for (let i = 0; i < assignedToContacts.length; i++) {
-        let contactNumber = assignedToContacts[i];
-        contactsForCurrentTask.push(contacts[contactNumber]);
-    }
+  for (let i = 0; i < assignedToContacts.length; i++) {
+    let contactNumber = assignedToContacts[i];
+    contactsForCurrentTask.push(contacts[contactNumber]);
+  }
 }
 
 /**
@@ -303,12 +290,12 @@ function assignedToContactsForCurrentTask() {
  */
 
 function renderAssignedToIconsSection() {
-    let assignedToIconsSection = document.getElementById('assigned-to-icons-section');
-    assignedToIconsSection.innerHTML = '';
-    for (let i = 0; i < assignedToContacts.length; i++) {
-        assignedToIndex = assignedToContacts[i];
-        assignedToIconsSection.innerHTML += templateAssignedToContactIcons(assignedToIndex);
-    }
+  let assignedToIconsSection = document.getElementById("assigned-to-icons-section");
+  assignedToIconsSection.innerHTML = "";
+  for (let i = 0; i < assignedToContacts.length; i++) {
+    assignedToIndex = assignedToContacts[i];
+    assignedToIconsSection.innerHTML += templateAssignedToContactIcons(assignedToIndex);
+  }
 }
 
 /**
@@ -316,11 +303,11 @@ function renderAssignedToIconsSection() {
  */
 
 function convertDate() {
-    let dueDate = document.getElementById('due-date').value;
-    let year = dueDate.slice(0, 4);
-    let month = dueDate.slice(5, 7);
-    let day = dueDate.slice(8, 10);
-    date = year + month + day;
+  let dueDate = document.getElementById("due-date").value;
+  let year = dueDate.slice(0, 4);
+  let month = dueDate.slice(5, 7);
+  let day = dueDate.slice(8, 10);
+  date = year + month + day;
 }
 
 /**
@@ -328,11 +315,11 @@ function convertDate() {
  */
 
 function renderPrioButtonsSection() {
-    let prioButtonsSection = document.getElementById('prio-buttons-section');
-    prioButtonsSection.innerHTML = '';
-    for (let i = 0; i < priorities.length; i++) {
-        prioButtonsSection.innerHTML += templatePrioButtonsSection(i);
-    }
+  let prioButtonsSection = document.getElementById("prio-buttons-section");
+  prioButtonsSection.innerHTML = "";
+  for (let i = 0; i < priorities.length; i++) {
+    prioButtonsSection.innerHTML += templatePrioButtonsSection(i);
+  }
 }
 
 /**
@@ -341,9 +328,9 @@ function renderPrioButtonsSection() {
  */
 
 function selectedPriority(i) {
-    deleteMistakeMessage('priority-required');
-    changeStyleOfSelectedButton(i);
-    resetOtherPriorityButtons(i);
+  deleteMistakeMessage("priority-required");
+  changeStyleOfSelectedButton(i);
+  resetOtherPriorityButtons(i);
 }
 
 /**
@@ -352,25 +339,23 @@ function selectedPriority(i) {
  */
 
 function changeStyleOfSelectedButton(i) {
-    let id = priorities[i]['name'];
-    let button = document.getElementById(id);
-    if (!button.classList.contains('white')) {
-        addSelectedButtonStyle(button, i);
-    }
-    else
-        removeStyleOfUnclickedButton(button, i);
+  let id = priorities[i]["name"];
+  let button = document.getElementById(id);
+  if (!button.classList.contains("white")) {
+    addSelectedButtonStyle(button, i);
+  } else removeStyleOfUnclickedButton(button, i);
 }
 
 /**
  * Styles the clicked button with a new background color and the font color white.
- * @param {string} button is the id name of the clicked element, e.g.urgent 
+ * @param {string} button is the id name of the clicked element, e.g.urgent
  * @param {number} i is the position of the clicked button in the array priorities
  */
 
 function addSelectedButtonStyle(button, i) {
-    button.style.backgroundColor = `${priorities[i]['color']}`;
-    button.classList.add('white');
-    document.getElementById(`img-${i}`).src = `${priorities[i]['selected-image']}`;
+  button.style.backgroundColor = `${priorities[i]["color"]}`;
+  button.classList.add("white");
+  document.getElementById(`img-${i}`).src = `${priorities[i]["selected-image"]}`;
 }
 
 /**
@@ -379,57 +364,54 @@ function addSelectedButtonStyle(button, i) {
  */
 
 function resetOtherPriorityButtons(i) {
-    for (let p = 0; p < priorities.length; p++) {
-        let priorityId = priorities[p]['name'];
-        let button = document.getElementById(priorityId);
-        if (p != i && button.classList.contains('white'))
-            removeStyleOfUnclickedButton(button, p);
-    }
+  for (let p = 0; p < priorities.length; p++) {
+    let priorityId = priorities[p]["name"];
+    let button = document.getElementById(priorityId);
+    if (p != i && button.classList.contains("white")) removeStyleOfUnclickedButton(button, p);
+  }
 }
 
-/**  
+/**
  * Removes the style of the unclicked button to his original style.
  * @param {string} button is the id name of the unclicked element, e.g.urgent.
  * @param {number} p is the position of the unclicked button in the array priorities
  */
 
 function removeStyleOfUnclickedButton(button, p) {
-    document.getElementById(`img-${p}`).src = `${priorities[p]['image']}`;
-    button.style.backgroundColor = 'white';
-    button.classList.remove('white');
+  document.getElementById(`img-${p}`).src = `${priorities[p]["image"]}`;
+  button.style.backgroundColor = "white";
+  button.classList.remove("white");
 }
 
 /**
- * When the task gets created, the current clicked priority button which is stored in the variable priorityId is assigned to the 
+ * When the task gets created, the current clicked priority button which is stored in the variable priorityId is assigned to the
  * global variable priorityNameForTask.
  */
 
 function priorityForCurrentTask() {
-    for (let i = 0; i < priorities.length; i++) {
-        let priorityId = priorities[i]['name'];
-        let button = document.getElementById(priorityId);
-        if (button.classList.contains('white'))
-            priorityNameForTask = priorityId;
-    }
+  for (let i = 0; i < priorities.length; i++) {
+    let priorityId = priorities[i]["name"];
+    let button = document.getElementById(priorityId);
+    if (button.classList.contains("white")) priorityNameForTask = priorityId;
+  }
 }
 
 /**
- * If the value of the subtask input is bigger than 3, the subtask will be added with the function addSubtask. If not, an 
+ * If the value of the subtask input is bigger than 3, the subtask will be added with the function addSubtask. If not, an
  * error message is displayed.
  */
 
 function checkSubtaskInputValue() {
-    let inputSubtask = document.getElementById('input-subtask-area');
-    let subtaskToShort = document.getElementById('subtask-to-short');
-    if (inputSubtask.value.length < 3) {
-        subtaskToShort.innerHTML = 'Your entry must be at least 3 characters long.';
-    }
-    else {
-        subtaskToShort.innerHTML = '';
-        addSubtask(inputSubtask.value);
-        document.getElementById('input-subtask-area').value = '';
-        closeSubtaskInputField();
-    }
+  let inputSubtask = document.getElementById("input-subtask-area");
+  let subtaskToShort = document.getElementById("subtask-to-short");
+  if (inputSubtask.value.length < 3) {
+    subtaskToShort.innerHTML = "Your entry must be at least 3 characters long.";
+  } else {
+    subtaskToShort.innerHTML = "";
+    addSubtask(inputSubtask.value);
+    document.getElementById("input-subtask-area").value = "";
+    closeSubtaskInputField();
+  }
 }
 
 /**
@@ -439,8 +421,8 @@ function checkSubtaskInputValue() {
  */
 
 function addSubtask(inputSubtask) {
-    subtasksForCurrenttask.push({ task: inputSubtask, completed: false });
-    renderSubtasks();
+  subtasksForCurrenttask.push({ task: inputSubtask, completed: false });
+  renderSubtasks();
 }
 
 /**
@@ -449,17 +431,16 @@ function addSubtask(inputSubtask) {
  */
 
 function renderSubtasks() {
-    let subtaskList = document.getElementById('subtask-list');
-    subtaskList.innerHTML = '';
-    for (let i = 0; i < subtasksForCurrenttask.length; i++) {
-        let taskElement = subtasksForCurrenttask[i];
-        if (checkCompletedStatus(i) == false) {
-            subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
-        }
-        else {
-            subtaskList.innerHTML += templateRenderSubtasksWhichAreCompleted(taskElement, i);
-        }
+  let subtaskList = document.getElementById("subtask-list");
+  subtaskList.innerHTML = "";
+  for (let i = 0; i < subtasksForCurrenttask.length; i++) {
+    let taskElement = subtasksForCurrenttask[i];
+    if (checkCompletedStatus(i) == false) {
+      subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
+    } else {
+      subtaskList.innerHTML += templateRenderSubtasksWhichAreCompleted(taskElement, i);
     }
+  }
 }
 
 /**
@@ -468,10 +449,8 @@ function renderSubtasks() {
  */
 
 function checkCompletedStatus(i) {
-    if (!subtasksForCurrenttask[i].completed)
-        return false;
-    else
-        return true;
+  if (!subtasksForCurrenttask[i].completed) return false;
+  else return true;
 }
 
 /**
@@ -481,9 +460,7 @@ function checkCompletedStatus(i) {
  */
 
 function changeCurrentCompleteStatus(i) {
-    let currentCheckbox = document.getElementById(`checkbox-${i}`);
-    if (currentCheckbox.checked)
-        subtasksForCurrenttask[i].completed = true;
-    else
-        subtasksForCurrenttask[i].completed = false;
+  let currentCheckbox = document.getElementById(`checkbox-${i}`);
+  if (currentCheckbox.checked) subtasksForCurrenttask[i].completed = true;
+  else subtasksForCurrenttask[i].completed = false;
 }

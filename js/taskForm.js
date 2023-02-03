@@ -2,9 +2,9 @@
  * Gets contacts for further rendering
  */
 async function loadContactsforTasks() {
-    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    contacts = JSON.parse(backend.getItem("contacts")) || [];
+  setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
+  await downloadFromServer();
+  contacts = JSON.parse(backend.getItem("contacts")) || [];
 }
 
 /**
@@ -12,12 +12,12 @@ async function loadContactsforTasks() {
  * @param {array} assignedTo Array of assigned persons
  */
 function renderAssignedTo(assignedTo) {
-    for (let i = 0; i < assignedTo['user'].length; i++) {
-        let user = assignedTo['user'][i];
-        document.getElementById('assignedto').innerHTML += `
-        <div class="user"><div class="round-icon-name" style="background-color: ${user['iconcolor']}">${user['icon']}</div><div class="username">${user['name']}</div></div>
+  for (let i = 0; i < assignedTo["user"].length; i++) {
+    let user = assignedTo["user"][i];
+    document.getElementById("assignedto").innerHTML += `
+        <div class="user"><div class="round-icon-name" style="background-color: ${user["iconcolor"]}">${user["icon"]}</div><div class="username">${user["name"]}</div></div>
         `;
-    };
+  }
 }
 
 /**
@@ -25,50 +25,51 @@ function renderAssignedTo(assignedTo) {
  * @param {integer} id Id of selected task
  */
 function renderSubTasks(id) {
-    document.getElementById('subtasks').innerHTML = ``;
-    for (let i = 0; i < tasklist[id]['subtasks']['tasks'].length; i++) {
-        let subtask = tasklist[id]['subtasks']['tasks'][i];
-        if (subtask['completed'] == false) {
-            document.getElementById('subtasks').innerHTML += `
-        <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})"><label for="${i}">${subtask['task']}</label></div>
+  document.getElementById("subtasks").innerHTML = ``;
+  for (let i = 0; i < tasklist[id]["subtasks"]["tasks"].length; i++) {
+    let subtask = tasklist[id]["subtasks"]["tasks"][i];
+    if (subtask["completed"] == false) {
+      document.getElementById("subtasks").innerHTML += `
+        <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})"><label for="${i}">${subtask["task"]}</label></div>
         `;
-        } else {
-            document.getElementById('subtasks').innerHTML += `
-        <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})" checked><label for="${i}">${subtask['task']}</label></div>
+    } else {
+      document.getElementById("subtasks").innerHTML += `
+        <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})" checked><label for="${i}">${subtask["task"]}</label></div>
         `;
-        }
     }
+  }
 }
 
 /**
  * Renders the editable-view of the selected task
  * @param {integer} id Id of selected task
  */
-function renderEditTask(id) {
-    task = tasklist.filter(t => t['id'] == id);
-    contactsForCurrentTask = task[0]['assignedTo']['user'];
-    let title = task[0]['title'];
-    let description = task[0]['description'];
-    let duedateunformated = JSON.stringify(task[0]['duedate']);
-    let year = duedateunformated.slice(0, 4);
-    let month = duedateunformated.slice(4, 6);
-    let day = duedateunformated.slice(6);
-    let duedate = year + '-' + month + '-' + day;
-    let priority = task[0]['priority'];
-    let subtasks = task[0]['subtasks']['tasks'];
-    document.getElementById('Boardpopup').innerHTML = editTaskTemplate(id);
-    document.getElementById('titleinput').value = title;
-    document.getElementById('descriptioninput').value = description;
-    document.getElementById('due-date').value = duedate;
-    loadContactsforTasks();
-    loadSubtasks(subtasks, id);
-    loadAssignetPersons();
-    getMinimumDate();
-    selectPrio(priority);
+async function renderEditTask(id) {
+  task = tasklist.filter((t) => t["id"] == id);
+  contactsForCurrentTask = task[0]["assignedTo"]["user"];
+  let title = task[0]["title"];
+  let description = task[0]["description"];
+  let duedateunformated = JSON.stringify(task[0]["duedate"]);
+  let year = duedateunformated.slice(0, 4);
+  let month = duedateunformated.slice(4, 6);
+  let day = duedateunformated.slice(6);
+  let duedate = year + "-" + month + "-" + day;
+  let priority = task[0]["priority"];
+  let subtasks = task[0]["subtasks"]["tasks"];
+  document.getElementById("Boardpopup").innerHTML = editTaskTemplate(id);
+  document.getElementById("titleinput").value = title;
+  document.getElementById("descriptioninput").value = description;
+  document.getElementById("due-date").value = duedate;
+  await loadContactsforTasks();
+  loadSubtasks(subtasks, id);
+  loadAssignetPersons();
+  getMinimumDate();
+  selectPrio(priority);
+  checkAndAddTOAssignedToContacts();
 }
 
 function getMinimumDate() {
-    document.getElementById('due-date').min = new Date().toISOString().split("T")[0];
+  document.getElementById("due-date").min = new Date().toISOString().split("T")[0];
 }
 
 /**
@@ -77,11 +78,11 @@ function getMinimumDate() {
  * @param {integer} id Id of selected task
  */
 function loadSubtasks(subtasks, id) {
-    document.getElementById('subtasks').innerHTML = '';
-    for (let i = 0; i < subtasks.length; i++) {
-        let subtask = subtasks[i];
-        document.getElementById('subtasks').innerHTML += templateEditabelSubtask(subtask['task'], i, id);
-    }
+  document.getElementById("subtasks").innerHTML = "";
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtask = subtasks[i];
+    document.getElementById("subtasks").innerHTML += templateEditabelSubtask(subtask["task"], i, id);
+  }
 }
 
 /**
@@ -89,15 +90,15 @@ function loadSubtasks(subtasks, id) {
  * @param {integer} id Id of selected task
  */
 async function addNewSubask(id) {
-    let newtask = document.getElementById('newsubtask').value;
-    tasklist[id]['subtasks']['tasks'].push({ 'task': newtask, 'completed': false })
-    document.getElementById('newsubtask').value = '';
-    await saveBoard();
-    await setTimeout(loadAll, 100);
-    renderBoard();
-    task = tasklist.filter(t => t['id'] == id);
-    let subtasks = task[0]['subtasks']['tasks'];
-    loadSubtasks(subtasks, id);
+  let newtask = document.getElementById("newsubtask").value;
+  tasklist[id]["subtasks"]["tasks"].push({ task: newtask, completed: false });
+  document.getElementById("newsubtask").value = "";
+  await saveBoard();
+  await setTimeout(loadAll, 100);
+  renderBoard();
+  task = tasklist.filter((t) => t["id"] == id);
+  let subtasks = task[0]["subtasks"]["tasks"];
+  loadSubtasks(subtasks, id);
 }
 
 /**
@@ -106,13 +107,13 @@ async function addNewSubask(id) {
  * @param {integer} id Id of selected task
  */
 function deleteSubtask(index, id) {
-    task = tasklist.filter(t => t['id'] == id);
-    task[0]['subtasks']['tasks'].splice(index, 1);
-    let subtasks = task[0]['subtasks']['tasks'];
-    saveBoard();
-    loadAll();
-    renderBoard();
-    loadSubtasks(subtasks, id);
+  task = tasklist.filter((t) => t["id"] == id);
+  task[0]["subtasks"]["tasks"].splice(index, 1);
+  let subtasks = task[0]["subtasks"]["tasks"];
+  saveBoard();
+  loadAll();
+  renderBoard();
+  loadSubtasks(subtasks, id);
 }
 
 /**
@@ -121,9 +122,9 @@ function deleteSubtask(index, id) {
  * @param {integer} id Id of selected task
  */
 function editSubtask(index, id) {
-    task = tasklist.filter(t => t['id'] == id);
-    let subtask = task[0]['subtasks']['tasks'][index];
-    document.getElementById(`subtask${index}`).innerHTML = templateEditabelSubtaskInput(subtask['task'], index, id);
+  task = tasklist.filter((t) => t["id"] == id);
+  let subtask = task[0]["subtasks"]["tasks"][index];
+  document.getElementById(`subtask${index}`).innerHTML = templateEditabelSubtaskInput(subtask["task"], index, id);
 }
 
 /**
@@ -132,18 +133,18 @@ function editSubtask(index, id) {
  * @param {integer} id Id of selected task
  */
 async function saveSubEdit(index, id) {
-    newsubtask = document.getElementById(`subedit${index}`).value;
-    tasklist[id]['subtasks']['tasks'][index]['task'] = newsubtask;
-    await saveBoard();
-    setTimeout(loadAll, 100);
-    renderBoard();
-    document.getElementById(`subtask${index}`).innerHTML = `
+  newsubtask = document.getElementById(`subedit${index}`).value;
+  tasklist[id]["subtasks"]["tasks"][index]["task"] = newsubtask;
+  await saveBoard();
+  setTimeout(loadAll, 100);
+  renderBoard();
+  document.getElementById(`subtask${index}`).innerHTML = `
     <div><p>${newsubtask}</p></div>
     <div>
         <button onclick="deleteSubtask(${index}, ${id})">Delete</button>
         <button onclick="editSubtask(${index}, ${id})">Edit</button>
     </div>
-    `
+    `;
 }
 
 /**
@@ -152,15 +153,15 @@ async function saveSubEdit(index, id) {
  * @param {integer} id Id of selected task
  */
 function cancelSubEdit(index, id) {
-    task = tasklist.filter(t => t['id'] == id);
-    let subtask = task[0]['subtasks']['tasks'][index];
-    document.getElementById(`subtask${index}`).innerHTML = `
-    <div><p>${subtask['task']}</p></div>
+  task = tasklist.filter((t) => t["id"] == id);
+  let subtask = task[0]["subtasks"]["tasks"][index];
+  document.getElementById(`subtask${index}`).innerHTML = `
+    <div><p>${subtask["task"]}</p></div>
     <div>
         <button onclick="deleteSubtask(${index}, ${id})">Delete</button>
         <button onclick="editSubtask(${index}, ${id})">Edit</button>
     </div>
-    `
+    `;
 }
 
 /**
@@ -169,14 +170,14 @@ function cancelSubEdit(index, id) {
  * @param {integer} id Id of selected task
  */
 async function taskStatusChange(task, id) {
-    if (tasklist[id]['subtasks']['tasks'][task]['completed'] == true) {
-        tasklist[id]['subtasks']['tasks'][task]['completed'] = false;
-    } else {
-        tasklist[id]['subtasks']['tasks'][task]['completed'] = true;
-    }
-    await saveBoard();
-    renderSubTasks(id);
-    setTimeout(await initBoard, 50);
+  if (tasklist[id]["subtasks"]["tasks"][task]["completed"] == true) {
+    tasklist[id]["subtasks"]["tasks"][task]["completed"] = false;
+  } else {
+    tasklist[id]["subtasks"]["tasks"][task]["completed"] = true;
+  }
+  await saveBoard();
+  renderSubTasks(id);
+  setTimeout(await initBoard, 50);
 }
 
 /**
@@ -184,43 +185,43 @@ async function taskStatusChange(task, id) {
  * @param {string} prio Name of selectet priority
  */
 function selectPrio(prio) {
-    if (prio == 'urgent') {
-        setPrioUrgent();
-    }
-    if (prio == 'medium') {
-        setPrioMedium();
-    }
-    if (prio == 'low') {
-        setPrioLow();
-    }
-    selectedPrio = prio;
+  if (prio == "urgent") {
+    setPrioUrgent();
+  }
+  if (prio == "medium") {
+    setPrioMedium();
+  }
+  if (prio == "low") {
+    setPrioLow();
+  }
+  selectedPrio = prio;
 }
 
 /**
  * Changes priority to urgent
  */
 function setPrioUrgent() {
-    document.getElementById('urgent').classList.add('urgent');
-    document.getElementById('medium').classList.remove('medium');
-    document.getElementById('low').classList.remove('low');
+  document.getElementById("urgent").classList.add("urgent");
+  document.getElementById("medium").classList.remove("medium");
+  document.getElementById("low").classList.remove("low");
 }
 
 /**
  * Changes priority to medium
  */
 function setPrioMedium() {
-    document.getElementById('urgent').classList.remove('urgent');
-    document.getElementById('medium').classList.add('medium');
-    document.getElementById('low').classList.remove('low');
+  document.getElementById("urgent").classList.remove("urgent");
+  document.getElementById("medium").classList.add("medium");
+  document.getElementById("low").classList.remove("low");
 }
 
 /**
  * Changes priority to low
  */
 function setPrioLow() {
-    document.getElementById('urgent').classList.remove('urgent');
-    document.getElementById('medium').classList.remove('medium');
-    document.getElementById('low').classList.add('low');
+  document.getElementById("urgent").classList.remove("urgent");
+  document.getElementById("medium").classList.remove("medium");
+  document.getElementById("low").classList.add("low");
 }
 
 /**
@@ -228,38 +229,62 @@ function setPrioLow() {
  * @param {integer} id Id of selected task
  */
 function loadAssignetPersons() {
-    document.getElementById('assigned-to-icons-section').innerHTML = ``;
-    for (let i = 0; i < contactsForCurrentTask.length; i++) {
-        let assignetperson = contactsForCurrentTask[i];
-        document.getElementById('assigned-to-icons-section').innerHTML += `<div class="round-icon-name icons-add-task" style="background-color: 
-        ${assignetperson['iconcolor']}">${assignetperson['icon']}</div>`
-    }
+  document.getElementById("assigned-to-icons-section").innerHTML = ``;
+  for (let i = 0; i < contactsForCurrentTask.length; i++) {
+    let assignetperson = contactsForCurrentTask[i];
+    document.getElementById("assigned-to-icons-section").innerHTML += `<div class="round-icon-name icons-add-task" style="background-color: 
+        ${assignetperson["iconcolor"]}">${assignetperson["icon"]}</div>`;
+  }
 }
 
 /**
- * Renders the open dropdown-menu for assigning contacts
- * @param {integer} id Id of selected task
+ * Checks at which position number of the array contacts a contact of the current task is and if the number isn´t in the array assignedToContacts, it gets pushed
+ * in it.
  */
-function openDropdownAssignTo(id) {
-    task = tasklist.filter(t => t['id'] == id);
-    document.getElementById('assign-container').innerHTML = templateOfOpenDropdownAssignTo(id)
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        if (checkOnAssignedContacts(contact) != false) {
-            document.getElementById('assign-container').innerHTML += templateAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
-        } else {
-            document.getElementById('assign-container').innerHTML += templateNotAssignedContact(i, contact['name'], contact['icon'], contact['iconcolor'], id);
-        }
+
+function checkAndAddTOAssignedToContacts() {
+  for (let a = 0; a < contacts.length; a++) {
+    let contact = contacts[a];
+    if (contactsForCurrentTask[0]["name"] === contact["name"]) {
+      assignedToContacts.push(a);
     }
-    for (let j = 0; j < assignetContacts.length; j++) {
-        let contact = assignetContacts[j];
-        if (checkOnContact(contact) == false) {
-            let index = j + contacts.length
-            document.getElementById('assign-container').innerHTML += templateAssignedContact(index, contact['name'], contact['icon'], contact['iconcolor'], id);
-        }
-    }
-    document.getElementById('assign-container').innerHTML += templateInviteContact(id);
+  }
 }
+
+/**
+ * @param {number} a is the iterationen number from the array contacts
+ * @param {array} assignedToContacts
+ * @returns
+ */
+
+function isValueInArray(a, assignedToContacts) {
+  return assignedToContacts.includes(a);
+}
+
+// /**
+//  * Renders the open dropdown-menu for assigning contacts
+//  * @param {integer} id Id of selected task
+//  */
+// function openDropdownAssignTo(id) {
+//   task = tasklist.filter((t) => t["id"] == id);
+//   document.getElementById("existing-contacts").innerHTML = templateOfOpenDropdownAssignTo(id);
+//   for (let i = 0; i < contacts.length; i++) {
+//     let contact = contacts[i];
+//     if (checkOnAssignedContacts(contact) != false) {
+//       document.getElementById("existing-contacts").innerHTML += templateAssignedContact(i, contact["name"], contact["icon"], contact["iconcolor"], id);
+//     } else {
+//       document.getElementById("existing-contacts").innerHTML += templateNotAssignedContact(i, contact["name"], contact["icon"], contact["iconcolor"], id);
+//     }
+//   }
+//   for (let j = 0; j < assignetContacts.length; j++) {
+//     let contact = assignetContacts[j];
+//     if (checkOnContact(contact) == false) {
+//       let index = j + contacts.length;
+//       document.getElementById("existing-contacts").innerHTML += templateAssignedContact(index, contact["name"], contact["icon"], contact["iconcolor"], id);
+//     }
+//   }
+//   document.getElementById("existing-contacts").innerHTML += templateInviteContact(id);
+// }
 
 /**
  * Changes the assign-status of selected contact
@@ -269,14 +294,14 @@ function openDropdownAssignTo(id) {
  * @param {integer} id Id of selected task
  */
 function assignChange(name, icon, color, id) {
-    let contact = { 'name': name, 'icon': icon, 'iconcolor': color }
-    let index = indexOfAssigned(contact);
-    if (checkOnAssignedContacts(contact['icon']) == true) {
-        assignetContactsTemp.splice(index, 1);
-    } else {
-        assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color });
-    }
-    loadAssignetPersons(id);
+  let contact = { name: name, icon: icon, iconcolor: color };
+  let index = indexOfAssigned(contact);
+  if (checkOnAssignedContacts(contact["icon"]) == true) {
+    assignetContactsTemp.splice(index, 1);
+  } else {
+    assignetContactsTemp.push({ name: name, icon: icon, iconcolor: color });
+  }
+  loadAssignetPersons(id);
 }
 
 /**
@@ -284,24 +309,10 @@ function assignChange(name, icon, color, id) {
  * @param {integer} id Id of selected task
  */
 function addNewContact(id) {
-    assignNewPerson();
-    showAddcontact();
-
-
-
-    // let email = document.getElementById('email').value;
-    // let icon = email.slice(0, 2);
-    // let color = getRandomColor();
-    // if (email.includes('@')) {
-    //     let tempName = email.split('@');
-    //     let name = tempName[0];
-    //     assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    // } else {
-    //     let name = email;
-    //     assignetContactsTemp.push({ 'name': name, 'icon': icon, 'iconcolor': color, });
-    // }
-    document.getElementById('assign-container').innerHTML = templateOfClosedDropdownAssignTo(id)
-    loadAssignetPersons();
+  assignNewPerson();
+  showAddcontact();
+  document.getElementById("assign-container").innerHTML = templateOfClosedDropdownAssignTo(id);
+  loadAssignetPersons();
 }
 
 /**
@@ -309,12 +320,12 @@ function addNewContact(id) {
  * @returns Random generated color
  */
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 /**
@@ -323,13 +334,13 @@ function getRandomColor() {
  * @returns status of containing the contact
  */
 function checkOnContact(contact) {
-    for (let i = 0; i < contacts.length; i++) {
-        let name = contacts[i]['name'];
-        if (name == contact) {
-            return true;
-        }
+  for (let i = 0; i < contacts.length; i++) {
+    let name = contacts[i]["name"];
+    if (name == contact) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 /**
@@ -338,13 +349,13 @@ function checkOnContact(contact) {
  * @returns status of containing the contact
  */
 function checkOnAssignedContacts(contact) {
-    for (let i = 0; i < assignetContactsTemp.length; i++) {
-        let check = assignetContactsTemp[i]['icon'];
-        if (check == contact) {
-            return true;
-        }
+  for (let i = 0; i < assignetContactsTemp.length; i++) {
+    let check = assignetContactsTemp[i]["icon"];
+    if (check == contact) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 /**
@@ -353,34 +364,41 @@ function checkOnAssignedContacts(contact) {
  * @returns position in array of contact
  */
 function indexOfAssigned(icon) {
-    for (let i = 0; i < assignetContactsTemp.length; i++) {
-        let name = assignetContactsTemp[i]['icon'];
-        if (name == icon) {
-            return i;
-        }
+  for (let i = 0; i < assignetContactsTemp.length; i++) {
+    let name = assignetContactsTemp[i]["icon"];
+    if (name == icon) {
+      return i;
     }
+  }
 }
 
 /**
  * Saves changes of selected task
- * @param {integer} id Id of selected task 
+ * @param {integer} id Id of selected task
  */
 async function editTask(id) {
-    formValidation = true;
-    let taskInputTitle = document.getElementById('titleinput').value;
-    let description = document.getElementById('descriptioninput').value;
-    convertDate();
-    checkInput('title', taskInputTitle);
-    checkInput('description', description);
-    checkDueDate();
-    if(formValidation) {
-        tasklist[id]['title'] = taskInputTitle;
-        tasklist[id]['description'] = description;
-    tasklist[id]['assignedTo']['user'] = assignetContacts;
-        tasklist[id]['duedate'] = date;
-    tasklist[id]['priority'] = selectedPrio;
+  formValidation = true;
+  let taskInputTitle = document.getElementById("titleinput").value;
+  let description = document.getElementById("descriptioninput").value;
+  convertDate();
+  checkInput("title", taskInputTitle);
+  checkInput("description", description);
+  checkDueDate();
+  checkAssigned();
+  if (formValidation) {
+    assignedToContactsForCurrentTask();
+    tasklist[id]["title"] = taskInputTitle;
+    tasklist[id]["description"] = description;
+    tasklist[id]["assignedTo"]["user"] = contactsForCurrentTask;
+    tasklist[id]["duedate"] = date;
+    tasklist[id]["priority"] = selectedPrio;
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();
+    setBack();
+  }
 }
+
+function setBack() {
+  assignedToContacts = [];
 }

@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": true,
+    
+"prettier.proseWrap": "never",
+"prettier.bracketSameLine": true,
+"prettier.htmlWhitespaceSensitivity": "strict",
+    
+}
+
