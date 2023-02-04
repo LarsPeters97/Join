@@ -96,10 +96,11 @@ function editTaskTemplate(id) {
                         <div id="assigned-to-icons-section" class="flex width-f"></div>
                         <span id="assigned-to-contacts-required" class="mistake-category-fields"></span>
                     </div>
+                    <div class="edit-task-section">
+                    <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
+                    </div>
                 </div>
-            <div class="editTask" onclick="editTask(${id})"><img src="./assets/img/check-button.png" alt="Ok"></div>
-        </div>
-        <div class="close" onclick="closeBoardPopup()">x</div>      
+        </div>    
     </div>
     `;
 }

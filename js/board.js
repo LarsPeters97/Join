@@ -187,8 +187,8 @@ function removeHighlight(id) {
 /**
  * Opens the add task Popup
  */
-function taskPopup() {
-  document.getElementById("Boardpopup").innerHTML = addTaskPopupTemplate();
+function taskPopup(progressStatus) {
+  document.getElementById("Boardpopup").innerHTML = addTaskPopupTemplate(progressStatus);
   includeHTML();
   document.getElementById("Boardpopup").classList.remove("d-none");
   document.getElementById("Boardpopup").style.overflow = "scroll";
@@ -206,7 +206,7 @@ function openTask(id) {
   let color = task[0]["category"]["color"];
   let title = task[0]["title"];
   let description = task[0]["description"];
-  let duedateunformated = task[0]["duedate"];
+  let duedateunformated = task[0]["duedate"].toString();
   let year = duedateunformated.slice(0, 4);
   let month = duedateunformated.slice(4, 6);
   let day = duedateunformated.slice(6);

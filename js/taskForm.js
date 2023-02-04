@@ -50,7 +50,7 @@ async function renderEditTask(id) {
   contactsForCurrentTask = task[0]["assignedTo"]["user"];
   let title = task[0]["title"];
   let description = task[0]["description"];
-  let duedateunformated = task[0]["duedate"];
+  let duedateunformated = task[0]["duedate"].toString();
   let year = duedateunformated.slice(0, 4);
   let month = duedateunformated.slice(4, 6);
   let day = duedateunformated.slice(6);
@@ -387,7 +387,6 @@ async function editTask(id) {
   checkDueDate();
   checkAssigned();
   if (formValidation) {
-    contactsForCurrentTask = [];
     assignedToContactsForCurrentTask();
     tasklist[id]["title"] = taskInputTitle;
     tasklist[id]["description"] = description;
@@ -397,5 +396,11 @@ async function editTask(id) {
     await saveBoard();
     setTimeout(await initBoard, 100);
     closeBoardPopup();
+    setBack();
   }
+}
+
+function setBack() {
+  contactsForCurrentTask = [];
+  assignedToContacts = [];
 }

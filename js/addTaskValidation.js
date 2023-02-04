@@ -46,7 +46,7 @@ function checkAssigned() {
 function checkDueDate() {
   let mandatoryFieldDate = document.getElementById("date-required");
   let today = dateTodayAsNumber();
-  if (!date || date < today) {
+  if (!date || (date < today && date.length != 8)) {
     formValidation = false;
     mandatoryFieldDate.innerHTML = "Invalid date. Select today or a future date.";
   }

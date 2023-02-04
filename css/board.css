@@ -704,17 +704,19 @@ textarea {
     margin-top: 12px;
 }
 
+.edit-task-section {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
 .editTask {
-    position: absolute !important;
-    bottom: 0px !important;
-    right: 0px !important;
     width: 83px;
     height: 57px;
     background: #2A3647;
     border-radius: 10px;
     cursor: pointer;
     display: flex;
-    flex-direction: row !important;
 }
 
 .subtaskedit {

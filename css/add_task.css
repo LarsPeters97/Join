@@ -9,9 +9,10 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 body::-webkit-scrollbar {
     width: 10px;
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -371,10 +372,6 @@ body::-webkit-scrollbar-thumb {
 
     .right-side {
         padding-left: 0px;
-    }
-
-    .margin-for-fields:nth-child(4) {
-        margin-bottom: 32px;
     }
 
     .task-btns {

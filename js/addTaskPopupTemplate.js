@@ -1,6 +1,6 @@
 // /**
 //  * creates a category option
-//  * 
+//  *
 //  * @param {integer} i index of the option
 //  * @param {string} name name of the option
 //  * @param {string} color affiliated color of the option
@@ -15,7 +15,7 @@
 
 // /**
 //  * template for open category dropdown
-//  * 
+//  *
 //  * @returns template
 //  */
 // function templateOpenCategorySelection() {
@@ -42,7 +42,7 @@
 
 // /**
 //  * template of the category inputfield
-//  * 
+//  *
 //  * @returns template
 //  */
 // function templateCreateNewCategoryInput() {
@@ -51,7 +51,7 @@
 //     <input class="input-category" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
 //     <span class="all-colors" id="selected-color"></span>
 //     <div class="category-icons">
-//         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
+//         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> |
 //         <img src="./assets/img/checkmark.png" class="checkmark" onclick="addNewCategory()">
 //     </div></div>`
 // }
@@ -153,7 +153,7 @@
 
 // function templateSubtasks(taskElement, i) {
 //     return `
-//         <div class="subtask_checkbox ">   
+//         <div class="subtask_checkbox ">
 //             <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})">
 //             <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
 //         </div>
@@ -162,15 +162,15 @@
 
 // function templateSubtasksCompleted(taskElement, i) {
 //     return `
-//         <div class="subtask_checkbox flex-start">  
+//         <div class="subtask_checkbox flex-start">
 //             <input type="checkbox" id="checkbox-${i}" class="input_subtask" onchange="changeCompleteStatus(${i})" checked>
 //             <label for="checkbox-${i}" class="margin-checkbox">${taskElement['task']}</label>
 //         </div>
 //         `;
 // }
 
-function addTaskPopupTemplate() {
-    return /*html*/`
+function addTaskPopupTemplate(progressStatus) {
+  return /*html*/ `
     <div class="background-popup" onclick="checkIfPopupShouldBeClosed()"></div>
     <div id="add-contact-section"></div>
     <div class="add_task_popup">
@@ -284,7 +284,7 @@ function addTaskPopupTemplate() {
                         onmouseover="showClearImgLightBlue()" onclick="clearTask()"
                         onmouseout="showClearImgDarkBlue()">Clear <img src="./assets/img/clear-x.svg" id="clear-img"
                             id="clear-img"></button>
-                        <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask()">Create Task
+                        <button class="create-btn btns-clear-and-create desktop-create-btn" onclick="createNewTask('${progressStatus}')">Create Task
                         <img src="./assets/img/create-check.svg" id="create-img"></button>
                     </div>
                 </div>

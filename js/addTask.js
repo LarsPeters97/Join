@@ -279,6 +279,7 @@ function addAssignedToIcon(i) {
  */
 
 function assignedToContactsForCurrentTask() {
+  contactsForCurrentTask = [];
   for (let i = 0; i < assignedToContacts.length; i++) {
     let contactNumber = assignedToContacts[i];
     contactsForCurrentTask.push(contacts[contactNumber]);

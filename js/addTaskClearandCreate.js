@@ -2,7 +2,7 @@
  * Fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
  */
 
-function addTask() {
+function addTask(progressStatus) {
   formValidation = true;
   let taskInputTitle = document.getElementById("input-title").value;
   let description = document.getElementById("description").value;
@@ -14,7 +14,7 @@ function addTask() {
   checkDueDate();
   checkPriority();
   if (formValidation) {
-    let currentTask = currentTaskValues(taskInputTitle, description);
+    let currentTask = currentTaskValues(taskInputTitle, description, progressStatus);
     tasklist.push(currentTask);
     saveCurrentTask();
     clearTask();
@@ -26,9 +26,9 @@ function addTask() {
  * @returns the values of the fields for the current task to the variable currentTask.
  */
 
-function currentTaskValues(taskInputTitle, description) {
+function currentTaskValues(taskInputTitle, description, progressStatus) {
   return {
-    progress: "todo",
+    progress: progressStatus,
     id: taskid,
     category: {
       color: selectedCategoryColor,
@@ -72,11 +72,11 @@ function clearTask() {
  * Creates and saves the just created task and clears the task fields again. At the end it will be redirected to the page board.html .
  */
 
-async function createNewTask() {
+async function createNewTask(progressStatus) {
   await loadTasklistForId();
   assignedToContactsForCurrentTask();
   priorityForCurrentTask();
-  addTask();
+  addTask(progressStatus);
 }
 
 /**
