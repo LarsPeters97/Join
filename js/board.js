@@ -232,7 +232,7 @@ function closeBoardPopup() {
  * @param {integer} id Id of the task
  */
 function findTask(id) {
-  let search = document.getElementById(id).value;
+  let search = document.getElementById(id).value.toLowerCase();
   searchInTodos(search);
   searchInInProgress(search);
   searchInAwaitFeedback(search);

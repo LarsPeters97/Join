@@ -18,7 +18,7 @@ function addTask(progressStatus) {
     tasklist.push(currentTask);
     saveCurrentTask();
     clearTask();
-    redirectToBoardPage();
+    showMessageAndMoveToBoard("message-task-added");
   }
 }
 
@@ -86,4 +86,25 @@ async function createNewTask(progressStatus) {
 function saveCurrentTask() {
   let tasklistAsString = JSON.stringify(tasklist);
   backend.setItem("tasklist", tasklistAsString);
+}
+
+/**
+ * When the task is created on the add_task.html page, the message that the task is added to the board is displayed.
+ * After that the board.html page is called.
+ * @param {string} messageID is the dom Id for the Message Container.
+ */
+
+function showMessageAndMoveToBoard(messageID) {
+  if (window.location.pathname === "/add_task.html") {
+    let noteContainer = document.getElementById(messageID);
+    noteContainer.style.display = "flex";
+    noteContainer.classList.add("showMessage");
+    setTimeout(() => {
+      noteContainer.style.display = "none";
+      noteContainer.classList.remove("showMessage");
+      redirectToBoardPage();
+    }, 2000);
+  } else {
+    redirectToBoardPage();
+  }
 }

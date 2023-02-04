@@ -360,6 +360,24 @@ body::-webkit-scrollbar-thumb {
     display: none;
 }
 
+.message-task-added {
+    bottom: 0px;
+    display: none;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    transition: all 1s;
+    width: 100%;
+    z-index: 19999;
+}
+
+
+.showMessage {
+    bottom: 100px;
+    opacity: 100;
+    transition: all 1s;
+}
+
 @media(max-width: 1400px) {
     .change-direction {
         flex-direction: column;
