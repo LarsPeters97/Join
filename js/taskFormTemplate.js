@@ -83,7 +83,7 @@ function editTaskTemplate(id) {
             </div>
             <div class="flex column margin-for-fields">
                         <span class="header-for-fields">Assigned to</span>
-                        <div class="dropdown-category-container width-f" id="assigned-container">
+                        <div class="dropdown-category-container" id="assigned-container" style="width: 100%;">
                             <div class="dropdown-category border-radius-fields" id="contact-container">
                                 <div class="flex input-section" onclick="checkIfAssignedToIsOpen()"
                                     id="assigned-contacts">
@@ -135,8 +135,7 @@ function assignNewContact() {
             |
             <img src="./assets/img/checkmark.png" onclick="addNewContact()">
         </div>
-    </div>
-    `;
+    </div>`;
 }
 
 function exitNewContact() {
@@ -144,8 +143,7 @@ function exitNewContact() {
     <div onclick="openExistingContacts()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">
-    </div>
-    `;
+    </div>`;
 }
 
 function templateOfClosedDropdownAssignTo() {
