@@ -14,23 +14,6 @@ function templateNotAssignedContact(i, name, icon, iconcolor, id) {
         </div>`;
 }
 
-function templateOfOpenDropdownAssignTo(id) {
-  return `
-    <div onclick="closeDropdownAssignTo(${id})">
-        <span class="flex">Select contacts to assign</span>
-        <img src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
-}
-
-function templateInviteContact(id) {
-  return `
-    <div class="contact" onclick="assignNewContact(${id})">
-        <span>Invite new contact</span>
-        <img src="./assets/img/contact-icon.png">
-    </div>
-    `;
-}
-
 function templateEditabelSubtask(task, i, task_id) {
   return `
         <div class="subtask" id="subtask${i}">
@@ -127,36 +110,8 @@ function taskformTemplate(category, color, title, description, duedate, priority
     </div>`;
 }
 
-function assignNewContact() {
-  document.getElementById("assign-container").innerHTML = `
-    <div class="newcontact">
-        <input type="email" placeholder="Contact email" id="email">
-        <div class="check">
-            <img src="./assets/img/false-x.png" onclick="exitNewContact()">
-            |
-            <img src="./assets/img/checkmark.png" onclick="addNewContact()">
-        </div>
-    </div>`;
-}
-
-function exitNewContact() {
-  document.getElementById("assign-container").innerHTML = `
-    <div onclick="openExistingContacts()">
-        <span class="flex">Select contacts to assign</span>
-        <img src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
-}
-
 function templateOfClosedDropdownAssignTo() {
   return `
-    <div onclick="openExistingContacts()">
-        <span class="flex">Select contacts to assign</span>
-        <img src="./assets/img/vector-2.png" alt="klick">
-    </div>`;
-}
-
-function closeDropdownAssignTo() {
-  document.getElementById("assign-container").innerHTML = `
     <div onclick="openExistingContacts()">
         <span class="flex">Select contacts to assign</span>
         <img src="./assets/img/vector-2.png" alt="klick">

@@ -857,7 +857,3 @@ input::-webkit-inner-spin-button {
         font-size: 18px;
     }
 }
-
-.d-none {
-    display: none;
-}

@@ -40,13 +40,13 @@ function checkAssigned() {
 
 /**
  * Checks if the global variable date isn't declared or when the global variable date is declared, if the date is smaller than
- * the variable today. If so, the global variable formValidation is set to false and a message is displayed.
+ * the variable today and if the varaible is unequal to 8. If so, the global variable formValidation is set to false and a message is displayed.
  */
 
 function checkDueDate() {
   let mandatoryFieldDate = document.getElementById("date-required");
   let today = dateTodayAsNumber();
-  if (!date || (date < today && date.length != 8)) {
+  if (!date || date < today || date.length != 8) {
     formValidation = false;
     mandatoryFieldDate.innerHTML = "Invalid date. Select today or a future date.";
   }

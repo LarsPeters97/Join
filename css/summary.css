@@ -7,7 +7,7 @@ body {
 
 body::-webkit-scrollbar {
     width: 10px;
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -51,7 +51,7 @@ body::-webkit-scrollbar-thumb {
     height: 32px;
     font-size: 27px;
     color: #2A3647;
-    font-weight:   400;
+    font-weight: 400;
 }
 
 .summary-greet-container {
@@ -154,6 +154,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 64px;
     line-height: 120%;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .summary-tasks-text {
@@ -368,10 +370,6 @@ body::-webkit-scrollbar-thumb {
     display: none;
 }
 
-.d-none {
-    display: none;
-}
-
 .wrapper_mobile_menu {
     position: fixed;
 }
@@ -388,7 +386,7 @@ body::-webkit-scrollbar-thumb {
     body {
         overflow-x: hidden;
     }
-    
+
     .summary-details-container {
         padding-bottom: 150px;
     }
@@ -437,7 +435,7 @@ body::-webkit-scrollbar-thumb {
             z-index: 0;
             opacity: 1;
             width: 100vw;
-            
+
         }
     }
 
@@ -475,7 +473,7 @@ body::-webkit-scrollbar-thumb {
         color: rgb(41, 171, 226);
         opacity: 0;
         animation: summary-greet-bottom-mobil 3s;
-        
+
     }
 
     @keyframes summary-greet-bottom-mobil {
@@ -491,9 +489,10 @@ body::-webkit-scrollbar-thumb {
 
         100% {
             color: rgba(41, 171, 226, 0);
-           opacity: 1;
+            opacity: 1;
         }
     }
+
     .summary-headline-container {
         padding-left: 0px !important;
         display: flex;
@@ -504,7 +503,7 @@ body::-webkit-scrollbar-thumb {
         padding-left: 0px !important;
         align-items: center;
     }
-    
+
 }
 
 @media (max-width:800px) {
@@ -520,29 +519,29 @@ body::-webkit-scrollbar-thumb {
     .summary-tasks-btn {
         width: 130px;
         height: 130px;
-       }
-    
-       .summary-tasks-container {
+    }
+
+    .summary-tasks-container {
         justify-content: center;
         gap: 15px;
-       }
-    
-       .summary-tasks-amount {
+    }
+
+    .summary-tasks-amount {
         width: 30px;
         height: 56px;
         font-size: 47px;
-    
-       }
 
-       .summary-tasks-container {
+    }
+
+    .summary-tasks-container {
         width: 0px;
     }
-    
-       .summary-tasks-text {
-        font-size: 14px;
-       }
 
-       .summary-urgency-container {
+    .summary-tasks-text {
+        font-size: 14px;
+    }
+
+    .summary-urgency-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -551,39 +550,39 @@ body::-webkit-scrollbar-thumb {
         gap: 20px;
         width: 420px;
         height: 130px;
-       }
+    }
 
-       .summary-urgency-frame {
+    .summary-urgency-frame {
         display: flex;
         flex-direction: row;
         align-items: center;
         padding: 0px;
         gap: 18px;
         height: 73px;
-       }
+    }
 
-       .summary-to-do-container {
+    .summary-to-do-container {
         width: 0px;
         justify-content: center;
-       }
+    }
 
-       .summary-to-do-frame {
+    .summary-to-do-frame {
         width: 192px;
-       }
+    }
 
-       .summary-urgency-image img {
+    .summary-urgency-image img {
         scale: 1;
-       }
+    }
 
-       .summary-to-do-amount {
+    .summary-to-do-amount {
         font-size: 47px;
-       }
-       
-       .summary-to-do-text {
+    }
+
+    .summary-to-do-text {
         font-size: 14px;
         display: flex;
         justify-content: center;
-       }
+    }
 }
 
 @media (max-width:550px) {
@@ -591,24 +590,25 @@ body::-webkit-scrollbar-thumb {
     .content {
         display: flex;
         flex-direction: column;
-     }
-     .summary-headline-container {
-       padding-left: 0px;
-       display: flex;
-       justify-content: center;
-       gap: 0px !important;
-       margin-top: 148px;
-     }
- 
-     .summary-headline-left {
-         font-size: 50px;
-     }
- 
-     .summary-headline-right {
-         font-size: 24px;
-     }
- 
-     .summary-details-container {
+    }
+
+    .summary-headline-container {
+        padding-left: 0px;
+        display: flex;
+        justify-content: center;
+        gap: 0px !important;
+        margin-top: 148px;
+    }
+
+    .summary-headline-left {
+        font-size: 50px;
+    }
+
+    .summary-headline-right {
+        font-size: 24px;
+    }
+
+    .summary-details-container {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -617,8 +617,8 @@ body::-webkit-scrollbar-thumb {
         position: absolute;
         width: 363px;
         left: 33px;
-        top: 310px; 
-     }
+        top: 310px;
+    }
 
     .summary-headline-container {
         display: flex;
@@ -665,25 +665,25 @@ body::-webkit-scrollbar-thumb {
     .summary-tasks-btn {
         width: 110px;
         height: 110px;
-       }
-    
-       .summary-tasks-container {
+    }
+
+    .summary-tasks-container {
         justify-content: start;
         gap: 15px;
-       }
-    
-       .summary-tasks-amount {
+    }
+
+    .summary-tasks-amount {
         width: 30px;
         height: 56px;
         font-size: 47px;
-    
-       }
-    
-       .summary-tasks-text {
-        font-size: 14px;
-       }
 
-       .summary-urgency-container {
+    }
+
+    .summary-tasks-text {
+        font-size: 14px;
+    }
+
+    .summary-urgency-container {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -692,9 +692,9 @@ body::-webkit-scrollbar-thumb {
         gap: 20px;
         width: 360px;
         height: 110px;
-       }
+    }
 
-       .summary-urgency-frame {
+    .summary-urgency-frame {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -702,23 +702,23 @@ body::-webkit-scrollbar-thumb {
         gap: 18px;
         width: 108px;
         height: 73px;
-       }
+    }
 
-       .summary-urgency-image {
+    .summary-urgency-image {
         width: 40px;
         height: 40px;
-       }
+    }
 
-       .summary-urgency-image img {
+    .summary-urgency-image img {
         width: 40px;
         height: 40px;
-       }
+    }
 
-       .summary-urgency-text {
+    .summary-urgency-text {
         font-size: 14px;
-       }
+    }
 
-       .summary-urgency-deadline {
+    .summary-urgency-deadline {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -726,17 +726,17 @@ body::-webkit-scrollbar-thumb {
         gap: 8px;
         width: 135px;
         height: 44px;
-       }
+    }
 
-       .summary-deadline-top {
+    .summary-deadline-top {
         font-size: 16px;
-       }
+    }
 
-       .summary-deadline-bottom {
+    .summary-deadline-bottom {
         font-size: 14px;
-       }
+    }
 
-       .summary-to-do-container {
+    .summary-to-do-container {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -744,48 +744,48 @@ body::-webkit-scrollbar-thumb {
         gap: 15px;
         width: 363px;
         height: 110px;
-       }
+    }
 
-       .summary-to-do-frame {
+    .summary-to-do-frame {
         width: 177.5px;
         height: 110px;
-       }
+    }
 
-       .summary-pen-image {
+    .summary-pen-image {
         width: 40px;
         height: 40px;
         background-image: url(../assets/img/mobile_pen.png);
         background-position: center;
-       }
+    }
 
-       .summary-to-do-check {
+    .summary-to-do-check {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 0px;
         width: 40px;
         height: 73px;
-       }
+    }
 
-       .summary-to-do-amount {
+    .summary-to-do-amount {
         font-size: 47px;
-       }
+    }
 
-       .summary-to-do-text {
+    .summary-to-do-text {
         font-size: 14px;
         text-align: center;
-       }
+    }
 
-       .summary-done-image  {
+    .summary-done-image {
         width: 40px;
         height: 40px;
         background-image: url(../assets/img/mobile_right.png);
         background-position: center;
-       }
+    }
 }
 
 @media(max-width: 450px) {
-    .content{
+    .content {
         z-index: -1;
     }
 

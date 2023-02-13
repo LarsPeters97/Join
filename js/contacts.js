@@ -1,23 +1,15 @@
-let contacts = [];
-
 let letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 let currentcolor = 0;
 let findContact = false;
-/**
- * Url for backend
- */
-setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
 
 /**
  * Loading contacts from backend
  */
 async function init() {
-  await downloadFromServer();
-  contacts = JSON.parse(backend.getItem("contacts")) || [];
+  await initGeneral();
   renderLetters();
   document.getElementById("sidebar_contact_mobile").classList.add("background-color");
   document.getElementById("sidebar_contact").classList.add("background-color");
-  getXLenght();
 }
 
 function showAddcontact() {
@@ -63,14 +55,14 @@ async function createContact() {
   let phone = document.getElementById("input_phone");
   let color = randomColor();
   let icon = getIcon(name.value);
-  contacts.push({
+  currentUser.contacts.push({
     name: name.value,
     email: email.value,
     phone: phone.value,
     iconcolor: color,
     icon: icon,
   });
-  await save();
+  await backend.setItem("users", JSON.stringify(users));
   clearInput();
   checkActionForBoardOrOtherPages();
   closeAddcontact();
@@ -106,14 +98,14 @@ function getIcon(name) {
 /**
  * Showing filtered contacts in contactbook
  */
-function showContacts(letter, i) {
-  sortContacts(contacts);
+function showContacts(letter) {
+  sortContacts();
   document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML = "";
-  for (let i = 0; i < contacts.length; i++) {
-    const contact = contacts[i];
+  for (let i = 0; i < currentUser.contacts.length; i++) {
+    const contact = currentUser.contacts[i];
     splittedName = contact.name.split(" ");
     if (contact.name.charAt(0).toUpperCase() == letter.charAt(0).toUpperCase()) {
-      document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML += showContactsHtml(contact, splittedName, i);
+      document.getElementById(`containerContact${letter.charAt(0)}`).innerHTML += showContactsHtml(contact, i);
       renderInitials(splittedName, i);
       findContact = true;
     }
@@ -143,12 +135,12 @@ function renderLetters() {
   for (let j = 0; j < letters.length; j++) {
     const letter = letters[j];
     findContact = false;
-    document.getElementById("contactsContainer").innerHTML += renderLettersHtml(letter, j);
+    document.getElementById("contactsContainer").innerHTML += renderLettersHtml(letter);
     showContacts(letter);
   }
 }
 
-function renderLettersHtml(letter, j) {
+function renderLettersHtml(letter) {
   return `
     <div id= "letterContainer${letter.charAt(0)}" class="container-filtered-contacts">
         <span class="letters">${letter}</span>
@@ -159,15 +151,15 @@ function renderLettersHtml(letter, j) {
 /**
  * Sort contacts from a-z
  */
-function sortContacts(contacts) {
-  contacts = contacts.sort((a, b) => {
+function sortContacts() {
+  currentUser.contacts.sort((a, b) => {
     let a1 = a.name.toLowerCase();
     let b1 = b.name.toLowerCase();
     return a1 < b1 ? -1 : a1 > b1 ? 1 : 0;
   });
 }
 
-function showContactsHtml(contact, splittedName, i) {
+function showContactsHtml(contact, i) {
   return `
     <div class="contact-card">
         <img onclick="openPopUp(${i})" class="contact-card-menu" src="./assets/img/ellipsis.png">
@@ -189,7 +181,7 @@ function showContactsHtml(contact, splittedName, i) {
 }
 
 function deleteContact(i) {
-  contacts.splice(i, 1);
+  currentUser.contacts.splice(i, 1);
   save();
 }
 
@@ -207,7 +199,7 @@ function closePopUp(i) {
 function showContact(i) {
   showContactMobile();
   document.getElementById("contactAreaBody").innerHTML = "";
-  let contact = contacts[i];
+  let contact = currentUser.contacts[i];
   let splittedName = contact.name.split(" ");
   document.getElementById("contactAreaBody").innerHTML = showContactHtml(contact, i);
   document.getElementById(`initialsBody${i}`).innerHTML = "";
@@ -283,7 +275,7 @@ function closeEditContact() {
 function openEditContact(i) {
   document.getElementById("editContact").classList.remove("d-none");
   document.getElementById("editContact").innerHTML = "";
-  let contact = contacts[i];
+  let contact = currentUser.contacts[i];
   let splittedName = contact.name.split(" ");
   document.getElementById("editContact").innerHTML = editContactHtml(contact, i);
   document.getElementById(`initialsedit${i}`).innerHTML = "";
@@ -333,7 +325,7 @@ function editContactHtml(contact, i) {
                             placeholder="Phone" />
                     </div>
                     <div class="container-button">
-                        <button onclick="saveChanges(${(contact, i)})" class="button-create">
+                        <button onclick="saveChanges(${contact})" class="button-create">
                             Save  
                         </button>
                     </div>
@@ -344,23 +336,15 @@ function editContactHtml(contact, i) {
 /**
  * Update contact
  */
-async function saveChanges(contact, i) {
+async function saveChanges(contact) {
   let newName = document.getElementById("input_name_edit");
   let newEmail = document.getElementById("input_email_edit");
   let newPhone = document.getElementById("input_phone_edit");
-  contacts[contact].name = newName.value;
-  contacts[contact].email = newEmail.value;
-  contacts[contact].phone = newPhone.value;
-  await save();
+  currentUser.contacts[contact].name = newName.value;
+  currentUser.contacts[contact].email = newEmail.value;
+  currentUser.contacts[contact].phone = newPhone.value;
+  await backend.setItem("users", JSON.stringify(users));
   closeEditContact();
-}
-
-/**
- * Saving to backend
- */
-async function save() {
-  await backend.setItem("contacts", JSON.stringify(contacts));
-  //window.location.href = "./contact.html";
 }
 
 function closeBoardPopup() {

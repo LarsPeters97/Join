@@ -67,7 +67,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .input-text-type {
-    padding: 13px 21px;
+    padding: 9px 21px;
     height: 51px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -98,12 +98,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dropdown-category {
-    height: 40px;
+    font-size: 21px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 13px 16px;
     background-color: white;
 }
 
@@ -122,22 +122,23 @@ body::-webkit-scrollbar-thumb {
 }
 
 .dropdown-category-new {
+    font-size: 21px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 13px 16px;
     background-color: white;
 }
 
 .dropdown-category-existing {
-    height: 40px;
+    font-size: 21px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 13px 16px;
     background-color: white;
 }
 
@@ -315,13 +316,6 @@ body::-webkit-scrollbar-thumb {
     margin-left: 12px;
 }
 
-.mistake-category-fields {
-    color: red;
-    font-size: 14px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
 .checkbox-style {
     width: 100%;
     justify-content: space-between;
@@ -348,7 +342,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .max-height-and-scroll {
-    max-height: 120px;
+    max-height: 153px;
     overflow: auto;
 }
 
@@ -438,6 +432,10 @@ body::-webkit-scrollbar-thumb {
 
     .desktop-clear-btn {
         display: none;
+    }
+
+    .logged-in-user-initials {
+        display: none !important;
     }
 }
 

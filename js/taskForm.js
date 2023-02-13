@@ -1,13 +1,4 @@
 /**
- * Gets contacts for further rendering
- */
-async function loadContactsforTasks() {
-  setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-  await downloadFromServer();
-  contacts = JSON.parse(backend.getItem("contacts")) || [];
-}
-
-/**
  * Renders the assigned users
  * @param {array} assignedTo Array of assigned persons
  */
@@ -27,8 +18,8 @@ function renderAssignedTo(assignedTo) {
  */
 function renderSubTasks(id) {
   document.getElementById("subtasks").innerHTML = ``;
-  for (let i = 0; i < tasklist[id]["subtasks"]["tasks"].length; i++) {
-    let subtask = tasklist[id]["subtasks"]["tasks"][i];
+  for (let i = 0; i < currentUser.tasks[id]["subtasks"]["tasks"].length; i++) {
+    let subtask = currentUser.tasks[id]["subtasks"]["tasks"][i];
     if (subtask["completed"] == false) {
       document.getElementById("subtasks").innerHTML += `
         <div class="subtask"><input type="checkbox" id="${i}" onchange="taskStatusChange(${i}, ${id})"><label for="${i}">${subtask["task"]}</label></div>
@@ -46,7 +37,7 @@ function renderSubTasks(id) {
  * @param {integer} id Id of selected task
  */
 async function renderEditTask(id) {
-  task = tasklist.filter((t) => t["id"] == id);
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   contactsForCurrentTask = task[0]["assignedTo"]["user"];
   let title = task[0]["title"];
   let description = task[0]["description"];
@@ -61,16 +52,10 @@ async function renderEditTask(id) {
   document.getElementById("titleinput").value = title;
   document.getElementById("descriptioninput").value = description;
   document.getElementById("due-date").value = duedate;
-  await loadContactsforTasks();
   loadSubtasks(subtasks, id);
   loadAssignetPersons();
-  getMinimumDate();
   selectPrio(priority);
   checkAndAddTOAssignedToContacts();
-}
-
-function getMinimumDate() {
-  document.getElementById("due-date").min = new Date().toISOString().split("T")[0];
 }
 
 /**
@@ -92,12 +77,12 @@ function loadSubtasks(subtasks, id) {
  */
 async function addNewSubask(id) {
   let newtask = document.getElementById("newsubtask").value;
-  tasklist[id]["subtasks"]["tasks"].push({ task: newtask, completed: false });
+  currentUser.tasks[id]["subtasks"]["tasks"].push({ task: newtask, completed: false });
   document.getElementById("newsubtask").value = "";
-  await saveBoard();
+  await backend.setItem("users", JSON.stringify(users));
   await setTimeout(loadAll, 100);
   renderBoard();
-  task = tasklist.filter((t) => t["id"] == id);
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   let subtasks = task[0]["subtasks"]["tasks"];
   loadSubtasks(subtasks, id);
 }
@@ -107,11 +92,11 @@ async function addNewSubask(id) {
  * @param {integer} index Index of selected subtask
  * @param {integer} id Id of selected task
  */
-function deleteSubtask(index, id) {
-  task = tasklist.filter((t) => t["id"] == id);
+async function deleteSubtask(index, id) {
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   task[0]["subtasks"]["tasks"].splice(index, 1);
   let subtasks = task[0]["subtasks"]["tasks"];
-  saveBoard();
+  await backend.setItem("users", JSON.stringify(users));
   loadAll();
   renderBoard();
   loadSubtasks(subtasks, id);
@@ -123,7 +108,7 @@ function deleteSubtask(index, id) {
  * @param {integer} id Id of selected task
  */
 function editSubtask(index, id) {
-  task = tasklist.filter((t) => t["id"] == id);
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   let subtask = task[0]["subtasks"]["tasks"][index];
   document.getElementById(`subtask${index}`).innerHTML = templateEditabelSubtaskInput(subtask["task"], index, id);
 }
@@ -135,8 +120,8 @@ function editSubtask(index, id) {
  */
 async function saveSubEdit(index, id) {
   newsubtask = document.getElementById(`subedit${index}`).value;
-  tasklist[id]["subtasks"]["tasks"][index]["task"] = newsubtask;
-  await saveBoard();
+  currentUser.tasks[id]["subtasks"]["tasks"][index]["task"] = newsubtask;
+  await backend.setItem("users", JSON.stringify(users));
   setTimeout(loadAll, 100);
   renderBoard();
   document.getElementById(`subtask${index}`).innerHTML = `
@@ -154,7 +139,7 @@ async function saveSubEdit(index, id) {
  * @param {integer} id Id of selected task
  */
 function cancelSubEdit(index, id) {
-  task = tasklist.filter((t) => t["id"] == id);
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   let subtask = task[0]["subtasks"]["tasks"][index];
   document.getElementById(`subtask${index}`).innerHTML = `
     <div><p>${subtask["task"]}</p></div>
@@ -171,12 +156,12 @@ function cancelSubEdit(index, id) {
  * @param {integer} id Id of selected task
  */
 async function taskStatusChange(task, id) {
-  if (tasklist[id]["subtasks"]["tasks"][task]["completed"] == true) {
-    tasklist[id]["subtasks"]["tasks"][task]["completed"] = false;
+  if (currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] == true) {
+    currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] = false;
   } else {
-    tasklist[id]["subtasks"]["tasks"][task]["completed"] = true;
+    currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] = true;
   }
-  await saveBoard();
+  await backend.setItem("users", JSON.stringify(users));
   renderSubTasks(id);
   setTimeout(await initBoard, 50);
 }
@@ -244,8 +229,8 @@ function loadAssignetPersons() {
  */
 
 function checkAndAddTOAssignedToContacts() {
-  for (let a = 0; a < contacts.length; a++) {
-    let contact = contacts[a];
+  for (let a = 0; a < currentUser.contacts.length; a++) {
+    let contact = currentUser.contacts[a];
     if (contactsForCurrentTask[0]["name"] === contact["name"]) {
       assignedToContacts.push(a);
     }
@@ -261,31 +246,6 @@ function checkAndAddTOAssignedToContacts() {
 function isValueInArray(a, assignedToContacts) {
   return assignedToContacts.includes(a);
 }
-
-// /**
-//  * Renders the open dropdown-menu for assigning contacts
-//  * @param {integer} id Id of selected task
-//  */
-// function openDropdownAssignTo(id) {
-//   task = tasklist.filter((t) => t["id"] == id);
-//   document.getElementById("existing-contacts").innerHTML = templateOfOpenDropdownAssignTo(id);
-//   for (let i = 0; i < contacts.length; i++) {
-//     let contact = contacts[i];
-//     if (checkOnAssignedContacts(contact) != false) {
-//       document.getElementById("existing-contacts").innerHTML += templateAssignedContact(i, contact["name"], contact["icon"], contact["iconcolor"], id);
-//     } else {
-//       document.getElementById("existing-contacts").innerHTML += templateNotAssignedContact(i, contact["name"], contact["icon"], contact["iconcolor"], id);
-//     }
-//   }
-//   for (let j = 0; j < assignetContacts.length; j++) {
-//     let contact = assignetContacts[j];
-//     if (checkOnContact(contact) == false) {
-//       let index = j + contacts.length;
-//       document.getElementById("existing-contacts").innerHTML += templateAssignedContact(index, contact["name"], contact["icon"], contact["iconcolor"], id);
-//     }
-//   }
-//   document.getElementById("existing-contacts").innerHTML += templateInviteContact(id);
-// }
 
 /**
  * Changes the assign-status of selected contact
@@ -388,12 +348,12 @@ async function editTask(id) {
   checkAssigned();
   if (formValidation) {
     assignedToContactsForCurrentTask();
-    tasklist[id]["title"] = taskInputTitle;
-    tasklist[id]["description"] = description;
-    tasklist[id]["assignedTo"]["user"] = contactsForCurrentTask;
-    tasklist[id]["duedate"] = date;
-    tasklist[id]["priority"] = selectedPrio;
-    await saveBoard();
+    currentUser.tasks[id]["title"] = taskInputTitle;
+    currentUser.tasks[id]["description"] = description;
+    currentUser.tasks[id]["assignedTo"]["user"] = contactsForCurrentTask;
+    currentUser.tasks[id]["duedate"] = date;
+    currentUser.tasks[id]["priority"] = selectedPrio;
+    await backend.setItem("users", JSON.stringify(users));
     setTimeout(await initBoard, 100);
     closeBoardPopup();
     setBack();

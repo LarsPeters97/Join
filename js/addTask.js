@@ -1,26 +1,12 @@
 /**
- * Saves the categories on the local storage with the key 'task-category'. When add.task.html is loaded the categories are
- * assigned to the selectedTaskValues array.
+ * Loads the JSON stored in the backend. Checks the currentUser and renders the Prio Buttons.
  */
 
 async function initialize() {
-  let categoriesasString = JSON.stringify(categories);
-  localStorage.setItem("task-category", categoriesasString);
-  selectedTaskValues = JSON.parse(localStorage.getItem("task-category"));
+  await initGeneral();
+  checkCurrentUserTasks();
   renderPrioButtonsSection();
-  category = (await JSON.parse(backend.getItem("category"))) || [];
   setTimeout(addTaskPage, 500);
-  getMinDate();
-  loadContacts();
-}
-
-/**
- * Gets "contacts" from the server
- */
-async function loadContacts() {
-  setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-  await downloadFromServer();
-  contacts = JSON.parse(backend.getItem("contacts")) || [];
 }
 
 /**
@@ -37,9 +23,6 @@ function addTaskPage() {
   }
 }
 
-function getMinDate() {
-  document.getElementById("due-date").min = new Date().toISOString().split("T")[0];
-}
 /**
  * Checks if the category-container is open or not. It is checked with the classList.contains method. When it is open
  * and the user clicks, the if statement notes that the class List ist not been added, through which the else state is executed.
@@ -58,8 +41,8 @@ function checkIfCategoryContainerOpen() {
 function openNewCategoryAndExistingCategories() {
   let existingCategories = document.getElementById("existing-categories");
   existingCategories.innerHTML = "";
-  for (let i = 0; i < selectedTaskValues.length; i++) {
-    let category = selectedTaskValues[i];
+  for (let i = 0; i < currentUser.categories.length; i++) {
+    let category = currentUser.categories[i];
     existingCategories.innerHTML += templateExistingCategories(i, category);
   }
   removeClassDnone("new-category");
@@ -86,8 +69,8 @@ function selectedCategory(i) {
  */
 
 function selectedCategoryVariables(i) {
-  newCategoryName = selectedTaskValues[i]["name"];
-  selectedCategoryColor = selectedTaskValues[i]["color"];
+  newCategoryName = currentUser.categories[i]["name"];
+  selectedCategoryColor = currentUser.categories[i]["color"];
 }
 
 /**
@@ -148,13 +131,12 @@ function addNewCategory() {
  * A new category is pushed in the array selectedTaskValues and the just now created category gets filled in the Category field.
  */
 
-function whenCategoryNameAndColorAreSelected() {
-  selectedTaskValues.push({
+async function whenCategoryNameAndColorAreSelected() {
+  currentUser.categories.push({
     name: newCategoryName,
     color: selectedCategoryColor,
   });
-  let TaskValuesAsString = JSON.stringify(selectedTaskValues);
-  localStorage.setItem("task-category", TaskValuesAsString);
+  await backend.setItem("users", JSON.stringify(users));
   document.getElementById("category-container").innerHTML = templateNewSelectedCategory();
   document.getElementById("categories-for-colors").innerHTML = "";
   document.getElementById("categories-for-colors").classList.remove("colors");
@@ -198,8 +180,8 @@ function openExistingContacts() {
   removeClassDnone("existing-contacts");
   let existingContacts = document.getElementById("existing-contacts");
   existingContacts.innerHTML = "";
-  for (let i = 0; i < contacts.length; i++) {
-    let contact = contacts[i];
+  for (let i = 0; i < currentUser.contacts.length; i++) {
+    let contact = currentUser.contacts[i];
     let findIndex = assignedToContacts.indexOf(i);
     if (assignedToContactIsInArray(findIndex)) existingContacts.innerHTML += templateExistingContactsChecked(i, contact);
     else existingContacts.innerHTML += templateExistingContacts(i, contact);
@@ -223,7 +205,7 @@ function assignNewPerson() {
  */
 
 function renderAssignedToCurrentTaskIcons() {
-  let currentPushedContactIndex = contacts.length - 1;
+  let currentPushedContactIndex = currentUser.contacts.length - 1;
   addAssignedToIcon(currentPushedContactIndex);
   renderAssignedToIconsSection();
 }
@@ -282,7 +264,7 @@ function assignedToContactsForCurrentTask() {
   contactsForCurrentTask = [];
   for (let i = 0; i < assignedToContacts.length; i++) {
     let contactNumber = assignedToContacts[i];
-    contactsForCurrentTask.push(contacts[contactNumber]);
+    contactsForCurrentTask.push(currentUser.contacts[contactNumber]);
   }
 }
 

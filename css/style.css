@@ -6,7 +6,7 @@ body {
 
 body::-webkit-scrollbar {
     width: 10px;
-    background-color:lightgrey;
+    background-color: lightgrey;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -27,7 +27,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
 }
 
-.wrong-password{
+.wrong-password {
     color: red;
     margin: -10px 0px;
     font-size: 12px;
@@ -42,7 +42,7 @@ body::-webkit-scrollbar-thumb {
     height: 80px;
 }
 
-.img-password{
+.img-password {
     position: absolute;
     top: 13px;
     right: 10px;
@@ -179,7 +179,7 @@ body::-webkit-scrollbar-thumb {
     background: #ffffff;
     border: 1px solid #d1d1d1;
     border-radius: 10px;
-   /* background-image: url("./assets/img/password_icon.png");*/
+    /* background-image: url("./assets/img/password_icon.png");*/
     background-repeat: no-repeat;
     background-position: 390px 16px;
     margin-bottom: 15px;
@@ -315,6 +315,13 @@ input[type="checkbox"] {
     background-color: rgb(224, 224, 224);
 }
 
+.mistake-category-fields {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
 @media (max-width: 1000px) {
     .header_startscreen_left {
         padding-right: 60px;
@@ -331,7 +338,7 @@ input[type="checkbox"] {
         margin-bottom: 40px;
     }
 
-    .img-password{
+    .img-password {
         top: 8px;
     }
 
@@ -364,6 +371,7 @@ input[type="checkbox"] {
         gap: 0px;
         align-items: flex-start;
     }
+
     .forgot_password {
         margin: 0px;
     }
@@ -377,15 +385,18 @@ input[type="checkbox"] {
     .login_button {
         padding: 15.5px 44px;
     }
-    .login_form{
+
+    .login_form {
         margin-top: 10px;
         padding: 17px 13px;
     }
+
     .logo_login_page {
         top: 20px;
         left: 30px;
     }
-    .login_form h2{
+
+    .login_form h2 {
         margin-top: 15px;
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -395,21 +406,21 @@ input[type="checkbox"] {
         font-size: 40px !important;
         line-height: normal !important;
         text-align: center;
-        margin-bottom: 38px!important;
+        margin-bottom: 38px !important;
     }
 
 }
 
-@media(max-height:700px){
+@media(max-height:700px) {
     .header_startscreen_left {
         margin-bottom: 20px;
     }
-    
+
 
 }
 
-@media (max-width:390px){
-    .header-reset{
+@media (max-width:390px) {
+    .header-reset {
         font-size: 50px !important;
     }
 }

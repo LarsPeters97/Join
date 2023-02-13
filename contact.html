@@ -1,57 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Join - Contacts</title>
-        <script src="./miniBackend.js"></script>
-        <link rel="stylesheet" href="./css/style.css" />
-        <script src="./script.js"></script>
-        <link rel="stylesheet" href="./assets/templates/desktop_template.css" />
-        <link rel="stylesheet" href="./css/contact.css" />
-        <script src="./js/contacts.js"></script>
-        <script src="./js/desktopTemplate.js"></script>
-        <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
-        <script src="./js/mobileTemplate.js"></script>
-        <link rel="stylesheet" href="./assets/templates/addTaskPopup.css" />
-        <script src="./js/addTaskPopup.js"></script>
-        <script src="./js/addTaskPopupTemplate.js"></script>
-        <script src="./js/contactTemplate.js"></script>
-        <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon" />
-    </head>
-    <body onload="init(), includeHTML()">
-        <div w3-include-html="./assets/templates/desktop_template.html"></div>
-        <div w3-include-html="./assets/templates/mobile_template.html"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Contacts</title>
+    <script src="./miniBackend.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="./assets/templates/desktop_template.css" />
+    <link rel="stylesheet" href="./css/contact.css" />
+    <script src="./js/contacts.js"></script>
+    <script src="./js/desktopTemplate.js"></script>
+    <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
+    <script src="./js/mobileTemplate.js"></script>
+    <link rel="stylesheet" href="./assets/templates/addTaskPopup.css" />
+    <script src="./js/addTaskPopupTemplate.js"></script>
+    <script src="./js/contactTemplate.js"></script>
+    <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon" />
+  </head>
+  <body onload="init(), includeHTML()">
+    <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
 
-        <div class="wrapper">
-            <div id="contactsContainer" class="container-contacts"></div>
+    <div class="wrapper">
+      <div id="contactsContainer" class="container-contacts"></div>
 
-            <div id="addcontactMobile" class="container-button-mobile">
-                <button onclick="showAddcontact()" class="button-addcontact-mobile">
-                    <p>New contact</p>
-                    <img src="./assets/img/logo-addcontact.png" alt="" />
-                </button>
-            </div>
+      <div id="addcontactMobile" class="container-button-mobile">
+        <button onclick="showAddcontact()" class="button-addcontact-mobile">
+          <p>New contact</p>
+          <img src="./assets/img/logo-addcontact.png" alt="" />
+        </button>
+      </div>
 
-            <div id="contact" class="container-contactarea d-none-mobile">
-                <div class="header-contacts">
-                    <h1>Contacts</h1>
-                    <div class="horizontal-line"></div>
-                    <p>Better with a team</p>
-                </div>
-                <div class="contactarea-body" id="contactAreaBody"></div>
-                <button onclick="showAddcontact()" class="button-addcontact">
-                    <p>New contact</p>
-                    <img src="./assets/img/logo-addcontact.png" alt="" />
-                </button>
-                <img onclick="closeContact()" class="close-contact-mobile" src="./assets/img/arrow_left.png" />
-            </div>
+      <div id="contact" class="container-contactarea d-none-mobile">
+        <div class="header-contacts">
+          <h1>Contacts</h1>
+          <div class="horizontal-line"></div>
+          <p>Better with a team</p>
         </div>
-            <div id="add-contact-section"></div>
+        <div class="contactarea-body" id="contactAreaBody"></div>
+        <button onclick="showAddcontact()" class="button-addcontact">
+          <p>New contact</p>
+          <img src="./assets/img/logo-addcontact.png" alt="" />
+        </button>
+        <img onclick="closeContact()" class="close-contact-mobile" src="./assets/img/arrow_left.png" />
+      </div>
+    </div>
+    <div id="add-contact-section"></div>
 
-        <div id="Boardpopup" class="container-addtask d-none">
-            <div w3-include-html="./assets/templates/add_task_popup.html"></div>
-        </div>
-    </body>
+    <div id="Boardpopup" class="container-addtask d-none"> </div>
+  </body>
 </html>

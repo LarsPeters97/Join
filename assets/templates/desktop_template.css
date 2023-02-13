@@ -34,11 +34,11 @@
   align-items: center;
   padding: 0px;
   gap: 26px;
-  width: 106px;
+  width: 120px;
   height: 49px;
 }
 
-.header_left_side a{
+.header_left_side a {
   text-decoration: unset;
 }
 
@@ -46,6 +46,7 @@
   width: 31px;
   height: 31px;
 }
+
 
 .profile-img {
   width: 49px;
@@ -58,7 +59,23 @@
   background-color: #e4e6e7;
 }
 
-.wrapper-logout{
+.logged-in-user-initials {
+  width: 60px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  border: 3px solid #2a3647;
+  border-radius: 180px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  font-weight: 600;
+  color: white;
+}
+
+.wrapper-logout {
   position: fixed;
   top: 0;
   left: 0;
@@ -67,7 +84,7 @@
   z-index: 1002;
 }
 
-.logout-popup{
+.logout-popup {
   position: absolute;
   top: 90px;
   background-color: #091931;
@@ -80,9 +97,16 @@
   right: 30px;
 }
 
-.logout-popup a{
+.logout {
   text-decoration: none;
-  padding: 16px 32px ;
+  margin: 4px 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-popup a {
+  text-decoration: none;
+  padding: 16px 32px;
   color: white;
   cursor: pointer;
 }
@@ -152,7 +176,7 @@
 
 }
 
-.sidebar_menu a{
+.sidebar_menu a {
   position: absolute;
   top: 0;
   left: 0;
@@ -160,8 +184,8 @@
   bottom: 0;
 }
 
-.sidebar_menu:hover{
-    background: #091931;
+.sidebar_menu:hover {
+  background: #091931;
 }
 
 .sidebar_menu img {
@@ -193,7 +217,7 @@
   margin-top: 100px;
 }
 
-.legalnotice a{
+.legalnotice a {
   position: absolute;
   top: 0;
   left: 0;
@@ -201,8 +225,8 @@
   bottom: 0;
 }
 
-.legalnotice:hover{
-    background: #091931;
+.legalnotice:hover {
+  background: #091931;
 }
 
 .legalnotice img {
@@ -210,31 +234,31 @@
   height: 18px;
 }
 
-.legalnotice span{
-    width: 94px;
-    height: 17px; 
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;  
-    color: #CDCDCD;
-    cursor: pointer;
-    text-decoration: none;
+.legalnotice span {
+  width: 94px;
+  height: 17px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #CDCDCD;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .header_left_side a:hover {
   opacity: 0.7;
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width:1050px) {
 
-  .wrapper_sidebar{
+  .wrapper_sidebar {
     display: none;
   }
 
-.header{
-  display: none;
-}
-  
+  .header {
+    display: none;
+  }
+
 }

@@ -1,9 +1,7 @@
 {
-    "editor.formatOnSave": true,
-    
-"prettier.proseWrap": "never",
-"prettier.bracketSameLine": true,
-"prettier.htmlWhitespaceSensitivity": "strict",
-    
+  "editor.formatOnSave": true,
+  "prettier.bracketSameLine": true,
+  "prettier.htmlWhitespaceSensitivity": "strict",
+  "prettier.printWidth": 180,
+  "prettier.proseWrap": "never"
 }
-

@@ -1,55 +1,52 @@
-
-    <div class="wrapper" id="wrapper">
-      <div class="header">
-        <p class="Kanban_headline">Kanban Project Management Tool</p>
-        <div class="header_left_side">
-          <a href="./info.html">
-          <img class="help-icon" src="assets/img/help-icon.png" alt="" />
-        </a>
-          <img onclick="showLogout()" class="profile-img" src="assets/img/profile-img.png" id="profile-img" />
+<div class="wrapper" id="wrapper">
+  <div class="header">
+    <p class="Kanban_headline">Kanban Project Management Tool</p>
+    <div class="header_left_side">
+      <a href="./info.html">
+        <img class="help-icon" src="assets/img/help-icon.png" alt="" />
+      </a>
+      <span id="logged-in-user-initials" class="logged-in-user-initials" onclick="showLogout()"></span>
+    </div>
+  </div>
+  <div class="wrapper_sidebar">
+    <div class="sidebar">
+      <img class="logo" src="assets/img/Logo.png" alt="" />
+      <div>
+        <div class="sidebar_menu_container">
+          <div id="sidebar_summary" class="sidebar_menu">
+            <img src="assets/img/summary-icon.png" alt="" />
+            <span>Summary</span>
+            <a href="./summary.html"></a>
+          </div>
+          <div id="sidebar_board" class="sidebar_menu">
+            <img src="assets/img/board-icon.png" alt="" />
+            <span>Board</span>
+            <a href="./board.html"></a>
+          </div>
+          <div id="sidebar_addtask" class="sidebar_menu">
+            <img src="assets/img/addtask-icon.png" alt="" />
+            <span>Add Task</span>
+            <a href="./add_task.html"></a>
+          </div>
+          <div id="sidebar_contact" class="sidebar_menu">
+            <img src="assets/img/contact-icon.png" alt="" />
+            <span>Contacts</span>
+            <a href="./contact.html"></a>
+          </div>
         </div>
-       
-      </div>
-      <div class="wrapper_sidebar">
-        <div class="sidebar">
-          <img class="logo" src="assets/img/Logo.png" alt="" />
-          <div>
-            <div class="sidebar_menu_container">
-              <div id="sidebar_summary" class="sidebar_menu">
-                <img src="assets/img/summary-icon.png" alt="" />
-                <span>Summary</span>
-                <a href="./summary.html"></a>
-              </div>
-              <div id="sidebar_board" class="sidebar_menu">
-                <img src="assets/img/board-icon.png" alt="" />
-                <span>Board</span>
-                <a href="./board.html"></a>
-              </div>
-              <div id="sidebar_addtask" class="sidebar_menu">
-                <img src="assets/img/addtask-icon.png" alt="" />
-                <span>Add Task</span>
-                <a href="./add_task.html"></a>
-              </div>
-              <div id="sidebar_contact" class="sidebar_menu">
-                <img src="assets/img/contact-icon.png" alt="" />
-                <span>Contacts</span>
-                <a href="./contact.html"></a>
-              </div>
-            </div>
-            <div class="sidebar_part3">
-                <div id="sidebar_legal" class="legalnotice">
-                    <img src="assets/img/legalnotice-icon.png" alt="">
-                    <span>Legal notice</span>
-                    <a href="./legalnotice.html"></a>
-                </div>
-            </div>
+        <div class="sidebar_part3">
+          <div id="sidebar_legal" class="legalnotice">
+            <img src="assets/img/legalnotice-icon.png" alt="" />
+            <span>Legal notice</span>
+            <a href="./legalnotice.html"></a>
           </div>
         </div>
       </div>
     </div>
-    <div id="popUp" onclick="closeHeaderPopup()" class="wrapper-logout d-none">
-      <div onclick="notClose(event)" class="logout-popup">
-        <a href="./index.html">Log out</a>
-      </div>
-    </div>
-
+  </div>
+</div>
+<div id="popUp" onclick="closeHeaderPopup()" class="wrapper-logout d-none">
+  <div onclick="notClose(event)" class="logout-popup">
+    <span class="logout" onclick="logout()">Log out</span>
+  </div>
+</div>

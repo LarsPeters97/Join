@@ -5,9 +5,9 @@
  */
 
 function templateExistingCategories(i, category) {
-    return /*html*/`
+  return /*html*/ `
     <div class="dropdown-category-existing select-bg-color" onclick="selectedCategory(${i})">
-        <span class="flex">${category['name']}<span class="dot margin-color" style="background-color: ${category['color']}"></span></span>        
+        <span class="flex">${category["name"]}<span class="dot margin-color" style="background-color: ${category["color"]}"></span></span>        
     </div>`;
 }
 
@@ -16,7 +16,7 @@ function templateExistingCategories(i, category) {
  */
 
 function templateSelectedCategory() {
-    return /*html*/`
+  return /*html*/ `
     <div class="flex input-section" onclick="reOpenExistigCategorys()">
         <span class="flex" id="dropdown-category">${newCategoryName} 
         <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
@@ -25,12 +25,12 @@ function templateSelectedCategory() {
 }
 
 /**
- * 
+ *
  * @returns the input field to create a new Category.
  */
 
 function templateCreateNewCategory() {
-    return /*html*/`
+  return /*html*/ `
     <input class="input-category-contact" type="text" placeholder="New Category Name" min="3" maxlength="32" required id="new-category-name">
     <div class="flex delete-and-create-icons-section">
         <img src="./assets/img/false-x.png" class="false-x" onclick="removeCategoryInput()"> | 
@@ -43,7 +43,7 @@ function templateCreateNewCategory() {
  */
 
 function templateOriginalCategoryField() {
-    return /*html*/`
+  return /*html*/ `
     <div class="flex input-section" id="input-section" onclick="checkIfCategoryContainerOpen()">
     <span class="flex" id="dropdown-category">Select task category</span>
     <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
@@ -51,14 +51,14 @@ function templateOriginalCategoryField() {
 }
 
 /**
- * 
+ *
  * @param {number} colorIndex is the selected Color Number frm the Array categoryColors
  * @param {string} categoryColor is the string of the hex color code on the current iteration
  * @returns all the colors from the Array categoryColors so one can be selected
  */
 
 function templateColorsForNewCategory(colorIndex, categoryColor) {
-    return /*html*/`
+  return /*html*/ `
     <span class="all-colors" style="background-color: ${categoryColor}" 
     id="selected-color-${colorIndex}" onclick="addNewCategoryColor('${categoryColor}', ${colorIndex})"></span>`;
 }
@@ -68,7 +68,7 @@ function templateColorsForNewCategory(colorIndex, categoryColor) {
  */
 
 function templateNewSelectedCategory() {
-    return /*html*/`
+  return /*html*/ `
     <div class="flex input-section" onclick="reOpenExistigCategorys()"><span class="flex" id="dropdown-category">${newCategoryName} 
         <span class="dot margin-color" style="background-color: ${selectedCategoryColor}"></span></span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">`;
@@ -81,10 +81,10 @@ function templateNewSelectedCategory() {
  */
 
 function templateExistingContactsChecked(i, contact) {
-    return /*html*/`
+  return /*html*/ `
 
         <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
-                    <span>${contact['name']}</span>
+                    <span>${contact["name"]}</span>
                     <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox" checked
                     onclick="checkAssignedToIcons(${i})">
             </label>      
@@ -98,10 +98,10 @@ function templateExistingContactsChecked(i, contact) {
  */
 
 function templateExistingContacts(i, contact) {
-    return /*html*/`
+  return /*html*/ `
 
         <label for="checkbox${i}" class="flex checkbox-style dropdown-category-existing select-bg-color flex">    
-                    <span>${contact['name']}</span>
+                    <span>${contact["name"]}</span>
                     <input value="${i}" id="checkbox${i}" type="checkbox" name="checkbox"
                     onclick="checkAssignedToIcons(${i})">
             </label>      
@@ -109,12 +109,12 @@ function templateExistingContacts(i, contact) {
 }
 
 /**
- * 
+ *
  * @returns the new contact field.
  */
 
 function templateInvitePerson() {
-    return /*html*/`
+  return /*html*/ `
     <div class="flex checkbox-style dropdown-category-existing select-bg-color flex" onclick="assignNewPerson()">
         <span>Invite new contact</span>
         <img src="./assets/img/invite-contact.png">
@@ -127,37 +127,35 @@ function templateInvitePerson() {
  */
 
 function templateExitNewPerson() {
-    document.getElementById('contact-container').innerHTML = 
-    /*html*/`
+  document.getElementById("contact-container").innerHTML = /*html*/ `
     <div class="flex input-section" onclick="checkIfAssignedToIsOpen()" id="assigned-contacts">
         <span class="flex">Select contacts to assign</span>
         <img class="dropdown-img" src="./assets/img/vector-2.png" alt="klick">
     </div>`;
 }
 
-
 /**
- * 
+ *
  * @param {number} assignedToIndex is the number of the position in the contact array
  * @returns the icons that are in the array assignedToContacts.
  */
 
 function templateAssignedToContactIcons(assignedToIndex) {
-    return /*html*/`
-    <div class="round-icon-name icons-add-task" style="background-color: ${contacts[assignedToIndex]['iconcolor']}">
-    ${contacts[assignedToIndex]['icon']}</div>`;
+  return /*html*/ `
+    <div class="round-icon-name icons-add-task" style="background-color: ${currentUser.contacts[assignedToIndex]["iconcolor"]}">
+    ${currentUser.contacts[assignedToIndex]["icon"]}</div>`;
 }
 
 /**
- * 
- * @param {number} i is the current iteration of the array priorities 
+ *
+ * @param {number} i is the current iteration of the array priorities
  * @returns the priority buttons.
  */
 
 function templatePrioButtonsSection(i) {
-    return /*html*/`
-     <button id="${priorities[i]['name']}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]['name']} 
-     <img src="${priorities[i]['image']}" id="img-${i}"></button>`;
+  return /*html*/ `
+     <button id="${priorities[i]["name"]}" type="button" class="prio-btns" onclick="selectedPriority(${i})">${priorities[i]["name"]} 
+     <img src="${priorities[i]["image"]}" id="img-${i}"></button>`;
 }
 
 /**
@@ -167,7 +165,7 @@ function templatePrioButtonsSection(i) {
  */
 
 function templateRenderSubtasksNotCompleted(taskElement, i) {
-    return /*html*/`
+  return /*html*/ `
         <div class="flex"> 
             <label for="checkbox-${i}" class="flex margin-checkbox">
                 <input type="checkbox" id="checkbox-${i}" class="input-subtask" onclick="changeCurrentCompleteStatus(${i})">
@@ -178,14 +176,13 @@ function templateRenderSubtasksNotCompleted(taskElement, i) {
 }
 
 /**
- * 
  * @param {object} taskElement is in the array subtasksForCurrenttask on at the position i.
  * @param {number} i is the position in the array subtasksForCurrenttask for the current iteration.
  * @returns the checked subtasks.
  */
 
 function templateRenderSubtasksWhichAreCompleted(taskElement, i) {
-    return /*html*/`
+  return /*html*/ `
     <div class="flex"> 
             <label for="checkbox-${i}" class="flex margin-checkbox">
                 <input onclick="changeCurrentCompleteStatus(${i})" type="checkbox" id="checkbox-${i}" class="input-subtask" checked>

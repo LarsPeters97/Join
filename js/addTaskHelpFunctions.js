@@ -3,7 +3,7 @@
  */
 
 function showClearImgLightBlue() {
-    document.getElementById('clear-img').src = './assets/img/clear-x-light-blue.svg';
+  document.getElementById("clear-img").src = "./assets/img/clear-x-light-blue.svg";
 }
 
 /**
@@ -11,7 +11,7 @@ function showClearImgLightBlue() {
  */
 
 function showClearImgDarkBlue() {
-    document.getElementById('clear-img').src = './assets/img/clear-x.svg';
+  document.getElementById("clear-img").src = "./assets/img/clear-x.svg";
 }
 
 /**
@@ -20,20 +20,20 @@ function showClearImgDarkBlue() {
  */
 
 function closeNewCategoryAndExistingCategories() {
-    addClassDnone('existing-categories');
-    addClassDnone('new-category');
+  addClassDnone("existing-categories");
+  addClassDnone("new-category");
 }
 
 /**
- * If the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field 
+ * If the input field is set for a new category and the x is clicked, this function removes the input and sets the Categor field
  * to its original version.
  */
 
 function removeCategoryInput() {
-    document.getElementById('categories-for-colors').classList.remove('colors');
-    document.getElementById('mistake-category-fields').innerHTML = '';
-    document.getElementById('categories-for-colors').innerHTML = '';
-    document.getElementById('category-container').innerHTML = templateOriginalCategoryField();
+  document.getElementById("categories-for-colors").classList.remove("colors");
+  document.getElementById("mistake-category-fields").innerHTML = "";
+  document.getElementById("categories-for-colors").innerHTML = "";
+  document.getElementById("category-container").innerHTML = templateOriginalCategoryField();
 }
 
 /**
@@ -41,9 +41,9 @@ function removeCategoryInput() {
  */
 
 function changeSubtaskInputField() {
-    addClassDnone('subtask-before');
-    removeClassDnone('subtask-after');
-    focusOnField('input-subtask-area');
+  addClassDnone("subtask-before");
+  removeClassDnone("subtask-after");
+  focusOnField("input-subtask-area");
 }
 
 /**
@@ -52,7 +52,7 @@ function changeSubtaskInputField() {
  */
 
 function focusOnField(idElement) {
-    document.getElementById(idElement).focus();
+  document.getElementById(idElement).focus();
 }
 
 /**
@@ -60,10 +60,10 @@ function focusOnField(idElement) {
  */
 
 function closeSubtaskInputField() {
-    removeClassDnone('subtask-before');
-    addClassDnone('subtask-after');
-    document.getElementById('subtask-to-short').innerHTML = '';
-    document.getElementById('input-subtask-area').value = '';
+  removeClassDnone("subtask-before");
+  addClassDnone("subtask-after");
+  document.getElementById("subtask-to-short").innerHTML = "";
+  document.getElementById("input-subtask-area").value = "";
 }
 
 /**
@@ -71,10 +71,10 @@ function closeSubtaskInputField() {
  */
 
 function deleteInputandTextareaValues() {
-    document.getElementById('input-title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('due-date').value = '';
-    document.getElementById('input-subtask-area').value = '';
+  document.getElementById("input-title").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("due-date").value = "";
+  document.getElementById("input-subtask-area").value = "";
 }
 
 /**
@@ -82,18 +82,7 @@ function deleteInputandTextareaValues() {
  */
 
 function getIdFromTasklist() {
-    taskid = tasklist.length
-}
-
-/**
- * All tasks already created are loaded from the server to get the id number for the currentTask with the function getIdFromTasklist.
- */
-
-async function loadTasklistForId() {
-    setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-    await downloadFromServer();
-    tasklist = JSON.parse(backend.getItem("tasklist")) || [];
-    getIdFromTasklist();
+  taskid = currentUser.tasks.length;
 }
 
 /**
@@ -101,7 +90,7 @@ async function loadTasklistForId() {
  */
 
 function redirectToBoardPage() {
-    window.location.href = "./board.html";
+  window.location.href = "./board.html";
 }
 
 /**
@@ -110,7 +99,7 @@ function redirectToBoardPage() {
  */
 
 function removeClassDnone(idElement) {
-    document.getElementById(idElement).classList.remove('d-none');
+  document.getElementById(idElement).classList.remove("d-none");
 }
 
 /**
@@ -119,5 +108,25 @@ function removeClassDnone(idElement) {
  */
 
 function addClassDnone(idElement) {
-    document.getElementById(idElement).classList.add('d-none');
+  document.getElementById(idElement).classList.add("d-none");
+}
+
+/**
+ * closes the popup and clears the arrays
+ */
+function closePopup() {
+  clearTask();
+  closeBoardPopup();
+}
+
+/**
+ * When the width of the screen is under 750px, the popup addTaskPopup gets closed.
+ */
+
+function checkIfPopupShouldBeClosed() {
+  if (window.innerWidth < 750) {
+    return;
+  } else {
+    closePopup();
+  }
 }

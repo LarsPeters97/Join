@@ -15,7 +15,8 @@ let searchDoneTasks = [];
  * Initialazing of the board
  */
 async function initBoard() {
-  await loadAll();
+  await initGeneral();
+  loadAll();
   renderBoard();
   setTimeout(boardPage, 500);
 }
@@ -26,10 +27,9 @@ function boardPage() {
 }
 
 /**
- * Loads Tasklist and sorts on progress
+ * Loads tasks an order them in the progress categories.
  */
-async function loadAll() {
-  await loadTasklist();
+function loadAll() {
   loadTodos();
   loadInProgress();
   loadAwaitFeedback();
@@ -37,57 +37,40 @@ async function loadAll() {
 }
 
 /**
- * Saves changes to backend
- */
-function saveBoard() {
-  let tasklistAsString = JSON.stringify(tasklist);
-  backend.setItem("tasklist", tasklistAsString);
-}
-
-/**
- * Gets tasklist from server
- */
-async function loadTasklist() {
-  setURL("https://lars-peters.developerakademie.net/smallest_backend_ever");
-  await downloadFromServer();
-  tasklist = JSON.parse(backend.getItem("tasklist")) || [];
-}
-
-/**
  * Filters for progress "todo"
  */
 function loadTodos() {
-  todos = tasklist.filter((t) => t["progress"] == "todo");
+  todos = currentUser.tasks.filter((t) => t["progress"] == "todo");
 }
 
 /**
  * Filters for progress "in progress"
  */
 function loadInProgress() {
-  inProgress = tasklist.filter((t) => t["progress"] == "inprogresss");
+  inProgress = currentUser.tasks.filter((t) => t["progress"] == "inprogress");
 }
 
 /**
  * Filters for progress "awaiting feedback"
  */
 function loadAwaitFeedback() {
-  awaitFeedback = tasklist.filter((t) => t["progress"] == "awaitfeedback");
+  awaitFeedback = currentUser.tasks.filter((t) => t["progress"] == "awaitfeedback");
 }
 
 /**
  * Filters for progress "done task"
  */
 function loadDoneTasks() {
-  doneTasks = tasklist.filter((t) => t["progress"] == "donetask");
+  doneTasks = currentUser.tasks.filter((t) => t["progress"] == "donetask");
 }
 
 /**
- * Loads the render funktions
+ * Loads the render functions.
  */
 function renderBoard() {
-  renderTodos("toDos", "todo", todos, "inprogresss", "todo");
-  renderTodos("inProgress", "inprogresss", inProgress, "awaitfeedback", "todo");
-  renderTodos("awaitingFeedback", "awaitfeedback", awaitFeedback, "donetask", "inprogresss");
+  renderTodos("toDos", "todo", todos, "inprogress", "todo");
+  renderTodos("inProgress", "inprogress", inProgress, "awaitfeedback", "todo");
+  renderTodos("awaitingFeedback", "awaitfeedback", awaitFeedback, "donetask", "inprogress");
   renderTodos("doneTasks", "donetask", doneTasks, "donetask", "awaitfeedback");
 }
 
@@ -149,8 +132,8 @@ function assignedTo(assignedTo) {
  * @param {string} destination Name of the progress destination
  */
 async function moveTask(id, destination) {
-  tasklist[id]["progress"] = destination;
-  await saveBoard();
+  currentUser.tasks[id].progress = destination;
+  await backend.setItem("users", JSON.stringify(users));
   setTimeout(await initBoard, 200);
 }
 
@@ -167,8 +150,8 @@ function allowDrop(ev) {
  * @param {string} destination Name of the progress destination
  */
 async function drop(destination) {
-  tasklist[currentDraggedElement]["progress"] = destination;
-  await saveBoard();
+  currentUser.tasks[currentDraggedElement].progress = destination;
+  await backend.setItem("users", JSON.stringify(users));
   setTimeout(await initBoard, 200);
 }
 
@@ -201,7 +184,7 @@ function taskPopup(progressStatus) {
  */
 function openTask(id) {
   document.getElementById("Boardpopup").classList.remove("d-none");
-  task = tasklist.filter((t) => t["id"] == id);
+  task = currentUser.tasks.filter((t) => t["id"] == id);
   let category = task[0]["category"]["categoryName"];
   let color = task[0]["category"]["color"];
   let title = task[0]["title"];
@@ -237,9 +220,9 @@ function findTask(id) {
   searchInInProgress(search);
   searchInAwaitFeedback(search);
   searchInDoneTasks(search);
-  rendersearchedTodos(searchTodos, "toDos", "todo", "inprogresss", "todo");
-  rendersearchedTodos(searchInProgress, "inProgress", "inprogresss", "awaitfeedback", "todo");
-  rendersearchedTodos(searchAwaitFeedback, "awaitingFeedback", "awaitfeedback", "donetask", "inprogresss");
+  rendersearchedTodos(searchTodos, "toDos", "todo", "inprogress", "todo");
+  rendersearchedTodos(searchInProgress, "inProgress", "inprogress", "awaitfeedback", "todo");
+  rendersearchedTodos(searchAwaitFeedback, "awaitingFeedback", "awaitfeedback", "donetask", "inprogress");
   rendersearchedTodos(searchDoneTasks, "doneTasks", "donetask", "donetask", "awaitfeedback");
 }
 

@@ -1,8 +1,10 @@
 /**
  * Fills the currentTask with the values of the variables. The currentTask will be then added to the tasks created so far.
+ *  @param {string} progressStatus is todo, inprogress, awaitfeedback or donetask.
+ *  @param {number} taskId is equal to the current length of the array currentUser.tasks.
  */
 
-function addTask(progressStatus) {
+async function addTask(progressStatus, taskId) {
   formValidation = true;
   let taskInputTitle = document.getElementById("input-title").value;
   let description = document.getElementById("description").value;
@@ -14,9 +16,9 @@ function addTask(progressStatus) {
   checkDueDate();
   checkPriority();
   if (formValidation) {
-    let currentTask = currentTaskValues(taskInputTitle, description, progressStatus);
-    tasklist.push(currentTask);
-    saveCurrentTask();
+    let currentTask = currentTaskValues(taskInputTitle, description, progressStatus, taskId);
+    currentUser.tasks.push(currentTask);
+    await backend.setItem("users", JSON.stringify(users));
     clearTask();
     showMessageAndMoveToBoard("message-task-added");
   }
@@ -26,10 +28,10 @@ function addTask(progressStatus) {
  * @returns the values of the fields for the current task to the variable currentTask.
  */
 
-function currentTaskValues(taskInputTitle, description, progressStatus) {
+function currentTaskValues(taskInputTitle, description, progressStatus, taskId) {
   return {
     progress: progressStatus,
-    id: taskid,
+    id: taskId,
     category: {
       color: selectedCategoryColor,
       categoryName: newCategoryName,
@@ -64,28 +66,19 @@ function clearTask() {
   closeSubtaskInputField();
   subtasksForCurrenttask = [];
   renderSubtasks();
-  focusOnField("input-title");
   clearMistakeCategoryFields();
 }
 
 /**
  * Creates and saves the just created task and clears the task fields again. At the end it will be redirected to the page board.html .
+ * @param {string} progressStatus is todo, inprogress, awaitfeedback or donetask.
  */
 
 async function createNewTask(progressStatus) {
-  await loadTasklistForId();
+  taskId = currentUser.tasks.length;
   assignedToContactsForCurrentTask();
   priorityForCurrentTask();
-  addTask(progressStatus);
-}
-
-/**
- * Saves all tasks in the backend with the key "tasklist".
- */
-
-function saveCurrentTask() {
-  let tasklistAsString = JSON.stringify(tasklist);
-  backend.setItem("tasklist", tasklistAsString);
+  addTask(progressStatus, taskId);
 }
 
 /**
