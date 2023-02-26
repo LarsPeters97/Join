@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Board</title>
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/add_task.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
+    <link rel="stylesheet" href="./assets/templates/desktop_template.css" />
+    <link rel="stylesheet" href="./assets/templates/addTaskPopup.css" />
+    <link rel="stylesheet" href="./css/contact.css" />
+    <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon" />
+    <script src="./miniBackend.js"></script>
+    <script src="./script.js"></script>
+    <script defer src="./js/board.js"></script>
+    <script src="./js/boardTemplate.js"></script>
+    <script src="./js/addTask.js"></script>
+    <script src="./js/addTaskClearandCreate.js"></script>
+    <script src="./js/addTaskDatabaseAndScopes.js"></script>
+    <script src="./js/addTaskHelpFunctions.js"></script>
+    <script src="./js/addTaskTemplates.js"></script>
+    <script src="./js/addTaskValidation.js"></script>
+    <script src="./js/taskForm.js"></script>
+    <script src="./js/taskFormTemplate.js"></script>
+    <script src="./js/desktopTemplate.js"></script>
+    <script src="./js/mobileTemplate.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="./js/contactTemplate.js"></script>
+    <script src="./js/addTaskPopupTemplate.js"></script>
+  </head>
+
+  <body onload="initBoard(); includeHTML()">
+    <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
+    <div class="whole-side" id="whole-side">
+      <div class="board-side">
+        <div id="Boardpopup" class="d-none"></div>
+        <div class="headline">
+          <h1><b>Board</b></h1>
+          <div class="headaction">
+            <div class="searchbar">
+              <div class="searchinfield">
+                <input type="text" onkeyup="findTask('search')" placeholder="Find Task" id="search" />
+                <img src="./assets/img/Search.png" />
+              </div>
+            </div>
+            <button onclick="taskPopup('todo')" class="addtask">Add task +</button>
+          </div>
+          <div class="addTaskMobile" onclick="taskPopup('todo')">
+            <div class="plusbuttonMobile">+</div>
+          </div>
+        </div>
+        <div class="searchMobile">
+          <div class="searchbar">
+            <div class="searchinfield">
+              <input type="text" onkeydown="findTask('mobileSearch')" placeholder="Find Task" id="mobileSearch" />
+              <img src="assets/img/Search.png" />
+            </div>
+          </div>
+        </div>
+        <div class="taskbar">
+          <div class="taskbar_1">
+            <div>
+              <div class="taskHeader" onclick="taskPopup('todo')">
+                <div>
+                  <p>To do</p>
+                </div>
+                <div class="plusbutton">+</div>
+              </div>
+              <div class="taskbox" id="toDos"></div>
+            </div>
+            <div>
+              <div class="taskHeader" onclick="taskPopup('inprogress')">
+                <div>
+                  <p>In progress</p>
+                </div>
+                <div class="plusbutton">+</div>
+              </div>
+              <div class="taskbox" id="inProgress"></div>
+            </div>
+          </div>
+          <div class="taskbar_2">
+            <div>
+              <div class="taskHeader" onclick="taskPopup('awaitfeedback')">
+                <div>
+                  <p>Awaiting<br />Feedback</p>
+                </div>
+                <div class="plusbutton">+</div>
+              </div>
+              <div class="taskbox" id="awaitingFeedback"></div>
+            </div>
+            <div>
+              <div class="taskHeader" onclick="taskPopup('donetask')">
+                <div>
+                  <p>Done</p>
+                </div>
+                <div class="plusbutton">+</div>
+              </div>
+              <div class="taskbox" id="doneTasks"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

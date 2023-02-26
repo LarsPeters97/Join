@@ -1,0 +1,510 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whole-side {
+    background-color: #F6F7F8;
+    width: 100%;
+    height: 100%;
+    padding: 70px 0px 24px 0px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left-side {
+    padding-right: 32px;
+    border-right: 1px solid #D1D1D1;
+}
+
+.right-side {
+    padding-left: 32px;
+}
+
+.margin-for-fields {
+    margin-bottom: 16px;
+}
+
+.margin-for-fields:nth-child(4) {
+    margin-bottom: 0px;
+}
+
+.headline-task {
+    height: 78px;
+    font-weight: 700;
+    font-size: 61px;
+    margin-bottom: 24px;
+}
+
+.header-for-fields {
+    font-weight: 400;
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.width-f {
+    width: 450px;
+}
+
+.input-text-type {
+    padding: 9px 21px;
+    height: 51px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    font-size: 21px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+#title-required {
+    font-weight: 400;
+}
+
+.description textarea {
+    height: 119px;
+    max-width: 500px;
+    max-height: 200px;
+    left: 0px;
+    top: 33px;
+    border-radius: 10px;
+    padding: 18px 21px 18px 21px;
+    font-size: 21px;
+    outline: none;
+    min-height: 60px;
+    min-width: 450px;
+    max-width: 450px;
+}
+
+.dropdown-category-container {
+    border: 1px solid #D1D1D1;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+.dropdown-category {
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 13px 16px;
+    background-color: white;
+}
+
+.border-radius-fields {
+    border-radius: 9px;
+}
+
+.input-section {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.dropdown-img {
+    width: 16px;
+    object-fit: contain;
+}
+
+.dropdown-category-new {
+    font-size: 21px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 13px 16px;
+    background-color: white;
+}
+
+.dropdown-category-existing {
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 13px 16px;
+    background-color: white;
+}
+
+.dropdown-category-existing {
+    border-radius: 9px 9px 9px 9px;
+}
+
+.newcontact {
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.due-date input {
+    height: 51px;
+    border-radius: 10px;
+    padding: 18px 21px 18px 21px;
+    border: 1px solid #D1D1D1;
+    outline: none;
+    font-size: 21px;
+}
+
+.due-date input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+.prio-buttons-section {
+    justify-content: space-between;
+}
+
+.prio-btns {
+    height: 51px;
+    width: 133px;
+    border-radius: 10px;
+    padding: 18px 10px 18px 10px;
+    border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    font-size: 21px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.prio-btns:hover {
+    transform: scale(1.03);
+}
+
+.input-subtask {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 21px;
+}
+
+#subtask-icons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.subtask-style-outer {
+    width: 410px;
+}
+
+.subtask-style-inner {
+    word-wrap: break-word;
+}
+
+#subtask-icons {
+    align-items: center;
+}
+
+.task-btns {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 48px;
+    width: 100%;
+}
+
+.inner-side {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.clear-btn {
+    border: 1px solid #2A3647;
+    color: #2A3647;
+    width: 136px;
+}
+
+.clear-btn:hover {
+    border: 1px solid rgb(0, 178, 238);
+    color: rgb(0, 178, 238);
+}
+
+.create-btn {
+    margin-left: 50px;
+    background-color: #2A3647;
+    color: white;
+    border: none;
+    width: 177px;
+}
+
+.create-btn:hover {
+    background-color: rgb(0, 178, 238);
+    color: white;
+    border: 1px solid rgb(0, 178, 238);
+}
+
+.btns-clear-and-create {
+    cursor: pointer;
+    border-radius: 10px;
+    height: 48px;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btns-clear-and-create:hover {
+    transform: scale(1.05);
+}
+
+.btns-clear-and-create img {
+    margin-left: 12px;
+}
+
+.dot {
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+}
+
+.input-category-contact {
+    width: 80%;
+    height: 100%;
+    font-size: 21px;
+    border: none;
+    outline: none;
+}
+
+.delete-and-create-icons-section {
+    align-items: center;
+    width: 20%;
+    justify-content: flex-end;
+}
+
+.false-x {
+    width: 27px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.checkmark {
+    width: 22px;
+    object-fit: cover;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.colors {
+    width: 250px;
+    justify-content: space-evenly;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+
+.all-colors {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.all-colors:hover {
+    transform: scale(1.1);
+}
+
+.margin-color {
+    margin-left: 12px;
+}
+
+.checkbox-style {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.round-icon-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.icons-add-task {
+    margin-right: 14px !important;
+    margin-top: 20px;
+}
+
+#assigned-to-icons-section {
+    flex-wrap: wrap;
+}
+
+.max-height-and-scroll {
+    max-height: 153px;
+    overflow: auto;
+}
+
+.margin-checkbox {
+    margin-right: 16px;
+}
+
+.create-btn-responsive {
+    display: none;
+}
+
+.showMessage {
+    bottom: 150px;
+    opacity: 100;
+    transition: all 1s;
+}
+
+
+@media(max-width: 1400px) {
+    .change-direction {
+        flex-direction: column;
+    }
+
+    .left-side {
+        border: none;
+        padding-right: 0px;
+    }
+
+    .right-side {
+        padding-left: 0px;
+    }
+
+    .task-btns {
+        justify-content: center;
+    }
+}
+
+@media(max-width: 1050px) {
+    .whole-side {
+        margin-bottom: 100px;
+    }
+
+}
+
+@media(max-width: 700px) {
+    .width-f {
+        width: 100% !important;
+    }
+
+    .form-add-task {
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .description textarea {
+        min-width: 240px;
+        max-width: none;
+    }
+
+    .create-btn-responsive {
+        display: flex;
+        position: fixed;
+        top: 20px;
+        z-index: 999;
+    }
+
+    .create-btn {
+        margin-left: 0px;
+    }
+
+    .profile-img {
+        display: none;
+    }
+
+    .desktop-create-btn {
+        display: none;
+    }
+
+    .desktop-clear-btn {
+        display: none;
+    }
+}
+
+@media(max-width: 475px) {
+    .prio-btns {
+        width: 83px;
+        font-size: 18px;
+        flex-direction: column-reverse;
+    }
+
+    .prio-btns img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+    }
+
+    .headline-task {
+        font-size: 48px;
+    }
+
+    .input-category {
+        font-size: 17px;
+        width: 72%;
+    }
+
+    .create-btn {
+        width: 140px;
+    }
+
+    .subtask-style-outer {
+        width: calc(100% - 36px);
+    }
+}
+
+@media(max-width: 450px) {
+    .headline-task-smaller {
+        font-size: 32px;
+    }
+}
+
+@media(max-width: 400px) {
+
+    .dropdown-category {
+        padding: 13px 8px;
+    }
+
+    .input-category-contact {
+        font-size: 18px;
+    }
+
+    .input-text-type {
+        font-size: 18px;
+    }
+
+    .description textarea {
+        font-size: 18px;
+    }
+
+    .dropdown-category {
+        font-size: 18px;
+    }
+
+    .dropdown-category-existing {
+        font-size: 18px;
+        padding: 13px 8px;
+    }
+
+    .due-date input {
+        font-size: 18px;
+    }
+
+    .input-subtask {
+        font-size: 18px;
+    }
+
+    .due-date input {
+        padding: 18px 21px 18px 8px;
+    }
+}

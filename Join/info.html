@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join - Info</title>
+    <link rel="stylesheet" href="./css/info.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./assets/templates/desktop_template.css" />
+    <link rel="stylesheet" href="./assets/templates/mobile_template.css" />
+    <link rel="shortcut icon" href="./assets/img/logo_blue.png" type="image/x-icon" />
+    <script src="./miniBackend.js"></script>
+    <script defer src="./script.js"></script>
+    <script src="./js/desktopTemplate.js"></script>
+    <script src="./js/mobileTemplate.js"></script>  
+  </head>
+  <body onload="includeHTML(), initGeneral()">
+    <div w3-include-html="./assets/templates/desktop_template.html"></div>
+    <div w3-include-html="./assets/templates/mobile_template.html"></div>
+
+    <div class="info-content">
+      <div class="mobile-top">
+        <div class="mobile-headline"> Kanban Project Managment Tool </div>
+        <div class="back1-btn">
+          <a href="./summary.html">
+            <img src="./assets/img/arrow_left.png" alt="" />
+          </a>
+        </div>
+      </div>
+
+      <div class="top">
+        <h1>Info</h1>
+        <div class="back-btn">
+          <a href="./summary.html">
+            <img src="./assets/img/arrow_left.png" alt="" />
+          </a>
+        </div>
+      </div>
+
+      <h2>What is Join?</h2>
+
+      <p
+        >Join is a classical task management tool with a kanban-board. You can organize your tasks whithin a project or business processes. <br />
+        It is perfectly suitable for working together with your team. Join let you and your team work more efficiently. <br />
+        You have all of your taks in focus und won't miss upcoming deadlines anymore. Start working with Join now!
+      </p>
+
+      <h2>How to use it</h2>
+
+      <table>
+        <tr class="info">
+          <td class="info-number">1.</td>
+          <td>Add a task with title, description and category. Assign the task to other team members of your contact list or invite new contacts.</td>
+        </tr>
+        <tr>
+          <td class="info-number">2.</td>
+          <td>Check the current status of your tasks in the kanban-board. You can drag and drop your task to change the status. Also it is possible to edit the task details.</td>
+        </tr>
+        <tr>
+          <td class="info-number">3.</td>
+          <td>Add team members to your contact list to communicate to them fastly. Also you can assign tasks directly to your contacts.</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
