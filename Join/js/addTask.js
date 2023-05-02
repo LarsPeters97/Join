@@ -420,7 +420,7 @@ function renderSubtasks() {
   subtaskList.innerHTML = "";
   for (let i = 0; i < subtasksForCurrenttask.length; i++) {
     let taskElement = subtasksForCurrenttask[i];
-    if (checkCompletedStatus(i) == false) {
+    if (!checkCompletedStatus(i)) {
       subtaskList.innerHTML += templateRenderSubtasksNotCompleted(taskElement, i);
     } else {
       subtaskList.innerHTML += templateRenderSubtasksWhichAreCompleted(taskElement, i);

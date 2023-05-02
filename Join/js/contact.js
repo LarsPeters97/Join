@@ -256,7 +256,8 @@ function showContactsHtml(contact, i) {
 async function deleteContact(i) {
   currentUser.contacts.splice(i, 1);
   await backend.setItem("users", JSON.stringify(users));
-  renderLetters();
+  saveCloseAndUpdate();
+  document.getElementById("contactAreaBody").innerHTML = "";
 }
 
 /**
