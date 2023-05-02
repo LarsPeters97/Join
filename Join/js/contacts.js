@@ -102,7 +102,7 @@ async function saveCloseAndUpdate() {
  */
 
 function checkActionForBoardOrOtherPages() {
-  if (window.location.pathname === "/contact.html") {
+  if (window.location.pathname === "/Join/contact.html") {
     renderLetters();
   }
 }
@@ -189,10 +189,10 @@ function renderLetters() {
  */
 
 function paddingBottomForLastLetterContainer() {
-  let lastContactIndex = currentUser.contacts.length - 1;
-  let firstLetterofLastContact = currentUser.contacts[lastContactIndex].name.charAt(0);
-  if (lastContactIndex) {
-    document.getElementById(`letterContainer${firstLetterofLastContact}`).style.paddingBottom = "80px";
+  if (currentUser.contacts > 0) {
+    let lastContactIndex = currentUser.contacts.length - 1;
+    let firstLetterofLastContact = currentUser.contacts[lastContactIndex].name.charAt(0);
+    if (lastContactIndex) document.getElementById(`letterContainer${firstLetterofLastContact}`).style.paddingBottom = "80px";
   }
 }
 

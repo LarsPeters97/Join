@@ -75,14 +75,18 @@ function loadDoneTasks() {
 }
 
 /**
- * Loads the render functions for the board tasks.
+ * Loads the render functions for the board tasks and the drop places where a task can be dragged.
  */
 
 function renderBoard() {
-  renderTodos("toDos", "todo", todos, "inprogress", "todo");
-  renderTodos("inProgress", "inprogress", inProgress, "awaitfeedback", "todo");
-  renderTodos("awaitingFeedback", "awaitfeedback", awaitFeedback, "donetask", "inprogress");
-  renderTodos("doneTasks", "donetask", doneTasks, "donetask", "awaitfeedback");
+  renderTodos("todo", "todo", todos, "inprogress", "todo");
+  renderTodos("inprogress", "inprogress", inProgress, "awaitfeedback", "todo");
+  renderTodos("awaitfeedback", "awaitfeedback", awaitFeedback, "donetask", "inprogress");
+  renderTodos("donetask", "donetask", doneTasks, "donetask", "awaitfeedback");
+  renderDropPlace("todo");
+  renderDropPlace("inprogress");
+  renderDropPlace("awaitfeedback");
+  renderDropPlace("donetask");
 }
 
 /**
@@ -105,15 +109,21 @@ function renderTodos(boxid, progression, array, next, previus) {
     let completedtasks = 0;
     for (let j = 0; j < toDo["subtasks"]["tasks"].length; j++) {
       let task = toDo["subtasks"]["tasks"][j];
-      if (task["completed"]) {
-        completedtasks++;
-      }
+      if (task["completed"]) completedtasks++;
     }
     let assignedIconToThree = assignedTo(toDo["assignedTo"]["user"]);
     let priority = toDo["priority"];
     document.getElementById(`${boxid}`).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus);
   }
-  document.getElementById(`${boxid}`).innerHTML += addDragarea(progression);
+}
+
+/**
+ * An empty div container is created for each category so that a task can be dragged into it.
+ * @param {string} progressStatus is the current processing status , e.g. "todo".
+ */
+
+function renderDropPlace(progressStatus) {
+  document.getElementById(progressStatus).innerHTML += templateRenderDropPlace(progressStatus);
 }
 
 /**
@@ -123,20 +133,11 @@ function renderTodos(boxid, progression, array, next, previus) {
  */
 
 function assignedTo(assignedTo) {
-  if (assignedTo.length == 0) {
-    return noAssignedPersonsTemplate();
-  }
-  if (assignedTo.length == 1) {
-    return oneAssignedPersonsTemplate(assignedTo);
-  }
-  if (assignedTo.length == 2) {
-    return twoAssignedPersonsTemplate(assignedTo);
-  }
-  if (assignedTo.length == 3) {
-    return threeAssignedPersonsTemplate(assignedTo);
-  } else {
-    return moreAssignedPersonsTemplate(assignedTo);
-  }
+  if (assignedTo.length == 0) return noAssignedPersonsTemplate();
+  if (assignedTo.length == 1) return oneAssignedPersonsTemplate(assignedTo);
+  if (assignedTo.length == 2) return twoAssignedPersonsTemplate(assignedTo);
+  if (assignedTo.length == 3) return threeAssignedPersonsTemplate(assignedTo);
+  else return moreAssignedPersonsTemplate(assignedTo);
 }
 
 /**
@@ -152,7 +153,7 @@ async function moveTask(id, destination) {
 }
 
 /**
- *
+ * Starts the dragging.
  * @param {number} id of the task which is dragged.
  */
 
@@ -161,11 +162,40 @@ function startDragging(id) {
 }
 
 /**
- * Allows the drop event.
+ * The currently dragged task can be dragged to another category. For this purpose, dashed square containers are displayed during the dragging process.
  */
 
 function allowDrop(ev) {
   ev.preventDefault();
+  let progressStatus = currentUser.tasks[currentDraggedElement].progress;
+  let dragAreas = document.querySelectorAll(".drag-area");
+  dragAreas.forEach((dragArea) => {
+    dragArea.classList.remove("d-none");
+    document.getElementById(`drop-${progressStatus}`).classList.add("d-none");
+  });
+}
+
+/**
+ * If the currently dragged task is dragged outside the target area and dragging is stopped,
+ * the task remains in the current category and the dashed square containers are no longer displayed.
+ */
+
+function removeDragAreaHighlight(ev) {
+  ev.preventDefault();
+  let dragAreas = document.querySelectorAll(".drag-area");
+  dragAreas.forEach((dragArea) => dragArea.classList.add("d-none"));
+}
+
+/**
+ * The category or status of the task is changed to the category where the task was dragged to. This is saved and the board is re-rendered.
+ * @param {string} status is the category where the task is dragged to.
+ */
+
+async function moveTo(status) {
+  currentUser.tasks[currentDraggedElement].progress = status;
+  await backend.setItem("users", JSON.stringify(users));
+  loadAll();
+  renderBoard();
 }
 
 /**
@@ -178,25 +208,6 @@ async function drop(destination) {
   await backend.setItem("users", JSON.stringify(users));
   setTimeout(await initBoard, 200);
 }
-
-/**
- * Highlights the droparea when hovering over it
- * @param {string} id of the dragarea.
- */
-
-function highlight(id) {
-  document.getElementById(id).classList.add("dragarea-highlight");
-}
-
-/**
- * Removes the highlighted droparea.
- * @param {string} id of the dragarea.
- */
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove("dragarea-highlight");
-}
-
 /**
  * Opens the add task Popup.
  */
@@ -240,10 +251,10 @@ function findTask(id) {
   searchInInProgress(search);
   searchInAwaitFeedback(search);
   searchInDoneTasks(search);
-  rendersearchedTodos(searchTodos, "toDos", "todo", "inprogress", "todo");
-  rendersearchedTodos(searchInProgress, "inProgress", "inprogress", "awaitfeedback", "todo");
-  rendersearchedTodos(searchAwaitFeedback, "awaitingFeedback", "awaitfeedback", "donetask", "inprogress");
-  rendersearchedTodos(searchDoneTasks, "doneTasks", "donetask", "donetask", "awaitfeedback");
+  rendersearchedTodos(searchTodos, "todo", "todo", "inprogress", "todo");
+  rendersearchedTodos(searchInProgress, "inprogress", "inprogress", "awaitfeedback", "todo");
+  rendersearchedTodos(searchAwaitFeedback, "awaitfeedback", "awaitfeedback", "donetask", "inprogress");
+  rendersearchedTodos(searchDoneTasks, "donetask", "donetask", "donetask", "awaitfeedback");
 }
 
 /**
@@ -334,13 +345,10 @@ function rendersearchedTodos(array, id1, id2, next, previus) {
     let completedtasks = 0;
     for (let j = 0; j < toDo["subtasks"]["tasks"].length; j++) {
       let task = toDo["subtasks"]["tasks"][j];
-      if (task["completed"]) {
-        completedtasks++;
-      }
+      if (task["completed"]) completedtasks++;
     }
     let assignedIconToThree = assignedTo(toDo["assignedTo"]["user"]);
     let priority = toDo["priority"];
     document.getElementById(id1).innerHTML += toDoTemplate(id, color, category, title, description, subtasks, completedtasks, assignedIconToThree, priority, next, previus);
   }
-  document.getElementById(id1).innerHTML += addDragarea(id2);
 }

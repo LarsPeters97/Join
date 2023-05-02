@@ -106,9 +106,5 @@ function closePopup() {
  */
 
 function checkIfPopupShouldBeClosed() {
-  if (window.innerWidth < 750) {
-    return;
-  } else {
-    closesPopupAddTask();
-  }
+  if (window.innerWidth >= 750) closesPopupAddTask();
 }

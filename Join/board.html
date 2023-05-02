@@ -64,43 +64,43 @@
         </div>
         <div class="taskbar">
           <div class="taskbar_1">
-            <div>
+            <div class="single-taskbar">
               <div class="taskHeader" onclick="taskPopup('todo')">
                 <div>
                   <p>To do</p>
                 </div>
-                <div class="plusbutton">+</div>
+                <div class="plusbutton"><span>+</span></div>
               </div>
-              <div class="taskbox" id="toDos"></div>
+              <div class="taskbox" id="todo" ondrop="moveTo('todo')" ondragover="allowDrop(event)" ondragend="removeDragAreaHighlight(event)"></div>
             </div>
-            <div>
+            <div class="single-taskbar">
               <div class="taskHeader" onclick="taskPopup('inprogress')">
                 <div>
                   <p>In progress</p>
                 </div>
-                <div class="plusbutton">+</div>
+                <div class="plusbutton"><span>+</span></div>
               </div>
-              <div class="taskbox" id="inProgress"></div>
+              <div class="taskbox" id="inprogress" ondrop="moveTo('inprogress')" ondragover="allowDrop(event)" ondragend="removeDragAreaHighlight(event)"></div>
             </div>
           </div>
           <div class="taskbar_2">
-            <div>
+            <div class="single-taskbar">
               <div class="taskHeader" onclick="taskPopup('awaitfeedback')">
                 <div>
                   <p>Awaiting<br />Feedback</p>
                 </div>
-                <div class="plusbutton">+</div>
+                <div class="plusbutton"><span>+</span></div>
               </div>
-              <div class="taskbox" id="awaitingFeedback"></div>
+              <div class="taskbox" id="awaitfeedback" ondrop="moveTo('awaitfeedback')" ondragover="allowDrop(event)" ondragend="removeDragAreaHighlight(event)"></div>
             </div>
-            <div>
+            <div class="single-taskbar">
               <div class="taskHeader" onclick="taskPopup('donetask')">
                 <div>
                   <p>Done</p>
                 </div>
-                <div class="plusbutton">+</div>
+                <div class="plusbutton"><span>+</span></div>
               </div>
-              <div class="taskbox" id="doneTasks"></div>
+              <div class="taskbox" id="donetask" ondrop="moveTo('donetask')" ondragover="allowDrop(event)" ondragend="removeDragAreaHighlight(event)"></div>
             </div>
           </div>
         </div>

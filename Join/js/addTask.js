@@ -434,8 +434,7 @@ function renderSubtasks() {
  */
 
 function checkCompletedStatus(i) {
-  if (!subtasksForCurrenttask[i].completed) return false;
-  else return true;
+  return subtasksForCurrenttask[i].completed;
 }
 
 /**

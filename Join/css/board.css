@@ -72,21 +72,19 @@ body {
 }
 
 .plusbutton {
-    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 3px;
-    gap: 10px;
-    width: 30px;
-    height: 30px;
+    box-sizing: border-box;
     border: 2px solid #2A3647;
     border-radius: 10px;
     flex: none;
     order: 1;
     flex-grow: 0;
     font-size: 30px;
+    padding: 0px 4px;
+    width: 32px;
+    height: 32px;
 }
 
 .taskbar {
@@ -94,6 +92,12 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.single-taskbar {
+    margin-right: 32px;
+    margin-left: 32px;
+    margin-bottom: 32px;
 }
 
 .taskbar_1 {
@@ -222,7 +226,7 @@ body {
     border-radius: 30px;
     gap: 10px;
     cursor: pointer;
-    margin-bottom: 35px;
+    margin-bottom: 32px;
 }
 
 .category {
@@ -262,15 +266,11 @@ body {
     justify-content: space-between;
 }
 
-.dragarea {
-    width: 250px;
+.drag-area {
+    width: 90%;
     height: 200px;
     border-radius: 30px;
-    border: dotted transparent 1px;
-}
-
-.dragarea-highlight {
-    border-color: #2A3647;
+    border: 2px dashed rgba(0, 0, 0, 0.5);
 }
 
 .progress {
@@ -933,7 +933,6 @@ body {
     .taskbar_1 {
         flex-direction: column;
         align-items: center;
-        width: 80vw;
     }
 
     .taskbar_2 {

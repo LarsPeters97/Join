@@ -107,7 +107,5 @@ function showMessageAndMoveToBoard(backgorundContainer, messageTaskAdded) {
       document.getElementById(messageTaskAdded).classList.remove("showMessage");
       redirectToBoardPage();
     }, 2200);
-  } else {
-    redirectToBoardPage();
-  }
+  } else redirectToBoardPage();
 }

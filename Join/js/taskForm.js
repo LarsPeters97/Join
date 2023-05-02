@@ -183,11 +183,7 @@ function cancelSubEdit(index, id) {
  */
 
 async function taskStatusChange(task, id) {
-  if (currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] == true) {
-    currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] = false;
-  } else {
-    currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] = true;
-  }
+  currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"] = !currentUser.tasks[id]["subtasks"]["tasks"][task]["completed"];
   await backend.setItem("users", JSON.stringify(users));
   renderSubTasks(id);
   setTimeout(await initBoard, 50);

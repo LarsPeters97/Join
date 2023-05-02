@@ -28,14 +28,12 @@ function toDoTemplate(id, color, category, title, description, subtasks, complet
 }
 
 /**
- * @param {string} id name of the current progression, e.g. todo.
- * @returns a drag area spot for the curret dragged task.
+ * @param {string} progressStatus into which category the task is dragged, e.g. "todo".
+ * @returns a stroked square where a task can be dragged in.
  */
 
-function addDragarea(id) {
-  return /*html*/ `
-    <div id="${id}" class="dragarea" ondrop="drop('${id}')" ondragover="allowDrop(event); highlight('${id}')" ondragleave="removeHighlight('${id}')"></div>
-    `;
+function templateRenderDropPlace(progressStatus) {
+  return /*html*/ `<div id="drop-${progressStatus}" class="drag-area d-none"></div>`;
 }
 
 /**
